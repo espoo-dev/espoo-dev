@@ -1,0 +1,51 @@
+version: "3"
+services:
+  espoo_db:
+    image: postgres:alpine
+    container_name: espoo_db
+    volumes:
+      - espoo_db_volume:/var/lib/postgresql/data
+    environment:
+      POSTGRES_PASSWORD: 'postgres'
+      POSTGRES_HOST_AUTH_METHOD: 'trust'
+    ports:
+      - '5444:5432'
+
+  espoo_server:
+    image: edimossilva/espoo
+    build:
+      context: "."
+      dockerfile: "dockerfile_rails"
+    container_name: espoo_server
+    volumes:
+      - ./:/app
+      - espoo_vendor:/app/vendor/
+
+    depends_on:
+      - espoo_db
+      - chrome
+    environment:
+      RAILS_MASTER_KEY: 'a667717bf0a47475b0582547379c816d'
+      DATABASE_USERNAME: 'postgres'
+      DATABASE_PASSWORD: 'postgres'
+      DATABASE_HOST: 'espoo_db'
+      DATABASE_PORT: '5432'
+      DATABASE_NAME: 'espoo_db_name'
+      DEVISE_JWT_SECRET_KEY: 'e26a21cfca4fdf67cc4e82385ba2d6ea4fb83ad1f8f5'
+      HUB_URL: http://chrome:4444/wd/hub
+    tty: true
+    ports:
+      - "3000:3000"
+    entrypoint: /app/scripts/entrypoint.sh
+
+  chrome:
+    image: selenium/standalone-chrome:3.141.59-zirconium
+    container_name: espoo_chrome
+    volumes:
+      - /dev/shm:/dev/shm
+
+volumes:
+  espoo_db_volume:
+  espoo_vendor:
+# docker-compose up -d
+# docker-compose exec espoo_server rspec
