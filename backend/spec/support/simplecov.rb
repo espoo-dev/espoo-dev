@@ -1,5 +1,5 @@
 require 'simplecov'
-SimpleCov.minimum_coverage_by_file line: 100, branch: 100
+SimpleCov.minimum_coverage_by_file 100
 
 SimpleCov.start do
   add_filter 'spec'
