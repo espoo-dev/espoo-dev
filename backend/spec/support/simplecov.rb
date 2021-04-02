@@ -1,4 +1,6 @@
 require 'simplecov'
+SimpleCov.minimum_coverage_by_file line: 100, branch: 100
+
 SimpleCov.start do
   add_filter 'spec'
   add_filter 'config'
@@ -10,4 +12,3 @@ SimpleCov.start do
   track_files '/app/**/*.rb'
 end
 
-SimpleCov.minimum_coverage 100
