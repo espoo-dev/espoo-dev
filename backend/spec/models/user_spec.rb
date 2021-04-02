@@ -9,7 +9,7 @@ RSpec.describe User, type: :model do
     it { is_expected.to validate_inclusion_of(:role).in_array(User::ROLES) }
   end
 
-  describe 'inclusion' do
+  describe 'inclusion2' do
     it { is_expected.to validate_inclusion_of(:role).in_array(User::ROLES) }
   end
 end
