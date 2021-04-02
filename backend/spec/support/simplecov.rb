@@ -9,3 +9,5 @@ SimpleCov.start do
   add_group 'Helpers', '/app/helpers'
   track_files '/app/**/*.rb'
 end
+
+SimpleCov.minimum_coverage 100
