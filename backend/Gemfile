@@ -73,3 +73,5 @@ gem 'active_model_serializers'
 gem "pundit"
 
 gem 'slim'
+
+gem "sprockets", "3.7.2"
