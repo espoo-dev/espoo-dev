@@ -31,6 +31,5 @@ yarn-debug.log*
 coverage
 
 /vendor/*
-/bin
 .bundle/config
 dockerfile_rails.tar
