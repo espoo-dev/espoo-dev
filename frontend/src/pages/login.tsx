@@ -1,4 +1,4 @@
-import React, { useRef } from "react";
+import React, { useRef, useState } from "react";
 import Image from "next/image";
 import { AppInput } from "../components";
 import {
@@ -11,11 +11,34 @@ import {
 } from "../styles/login.styles";
 import { Button, FlexColumn, FlexRow } from "../styles/utils";
 import { AppButton } from "components/app-button";
+import { httpClient } from "api";
+import { AuthService } from "api/services";
+import { UserLogin } from "api/models/user";
+import { toast } from "react-toastify";
+
+const authService = new AuthService(httpClient);
 
 const Login = () => {
   const formRef = useRef();
-  const handleFormSubmit = (data) => {
-    console.log(data);
+  const handleFormSubmit = (data: any) => {
+    login(data);
+  };
+  const [loading, setLoading] = useState(false);
+
+  const login = async (data: UserLogin) => {
+    try {
+      setLoading(true);
+      const response = await authService.authenticate(data);
+      console.log(`response`, response);
+      setLoading(false);
+      toast(`Welcome ${response.email}`, {
+        position: "top-right",
+        type: "success",
+        pauseOnHover: false,
+      });
+    } catch (error) {
+      setLoading(false);
+    }
   };
 
   return (
@@ -26,8 +49,8 @@ const Login = () => {
             <Heading>Welcome</Heading>
           </FlexRow>
           <AppInput
-            id="user"
-            name="user"
+            id="email"
+            name="email"
             label="Email / username"
             placeholder="Email or username..."
             type="text"
@@ -40,7 +63,7 @@ const Login = () => {
             type="password"
           />
 
-          <AppButton styling="primary" text="Log in" />
+          <AppButton styling="primary" text="Log in" type="submit" loading={loading} />
           <AppButton styling="primary" text="Register" />
         </LoginForm>
         <Divider />

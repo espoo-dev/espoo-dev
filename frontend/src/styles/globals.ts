@@ -10,7 +10,7 @@ export const GlobalStyle = createGlobalStyle`
     font-family: -apple-system, Roboto, Oxygen,
       Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
   }
-  
+
   * {
     box-sizing: border-box;
   }
@@ -18,7 +18,16 @@ export const GlobalStyle = createGlobalStyle`
   body {
     background: #ececec;
   }
-  
+
+  .Toastify__toast {
+    border-radius: 8px !important;
+    padding: 1em !important;
+  }
+
+  .Toastify__toast--error {
+    background: #ed3e3e !important;
+  }
+
   ::-webkit-scrollbar {
     height       : 5px;
     width        : 5px;

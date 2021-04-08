@@ -1,5 +1,8 @@
 import Head from "next/head";
+import { ToastContainer } from "react-toastify";
 import { GlobalStyle } from "../styles/globals";
+
+import 'react-toastify/dist/ReactToastify.css';
 
 function MyApp({ Component, pageProps }) {
   return (
@@ -14,6 +17,8 @@ function MyApp({ Component, pageProps }) {
       <GlobalStyle />
 
       <Component {...pageProps} />
+
+      <ToastContainer />
     </>
   );
 }
