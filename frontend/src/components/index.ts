@@ -1,1 +1,1 @@
-export * from './AppInput';
+export * from './app-input';

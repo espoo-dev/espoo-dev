@@ -16,9 +16,11 @@ interface ContainerProps {
   gap?: string;
 }
 
-interface ButtonProps {
-  styling?: "primary" | "secondary" | "default" | "danger" | "success";
-  round?: "full" | "rounded";
+type Stylings = 'primary' | 'secondary' | 'default' | 'danger' | 'success';
+
+export interface ButtonProps {
+  styling?: Stylings;
+  round?: 'full' | 'rounded';
 }
 
 export const FlexRow = styled.div<ContainerProps>`
@@ -47,22 +49,23 @@ export const FlexColumn = styled.div<ContainerProps>`
 
 export const Button = styled.button<ButtonProps>`
   border: none;
-  border-radius: 8px;
   cursor: pointer;
   padding: 12px 18px;
   font-weight: bold;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   color: #fff;
   border-radius: ${(props) => {
-    if (props.round === "full") {
-      return "30px";
-    } else {
-      return "6px";
+    if (props.round === 'full') {
+      return '30px';
     }
+    return '5px';
   }};
   background: ${(props) => {
     const { styling } = props;
     const color = colors[styling];
-    return color ? color : "#b0bec5";
+    return color ? color : colors.primary;
   }};
   transition: all 0.3s ease-in-out;
   &:hover {
@@ -72,8 +75,7 @@ export const Button = styled.button<ButtonProps>`
   }
   &:disabled {
     cursor: not-allowed;
-    filter: grayscale();
-    opacity: 0.7;
+    opacity: 0.5;
   }
 `;
 

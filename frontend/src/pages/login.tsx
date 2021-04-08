@@ -10,6 +10,7 @@ import {
   MainImg,
 } from "../styles/login.styles";
 import { Button, FlexColumn, FlexRow } from "../styles/utils";
+import { AppButton } from "components/app-button";
 
 const Login = () => {
   const formRef = useRef();
@@ -39,8 +40,8 @@ const Login = () => {
             type="password"
           />
 
-          <Button styling="primary">Log in</Button>
-          <Button styling="primary">Register</Button>
+          <AppButton styling="primary" text="Log in" />
+          <AppButton styling="primary" text="Register" />
         </LoginForm>
         <Divider />
         <FlexColumn
