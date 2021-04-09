@@ -1,5 +1,4 @@
-import React, { useRef, useState } from "react";
-import Image from "next/image";
+import React, { useCallback, useRef, useState } from "react";
 import { AppInput } from "../components";
 import {
   Container,
@@ -9,7 +8,7 @@ import {
   MainCard,
   MainImg,
 } from "../styles/login.styles";
-import { Button, FlexColumn, FlexRow } from "../styles/utils";
+import { FlexColumn, FlexRow } from "../styles/utils";
 import { AppButton } from "components/app-button";
 import { httpClient } from "api";
 import { AuthService } from "api/services";
@@ -25,12 +24,12 @@ const Login = () => {
   };
   const [loading, setLoading] = useState(false);
 
-  const login = async (data: UserLogin) => {
+  const login = useCallback(async (data: UserLogin) => {
     try {
       setLoading(true);
       const response = await authService.authenticate(data);
-      console.log(`response`, response);
       setLoading(false);
+      // TODO: Redirect to admin page
       toast(`Welcome ${response.email}`, {
         position: "top-right",
         type: "success",
@@ -39,7 +38,7 @@ const Login = () => {
     } catch (error) {
       setLoading(false);
     }
-  };
+  }, []);
 
   return (
     <Container>
@@ -63,7 +62,12 @@ const Login = () => {
             type="password"
           />
 
-          <AppButton styling="primary" text="Log in" type="submit" loading={loading} />
+          <AppButton
+            styling="primary"
+            text="Log in"
+            type="submit"
+            loading={loading}
+          />
           <AppButton styling="primary" text="Register" />
         </LoginForm>
         <Divider />

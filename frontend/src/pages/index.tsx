@@ -7,7 +7,7 @@ const Home = () => {
     <Container>
       <FlexColumn>
         <h1>Landing page bonita aqui</h1>
-        <Link href="login">Login</Link>
+        <Link href="/login">Login</Link>
       </FlexColumn>
     </Container>
   );
