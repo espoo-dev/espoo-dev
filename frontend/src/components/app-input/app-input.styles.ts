@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import { labelMargin } from "styles/spacings";
 
 export const InputWrapper = styled.div`
   display: flex;
@@ -6,7 +7,7 @@ export const InputWrapper = styled.div`
 
   label {
     font-weight: bold;
-    margin: 0 0 5px 5px;
+    margin: 0 0 ${labelMargin} ${labelMargin};
   }
 
   input {
