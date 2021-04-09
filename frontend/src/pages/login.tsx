@@ -53,6 +53,7 @@ const Login = () => {
             label="Email / username"
             placeholder="Email or username..."
             type="text"
+            required
           />
           <AppInput
             id="password"
@@ -60,6 +61,7 @@ const Login = () => {
             label="Password"
             placeholder="******"
             type="password"
+            required
           />
 
           <AppButton
