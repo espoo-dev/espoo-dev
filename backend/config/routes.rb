@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  resources :questions, only: [:create]
+
   namespace :admin do
     resources :users
 
