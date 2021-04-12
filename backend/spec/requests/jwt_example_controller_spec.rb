@@ -40,7 +40,7 @@ describe JwtExampleController do
         expect(body).to include(
           'id' => user.id,
           'email' => user.email,
-          'phone' => user.phone
+          'role' => user.role
         )
       end
     end
