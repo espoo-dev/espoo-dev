@@ -5,7 +5,8 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :validatable,
          :jwt_authenticatable, jwt_revocation_strategy: Devise::JWT::RevocationStrategies::Null
 
-  ROLES = %w[admin moderator].freeze
+  ADMIN_ROLE = 'admin'.freeze
+  ROLES = [ADMIN_ROLE, 'moderator'].freeze
 
   validates :role, presence: true, inclusion: { in: ROLES }
 
