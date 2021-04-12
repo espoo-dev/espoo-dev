@@ -1,5 +1,5 @@
-import { AxiosError } from 'axios';
-import { toast } from 'react-toastify';
+import { AxiosError } from "axios";
+import { toast } from "react-toastify";
 
 interface CustomError {
   error?: string;
@@ -16,12 +16,13 @@ export const errorHandler = (errorInstance: AxiosError<CustomError>) => {
   } else if (message) {
     createErrorToast(message);
   } else {
-    createErrorToast('Opss... something went wrong');
+    createErrorToast("Opss... something went wrong");
   }
 };
 
-const createErrorToast = (message: string) => toast(message, {
-  position: 'top-right',
-  type: 'error',
-  pauseOnHover: false,
-});
+const createErrorToast = (message: string) =>
+  toast(message, {
+    position: "top-right",
+    type: "error",
+    pauseOnHover: false,
+  });

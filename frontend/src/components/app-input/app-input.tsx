@@ -1,6 +1,6 @@
-import React, { useEffect, useRef } from 'react';
-import { useField } from '@unform/core';
-import { InputWrapper } from './app-input.styles';
+import React, { useEffect, useRef } from "react";
+import { InputWrapper } from "./app-input.styles";
+import { useField } from "@unform/core";
 
 interface AppInputProps {
   label: string;
@@ -15,14 +15,6 @@ interface AppInputProps {
   maxLength?: number;
 }
 
-const defaultProps = {
-  required: undefined,
-  min: undefined,
-  max: undefined,
-  minLength: undefined,
-  maxLength: undefined,
-};
-
 export const AppInput = (props: AppInputProps) => {
   const inputRef = useRef(null);
   const { id, label, placeholder, type, name, ...rest } = props;
@@ -32,7 +24,7 @@ export const AppInput = (props: AppInputProps) => {
     registerField({
       name: fieldName,
       ref: inputRef.current,
-      path: 'value',
+      path: "value",
     });
   }, [fieldName, registerField]);
 
@@ -41,7 +33,7 @@ export const AppInput = (props: AppInputProps) => {
       <label htmlFor={id}>{label}</label>
       <input
         id={id}
-        type={type || 'text'}
+        type={type ? type : "text"}
         placeholder={placeholder}
         ref={inputRef}
         defaultValue={defaultValue}
@@ -51,5 +43,3 @@ export const AppInput = (props: AppInputProps) => {
     </InputWrapper>
   );
 };
-
-AppInput.defaultProps = defaultProps;

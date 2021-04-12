@@ -1,107 +1,91 @@
-/* eslint-disable import/no-unresolved */
-/* eslint-disable import/order */
-/* eslint-disable import/no-extraneous-dependencies */
-/* eslint-disable @typescript-eslint/no-unused-vars */
-import React, { useContext, useRef } from 'react';
-import { useRouter } from 'next/router';
-import { AuthContext } from 'context/auth';
-import { UserLogin } from 'api/models/user';
+import React, { useCallback, useRef, useState } from "react";
+import { AppInput } from "../components";
 import {
-  PageContainer,
-  LeftContainer,
-  LoginContainer,
-  LoginFormContainer,
-  LoginTitle,
-  Subtitle,
-  ContainerForm,
-  RightContainer,
-  ForgotBtn,
-  RegisterBtn,
-  LogoImg
-} from '../styles/login.styles';
+  Container,
+  Divider,
+  Heading,
+  LoginForm,
+  MainCard,
+  MainImg,
+} from "../styles/login.styles";
+import { FlexColumn, FlexRow } from "../styles/utils";
+import { AppButton } from "components/app-button";
+import { httpClient } from "api";
+import { AuthService } from "api/services";
+import { UserLogin } from "api/models/user";
+import { toast } from "react-toastify";
 
-import { AppInput } from '../components/app-input';
-import { AppButton } from '../components/app-button';
+const authService = new AuthService(httpClient);
 
 const Login = () => {
   const formRef = useRef();
-  const context = useContext(AuthContext);
-  const { login, loading } = context;
-  const router = useRouter();
-
-  const handleFormSubmit = (data: UserLogin) => {
+  const handleFormSubmit = (data: any) => {
     login(data);
   };
+  const [loading, setLoading] = useState(false);
 
-  const goToRegister = () => {
-    router.replace('/register');
-  };
+  const login = useCallback(async (data: UserLogin) => {
+    try {
+      setLoading(true);
+      const response = await authService.authenticate(data);
+      setLoading(false);
+      // TODO: Redirect to admin page
+      toast(`Welcome ${response.email}`, {
+        position: "top-right",
+        type: "success",
+        pauseOnHover: false,
+      });
+    } catch (error) {
+      setLoading(false);
+    }
+  }, []);
 
   return (
-    <PageContainer>
-      <LeftContainer>
-        <LoginContainer>
-          <LoginFormContainer>
-            <LogoImg>
-              <img src="/assets/logo.png" alt="" />
-            </LogoImg>
-            <LoginTitle>
-              <span>Log in.</span>
-            </LoginTitle>
-            <Subtitle>
-              <span>
-                Log in with your data or
-                <RegisterBtn onClick={() => goToRegister()}>
-                  register now.
-                </RegisterBtn>
-              </span>
-            </Subtitle>
+    <Container>
+      <MainCard>
+        <LoginForm ref={formRef} onSubmit={handleFormSubmit}>
+          <FlexRow aligment="center" justify="center">
+            <Heading>Welcome</Heading>
+          </FlexRow>
+          <AppInput
+            id="email"
+            name="email"
+            label="Email / username"
+            placeholder="Email or username..."
+            type="text"
+            required
+          />
+          <AppInput
+            id="password"
+            name="password"
+            label="Password"
+            placeholder="******"
+            type="password"
+            required
+          />
 
-            {/* Form */}
-            <ContainerForm ref={formRef} onSubmit={handleFormSubmit}>
-
-              <AppInput
-                id="email"
-                name="email"
-                label="Email / username"
-                placeholder="Email or username..."
-                type="text"
-                required
-              />
-
-              <AppInput
-                id="password"
-                name="password"
-                label="Password"
-                placeholder="******"
-                type="password"
-                required
-              />
-
-              <AppButton
-                styling="primary"
-                text="Log in"
-                type="submit"
-                loading={loading}
-              />
-
-            </ContainerForm>
-
-            {/* <KeepLogin>
-              <CheckBox />
-              <span>Keep me logged in</span>
-            </KeepLogin> */}
-
-            <ForgotBtn>
-              <span>Forgot password?</span>
-            </ForgotBtn>
-
-          </LoginFormContainer>
-        </LoginContainer>
-
-      </LeftContainer>
-      <RightContainer />
-    </PageContainer>
+          <AppButton
+            styling="primary"
+            text="Log in"
+            type="submit"
+            loading={loading}
+          />
+          <AppButton styling="primary" text="Register" />
+        </LoginForm>
+        <Divider />
+        <FlexColumn
+          justify="center"
+          aligment="center"
+          style={{ textAlign: "center" }}
+          gap="20px"
+        >
+          <Heading>
+            Lorem ipsum dolor sit amet consectetur adipisicing elit.
+          </Heading>
+          <MainImg src="/assets/reading-time.svg" alt="Picture of the author" />
+        </FlexColumn>
+      </MainCard>
+    </Container>
   );
 };
 

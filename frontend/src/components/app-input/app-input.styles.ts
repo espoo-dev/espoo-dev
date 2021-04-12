@@ -1,24 +1,23 @@
-import styled from 'styled-components';
+import styled from "styled-components";
+import { labelMargin } from "styles/spacings";
 
 export const InputWrapper = styled.div`
   display: flex;
   flex-direction: column;
 
   label {
-    color: #848484;
+    font-weight: bold;
+    margin: 0 0 ${labelMargin} ${labelMargin};
   }
 
   input {
-    margin-top: 10px;
-    width: 100%;
-    height: 36px;
-    border: 1px solid #E2E2E2;
-    border-radius: 5px;
-    color: #565656;
-    padding: 0px 8px;
+    border: 1px solid rgba(0, 0, 0, 0.15);
+    border-radius: 6px;
+    padding: 8px 12px;
+    color: #000;
 
-    ::placeholder {
-      color: #e2e2e2;
+    &::placeholder {
+      color: rgba(0, 0, 0, 0.2);
     }
   }
 `;
