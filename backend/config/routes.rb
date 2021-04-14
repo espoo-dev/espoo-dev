@@ -3,7 +3,7 @@ Rails.application.routes.draw do
 
   namespace :admin do
     resources :users
-
+    get '/teachers', action: :teacher, controller: :users
     root to: "users#index"
   end
 
