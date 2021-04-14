@@ -1,6 +1,8 @@
 require 'rails_helper'
 
 RSpec.describe 'UsersController', type: :request do
+  include JsonResponseHelper
+
   describe '#create' do
     context 'when data is valid' do
       let(:user) { build(:user) }
@@ -50,6 +52,56 @@ RSpec.describe 'UsersController', type: :request do
       it { expect(User.count).to eq(0) }
 
       it { expect(response_body).to match({ 'error_message' => "Can't create admin user :(" }) }
+    end
+  end
+
+  describe '#list' do
+    describe 'when has params role' do
+      context 'when users exist' do
+        let!(:user_teacher) { create(:user_teacher) }
+
+        before do
+          create(:user)
+          create(:user_moderator)
+          get '/api/v1/users?role=teacher', headers: auth_headers
+        end
+
+        it { expect(response).to have_http_status :success }
+
+        it 'has user with role teacher' do
+          teacher = response_body[0]
+          expected_attributes = {
+            'id' => user_teacher.id,
+            'email' => user_teacher.email,
+            'role' => user_teacher.role
+          }
+          expect(teacher).to match(expected_attributes)
+        end
+      end
+
+      context 'when users do not exist' do
+        before do
+          create(:user)
+          get '/api/v1/users?role=teacher', headers: auth_headers
+        end
+
+        it { expect(response).to have_http_status :success }
+
+        it { expect(response.body).to match('[]') }
+
+        it { expect(response_body.count).to eq(0) }
+      end
+    end
+
+    context 'when has no params' do
+      before do
+        create_list(:user, 5)
+        get '/api/v1/users', headers: auth_headers
+      end
+
+      it { expect(response).to have_http_status :success }
+
+      it { expect(response_body.count).to eq(6) }
     end
   end
 end
