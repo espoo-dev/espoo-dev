@@ -30,17 +30,15 @@ RSpec.describe 'UsersController', type: :request do
       let!(:user) { create(:user) }
 
       before do
-        get '/admin/teachers', params: user, headers: auth_headers
+        get '/admin/teachers', headers: auth_headers
       end
 
       it { expect(response).to have_http_status :success }
 
       it { expect(response.body).to match('[]') }
 
-      it 'when cannot find any teacher' do
-        teachers = User.where(role: 'teacher')
-        expect(teachers.count).to eq(0)
-      end
+      it {  expect(response_body.count).to eq(0) }
+
     end
   end
 end
