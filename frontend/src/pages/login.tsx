@@ -1,4 +1,4 @@
-import React, { useCallback, useContext, useRef, useState } from "react";
+import React, { useContext, useRef } from "react";
 import { AppInput } from "../components";
 import {
   Container,
@@ -12,9 +12,8 @@ import { FlexColumn, FlexRow } from "../styles/utils";
 import { AppButton } from "components/app-button";
 import { httpClient } from "api";
 import { AuthService } from "api/services";
-import { UserLogin } from "api/models/user";
-import { toast } from "react-toastify";
 import { AuthContext } from "context/auth";
+import Head from 'next/head';
 
 const authService = new AuthService(httpClient);
 
@@ -29,6 +28,10 @@ const Login = () => {
 
   return (
     <Container>
+      <Head>
+        <title>Espoolingo - Login</title>
+      </Head>
+
       <MainCard>
         <LoginForm ref={formRef} onSubmit={handleFormSubmit}>
           <FlexRow aligment="center" justify="center">

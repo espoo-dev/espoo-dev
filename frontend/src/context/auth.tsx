@@ -49,6 +49,7 @@ export const AuthProvider: React.FC = ({ children }) => {
         router.replace("/main");
 
         httpClient.defaults.headers.Authorization = authorization;
+
         setLoading(false);
         setUser(response.data);
         setToken(authorization);
@@ -62,6 +63,7 @@ export const AuthProvider: React.FC = ({ children }) => {
 
   const logout = useCallback(() => {
     localStorage.removeItem("token");
+    setToken(null);
     setUser(null);
   }, []);
 
@@ -69,13 +71,14 @@ export const AuthProvider: React.FC = ({ children }) => {
     setLoading(true);
 
     let storedToken = localStorage.getItem("token");
+    setLoading(false);
 
-    if (storedToken) {
-      setLoading(false);
-    } else {
+    if (!storedToken) {
       router.replace("/login");
+    } else {
+      setToken(storedToken);
     }
-  }, []);
+  }, [setToken]);
 
   useEffect(() => {
     checkToken();
@@ -83,7 +86,7 @@ export const AuthProvider: React.FC = ({ children }) => {
 
   return (
     <AuthContext.Provider
-      value={{ isAuthenticated: !!user, user, login, loading, logout }}
+      value={{ isAuthenticated: !!token, user, login, loading, logout }}
     >
       {children}
     </AuthContext.Provider>
