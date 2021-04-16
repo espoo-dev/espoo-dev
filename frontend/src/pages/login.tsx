@@ -1,4 +1,4 @@
-import React, { useCallback, useRef, useState } from "react";
+import React, { useCallback, useContext, useRef, useState } from "react";
 import { AppInput } from "../components";
 import {
   Container,
@@ -14,31 +14,18 @@ import { httpClient } from "api";
 import { AuthService } from "api/services";
 import { UserLogin } from "api/models/user";
 import { toast } from "react-toastify";
+import { AuthContext } from "context/auth";
 
 const authService = new AuthService(httpClient);
 
 const Login = () => {
   const formRef = useRef();
+  const context = useContext(AuthContext)
+  const { login, loading } = context;
+
   const handleFormSubmit = (data: any) => {
     login(data);
   };
-  const [loading, setLoading] = useState(false);
-
-  const login = useCallback(async (data: UserLogin) => {
-    try {
-      setLoading(true);
-      const response = await authService.authenticate(data);
-      setLoading(false);
-      // TODO: Redirect to admin page
-      toast(`Welcome ${response.email}`, {
-        position: "top-right",
-        type: "success",
-        pauseOnHover: false,
-      });
-    } catch (error) {
-      setLoading(false);
-    }
-  }, []);
 
   return (
     <Container>
