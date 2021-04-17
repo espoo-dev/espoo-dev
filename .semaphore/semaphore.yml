@@ -30,5 +30,6 @@ blocks:
         - name: build client
           commands:
             - checkout
+            - cd frontend
             - cache restore
-            - npm run build
+            - yarn build
