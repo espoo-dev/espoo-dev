@@ -1,9 +1,8 @@
-import React, { useCallback, useRef, useState } from 'react';
+import React, { useContext, useRef } from 'react';
 import { AppButton } from 'components/app-button';
-import { httpClient } from 'api';
-import { AuthService } from 'api/services';
+import { AuthContext } from 'context/auth';
+import Head from 'next/head';
 import { UserLogin } from 'api/models/user';
-import { toast } from 'react-toastify';
 import { FlexColumn, FlexRow } from '../styles/utils';
 import {
   Container,
@@ -15,33 +14,21 @@ import {
 } from '../styles/login.styles';
 import { AppInput } from '../components';
 
-const authService = new AuthService(httpClient);
-
 const Login = () => {
   const formRef = useRef();
-  const handleFormSubmit = (data: any) => {
+  const context = useContext(AuthContext);
+  const { login, loading } = context;
+
+  const handleFormSubmit = (data: UserLogin) => {
     login(data);
   };
-  const [loading, setLoading] = useState(false);
-
-  const login = useCallback(async (data: UserLogin) => {
-    try {
-      setLoading(true);
-      const response = await authService.authenticate(data);
-      setLoading(false);
-      // TODO: Redirect to admin page
-      toast(`Welcome ${response.email}`, {
-        position: 'top-right',
-        type: 'success',
-        pauseOnHover: false,
-      });
-    } catch (error) {
-      setLoading(false);
-    }
-  }, []);
 
   return (
     <Container>
+      <Head>
+        <title>Espoolingo - Login</title>
+      </Head>
+
       <MainCard>
         <LoginForm ref={formRef} onSubmit={handleFormSubmit}>
           <FlexRow aligment="center" justify="center">
