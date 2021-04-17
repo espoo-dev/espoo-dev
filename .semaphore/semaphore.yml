@@ -1,0 +1,35 @@
+version: v1.0
+name: Espoolingo
+agent:
+  machine:
+    type: e1-standard-2
+    os_image: ubuntu1804
+blocks:
+  - name: Install dependencies
+    task:
+      jobs:
+        - name: install client dependencies
+          commands:
+            - checkout
+            - cd frontend
+            - cache restore
+            - yarn install
+            - cache store
+  - name: Lint
+    task:
+      jobs:
+        - name: lint client
+          commands:
+            - checkout
+            - cd frontend
+            - cache restore
+            - yarn lint
+  - name: Build
+    task:
+      jobs:
+        - name: build client
+          commands:
+            - checkout
+            - cd frontend
+            - cache restore
+            - yarn build
