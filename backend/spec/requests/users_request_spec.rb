@@ -4,17 +4,17 @@ RSpec.describe 'UsersController', type: :request do
   include JsonResponseHelper
   describe 'list users with role teacher' do
     context 'when can list the record' do
-
       let!(:user_teacher) { create(:teacher) }
-      let!(:user) { create(:user) }
-      let!(:user_moderator) { create(:user_moderator) }
-      
+      let(:user) { create(:user) }
+      let(:user_moderator) { create(:user_moderator) }
+
       before do
-        get '/admin/teachers', headers: auth_headers
+        get '/api/v1/users?role=teacher', headers: auth_headers
       end
+
       it { expect(response).to have_http_status :success }
 
-      it 'should have user with role teacher' do
+      it 'have user with role teacher' do
         teacher = response_body[0]
         expected_attributes = {
           'id' => user_teacher.id,
@@ -27,18 +27,16 @@ RSpec.describe 'UsersController', type: :request do
     end
 
     context 'when cannot find any teacher' do
-      let!(:user) { create(:user) }
+      let(:user) { create(:user) }
 
       before do
-        get '/admin/teachers', headers: auth_headers
+        get '/api/v1/users?role=teacher', headers: auth_headers
       end
 
       it { expect(response).to have_http_status :success }
 
       it { expect(response.body).to match('[]') }
-
-      it {  expect(response_body.count).to eq(0) }
-
+      it { expect(response_body.count).to eq(0) }
     end
   end
 end

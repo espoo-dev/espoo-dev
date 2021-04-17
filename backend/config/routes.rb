@@ -3,8 +3,13 @@ Rails.application.routes.draw do
 
   namespace :admin do
     resources :users
-    get '/teachers', action: :teacher, controller: :users
     root to: "users#index"
+  end
+
+  namespace :api do
+    namespace :v1 do
+      get '/users', action: :index, controller: :users
+    end
   end
 
   get '/jwt_example', to: 'jwt_example#index'

@@ -42,9 +42,5 @@ module Admin
 
     # See https://administrate-prototype.herokuapp.com/customizing_controller_actions
     # for more information
-    def teacher
-      teachers = User.where(role: 'teacher')
-      render json: teachers
-    end
   end
 end
