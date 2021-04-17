@@ -1,5 +1,5 @@
 version: v1.0
-name: Espoolingo
+name: GH Finder
 agent:
   machine:
     type: e1-standard-2
@@ -30,6 +30,5 @@ blocks:
         - name: build client
           commands:
             - checkout
-            - cd frontend
             - cache restore
-            - yarn build
+            - npm run build
