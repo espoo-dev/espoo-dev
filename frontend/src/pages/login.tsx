@@ -1,5 +1,10 @@
-import React, { useCallback, useRef, useState } from "react";
-import { AppInput } from "../components";
+import React, { useCallback, useRef, useState } from 'react';
+import { AppButton } from 'components/app-button';
+import { httpClient } from 'api';
+import { AuthService } from 'api/services';
+import { UserLogin } from 'api/models/user';
+import { toast } from 'react-toastify';
+import { FlexColumn, FlexRow } from '../styles/utils';
 import {
   Container,
   Divider,
@@ -7,13 +12,8 @@ import {
   LoginForm,
   MainCard,
   MainImg,
-} from "../styles/login.styles";
-import { FlexColumn, FlexRow } from "../styles/utils";
-import { AppButton } from "components/app-button";
-import { httpClient } from "api";
-import { AuthService } from "api/services";
-import { UserLogin } from "api/models/user";
-import { toast } from "react-toastify";
+} from '../styles/login.styles';
+import { AppInput } from '../components';
 
 const authService = new AuthService(httpClient);
 
@@ -31,8 +31,8 @@ const Login = () => {
       setLoading(false);
       // TODO: Redirect to admin page
       toast(`Welcome ${response.email}`, {
-        position: "top-right",
-        type: "success",
+        position: 'top-right',
+        type: 'success',
         pauseOnHover: false,
       });
     } catch (error) {
@@ -76,7 +76,7 @@ const Login = () => {
         <FlexColumn
           justify="center"
           aligment="center"
-          style={{ textAlign: "center" }}
+          style={{ textAlign: 'center' }}
           gap="20px"
         >
           <Heading>

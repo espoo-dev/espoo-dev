@@ -1,6 +1,6 @@
-import { errorHandler } from "api/error-handler";
-import { AxiosInstance, AxiosError } from "axios";
-import { UserLogin, User } from "../models/user";
+import { errorHandler } from 'api/error-handler';
+import { AxiosInstance } from 'axios';
+import { UserLogin, User } from '../models/user';
 
 export class AuthService {
   constructor(private httpClient: AxiosInstance) {
@@ -9,7 +9,7 @@ export class AuthService {
 
   public async authenticate(user: UserLogin): Promise<User | undefined> {
     try {
-      const response = await this.httpClient.post<User>(`/users/sign_in`, {
+      const response = await this.httpClient.post<User>('/users/sign_in', {
         user,
       });
 
