@@ -1,5 +1,9 @@
-import React, { useContext, useRef } from "react";
-import { AppInput } from "../components";
+import React, { useContext, useRef } from 'react';
+import { AppButton } from 'components/app-button';
+import { AuthContext } from 'context/auth';
+import Head from 'next/head';
+import { UserLogin } from 'api/models/user';
+import { FlexColumn, FlexRow } from '../styles/utils';
 import {
   Container,
   Divider,
@@ -7,22 +11,15 @@ import {
   LoginForm,
   MainCard,
   MainImg,
-} from "../styles/login.styles";
-import { FlexColumn, FlexRow } from "../styles/utils";
-import { AppButton } from "components/app-button";
-import { httpClient } from "api";
-import { AuthService } from "api/services";
-import { AuthContext } from "context/auth";
-import Head from 'next/head';
-
-const authService = new AuthService(httpClient);
+} from '../styles/login.styles';
+import { AppInput } from '../components';
 
 const Login = () => {
   const formRef = useRef();
-  const context = useContext(AuthContext)
+  const context = useContext(AuthContext);
   const { login, loading } = context;
 
-  const handleFormSubmit = (data: any) => {
+  const handleFormSubmit = (data: UserLogin) => {
     login(data);
   };
 
@@ -66,7 +63,7 @@ const Login = () => {
         <FlexColumn
           justify="center"
           aligment="center"
-          style={{ textAlign: "center" }}
+          style={{ textAlign: 'center' }}
           gap="20px"
         >
           <Heading>

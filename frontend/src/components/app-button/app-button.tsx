@@ -11,6 +11,11 @@ interface AppButtonProps extends CustomButton {
   icon?: ReactElement<IconType>;
 }
 
+const defaultProps = {
+  icon: undefined,
+  loading: false,
+};
+
 export const AppButton = (props: AppButtonProps) => {
   const { disabled, loading, icon, text, ...rest } = props;
   return (
@@ -21,3 +26,5 @@ export const AppButton = (props: AppButtonProps) => {
     </StyledAppButton>
   );
 };
+
+AppButton.defaultProps = defaultProps;

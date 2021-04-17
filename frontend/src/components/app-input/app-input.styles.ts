@@ -1,5 +1,5 @@
-import styled from "styled-components";
-import { labelMargin } from "styles/spacings";
+import styled from 'styled-components';
+import { labelMargin } from 'styles/spacings';
 
 export const InputWrapper = styled.div`
   display: flex;

@@ -1,14 +1,14 @@
-import styled from "styled-components";
-import { colors } from "./colors";
+import styled from 'styled-components';
+import { colors } from './colors';
 
 interface ContainerProps {
-  aligment?: "center" | "baseline" | "flex-end" | "flex-start" | "stretch";
+  aligment?: 'center' | 'baseline' | 'flex-end' | 'flex-start' | 'stretch';
   justify?:
-    | "flex-end"
-    | "flex-start"
-    | "space-arround"
-    | "space-between"
-    | "center";
+    | 'flex-end'
+    | 'flex-start'
+    | 'space-arround'
+    | 'space-between'
+    | 'center';
   padding?: string;
   margin?: string;
   width?: string;
@@ -65,7 +65,7 @@ export const Button = styled.button<ButtonProps>`
   background: ${(props) => {
     const { styling } = props;
     const color = colors[styling];
-    return color ? color : colors.primary;
+    return color || colors.primary;
   }};
   transition: all 0.3s ease-in-out;
   &:hover {
