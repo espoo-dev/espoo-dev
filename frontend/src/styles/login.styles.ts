@@ -1,5 +1,5 @@
-import styled from "styled-components";
-import { Form } from "@unform/web";
+import styled from 'styled-components';
+import { Form } from '@unform/web';
 
 export const Container = styled.div`
   height: 100vh;
@@ -22,7 +22,7 @@ export const MainCard = styled.div`
   border-radius: 12px;
   padding: 20px;
 
-  @media(max-width: 900px) {
+  @media (max-width: 900px) {
     grid-template-columns: auto;
   }
 `;

@@ -1,6 +1,6 @@
-import Axios, { AxiosInstance } from "axios";
-import { useAuth } from "hooks";
-import { config } from "../config";
+import Axios, { AxiosInstance } from 'axios';
+import { useAuth } from 'hooks';
+import { config } from '../config';
 
 /**
  * HTTP client
@@ -8,15 +8,16 @@ import { config } from "../config";
 export const httpClient: AxiosInstance = Axios.create({
   baseURL: config.API_URL,
   headers: {
-    "Accept": "application/json",
-    "Content-Type": "application/json",
+    Accept: 'application/json',
+    'Content-Type': 'application/json',
   },
 });
 
 httpClient.interceptors.request.use(
-  (value) => {
-    value.headers.Authorization = useAuth();
-    return value;
+  (requestConfig) => {
+    const newConfig = requestConfig;
+    newConfig.headers.Authorization = useAuth();
+    return newConfig;
   },
   (error) => Promise.reject(error)
 );
