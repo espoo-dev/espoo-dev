@@ -3,26 +3,48 @@ require 'rails_helper'
 RSpec.describe 'Question CRUD', type: :system do
   include Devise::Test::IntegrationHelpers
   describe 'CRUD' do
-    let!(:question) { create(:question) }
-    let(:question_type) { create(:question_type) }
+    let!(:question_name) { 'question name' }
 
     before do
       sign_in create(:user)
     end
 
-    it 'list question' do
-      visit '/admin/questions/'
+    describe 'create' do
+      let!(:question_type) { create(:question_type) }
 
-      expect(page).to have_text(question.name)
+      it 'creates the question' do
+        visit '/admin/questions/new'
+
+        find('label', text: 'Question type').click
+        find('.option', text: question_type.name).click
+        fill_in 'Name', with: question_name
+
+        click_button 'Create Question'
+        expect(page).to have_content 'Question was successfully created.'
+      end
     end
 
-    it 'Delete question' do
-      visit '/admin/questions'
+    describe 'list' do
+      it 'list the questions' do
+        question = create(:question)
 
-      click_on 'Destroy'
-      page.accept_alert
+        visit '/admin/questions'
 
-      expect(page).to have_text('Question was successfully destroyed.')
+        expect(page).to have_text(question.name)
+      end
+    end
+
+    describe 'delete' do
+      it 'deletes the question' do
+        create(:question)
+
+        visit '/admin/questions'
+
+        click_on 'Destroy'
+        page.accept_alert
+
+        expect(page).to have_text('Question was successfully destroyed.')
+      end
     end
   end
 end
