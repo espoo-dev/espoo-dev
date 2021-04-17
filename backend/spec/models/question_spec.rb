@@ -5,6 +5,10 @@ RSpec.describe Question, type: :model do
 
   it { expect(question).to be_valid }
 
+  describe 'relationship' do
+    it { is_expected.to belong_to(:question_type).required }
+  end
+
   describe 'presence' do
     it { is_expected.to validate_presence_of(:name) }
   end

@@ -4,6 +4,8 @@ Rails.application.routes.draw do
 
   namespace :admin do
     resources :users
+    resources :questions
+    resources :question_types
 
     root to: "users#index"
   end
