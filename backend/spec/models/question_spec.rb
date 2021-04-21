@@ -7,6 +7,7 @@ RSpec.describe Question, type: :model do
 
   describe 'relationship' do
     it { is_expected.to belong_to(:question_type).required }
+    it { is_expected.to belong_to(:survey).optional }
   end
 
   describe 'presence' do
