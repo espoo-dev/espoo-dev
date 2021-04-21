@@ -6,6 +6,7 @@ Rails.application.routes.draw do
     resources :users
     resources :questions
     resources :question_types
+    resources :surveys
 
     root to: "users#index"
   end
