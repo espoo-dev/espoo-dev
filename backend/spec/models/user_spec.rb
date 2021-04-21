@@ -10,6 +10,6 @@ RSpec.describe User, type: :model do
   end
 
   describe 'relationships' do
-    it { should have_many(:surveys).dependent(:destroy) }
+    it { is_expected.to have_many(:surveys).dependent(:destroy) }
   end
 end
