@@ -6,6 +6,10 @@ RSpec.describe User, type: :model do
   it { expect(user).to be_valid }
 
   describe 'inclusion' do
-    it { is_expected.to validate_inclusion_of(:role).in_array(User::ROLES) }
+    it { should validate_inclusion_of(:role).in_array(User::ROLES) }
+  end
+
+  describe 'relationships' do
+    it { should have_many(:surveys).dependent(:destroy) }
   end
 end
