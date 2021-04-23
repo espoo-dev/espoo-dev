@@ -35,8 +35,4 @@ class ApplicationPolicy
   def destroy?
     admin?
   end
-
-  def teacher?
-    admin?
-  end
 end

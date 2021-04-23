@@ -2,7 +2,7 @@ require 'rails_helper'
 
 RSpec.describe User, type: :model do
   let(:user) { create(:user) }
-  let(:user_teacher) { create(:teacher) }
+  let(:user_teacher) { create(:user_teacher) }
 
   it { expect(user_teacher.teacher?).to eq true }
 

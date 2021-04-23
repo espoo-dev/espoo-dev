@@ -9,7 +9,7 @@ FactoryBot.define do
     role { User::ROLES[1] }
   end
 
-  factory :teacher, parent: :user do
+  factory :user_teacher, parent: :user do
     role { User::ROLES[2] }
   end
 end

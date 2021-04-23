@@ -53,10 +53,9 @@ RSpec.describe 'UsersController', type: :request do
     end
   end
 
-  include JsonResponseHelper
   describe 'list users with role teacher' do
     context 'when can list the record' do
-      let!(:user_teacher) { create(:teacher) }
+      let!(:user_teacher) { create(:user_teacher) }
       let(:user) { create(:user) }
       let(:user_moderator) { create(:user_moderator) }
 
@@ -78,9 +77,8 @@ RSpec.describe 'UsersController', type: :request do
     end
 
     context 'when cannot find any teacher' do
-      let(:user) { create(:user) }
-
       before do
+        create(:user)
         get '/api/v1/users?role=teacher', headers: auth_headers
       end
 
