@@ -2,7 +2,7 @@ import React, { useContext, useEffect, useState } from 'react';
 import { useRouter } from 'next/router';
 import { AuthContext } from 'context/auth';
 
-export const withAuth = (WrappedComponent: React.FC) => (props: any) => {
+export const withAuth = (WrappedComponent: React.FC) => (props: unknown) => {
   const router = useRouter();
   const context = useContext(AuthContext);
   const { isAuthenticated, loading, checkToken } = context;
