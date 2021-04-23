@@ -39,4 +39,19 @@ RSpec.describe 'UsersController', type: :request do
       it { expect(response_body.count).to eq(0) }
     end
   end
+
+  describe 'List users' do
+    context 'without params' do
+      let!(:created_users) { create_list(:user, 5) }
+      let!(:user_teacher) { create(:teacher) }
+
+      before do
+        get '/api/v1/users', headers: auth_headers
+      end
+
+      it { expect(response).to have_http_status :success }
+
+      it { expect(response_body.count).to eq(7) }
+    end
+  end
 end
