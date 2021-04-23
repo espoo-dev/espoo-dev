@@ -1,0 +1,12 @@
+version: '3.7'
+
+services:
+    frontend:
+        build:
+            context: ./
+            dockerfile: dev.Dockerfile
+        volumes:
+            - ./:/frontend
+        ports:
+            - 3000:3000
+        restart: unless-stopped
