@@ -1,7 +1,8 @@
 import React, { useContext, useRef } from 'react';
+import Head from 'next/head';
+import { useRouter } from 'next/router';
 import { AppButton } from 'components/app-button';
 import { AuthContext } from 'context/auth';
-import Head from 'next/head';
 import { UserLogin } from 'api/models/user';
 import { FlexColumn, FlexRow } from '../styles/utils';
 import {
@@ -18,9 +19,14 @@ const Login = () => {
   const formRef = useRef();
   const context = useContext(AuthContext);
   const { login, loading } = context;
+  const router = useRouter();
 
   const handleFormSubmit = (data: UserLogin) => {
     login(data);
+  };
+
+  const goToRegister = () => {
+    router.replace('/register');
   };
 
   return (
@@ -57,7 +63,12 @@ const Login = () => {
             type="submit"
             loading={loading}
           />
-          <AppButton styling="primary" text="Register" />
+          <AppButton
+            styling="primary"
+            text="Register"
+            type="button"
+            onClick={() => goToRegister()}
+          />
         </LoginForm>
         <Divider />
         <FlexColumn

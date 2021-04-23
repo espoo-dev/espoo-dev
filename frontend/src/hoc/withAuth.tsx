@@ -2,28 +2,42 @@ import React, { useContext, useEffect, useState } from 'react';
 import { useRouter } from 'next/router';
 import { AuthContext } from 'context/auth';
 
-export const withAuth = (WrappedComponent: React.FC) => (props: any) => {
+export const withAuth = (WrappedComponent: React.FC) => (props: unknown) => {
   const router = useRouter();
   const context = useContext(AuthContext);
-  const { isAuthenticated, loading } = context;
+  const { isAuthenticated, loading, checkToken } = context;
   const [isMounted, setIsMounted] = useState(false);
+  const [checking, setChecking] = useState(true);
 
   useEffect(() => {
     setIsMounted(true);
-  }, [isMounted]);
+
+    return () => {
+      setIsMounted(false);
+    };
+  }, []);
 
   useEffect(() => {
-    if (!loading && !isAuthenticated) {
+    const shouldRender = async () => {
+      const result = await checkToken();
+      setChecking(result);
+    };
+
+    shouldRender();
+  }, [checking]);
+
+  useEffect(() => {
+    if (!checking && !loading && !isAuthenticated) {
       router.replace('/login');
     }
-  }, [isAuthenticated, loading, router]);
+  }, [isAuthenticated, loading, checking]);
 
   if (!isMounted) {
     return null;
   }
 
   // If authentication is loading
-  if (loading) {
+  if (loading || checking) {
     return (
       <div
         style={{
