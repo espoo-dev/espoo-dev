@@ -52,4 +52,51 @@ RSpec.describe 'UsersController', type: :request do
       it { expect(response_body).to match({ 'error_message' => "Can't create admin user :(" }) }
     end
   end
+
+  describe 'list users with role teacher' do
+    context 'when can list the record' do
+      let!(:user_teacher) { create(:user_teacher) }
+
+      before do
+        create(:user)
+        create(:user_moderator)
+        get '/api/v1/users?role=teacher', headers: auth_headers
+      end
+
+      it { expect(response).to have_http_status :success }
+
+      it 'have user with role teacher' do
+        teacher = response_body[0]
+        expected_attributes = {
+          'id' => user_teacher.id,
+          'email' => user_teacher.email,
+          'role' => user_teacher.role
+        }
+        expect(teacher).to match(expected_attributes)
+      end
+    end
+
+    context 'when cannot find any teacher' do
+      before do
+        create(:user)
+        get '/api/v1/users?role=teacher', headers: auth_headers
+      end
+
+      it { expect(response).to have_http_status :success }
+
+      it { expect(response.body).to match('[]') }
+      it { expect(response_body.count).to eq(0) }
+    end
+  end
+
+  context 'without params' do
+    before do
+      create_list(:user, 5)
+      get '/api/v1/users', headers: auth_headers
+    end
+
+    it { expect(response).to have_http_status :success }
+
+    it { expect(response_body.count).to eq(6) }
+  end
 end

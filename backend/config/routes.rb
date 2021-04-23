@@ -11,6 +11,12 @@ Rails.application.routes.draw do
     root to: "users#index"
   end
 
+  namespace :api do
+    namespace :v1 do
+      resources :users, only: %i[index]
+    end
+  end
+
   get '/jwt_example', to: 'jwt_example#index'
   get '/', to: 'admin/users#index'
 
