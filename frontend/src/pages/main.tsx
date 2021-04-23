@@ -1,19 +1,21 @@
-import { AuthContext } from 'context/auth';
+import Head from 'next/head';
+import { Navbar } from 'components/navbar';
 import { withAuth } from 'hoc/withAuth';
-import React, { useContext } from 'react';
+import { Content, Layout } from 'styles/main.styles';
 
-const Main = () => {
-  const context = useContext(AuthContext);
-  const { logout } = context;
+const Main = () => (
+  <>
+    <Head>
+      <title>Espoolingo - Home</title>
+    </Head>
+    <Layout>
+      <header>
+        <Navbar />
+      </header>
 
-  return (
-    <div>
-      Main page
-      <button type="button" onClick={logout}>
-        Logout
-      </button>
-    </div>
-  );
-};
+      <Content>Main page</Content>
+    </Layout>
+  </>
+);
 
 export default withAuth(Main);
