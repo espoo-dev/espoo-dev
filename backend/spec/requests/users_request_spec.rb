@@ -56,10 +56,10 @@ RSpec.describe 'UsersController', type: :request do
   describe 'list users with role teacher' do
     context 'when can list the record' do
       let!(:user_teacher) { create(:user_teacher) }
-      let(:user) { create(:user) }
-      let(:user_moderator) { create(:user_moderator) }
 
       before do
+        create(:user)
+        create(:user_moderator)
         get '/api/v1/users?role=teacher', headers: auth_headers
       end
 
