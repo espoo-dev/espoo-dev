@@ -85,6 +85,7 @@ RSpec.describe 'UsersController', type: :request do
       it { expect(response).to have_http_status :success }
 
       it { expect(response.body).to match('[]') }
+
       it { expect(response_body.count).to eq(0) }
     end
   end

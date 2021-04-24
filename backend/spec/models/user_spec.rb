@@ -4,9 +4,9 @@ RSpec.describe User, type: :model do
   let(:user) { create(:user) }
   let(:user_teacher) { create(:user_teacher) }
 
-  it { expect(user_teacher.teacher?).to eq true }
+  it { expect(user_teacher).to be_teacher }
 
-  it { expect(user.admin?).to eq true }
+  it { expect(user).to be_admin }
 
   it { expect(user).to be_valid }
 
