@@ -8,4 +8,8 @@ FactoryBot.define do
   factory :user_moderator, parent: :user do
     role { User::ROLES[1] }
   end
+
+  factory :user_teacher, parent: :user do
+    role { User::ROLES[2] }
+  end
 end
