@@ -4,9 +4,10 @@ RSpec.describe 'Question CRUD', type: :system do
   include Devise::Test::IntegrationHelpers
   describe 'CRUD' do
     let!(:question_name) { 'question name' }
+    let!(:user) { create(:user) }
 
     before do
-      sign_in create(:user)
+      sign_in user
     end
 
     describe 'create' do
@@ -17,6 +18,10 @@ RSpec.describe 'Question CRUD', type: :system do
 
         find('label', text: 'Question type').click
         find('.option', text: question_type.name).click
+
+        find('label', text: 'User').click
+        find('.option', text: user.email).click
+
         fill_in 'Name', with: question_name
 
         click_button 'Create Question'
