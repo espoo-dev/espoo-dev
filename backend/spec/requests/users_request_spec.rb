@@ -11,7 +11,7 @@ RSpec.describe 'UsersController', type: :request do
           role: 'moderator',
           password: '123456'
         }
-        post users_path, params: user_params
+        post api_v1_users_path, params: user_params
       end
 
       it { expect(response).to have_http_status :created }
@@ -42,7 +42,7 @@ RSpec.describe 'UsersController', type: :request do
             'role' => 'admin'
           }
 
-          post users_path, params: user_params
+          post api_v1_users_path, params: user_params
         end
 
         it { expect(response).to have_http_status :unauthorized }
@@ -61,7 +61,7 @@ RSpec.describe 'UsersController', type: :request do
             'role' => user_teacher.role
           }
 
-          post users_path, params: user_params
+          post api_v1_users_path, params: user_params
         end
 
         it { expect(response).to have_http_status :unprocessable_entity }
@@ -74,6 +74,15 @@ RSpec.describe 'UsersController', type: :request do
   end
 
   describe '#list' do
+    describe 'when has no headers' do
+      before do
+        create(:user)
+        get '/api/v1/users'
+      end
+
+      it { expect(response).to have_http_status :found }
+    end
+
     describe 'when has params role' do
       context 'when users exist' do
         let!(:user_teacher) { create(:user_teacher) }
