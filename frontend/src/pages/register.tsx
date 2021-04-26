@@ -3,48 +3,60 @@ import Head from 'next/head';
 import { useRouter } from 'next/router';
 import { AppButton } from 'components/app-button';
 import { AuthContext } from 'context/auth';
-import { UserLogin } from 'api/models/user';
+import { UserCreate } from 'api/models/user';
 import { FlexColumn, FlexRow } from '../styles/utils';
 import {
   Container,
   Divider,
   Heading,
-  LoginForm,
+  RegisterForm,
   MainCard,
   MainImg,
-} from '../styles/login.styles';
+} from '../styles/register.styles';
 import { AppInput } from '../components';
 
 const Login = () => {
   const formRef = useRef();
   const context = useContext(AuthContext);
-  const { login, loading } = context;
+  const { register, loading } = context;
   const router = useRouter();
 
-  const handleFormSubmit = (data: UserLogin) => {
-    login(data);
+  const handleFormSubmit = (data: UserCreate) => {
+    register(data);
   };
 
-  const goToRegister = () => {
-    router.replace('/register');
+  const goToLogin = () => {
+    router.replace('/login');
   };
 
   return (
     <Container>
       <Head>
-        <title>Espoolingo - Login</title>
+        <title>Espoolingo - Register</title>
       </Head>
 
       <MainCard>
-        <LoginForm ref={formRef} onSubmit={handleFormSubmit}>
+        <FlexColumn
+          justify="center"
+          aligment="center"
+          style={{ textAlign: 'center' }}
+          gap="20px"
+        >
+          <Heading>
+            Lorem ipsum dolor sit amet consectetur adipisicing elit.
+          </Heading>
+          <MainImg src="/assets/press-play.svg" alt="Picture of the author" />
+        </FlexColumn>
+        <Divider />
+        <RegisterForm ref={formRef} onSubmit={handleFormSubmit}>
           <FlexRow aligment="center" justify="center">
-            <Heading>Welcome</Heading>
+            <Heading>Register</Heading>
           </FlexRow>
           <AppInput
             id="email"
             name="email"
-            label="Email / username"
-            placeholder="Email or username..."
+            label="Email"
+            placeholder="email@email.com"
             type="text"
             required
           />
@@ -56,32 +68,29 @@ const Login = () => {
             type="password"
             required
           />
+          <AppInput
+            id="role"
+            name="role"
+            label="Role"
+            placeholder="teacher, moderator..."
+            type="text"
+            required
+          />
 
           <AppButton
             styling="primary"
-            text="Log in"
+            text="Register"
             type="submit"
             loading={loading}
           />
+
           <AppButton
             styling="primary"
-            text="Register"
+            text="Go to Login"
             type="button"
-            onClick={() => goToRegister()}
+            onClick={() => goToLogin()}
           />
-        </LoginForm>
-        <Divider />
-        <FlexColumn
-          justify="center"
-          aligment="center"
-          style={{ textAlign: 'center' }}
-          gap="20px"
-        >
-          <Heading>
-            Lorem ipsum dolor sit amet consectetur adipisicing elit.
-          </Heading>
-          <MainImg src="/assets/reading-time.svg" alt="Picture of the author" />
-        </FlexColumn>
+        </RegisterForm>
       </MainCard>
     </Container>
   );

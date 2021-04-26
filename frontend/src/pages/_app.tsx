@@ -1,7 +1,7 @@
 import Head from 'next/head';
 import { ToastContainer } from 'react-toastify';
+import { AuthProvider } from 'context/auth';
 import { GlobalStyle } from '../styles/globals';
-
 import 'react-toastify/dist/ReactToastify.css';
 
 function MyApp({ Component, pageProps }) {
@@ -10,15 +10,17 @@ function MyApp({ Component, pageProps }) {
 
   return (
     <>
-      <Head>
-        <link rel="preconnect" href="https://fonts.gstatic.com" />
-        <link href={fontURl} rel="stylesheet" />
-      </Head>
-      <GlobalStyle />
+      <AuthProvider>
+        <Head>
+          <link rel="preconnect" href="https://fonts.gstatic.com" />
+          <link href={fontURl} rel="stylesheet" />
+        </Head>
+        <GlobalStyle />
 
-      <Component {...pageProps} />
+        <Component {...pageProps} />
 
-      <ToastContainer />
+        <ToastContainer />
+      </AuthProvider>
     </>
   );
 }
