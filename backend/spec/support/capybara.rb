@@ -21,8 +21,8 @@ RSpec.configure do |config|
   config.before(:each, type: :system) do
     driven_by :chrome_headless
 
-    Capybara.app_host = "http://#{IPSocket.getaddress(Socket.gethostname)}:3000"
+    Capybara.app_host = "http://#{IPSocket.getaddress(Socket.gethostname)}:30000"
     Capybara.server_host = IPSocket.getaddress(Socket.gethostname)
-    Capybara.server_port = 3000
+    Capybara.server_port = 30_000
   end
 end

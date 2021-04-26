@@ -1,0 +1,16 @@
+version: '3.7'
+
+services:
+  frontend:
+    container_name: espoo_frontend
+    build:
+      context: .
+      dockerfile: dev.Dockerfile
+    volumes:
+      - ./:/frontend
+      - /frontend/node_modules
+    ports:
+      - 3000:3000
+    restart: unless-stopped
+    tty: true
+    command: yarn dev
