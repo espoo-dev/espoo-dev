@@ -12,4 +12,8 @@ FactoryBot.define do
   factory :user_teacher, parent: :user do
     role { User::ROLES[2] }
   end
+
+  factory :user_with_surveys, parent: :user do
+    surveys { build_list :survey, 1 }
+  end
 end
