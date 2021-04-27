@@ -2,7 +2,7 @@ class Api::V1::UsersController < Api::V1::ApiController
   skip_before_action :authenticate_user!, only: [:create]
 
   def index
-    users = User.where(params.permit(:role))
+    users = User.where(params.permit(:role)).includes([:surveys])
 
     render json: users
   end
