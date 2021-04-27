@@ -22,7 +22,8 @@ RSpec.describe 'UsersController', type: :request do
         expected_attributes = {
           'id' => anything,
           'email' => user.email,
-          'role' => 'moderator'
+          'role' => 'moderator',
+          'surveys' => []
         }
         expect(response_body).to match(expected_attributes)
       end
@@ -83,6 +84,33 @@ RSpec.describe 'UsersController', type: :request do
       it { expect(response).to have_http_status :found }
     end
 
+    describe 'when user has survey' do
+      let!(:user_with_surveys) { create(:user_with_surveys) }
+      let!(:survey) { user_with_surveys.surveys.first }
+
+      before do
+        get '/api/v1/users', headers: auth_headers
+      end
+
+      it 'has user with surveys' do
+        user = response_body[0]
+        expected_attributes = {
+          'id' => user_with_surveys.id,
+          'email' => user_with_surveys.email,
+          'role' => user_with_surveys.role,
+          'surveys' => [
+            {
+              'id' => survey.id,
+              'name' => survey.name,
+              'description' => survey.description,
+              'questions_quantity' => survey.questions.size
+            }
+          ]
+        }
+        expect(user).to match(expected_attributes)
+      end
+    end
+
     describe 'when has params role' do
       context 'when users exist' do
         let!(:user_teacher) { create(:user_teacher) }
@@ -100,7 +128,8 @@ RSpec.describe 'UsersController', type: :request do
           expected_attributes = {
             'id' => user_teacher.id,
             'email' => user_teacher.email,
-            'role' => user_teacher.role
+            'role' => user_teacher.role,
+            'surveys' => []
           }
           expect(teacher).to match(expected_attributes)
         end
