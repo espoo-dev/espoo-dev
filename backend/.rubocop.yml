@@ -53,7 +53,7 @@ Style/TernaryParentheses:
   EnforcedStyle: require_parentheses_when_complex
 
 RSpec/ExampleLength:
-  Max: 10
+  Max: 30
 
 RSpec/NestedGroups:
   Max: 4
