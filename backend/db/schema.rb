@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_04_25_112516) do
+ActiveRecord::Schema.define(version: 2021_04_30_183118) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -34,6 +34,12 @@ ActiveRecord::Schema.define(version: 2021_04_25_112516) do
     t.index ["user_id"], name: "index_questions_on_user_id"
   end
 
+  create_table "roles", force: :cascade do |t|
+    t.string "role_type"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
   create_table "surveys", force: :cascade do |t|
     t.string "name"
     t.string "description"
@@ -52,9 +58,11 @@ ActiveRecord::Schema.define(version: 2021_04_25_112516) do
     t.datetime "remember_created_at"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.string "role", null: false
+    t.bigint "role_id", null: false
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
+    t.index ["role_id"], name: "index_users_on_role_id"
   end
 
+  add_foreign_key "users", "roles"
 end
