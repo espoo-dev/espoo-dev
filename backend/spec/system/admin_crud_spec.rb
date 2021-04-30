@@ -5,6 +5,7 @@ RSpec.describe 'Admin CRUD', type: :system do
   describe 'CRUD' do
     let(:user) { create(:user) }
     let(:user2) { build(:user) }
+    let(:role) { build(:role_teacher) }
 
     it 'creates user' do
       sign_in user
@@ -14,7 +15,8 @@ RSpec.describe 'Admin CRUD', type: :system do
       fill_in 'Password', with: user2.password
       fill_in 'Phone', with: user2.phone
       fill_in 'Role', with: user2.role
-
+      find('label', text: 'Role').click
+      find('.option', text: "Role ##{role.id}").click
       click_on 'Create User'
 
       expect(page).to have_text('User was successfully created.')

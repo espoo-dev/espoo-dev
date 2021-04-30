@@ -17,7 +17,10 @@ class ApplicationPolicy
   end
 
   def create?
-    admin?
+    return true if @user&.admin?
+    return false if record.admin?
+
+    true
   end
 
   def new?

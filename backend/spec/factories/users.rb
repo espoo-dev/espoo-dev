@@ -2,15 +2,15 @@ FactoryBot.define do
   factory :user do
     email { Faker::Internet.unique.email }
     password { '123456' }
-    role { User::ROLES[0] }
+    association :role, factory: :role_admin
   end
 
   factory :user_moderator, parent: :user do
-    role { User::ROLES[1] }
+    association :role, factory: :role_moderator
   end
 
   factory :user_teacher, parent: :user do
-    role { User::ROLES[2] }
+    association :role, factory: :role_teacher
   end
 
   factory :user_with_surveys, parent: :user do

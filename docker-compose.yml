@@ -14,11 +14,11 @@ services:
   espoo_server:
     image: edimossilva/espoo
     build:
-      context: "."
+      context: "./backend"
       dockerfile: "dockerfile_rails"
     container_name: espoo_server
     volumes:
-      - ./:/app
+      - ./backend:/app
       - espoo_vendor:/app/vendor/
 
     depends_on:
@@ -43,6 +43,20 @@ services:
     container_name: espoo_chrome
     volumes:
       - /dev/shm:/dev/shm
+
+  frontend:
+    container_name: espoo_frontend
+    build:
+      context: "./frontend"
+      dockerfile: dev.Dockerfile
+    volumes:
+      - ./frontend:/frontend
+      - /frontend/node_modules
+    ports:
+      - 4000:4000
+    restart: unless-stopped
+    tty: true
+    command: yarn dev
 
 volumes:
   espoo_db_volume:
