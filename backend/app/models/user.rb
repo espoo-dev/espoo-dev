@@ -11,6 +11,4 @@ class User < ApplicationRecord
 
   validates :role, presence: true
   delegate :admin?, to: :role
-
- 
 end

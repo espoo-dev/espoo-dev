@@ -1,9 +1,8 @@
 class Role < ApplicationRecord
-    has_many :users, dependent: :nullify
-    validates_presence_of :role_type
+  has_many :users, dependent: :nullify
+  validates :role_type, presence: true
 
-
-    def admin?
-        role_type == "admin"
-    end
+  def admin?
+    role_type == 'admin'
+  end
 end

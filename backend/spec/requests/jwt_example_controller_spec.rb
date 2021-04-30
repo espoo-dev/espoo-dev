@@ -36,11 +36,13 @@ describe JwtExampleController do
       it { expect(response.header['Authorization']).to start_with('Bearer') }
 
       it 'return user data' do
-        body = JSON.parse response.body
-        expect(body).to include(
+        expect(response_body).to include(
           'id' => user.id,
           'email' => user.email,
-          'role' => user.role
+          'role' => {
+            'id' => user.role.id,
+            'role_type' => user.role.role_type
+          }
         )
       end
     end
