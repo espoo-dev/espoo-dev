@@ -13,6 +13,7 @@ Rails.application.routes.draw do
     namespace :v1 do
       resources :users, only: %i[index create]
       resources :surveys, only: %i[show]
+      resources :roles, only: %i[index]
     end
   end
 
