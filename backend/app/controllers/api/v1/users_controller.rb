@@ -8,7 +8,7 @@ class Api::V1::UsersController < Api::V1::ApiController
   end
 
   def create
-    user = User.create(create_params)
+    user = User.new(create_params)
     authorize user, :create?
     user.save!
     render json: user, status: :created
