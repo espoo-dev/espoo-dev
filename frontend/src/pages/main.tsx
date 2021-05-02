@@ -1,21 +1,18 @@
 import Head from 'next/head';
-import { Navbar } from 'components/navbar';
 import { withAuth } from 'hoc/withAuth';
-import { Content, Layout } from 'styles/main.styles';
+import { Container, Content, Layout } from 'styles/main.styles';
+import { Sidemenu } from 'components/sidemenu';
 
 const Main = () => (
-  <>
+  <Container>
     <Head>
       <title>Espoolingo - Home</title>
     </Head>
     <Layout>
-      <header>
-        <Navbar />
-      </header>
-
+      <Sidemenu />
       <Content>Main page</Content>
     </Layout>
-  </>
+  </Container>
 );
 
 export default withAuth(Main);
