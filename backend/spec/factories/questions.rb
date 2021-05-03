@@ -3,6 +3,6 @@ FactoryBot.define do
     name { Faker::Name.unique.name }
     association :question_type
     association :user
-    association :option
+    association :option, factory: :option
   end
 end
