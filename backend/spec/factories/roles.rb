@@ -1,13 +1,17 @@
 FactoryBot.define do
-  factory :role_teacher, class: 'Role' do
-    role_type { 'teacher' }
+  factory :role do
+    role_type { 'moderator' }
   end
 
-  factory :role_admin, class: 'Role' do
+  factory :role_admin, parent: :role do
     role_type { 'admin' }
   end
 
-  factory :role_moderator, class: 'Role' do
+  factory :role_teacher, parent: :role do
+    role_type { 'teacher' }
+  end
+
+  factory :role_moderator, parent: :role do
     role_type { 'moderator' }
   end
 end
