@@ -3,4 +3,5 @@ class Question < ApplicationRecord
   belongs_to :user
   belongs_to :question_type
   belongs_to :survey, optional: true
+  belongs_to :option
 end
