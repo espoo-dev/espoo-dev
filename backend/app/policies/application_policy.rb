@@ -9,6 +9,7 @@ class ApplicationPolicy
   delegate :admin?, to: :user
 
   def index?
+    binding.pry
     admin?
   end
 
@@ -17,10 +18,7 @@ class ApplicationPolicy
   end
 
   def create?
-    return true if @user&.admin?
-    return false if record.admin?
-
-    true
+    admin?
   end
 
   def new?
@@ -37,5 +35,9 @@ class ApplicationPolicy
 
   def destroy?
     admin?
+  end
+
+  def has_user?
+    user.present?
   end
 end

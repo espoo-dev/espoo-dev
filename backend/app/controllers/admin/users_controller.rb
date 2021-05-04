@@ -8,6 +8,10 @@ module Admin
     #   send_foo_updated_email(requested_resource)
     # end
 
+    def index
+      super
+      authorize current_user, :index?
+    end
     # Override this method to specify custom lookup behavior.
     # This will be used to set the resource for the `show`, `edit`, and `update`
     # actions.
@@ -21,13 +25,13 @@ module Admin
     # Override this if you have certain roles that require a subset
     # this will be used to set the records shown on the `index` action.
     #
-    # def scoped_resource
-    #   if current_user.super_admin?
-    #     resource_class
-    #   else
-    #     resource_class.with_less_stuff
-    #   end
-    # end
+    def scoped_resource
+      if current_user.admin?
+        resource_class
+      else
+        resource_class.where(id: current_user.id)
+      end
+    end
 
     # Override `resource_params` if you want to transform the submitted
     # data before it's persisted. For example, the following would turn all

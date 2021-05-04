@@ -8,6 +8,11 @@ module Admin
     #   send_foo_updated_email(requested_resource)
     # end
 
+    def index
+      super
+      authorize
+    end
+
     # Override this method to specify custom lookup behavior.
     # This will be used to set the resource for the `show`, `edit`, and `update`
     # actions.
