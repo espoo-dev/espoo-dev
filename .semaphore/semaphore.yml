@@ -9,6 +9,7 @@ blocks:
     task:
       jobs:
         - name: install client dependencies
+          parallelism: 2
           commands:
             - checkout
             - cd frontend
@@ -19,6 +20,7 @@ blocks:
     task:
       jobs:
         - name: lint client
+          parallelism: 3
           commands:
             - checkout
             - cd frontend
@@ -28,6 +30,7 @@ blocks:
     task:
       jobs:
         - name: build client
+          parallelism: 2
           commands:
             - checkout
             - cd frontend
