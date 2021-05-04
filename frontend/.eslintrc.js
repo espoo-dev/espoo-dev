@@ -60,6 +60,11 @@ module.exports = {
     'react/self-closing-comp': 'warn',
     'semi': 'warn',
     'quote-props': 'off',
+    'camelcase': 'off',
+    '@typescript/no-empty-function': 'off',
+    'react/require-default-props': 'off',
+    'react/no-unused-prop-types': 'off',
+    'object-curly-spacing': 'off'
   },
   settings: {
     'import/resolver': {

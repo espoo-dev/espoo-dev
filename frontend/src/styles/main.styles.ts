@@ -12,5 +12,13 @@ export const Layout = styled.div`
 
 export const Content = styled.main`
   display: flex;
-  padding: 1em;
+  padding: 2em;
+  display: flex;
+  flex-direction: column;
+
+  h1 {
+    color: #fff;
+    font-size: 26px;
+    margin: 0;
+  }
 `;
