@@ -2,7 +2,12 @@ import Link from 'next/link';
 import React from 'react';
 import { IconType } from 'react-icons';
 import { HiAcademicCap } from 'react-icons/hi';
-import { Container, MenuHeader, MenuLinkContainer } from './sidemenu.styles';
+import {
+  Container,
+  MenuHeader,
+  MenuLinkContainer,
+  MenuLinkOption,
+} from './sidemenu.styles';
 
 interface MenuLink {
   url: string;
@@ -14,24 +19,26 @@ export const Sidemenu = () => {
   const menuLinks: MenuLink[] = [
     {
       icon: HiAcademicCap,
-      name: 'Professores',
-      url: '/main'
-    }
+      name: 'Teachers',
+      url: '/main',
+    },
   ];
 
   return (
     <Container>
       <MenuHeader>
-        Espoolingo
+        <h1>Espoolingo</h1>
       </MenuHeader>
       <MenuLinkContainer>
         {menuLinks.map((item) => {
           const { icon: Icon, name, url } = item;
 
           return (
-            <Link href={url}>
-              <Icon />
-              {name}
+            <Link href={url} passHref key={url}>
+              <MenuLinkOption>
+                <Icon size={20} />
+                {name}
+              </MenuLinkOption>
             </Link>
           );
         })}
