@@ -2,6 +2,8 @@ import Axios, { AxiosInstance } from 'axios';
 import { useAuth } from 'hooks';
 import { config } from '../config';
 
+const openEndpoints = ['/users/sign_in'];
+
 /**
  * HTTP client
  */
@@ -16,7 +18,11 @@ export const httpClient: AxiosInstance = Axios.create({
 httpClient.interceptors.request.use(
   (requestConfig) => {
     const newConfig = requestConfig;
-    newConfig.headers.Authorization = useAuth();
+
+    if (!openEndpoints.includes(newConfig.url)) {
+      newConfig.headers.Authorization = useAuth();
+    }
+
     return newConfig;
   },
   (error) => Promise.reject(error)

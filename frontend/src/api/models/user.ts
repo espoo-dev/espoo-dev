@@ -3,7 +3,19 @@ export interface UserLogin {
   password: string;
 }
 
-type Role = 'teacher' | 'moderator';
+type RoleType = 'teacher' | 'admin' | 'moderator';
+
+interface Role {
+  id: number;
+  role_type: RoleType;
+}
+
+export interface Survey {
+  id: number;
+  name: string;
+  description: string;
+  questions_quantity: number;
+}
 
 export interface User {
   email: string;
@@ -15,5 +27,9 @@ export interface User {
 export interface UserCreate {
   email: string;
   password: string;
-  role: Role;
+  role: number;
+}
+
+export interface UserFilters {
+  role_id: number;
 }
