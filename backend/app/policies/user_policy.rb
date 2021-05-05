@@ -1,11 +1,10 @@
 class UserPolicy < ApplicationPolicy
   def index?
-    binding.pry
-    has_user?
+    user?
   end
 
   def show?
-    has_user?
+    user?
   end
 
   def create?
@@ -16,14 +15,24 @@ class UserPolicy < ApplicationPolicy
   end
 
   def update?
-    has_user?
+    user?
   end
 
   def edit?
-    has_user?
+    user?
   end
 
   def destroy?
-    has_user?
+    user?
+  end
+
+  class Scope < Scope
+    def resolve_admin
+      if user.admin?
+        User.all
+      else
+        User.where(id: user.id)
+      end
+    end
   end
 end

@@ -1,5 +1,5 @@
 class RolePolicy < ApplicationPolicy
-  def index?
+  def destroy?
     false
   end
 end

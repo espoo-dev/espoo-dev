@@ -12,7 +12,7 @@ RSpec.describe 'Role CRUD', type: :system do
         visit '/admin/users'
       end
 
-      it 'should see all users' do
+      it 'sees all users' do
         expect(page.text).to include(user_admin.email, user_teacher.email)
       end
     end
@@ -23,16 +23,16 @@ RSpec.describe 'Role CRUD', type: :system do
         visit '/admin/users'
       end
 
-      it 'should be at admin/users page' do
-        expect(page.current_path).to eq('/admin/users')
+      it 'is at admin/users page' do
+        expect(page).to have_current_path('/admin/users')
       end
 
-      it 'should see himself' do
+      it 'sees himself' do
         expect(page.text).to include(user_teacher.email)
       end
 
-      it 'should not see other user' do
-        expect(page.text).to_not include(user_admin.email)
+      it 'does not see other user' do
+        expect(page.text).not_to include(user_admin.email)
       end
     end
   end

@@ -7,6 +7,11 @@ RSpec.describe 'Admin CRUD', type: :system do
     let(:user2) { build(:user) }
     let(:role) { build(:role_teacher) }
 
+    it 'goes to log in page when user is not logged' do
+      visit '/admin/users/new'
+      expect(page).to have_current_path('/users/sign_in')
+    end
+
     it 'creates user' do
       sign_in user
       visit '/admin/users/new'
