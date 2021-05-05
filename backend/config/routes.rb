@@ -5,6 +5,7 @@ Rails.application.routes.draw do
     resources :question_types
     resources :surveys
     resources :roles
+    resources :options
 
     root to: "users#index"
   end
