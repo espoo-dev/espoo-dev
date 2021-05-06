@@ -6,10 +6,10 @@ agent:
     os_image: ubuntu1804
 blocks:
   - name: Install dependencies
+    dependencies: []
     task:
       jobs:
         - name: install client dependencies
-          parallelism: 2
           commands:
             - checkout
             - cd frontend
@@ -17,20 +17,21 @@ blocks:
             - yarn install
             - cache store
   - name: Lint
+    dependencies: []
     task:
       jobs:
         - name: lint client
-          parallelism: 3
           commands:
             - checkout
             - cd frontend
             - cache restore
             - yarn lint
   - name: Build
+    dependencies:
+      - Install dependencies
     task:
       jobs:
         - name: build client
-          parallelism: 2
           commands:
             - checkout
             - cd frontend
