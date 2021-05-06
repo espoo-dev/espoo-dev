@@ -12,7 +12,12 @@ export const TeachersList = (props: TeacherListProps) => {
   return (
     <List mt="10">
       {data.map((item) => (
-        <ListItem key={item.id} onClick={() => onSelect(item)}>
+        <ListItem
+          key={item.id}
+          onClick={() => onSelect(item)}
+          cursor="pointer"
+          mb="4"
+        >
           <HStack spacing="4">
             <Avatar
               border="3px solid #27C854"

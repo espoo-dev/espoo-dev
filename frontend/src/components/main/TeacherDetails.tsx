@@ -1,16 +1,31 @@
 import React from 'react';
 import { Avatar, AvatarBadge, Button, VStack, Text } from '@chakra-ui/react';
 import { User } from 'api/models/user';
+import { HiOutlineX } from 'react-icons/hi';
 
 interface TeacherDetailsProps {
   data: User;
   onClickFollow?: () => void;
+  onClickClose?: () => void;
 }
 
 export const TeacherDetails = (props: TeacherDetailsProps) => {
-  const { data, onClickFollow } = props;
+  const { data, onClickClose, onClickFollow } = props;
   return (
-    <VStack spacing="4">
+    <VStack spacing="4" position="relative">
+      <Button
+        bg="transparent"
+        position="absolute"
+        colorScheme="whiteAlpha"
+        right="0"
+        top="0"
+        size="sm"
+        p={0}
+        m={0}
+        onClick={onClickClose}
+      >
+        <HiOutlineX />
+      </Button>
       <Avatar
         border="3px solid #27C854"
         src="https://bit.ly/ryan-florence"

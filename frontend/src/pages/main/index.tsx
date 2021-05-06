@@ -2,21 +2,7 @@ import Head from 'next/head';
 import { withAuth } from 'hoc/withAuth';
 import { Container, Content, Layout } from 'styles/main.styles';
 import { Sidemenu } from 'components/sidemenu';
-import {
-  Avatar,
-  AvatarBadge,
-  Box,
-  Button,
-  Flex,
-  Grid,
-  GridItem,
-  Heading,
-  HStack,
-  List,
-  ListItem,
-  Text,
-  VStack,
-} from '@chakra-ui/react';
+import { Box, Flex, Grid, GridItem, Heading, Text } from '@chakra-ui/react';
 import { UserService } from 'api/services/user';
 import { httpClient } from 'api';
 import { errorHandler } from 'api/error-handler';
@@ -46,6 +32,10 @@ const Main = () => {
     setSelectedTeacher(user);
   };
 
+  const unselectTeacher = () => {
+    setSelectedTeacher(null);
+  };
+
   useEffect(() => {
     listUsers();
   }, []);
@@ -58,7 +48,9 @@ const Main = () => {
       <Layout>
         <Sidemenu />
         <Content>
-          <h1>Teachers</h1>
+          <Heading as="h1" fontWeight="normal" fontSize="26px">
+            Teachers
+          </Heading>
 
           <Grid
             mt="30px"
@@ -76,7 +68,10 @@ const Main = () => {
               p={4}
             >
               {selectedTeacher ? (
-                <TeacherDetails data={selectedTeacher} />
+                <TeacherDetails
+                  data={selectedTeacher}
+                  onClickClose={unselectTeacher}
+                />
               ) : (
                 <Text color="white" textAlign="center">
                   Select a teacher in the list below to see his detais
