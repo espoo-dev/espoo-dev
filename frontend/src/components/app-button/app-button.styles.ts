@@ -6,6 +6,10 @@ export const StyledAppButton = styled(Button)`
   .text {
     margin: 0 5px;
   }
+  width: 100%;
+  height: 36px;
+  font-weight: normal;
+
   @media (max-width: 500px) {
     padding: 10px;
     width: fit-content;
