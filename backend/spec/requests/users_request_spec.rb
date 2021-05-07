@@ -40,7 +40,7 @@ RSpec.describe 'UsersController', type: :request do
     context 'when data is not valid' do
       context 'when user role is admin' do
         let(:user) { build(:user, email: '') }
-        let(:role_admin) { create(:role_admin) }
+        let(:role_admin) { Role.find_by(role_type: Role::ADMIN) || create(:role_admin) }
 
         before do
           user_params = {
@@ -149,10 +149,10 @@ RSpec.describe 'UsersController', type: :request do
         end
       end
 
-      context 'when users do not exist' do
+      context 'when users do not exist by role_id' do
         before do
           create(:user)
-          role = create(:role_admin)
+          role = create(:role, role_type: 'test')
           get "/api/v1/users?role_id=#{role.id}", headers: auth_headers
         end
 
