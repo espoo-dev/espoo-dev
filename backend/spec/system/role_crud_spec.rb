@@ -14,5 +14,13 @@ RSpec.describe 'Role CRUD', type: :system do
         expect(page).to have_content 'Role'
       end
     end
+
+    describe 'destroy' do
+      it 'cannot destroy role' do
+        visit '/admin/roles'
+
+        expect(page).not_to have_content 'Destroy'
+      end
+    end
   end
 end

@@ -17,17 +17,10 @@ class ApplicationPolicy
   end
 
   def create?
-    return true if @user&.admin?
-    return false if record.admin?
-
-    true
-  end
-
-  def new?
     admin?
   end
 
-  def update?
+  def new?
     admin?
   end
 
@@ -37,5 +30,22 @@ class ApplicationPolicy
 
   def destroy?
     admin?
+  end
+
+  def user?
+    user.present?
+  end
+
+  class Scope
+    attr_reader :user, :scope
+
+    def initialize(user, scope)
+      @user = user
+      @scope = scope
+    end
+
+    def resolve_admin
+      scope.all
+    end
   end
 end

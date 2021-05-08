@@ -4,24 +4,52 @@ RSpec.describe 'question_type CRUD', type: :system do
   include Devise::Test::IntegrationHelpers
   describe 'CRUD' do
     let!(:question_type) { create(:question_type) }
+    let!(:admin_user) { create(:user) }
+    let!(:user_teacher) { create(:user_teacher) }
 
-    before do
-      sign_in create(:user)
+    describe 'when user is admin' do
+      before do
+        sign_in admin_user
+      end
+
+      it 'list question_type' do
+        visit '/admin/question_types/'
+
+        expect(page).to have_text(question_type.name)
+      end
+
+      it 'Delete question_type' do
+        visit '/admin/question_types'
+
+        click_on 'Destroy'
+        page.accept_alert
+
+        expect(page).to have_text('Question type was successfully destroyed.')
+      end
     end
 
-    it 'list question_type' do
-      visit '/admin/question_types/'
+    describe 'when user is not admin' do
+      before do
+        sign_in user_teacher
+      end
 
-      expect(page).to have_text(question_type.name)
-    end
+      it 'can show question_type' do
+        visit "/admin/question_types/#{question_type.id}"
 
-    it 'Delete question_type' do
-      visit '/admin/question_types'
+        expect(page).to have_text(question_type.name)
+      end
 
-      click_on 'Destroy'
-      page.accept_alert
+      it 'can list question_type' do
+        visit '/admin/question_types/'
 
-      expect(page).to have_text('Question type was successfully destroyed.')
+        expect(page).to have_text(question_type.name)
+      end
+
+      it 'cannot delete question_type' do
+        visit '/admin/question_types'
+
+        expect(page).not_to have_text('Destroy')
+      end
     end
   end
 end
