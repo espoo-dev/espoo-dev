@@ -9,6 +9,7 @@ RSpec.describe Question, type: :model do
     it { is_expected.to belong_to(:question_type).required }
     it { is_expected.to belong_to(:survey).optional }
     it { is_expected.to belong_to(:user).required }
+    it { is_expected.to have_many(:options).dependent(:destroy) }
   end
 
   describe 'presence' do
