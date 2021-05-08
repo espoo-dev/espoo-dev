@@ -12,8 +12,14 @@ module Admin
     after_action :verify_authorized
     around_action :skip_bullet, if: -> { defined?(Bullet) }
 
+    rescue_from ActiveRecord::RecordNotFound, with: :render_not_found
+
     def authenticate_admin
       authorize current_user
+    end
+
+    def render_not_found
+      redirect_to '/404.html'
     end
 
     # Override this value to specify the number of elements to display at a time

@@ -1,2 +1,2 @@
-class SurveyPolicy < ApplicationPolicy
+class SurveyPolicy < GenericPolicy
 end
