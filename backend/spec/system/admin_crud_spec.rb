@@ -50,5 +50,14 @@ RSpec.describe 'Admin CRUD', type: :system do
 
       expect(page).to have_text('User was successfully updated.')
     end
+
+    it 'list users without id' do
+      sign_in user
+
+      visit '/admin/users'
+
+      expect(page).to have_text(user.email)
+      expect(page).not_to have_text(user.id)
+    end
   end
 end

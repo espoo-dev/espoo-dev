@@ -9,7 +9,6 @@ class QuestionTypeDashboard < Administrate::BaseDashboard
   # on pages throughout the dashboard.
   ATTRIBUTE_TYPES = {
     questions: Field::HasMany,
-    id: Field::Number,
     name: Field::String,
     created_at: Field::DateTime,
     updated_at: Field::DateTime
@@ -22,7 +21,6 @@ class QuestionTypeDashboard < Administrate::BaseDashboard
   # Feel free to add, remove, or rearrange items.
   COLLECTION_ATTRIBUTES = %i[
     questions
-    id
     name
     created_at
   ].freeze
@@ -31,7 +29,6 @@ class QuestionTypeDashboard < Administrate::BaseDashboard
   # an array of attributes that will be displayed on the model's show page.
   SHOW_PAGE_ATTRIBUTES = %i[
     questions
-    id
     name
     created_at
     updated_at
