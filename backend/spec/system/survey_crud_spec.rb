@@ -24,30 +24,16 @@ RSpec.describe 'Survey CRUD', type: :system do
         end
       end
 
-      describe 'list' do
-        it 'list the surveys' do
-          visit '/admin/surveys'
-
-          expect(page).to have_text(survey.name)
-        end
-      end
-
-      describe 'delete' do
-        it 'deletes the survey' do
-          visit '/admin/surveys'
-
-          click_on 'Destroy'
-          page.accept_alert
+    describe 'list' do
+      it 'list the surveys without id' do
+        survey = create(:survey)
 
           expect(page).to have_text('Survey was successfully destroyed.')
         end
       end
 
-      describe 'edit' do
-        it 'can edit user' do
-          visit edit_admin_survey_path survey.id
-          expect(page).to have_selector '#survey_user_id', visible: :hidden
-        end
+        expect(page).to have_text(survey.name)
+        expect(page).not_to have_text(survey.id)
       end
     end
 

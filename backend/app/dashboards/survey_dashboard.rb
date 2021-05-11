@@ -10,7 +10,6 @@ class SurveyDashboard < Administrate::BaseDashboard
   ATTRIBUTE_TYPES = {
     user: Field::BelongsTo,
     questions: Field::HasMany,
-    id: Field::Number,
     name: Field::String,
     description: Field::String,
     created_at: Field::DateTime,
@@ -25,7 +24,6 @@ class SurveyDashboard < Administrate::BaseDashboard
   COLLECTION_ATTRIBUTES = %i[
     user
     questions
-    id
     name
   ].freeze
 
@@ -34,7 +32,6 @@ class SurveyDashboard < Administrate::BaseDashboard
   SHOW_PAGE_ATTRIBUTES = %i[
     user
     questions
-    id
     name
     description
     created_at
