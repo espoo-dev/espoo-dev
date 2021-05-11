@@ -22,12 +22,13 @@ RSpec.describe 'Survey CRUD', type: :system do
     end
 
     describe 'list' do
-      it 'list the surveys' do
+      it 'list the surveys without id' do
         survey = create(:survey)
 
         visit '/admin/surveys'
 
         expect(page).to have_text(survey.name)
+        expect(page).not_to have_text(survey.id)
       end
     end
 
