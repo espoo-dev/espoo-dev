@@ -1,6 +1,6 @@
 # README
 
-## Main configured gems
+## Main configured gems 💎
 
 1. Rails 6
 
