@@ -1,29 +1,9 @@
-class UserPolicy < ApplicationPolicy
-  def index?
-    user?
-  end
-
-  def show?
-    user?
-  end
-
+class UserPolicy < GenericPolicy
   def create?
     return true if @user&.admin?
     return false if record.admin?
 
     true
-  end
-
-  def update?
-    user?
-  end
-
-  def edit?
-    user?
-  end
-
-  def destroy?
-    user?
   end
 
   class Scope < Scope

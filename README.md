@@ -27,3 +27,11 @@ localhost:4000
 
 1. [Postman requests](https://www.postman.com/grey-zodiac-51715/workspace/espoo/overview)
 1. [Class Diagram](https://drive.google.com/file/d/1681YmHrron_fxAb8tOebmzTbqy9qGM8p/view?usp=sharing)
+
+
+# ✨ Demos
+1. [admin](https://espoo.herokuapp.com/)
+1. [client](https://espoo-dev.vercel.app/)
+
+# 🌎 Community
+1. [Slack](https://join.slack.com/t/espoo-dev/shared_invite/zt-q3od66jm-x7MNmrenB0fra86jop0jsg)
