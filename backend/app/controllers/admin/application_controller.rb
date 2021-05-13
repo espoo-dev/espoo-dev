@@ -15,7 +15,6 @@ module Admin
     rescue_from ActiveRecord::RecordNotFound, with: :render_not_found
     rescue_from Pundit::NotAuthorizedError, with: :render_not_found
 
-
     def render_not_found
       redirect_to '/404.html'
     end
@@ -23,7 +22,7 @@ module Admin
     helper_method :filter_form_attributes
     def filter_form_attributes(attributes)
       return attributes if current_user&.admin?
-      admin_attributes = [:user, :role]
+      admin_attributes = %i[user role]
       attributes.reject { |attr| admin_attributes.include? attr.attribute }
     end
 
