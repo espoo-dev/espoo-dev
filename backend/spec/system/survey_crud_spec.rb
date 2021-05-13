@@ -5,6 +5,7 @@ RSpec.describe 'Survey CRUD', type: :system do
   describe 'CRUD' do
     let!(:user_admin) { create(:user) }
     let!(:user_teacher) { create(:user_teacher) }
+    let!(:survey) { create(:survey) }
 
     describe 'when user is admin' do
       before do
@@ -25,8 +26,6 @@ RSpec.describe 'Survey CRUD', type: :system do
 
       describe 'list' do
         it 'list the surveys' do
-          survey = create(:survey)
-
           visit '/admin/surveys'
 
           expect(page).to have_text(survey.name)
@@ -35,14 +34,19 @@ RSpec.describe 'Survey CRUD', type: :system do
 
       describe 'delete' do
         it 'deletes the survey' do
-          create(:survey)
-
           visit '/admin/surveys'
 
           click_on 'Destroy'
           page.accept_alert
 
           expect(page).to have_text('Survey was successfully destroyed.')
+        end
+      end
+
+      describe 'edit' do
+        it 'can edit user' do
+          visit edit_admin_survey_path survey.id
+          expect(page).to have_selector '#survey_user_id', visible: :hidden
         end
       end
     end
@@ -53,6 +57,15 @@ RSpec.describe 'Survey CRUD', type: :system do
 
       before do
         sign_in user_teacher
+      end
+
+      describe 'create' do
+        it 'creates the survey' do
+          visit '/admin/surveys/new'
+
+          click_button 'Create Survey'
+          expect(page).to have_content 'Survey was successfully created.'
+        end
       end
 
       describe 'list' do
@@ -74,12 +87,20 @@ RSpec.describe 'Survey CRUD', type: :system do
           visit "/admin/surveys/#{survey1.id}"
 
           expect(page).to have_text(survey1.name)
+          expect(page).not_to have_text(survey.id)
         end
 
         it "can't see surveys that not belongs to him" do
           visit "/admin/surveys/#{survey2.id}"
 
           expect(page).to have_text("The page you were looking for doesn't exist.")
+        end
+      end
+
+      describe 'edit' do
+        it "can't edit user" do
+          visit edit_admin_survey_path survey1.id
+          expect(page).not_to have_selector '#survey_user_id', visible: :hidden
         end
       end
     end
