@@ -11,7 +11,6 @@ class QuestionDashboard < Administrate::BaseDashboard
     user: Field::BelongsTo,
     question_type: Field::BelongsTo,
     survey: Field::BelongsTo,
-    id: Field::Number,
     name: Field::String,
     created_at: Field::DateTime,
     updated_at: Field::DateTime
@@ -26,7 +25,6 @@ class QuestionDashboard < Administrate::BaseDashboard
     name
     question_type
     survey
-    id
   ].freeze
 
   # SHOW_PAGE_ATTRIBUTES
@@ -35,7 +33,6 @@ class QuestionDashboard < Administrate::BaseDashboard
     user
     question_type
     survey
-    id
     name
     created_at
     updated_at
