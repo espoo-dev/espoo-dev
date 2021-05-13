@@ -87,6 +87,7 @@ RSpec.describe 'Survey CRUD', type: :system do
           visit "/admin/surveys/#{survey1.id}"
 
           expect(page).to have_text(survey1.name)
+          expect(page).not_to have_text(survey.id)
         end
 
         it "can't see surveys that not belongs to him" do
