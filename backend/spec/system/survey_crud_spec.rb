@@ -48,6 +48,8 @@ RSpec.describe 'Survey CRUD', type: :system do
           visit edit_admin_survey_path survey.id
           expect(page).to have_selector '#survey_user_id', visible: :hidden
         end
+        expect(page).to have_text(survey.name)
+        expect(page).not_to have_text(survey.id)
       end
     end
 

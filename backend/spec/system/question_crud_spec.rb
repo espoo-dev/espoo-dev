@@ -30,12 +30,13 @@ RSpec.describe 'Question CRUD', type: :system do
     end
 
     describe 'list' do
-      it 'list the questions' do
+      it 'list the questions without id' do
         question = create(:question)
 
         visit '/admin/questions'
 
         expect(page).to have_text(question.name)
+        expect(page).not_to have_text(question.id)
       end
     end
 
