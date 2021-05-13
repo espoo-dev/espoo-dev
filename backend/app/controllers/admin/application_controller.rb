@@ -22,6 +22,7 @@ module Admin
     helper_method :filter_form_attributes
     def filter_form_attributes(attributes)
       return attributes if current_user&.admin?
+
       admin_attributes = %i[user role]
       attributes.reject { |attr| admin_attributes.include? attr.attribute }
     end
