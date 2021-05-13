@@ -37,6 +37,7 @@ RSpec.describe 'question_type CRUD', type: :system do
         visit "/admin/question_types/#{question_type.id}"
 
         expect(page).to have_text(question_type.name)
+        expect(page).not_to have_text(question_type.id)
       end
 
       it 'can list question_type' do
