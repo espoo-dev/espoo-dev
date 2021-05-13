@@ -8,18 +8,23 @@ module Admin
   class ApplicationController < Administrate::ApplicationController
     include Administrate::Punditize
 
-    before_action :authenticate_user!, :authenticate_admin
+    before_action :authenticate_user!
     after_action :verify_authorized
     around_action :skip_bullet, if: -> { defined?(Bullet) }
 
     rescue_from ActiveRecord::RecordNotFound, with: :render_not_found
-
-    def authenticate_admin
-      authorize current_user
-    end
+    rescue_from Pundit::NotAuthorizedError, with: :render_not_found
 
     def render_not_found
       redirect_to '/404.html'
+    end
+
+    helper_method :filter_form_attributes
+    def filter_form_attributes(attributes)
+      return attributes if current_user&.admin?
+
+      admin_attributes = %i[user role]
+      attributes.reject { |attr| admin_attributes.include? attr.attribute }
     end
 
     # Override this value to specify the number of elements to display at a time
