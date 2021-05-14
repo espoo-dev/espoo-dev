@@ -3,53 +3,121 @@ require 'rails_helper'
 RSpec.describe 'Question CRUD', type: :system do
   include Devise::Test::IntegrationHelpers
   describe 'CRUD' do
-    let!(:question_name) { 'question name' }
-    let!(:user) { create(:user) }
+    let!(:user_admin) { create(:user) }
+    let!(:user_teacher) { create(:user_teacher) }
+    let!(:question_admin) { create(:question, user: user_admin) }
+    let!(:question_teacher) { create(:question, user: user_teacher) }
+    let!(:question_type) { create(:question_type) }
 
-    before do
-      sign_in user
-    end
+    describe 'user admin' do
+      before do
+        sign_in user_admin
+      end
 
-    describe 'create' do
-      let!(:question_type) { create(:question_type) }
+      context 'when create' do
+        before do
+          visit '/admin/questions/new'
 
-      it 'creates the question' do
-        visit '/admin/questions/new'
+          find('label', text: 'Question type').click
+          find('.option', text: question_type.name).click
 
-        find('label', text: 'Question type').click
-        find('.option', text: question_type.name).click
+          find('label', text: 'User').click
+          find('.option', text: user_admin.email).click
 
-        find('label', text: 'User').click
-        find('.option', text: user.email).click
+          fill_in 'Name', with: 'question name'
 
-        fill_in 'Name', with: question_name
+          click_button 'Create Question'
+        end
 
-        click_button 'Create Question'
-        expect(page).to have_content 'Question was successfully created.'
+        it 'creates the question' do
+          expect(page).to have_content 'Question was successfully created.'
+        end
+      end
+
+      describe 'index' do
+        before do
+          visit '/admin/questions'
+        end
+
+        it 'list the questions without id' do
+          expect(page).not_to have_text(question_admin.id)
+          expect(page).not_to have_text(question_teacher.id)
+        end
+
+        it 'list all the questions when admin is logged in' do
+          expect(page).to have_text(question_admin.name)
+          expect(page).to have_text(question_teacher.name)
+        end
+      end
+
+      describe 'delete' do
+        before do
+          visit '/admin/questions'
+
+          first(:link, 'Destroy').click
+
+          page.accept_alert
+        end
+
+        it 'deletes the question' do
+          expect(page).to have_text('Question was successfully destroyed.')
+        end
       end
     end
 
-    describe 'list' do
-      it 'list the questions without id' do
-        question = create(:question)
-
-        visit '/admin/questions'
-
-        expect(page).to have_text(question.name)
-        expect(page).not_to have_text(question.id)
+    describe 'user teacher' do
+      before do
+        sign_in user_teacher
       end
-    end
 
-    describe 'delete' do
-      it 'deletes the question' do
-        create(:question)
+      describe 'create' do
+        before do
+          visit '/admin/questions/new'
 
-        visit '/admin/questions'
+          find('label', text: 'Question type').click
+          find('.option', text: question_type.name).click
 
-        click_on 'Destroy'
-        page.accept_alert
+          find('label', text: 'User').click
+          find('.option', text: user_teacher.email).click
 
-        expect(page).to have_text('Question was successfully destroyed.')
+          fill_in 'Name', with: 'question name'
+
+          click_button 'Create Question'
+        end
+
+        it 'creates the question' do
+          expect(page).to have_content 'Question was successfully created.'
+        end
+      end
+
+      describe 'index' do
+        before do
+          visit '/admin/questions'
+        end
+
+        it 'list the questions without id' do
+          expect(page).not_to have_text(question_admin.id)
+          expect(page).not_to have_text(question_teacher.id)
+        end
+
+        it 'when logged in as teacher list only questions of teacher' do
+          expect(page).not_to have_text(question_admin.name)
+          expect(page).to have_text(question_teacher.name)
+        end
+      end
+
+      context 'when delete' do
+        before do
+          visit '/admin/questions'
+
+          click_on 'Destroy'
+
+          page.accept_alert
+        end
+
+        it 'deletes the question' do
+          expect(page).to have_text('Question was successfully destroyed.')
+        end
       end
     end
   end
