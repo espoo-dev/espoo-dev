@@ -19,7 +19,10 @@ RSpec.describe 'Role CRUD', type: :system do
       it 'cannot destroy role' do
         visit '/admin/roles'
 
-        expect(page).not_to have_content 'Destroy'
+        click_on 'Destroy'
+        page.accept_alert
+
+        expect(page).to have_content "Can't destroy role with 1 users"
       end
     end
   end
