@@ -1,3 +1,10 @@
 ---
 en:
+  activerecord:
+    errors:
+      models:
+        role:
+          attributes:
+            users:
+              cant_destroy_role: Can't destroy role with %{users_count} users
   app_name: Rails espoo
