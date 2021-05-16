@@ -51,5 +51,5 @@ directories:
 exclude_paths:
   - lib/
   - bin/
-  - node_modules/
-  - tmp/
+  - vendor/
+  - db/migrate
