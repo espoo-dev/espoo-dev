@@ -48,6 +48,11 @@ RSpec.describe 'Question CRUD', type: :system do
           expect(page).to have_text(question_admin.name)
           expect(page).to have_text(question_teacher.name)
         end
+
+        it 'list all questions with surveys names' do
+          expect(page).to have_text(question_admin.survey.name)
+          expect(page).to have_text(question_teacher.survey.name)
+        end
       end
 
       describe 'delete' do

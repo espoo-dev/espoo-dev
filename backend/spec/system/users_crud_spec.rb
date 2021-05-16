@@ -19,6 +19,10 @@ RSpec.describe 'Role CRUD', type: :system do
         it 'sees all users' do
           expect(page.text).to include(user_admin.email, user_teacher.email)
         end
+
+        it 'sees all roles' do
+          expect(page.text).to include(user_admin.role.role_type, user_teacher.role.role_type)
+        end
       end
 
       describe 'edit' do
