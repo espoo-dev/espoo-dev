@@ -5,9 +5,8 @@ RSpec.describe 'Question CRUD', type: :system do
   describe 'CRUD' do
     let!(:user_admin) { create(:user) }
     let!(:user_teacher) { create(:user_teacher) }
-    let!(:survey) { create(:survey) }
-    let!(:question_admin) { create(:question, user: user_admin, survey: survey) }
-    let!(:question_teacher) { create(:question, user: user_teacher, survey: survey) }
+    let!(:question_admin) { create(:question, user: user_admin) }
+    let!(:question_teacher) { create(:question, user: user_teacher) }
     let!(:question_type) { create(:question_type) }
 
     describe 'user admin' do

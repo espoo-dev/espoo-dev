@@ -5,7 +5,7 @@ RSpec.describe 'Admin CRUD', type: :system do
   describe 'CRUD' do
     let(:user) { create(:user) }
     let(:user2) { build(:user) }
-    let(:role) { build(:role_teacher) }
+    let!(:role) { create(:role_teacher) }
 
     it 'goes to log in page when user is not logged' do
       visit '/admin/users/new'
@@ -21,7 +21,7 @@ RSpec.describe 'Admin CRUD', type: :system do
       fill_in 'Phone', with: user2.phone
       fill_in 'Role', with: user2.role
       find('label', text: 'Role').click
-      find('.option', text: "Role ##{role.id}").click
+      find('.option', text: role.role_type).click
       click_on 'Create User'
 
       expect(page).to have_text('User was successfully created.')
