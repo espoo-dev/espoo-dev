@@ -63,7 +63,7 @@ class SurveyDashboard < Administrate::BaseDashboard
   # Overwrite this method to customize how surveys are displayed
   # across all pages of the admin dashboard.
   #
-  # def display_resource(survey)
-  #   "Survey ##{survey.id}"
-  # end
+  def display_resource(survey)
+    survey.name
+  end
 end

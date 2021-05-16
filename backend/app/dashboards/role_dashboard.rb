@@ -60,7 +60,7 @@ class RoleDashboard < Administrate::BaseDashboard
   # Overwrite this method to customize how roles are displayed
   # across all pages of the admin dashboard.
   #
-  # def display_resource(role)
-  #   "Role ##{role.id}"
-  # end
+  def display_resource(role)
+    role.role_type
+  end
 end
