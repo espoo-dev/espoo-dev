@@ -9,17 +9,17 @@ RSpec.describe 'Admin', type: :system do
   describe 'When user is logged' do
     it 'goes to admin page' do
       sign_in user
-      visit '/admin'
+      visit admin_root_path
 
-      expect(page).to have_current_path('/admin')
+      expect(page).to have_current_path(admin_root_path)
     end
   end
 
   describe 'When user is not logged' do
     it 'does log in' do
-      visit '/admin'
+      visit admin_root_path
 
-      expect(page).to have_current_path('/users/sign_in')
+      expect(page).to have_current_path(new_user_session_path)
     end
   end
 end
