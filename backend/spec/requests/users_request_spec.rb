@@ -83,7 +83,7 @@ RSpec.describe 'UsersController', type: :request do
     describe 'when has no headers' do
       before do
         create(:user)
-        get '/api/v1/users'
+        get api_v1_users_path
       end
 
       it { expect(response).to have_http_status :found }
@@ -96,7 +96,7 @@ RSpec.describe 'UsersController', type: :request do
       let!(:survey) { user_with_surveys.surveys.first }
 
       before do
-        get '/api/v1/users', headers: auth_headers
+        get api_v1_users_path, headers: auth_headers
       end
 
       it 'has user with surveys' do
@@ -129,7 +129,7 @@ RSpec.describe 'UsersController', type: :request do
         before do
           create(:user)
           create(:user_moderator)
-          get '/api/v1/users?role=teacher', headers: auth_headers
+          get api_v1_users_path(role: 'teacher'), headers: auth_headers
         end
 
         it { expect(response).to have_http_status :success }
@@ -153,7 +153,7 @@ RSpec.describe 'UsersController', type: :request do
         before do
           create(:user)
           role = create(:role, role_type: 'test')
-          get "/api/v1/users?role_id=#{role.id}", headers: auth_headers
+          get api_v1_users_path(role_id: role.id), headers: auth_headers
         end
 
         it { expect(response).to have_http_status :success }
@@ -167,7 +167,7 @@ RSpec.describe 'UsersController', type: :request do
     context 'when has no params' do
       before do
         create_list(:user, 5)
-        get '/api/v1/users', headers: auth_headers
+        get api_v1_users_path, headers: auth_headers
       end
 
       it { expect(response).to have_http_status :success }

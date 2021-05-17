@@ -13,7 +13,7 @@ RSpec.describe 'Role CRUD', type: :system do
 
       describe 'index' do
         before do
-          visit '/admin/users'
+          visit admin_users_path
         end
 
         it 'sees all users' do
@@ -27,7 +27,7 @@ RSpec.describe 'Role CRUD', type: :system do
 
       describe 'edit' do
         before do
-          visit edit_admin_user_path user_admin
+          visit edit_admin_user_path(user_admin)
         end
 
         it 'does see role' do
@@ -47,7 +47,7 @@ RSpec.describe 'Role CRUD', type: :system do
         end
 
         it 'is at admin/users page' do
-          expect(page).to have_current_path('/admin/users')
+          expect(page).to have_current_path(admin_users_path)
         end
 
         it 'sees himself' do
@@ -61,7 +61,7 @@ RSpec.describe 'Role CRUD', type: :system do
 
       describe 'edit' do
         before do
-          visit edit_admin_user_path user_teacher
+          visit edit_admin_user_path(user_teacher)
         end
 
         it 'does not see role' do

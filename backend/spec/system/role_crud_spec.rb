@@ -9,7 +9,7 @@ RSpec.describe 'Role CRUD', type: :system do
 
     describe 'list' do
       it 'visits roles' do
-        visit '/admin/roles'
+        visit admin_roles_path
 
         expect(page).to have_content 'Role'
       end
@@ -17,7 +17,7 @@ RSpec.describe 'Role CRUD', type: :system do
 
     describe 'destroy' do
       it 'cannot destroy role' do
-        visit '/admin/roles'
+        visit admin_roles_path
 
         click_on 'Destroy'
         page.accept_alert
