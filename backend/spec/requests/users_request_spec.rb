@@ -129,7 +129,7 @@ RSpec.describe 'UsersController', type: :request do
         before do
           create(:user)
           create(:user_moderator)
-          get '/api/v1/users?role=teacher', headers: auth_headers
+          get api_v1_users_path(role:"teacher"), headers: auth_headers
         end
 
         it { expect(response).to have_http_status :success }
@@ -153,7 +153,7 @@ RSpec.describe 'UsersController', type: :request do
         before do
           create(:user)
           role = create(:role, role_type: 'test')
-          get "/api/v1/users?role_id=#{role.id}", headers: auth_headers
+          get api_v1_users_path(role_id: role.id), headers: auth_headers
         end
 
         it { expect(response).to have_http_status :success }
