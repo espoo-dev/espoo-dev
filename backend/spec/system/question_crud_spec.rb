@@ -16,7 +16,7 @@ RSpec.describe 'Question CRUD', type: :system do
 
       context 'when create' do
         before do
-          visit '/admin/questions/new'
+          visit new_admin_question_path
 
           find('label', text: 'Question type').click
           find('.option', text: question_type.name).click
@@ -36,7 +36,7 @@ RSpec.describe 'Question CRUD', type: :system do
 
       describe 'index' do
         before do
-          visit '/admin/questions'
+          visit admin_questions_path
         end
 
         it 'list the questions without id' do
@@ -57,7 +57,7 @@ RSpec.describe 'Question CRUD', type: :system do
 
       describe 'delete' do
         before do
-          visit '/admin/questions'
+          visit admin_questions_path
 
           first(:link, 'Destroy').click
 
@@ -77,7 +77,7 @@ RSpec.describe 'Question CRUD', type: :system do
 
       describe 'create' do
         before do
-          visit '/admin/questions/new'
+          visit new_admin_question_path
 
           find('label', text: 'Question type').click
           find('.option', text: question_type.name).click
@@ -97,7 +97,7 @@ RSpec.describe 'Question CRUD', type: :system do
 
       describe 'index' do
         before do
-          visit '/admin/questions'
+          visit admin_questions_path
         end
 
         it 'list the questions without id' do
@@ -113,7 +113,7 @@ RSpec.describe 'Question CRUD', type: :system do
 
       context 'when delete' do
         before do
-          visit '/admin/questions'
+          visit admin_questions_path
 
           click_on 'Destroy'
 

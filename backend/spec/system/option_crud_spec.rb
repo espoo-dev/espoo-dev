@@ -14,7 +14,7 @@ RSpec.describe 'Option CRUD', type: :system do
       let!(:option) { create(:option) }
 
       it 'creates the option' do
-        visit '/admin/options/new'
+        visit new_admin_option_path
 
         find('label', text: 'Question').click
         find('.option', text: question.name).click
@@ -30,7 +30,7 @@ RSpec.describe 'Option CRUD', type: :system do
       it 'list the options' do
         option = create(:option)
 
-        visit '/admin/options'
+        visit admin_options_path
 
         expect(page).to have_text(option.option_type)
       end
@@ -40,7 +40,7 @@ RSpec.describe 'Option CRUD', type: :system do
       it 'deletes the option' do
         create(:option)
 
-        visit '/admin/options'
+        visit admin_options_path
 
         click_on 'Destroy'
         page.accept_alert

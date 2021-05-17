@@ -14,7 +14,7 @@ RSpec.describe 'Survey CRUD', type: :system do
 
       describe 'create' do
         it 'creates the survey' do
-          visit '/admin/surveys/new'
+          visit new_admin_survey_path
 
           find('label', text: 'User').click
           find('.option', text: user_admin.email).click
@@ -26,7 +26,7 @@ RSpec.describe 'Survey CRUD', type: :system do
 
       describe 'list' do
         it 'list the surveys' do
-          visit '/admin/surveys'
+          visit  admin_surveys_path
 
           expect(page).to have_text(survey.name)
         end
@@ -34,7 +34,7 @@ RSpec.describe 'Survey CRUD', type: :system do
 
       describe 'delete' do
         it 'deletes the survey' do
-          visit '/admin/surveys'
+          visit admin_surveys_path
 
           click_on 'Destroy'
           page.accept_alert
@@ -45,7 +45,7 @@ RSpec.describe 'Survey CRUD', type: :system do
 
       describe 'edit' do
         it 'can edit user' do
-          visit edit_admin_survey_path survey.id
+          visit edit_admin_survey_path(survey)
           expect(page).to have_selector '#survey_user_id', visible: :hidden
         end
       end
@@ -61,7 +61,7 @@ RSpec.describe 'Survey CRUD', type: :system do
 
       describe 'create' do
         it 'creates the survey' do
-          visit '/admin/surveys/new'
+          visit new_admin_survey_path
 
           click_button 'Create Survey'
           expect(page).to have_content 'Survey was successfully created.'
@@ -70,7 +70,7 @@ RSpec.describe 'Survey CRUD', type: :system do
 
       describe 'list' do
         before do
-          visit '/admin/surveys'
+          visit admin_surveys_path
         end
 
         it 'see surveys that belongs to him' do
@@ -84,14 +84,14 @@ RSpec.describe 'Survey CRUD', type: :system do
 
       describe 'show' do
         it 'can see his own survey' do
-          visit "/admin/surveys/#{survey1.id}"
+          visit admin_survey_path(survey1)
 
           expect(page).to have_text(survey1.name)
           expect(page).not_to have_text(survey.id)
         end
 
         it "can't see surveys that not belongs to him" do
-          visit "/admin/surveys/#{survey2.id}"
+          visit admin_survey_path(survey2)
 
           expect(page).to have_text("The page you were looking for doesn't exist.")
         end
@@ -99,7 +99,7 @@ RSpec.describe 'Survey CRUD', type: :system do
 
       describe 'edit' do
         it "can't edit user" do
-          visit edit_admin_survey_path survey1.id
+          visit edit_admin_survey_path(survey1)
           expect(page).not_to have_selector '#survey_user_id', visible: :hidden
         end
       end
