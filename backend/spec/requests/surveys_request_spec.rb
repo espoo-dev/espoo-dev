@@ -6,7 +6,7 @@ RSpec.describe 'SurveysController', type: :request do
     let!(:survey_question) { survey.questions.first }
     let!(:question_type) { survey_question.question_type }
 
-    before { get api_v1_survey_path(survey.id), headers: auth_headers }
+    before { get api_v1_survey_path(survey), headers: auth_headers }
 
     it { expect(response).to have_http_status :ok }
 

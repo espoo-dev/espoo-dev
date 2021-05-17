@@ -12,13 +12,13 @@ RSpec.describe 'question_type CRUD', type: :system do
       end
 
       it 'list question_type' do
-        visit '/admin/question_types/'
+        visit admin_question_types_path
 
         expect(page).to have_text(question_type.name)
       end
 
       it 'Delete question_type' do
-        visit '/admin/question_types'
+        visit admin_question_types_path
 
         click_on 'Destroy'
         page.accept_alert
