@@ -7,4 +7,8 @@ en:
           attributes:
             users:
               cant_destroy_role: Can't destroy role with %{users_count} users
+  admin:
+    application:
+      navigation:
+        sign_out: Logout
   app_name: Rails espoo

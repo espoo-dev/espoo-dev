@@ -15,6 +15,13 @@ RSpec.describe 'User sign in', type: :system do
     it { expect(page).to have_current_path('/') }
 
     it { expect(page).to have_text('Signed in successfully') }
+
+    it { expect(page).to have_link('Logout', href: destroy_user_session_path) }
+
+    it 'when can click on logout button' do
+      click_on 'Logout'
+      expect(page).to have_current_path(user_session_path)
+    end
   end
 
   describe 'When data is not valid' do
