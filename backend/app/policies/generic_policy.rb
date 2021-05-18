@@ -32,8 +32,12 @@ class GenericPolicy < ApplicationPolicy
       if user.admin?
         scope.all
       else
-        scope.where(user_id: user.id)
+        scope.where(search_params)
       end
+    end
+
+    def search_params
+      { user_id: user.id }
     end
   end
 end
