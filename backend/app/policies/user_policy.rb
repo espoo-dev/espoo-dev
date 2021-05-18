@@ -11,12 +11,8 @@ class UserPolicy < GenericPolicy
   end
 
   class Scope < Scope
-    def resolve_admin
-      if user.admin?
-        User.all
-      else
-        User.where(id: user.id)
-      end
+    def search_params
+      { id: user.id }
     end
   end
 end
