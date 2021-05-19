@@ -6,6 +6,10 @@ agent:
     os_image: ubuntu1804
 blocks:
   - name: Install dependencies
+    dependencies: []
+    # Run this block on changes in frontend folder 
+    run:
+      when: "change_in('frontend')"
     task:
       jobs:
         - name: install client dependencies
@@ -16,6 +20,10 @@ blocks:
             - yarn install
             - cache store
   - name: Lint
+    dependencies: []
+    # Run this block on changes in frontend folder 
+    run:
+      when: "change_in('frontend')"
     task:
       jobs:
         - name: lint client
@@ -25,6 +33,10 @@ blocks:
             - cache restore
             - yarn lint
   - name: Build
+    dependencies: []
+    # Run this block on changes in frontend folder and installed dependencies 
+    run:
+      when: "change_in('frontend')"
     task:
       jobs:
         - name: build client
@@ -32,4 +44,5 @@ blocks:
             - checkout
             - cd frontend
             - cache restore
+            - yarn install
             - yarn build

@@ -8,10 +8,11 @@ class QuestionDashboard < Administrate::BaseDashboard
   # which determines how the attribute is displayed
   # on pages throughout the dashboard.
   ATTRIBUTE_TYPES = {
-    user: Field::BelongsTo,
+    user: Field::BelongsTo.with_options(
+      include_blank: false
+    ),
     question_type: Field::BelongsTo,
     survey: Field::BelongsTo,
-    id: Field::Number,
     name: Field::String,
     created_at: Field::DateTime,
     updated_at: Field::DateTime
@@ -26,7 +27,6 @@ class QuestionDashboard < Administrate::BaseDashboard
     name
     question_type
     survey
-    id
   ].freeze
 
   # SHOW_PAGE_ATTRIBUTES
@@ -35,7 +35,6 @@ class QuestionDashboard < Administrate::BaseDashboard
     user
     question_type
     survey
-    id
     name
     created_at
     updated_at

@@ -24,15 +24,28 @@ class ApplicationPolicy
     admin?
   end
 
-  def update?
-    admin?
-  end
-
   def edit?
     admin?
   end
 
   def destroy?
     admin?
+  end
+
+  def user?
+    user.present?
+  end
+
+  class Scope
+    attr_reader :user, :scope
+
+    def initialize(user, scope)
+      @user = user
+      @scope = scope
+    end
+
+    def resolve_admin
+      scope.all
+    end
   end
 end

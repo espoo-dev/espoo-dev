@@ -6,20 +6,29 @@
 # you're free to overwrite the RESTful controller actions.
 module Admin
   class ApplicationController < Administrate::ApplicationController
-    include Pundit
+    include Administrate::Punditize
 
-    before_action :authenticate_user!, :authenticate_admin
+    before_action :authenticate_user!
     after_action :verify_authorized
     around_action :skip_bullet, if: -> { defined?(Bullet) }
 
-    rescue_from Pundit::NotAuthorizedError, with: :render_unauthorized
+    rescue_from ActiveRecord::RecordNotFound, with: :render_not_found
+    rescue_from Pundit::NotAuthorizedError, with: :render_not_found
 
-    def authenticate_admin
-      authorize current_user
+    def render_not_found
+      redirect_to '/404.html'
     end
 
-    def render_unauthorized
-      redirect_to '/401.html'
+    helper_method :filter_form_attributes
+    def filter_form_attributes(attributes)
+      return attributes if current_user&.admin?
+
+      admin_attributes = %i[user role]
+      attributes.reject { |attr| admin_attributes.include? attr.attribute }
+    end
+
+    def resource_params
+      current_user.admin? ? super : super.merge(user_id: current_user.id)
     end
 
     # Override this value to specify the number of elements to display at a time
