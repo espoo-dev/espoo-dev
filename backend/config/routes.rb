@@ -1,13 +1,21 @@
 Rails.application.routes.draw do
-  resources :questions, only: [:create]
-  resources :users, only: [:create]
-
   namespace :admin do
     resources :users
     resources :questions
     resources :question_types
+    resources :surveys
+    resources :roles
+    resources :options
 
     root to: "users#index"
+  end
+
+  namespace :api do
+    namespace :v1 do
+      resources :users, only: %i[index create]
+      resources :surveys, only: %i[index show]
+      resources :roles, only: %i[index]
+    end
   end
 
   get '/jwt_example', to: 'jwt_example#index'

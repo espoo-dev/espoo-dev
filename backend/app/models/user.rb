@@ -5,12 +5,10 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :validatable,
          :jwt_authenticatable, jwt_revocation_strategy: Devise::JWT::RevocationStrategies::Null
 
-  ADMIN_ROLE = 'admin'.freeze
-  ROLES = [ADMIN_ROLE, 'moderator'].freeze
+  has_many :surveys, dependent: :destroy
+  has_many :questions, dependent: :destroy
+  belongs_to :role
 
-  validates :role, presence: true, inclusion: { in: ROLES }
-
-  def admin?
-    role == ROLES[0]
-  end
+  validates :role, presence: true
+  delegate :admin?, to: :role
 end

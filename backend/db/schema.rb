@@ -10,10 +10,18 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_04_17_083055) do
+ActiveRecord::Schema.define(version: 2021_05_07_070142) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "options", force: :cascade do |t|
+    t.string "option_type"
+    t.bigint "question_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["question_id"], name: "index_options_on_question_id"
+  end
 
   create_table "question_types", force: :cascade do |t|
     t.string "name", null: false
@@ -27,7 +35,27 @@ ActiveRecord::Schema.define(version: 2021_04_17_083055) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.integer "question_type_id", null: false
+    t.integer "survey_id"
+    t.integer "user_id", null: false
     t.index ["question_type_id"], name: "index_questions_on_question_type_id"
+    t.index ["survey_id"], name: "index_questions_on_survey_id"
+    t.index ["user_id"], name: "index_questions_on_user_id"
+  end
+
+  create_table "roles", force: :cascade do |t|
+    t.string "role_type"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["role_type"], name: "index_roles_on_role_type", unique: true
+  end
+
+  create_table "surveys", force: :cascade do |t|
+    t.string "name"
+    t.string "description"
+    t.bigint "user_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["user_id"], name: "index_surveys_on_user_id"
   end
 
   create_table "users", force: :cascade do |t|
@@ -39,9 +67,12 @@ ActiveRecord::Schema.define(version: 2021_04_17_083055) do
     t.datetime "remember_created_at"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.string "role", null: false
+    t.bigint "role_id", null: false
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
+    t.index ["role_id"], name: "index_users_on_role_id"
   end
 
+  add_foreign_key "options", "questions"
+  add_foreign_key "users", "roles"
 end
