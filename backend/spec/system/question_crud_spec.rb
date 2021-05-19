@@ -20,16 +20,29 @@ RSpec.describe 'Question CRUD', type: :system do
 
           find('label', text: 'Question type').click
           find('.option', text: question_type.name).click
+        end
 
+        it 'shows user select when admin' do
+          expect(page).to have_selector('label', text: 'User')
+        end
+
+        it 'creates the question for admin' do
           find('label', text: 'User').click
           find('.option', text: user_admin.email).click
 
           fill_in 'Name', with: 'question name'
 
           click_button 'Create Question'
+          expect(page).to have_content 'Question was successfully created.'
         end
 
-        it 'creates the question' do
+        it 'creates the question for user' do
+          find('label', text: 'User').click
+          find('.option', text: user_teacher.email).click
+
+          fill_in 'Name', with: 'question name'
+
+          click_button 'Create Question'
           expect(page).to have_content 'Question was successfully created.'
         end
       end
@@ -82,15 +95,15 @@ RSpec.describe 'Question CRUD', type: :system do
           find('label', text: 'Question type').click
           find('.option', text: question_type.name).click
 
-          find('label', text: 'User').click
-          find('.option', text: user_teacher.email).click
-
           fill_in 'Name', with: 'question name'
+        end
 
-          click_button 'Create Question'
+        it 'does not show user select when not admin' do
+          expect(page).not_to have_selector('label', text: 'User')
         end
 
         it 'creates the question' do
+          click_button 'Create Question'
           expect(page).to have_content 'Question was successfully created.'
         end
       end
