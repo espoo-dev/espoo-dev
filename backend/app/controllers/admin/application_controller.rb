@@ -27,6 +27,10 @@ module Admin
       attributes.reject { |attr| admin_attributes.include? attr.attribute }
     end
 
+    def resource_params
+      current_user.admin? ? super : super.merge(user_id: current_user.id)
+    end
+
     # Override this value to specify the number of elements to display at a time
     # on index pages. Defaults to 20.
     # def records_per_page
