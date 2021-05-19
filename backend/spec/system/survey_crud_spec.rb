@@ -22,6 +22,16 @@ RSpec.describe 'Survey CRUD', type: :system do
           click_button 'Create Survey'
           expect(page).to have_content 'Survey was successfully created.'
         end
+
+        it 'creates the survey for teacher' do
+          visit new_admin_survey_path
+
+          find('label', text: 'User').click
+          find('.option', text: user_teacher.email).click
+
+          click_button 'Create Survey'
+          expect(page).to have_content 'Survey was successfully created.'
+        end
       end
 
       describe 'list' do
