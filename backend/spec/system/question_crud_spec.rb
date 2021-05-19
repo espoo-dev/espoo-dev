@@ -22,14 +22,23 @@ RSpec.describe 'Question CRUD', type: :system do
           find('.option', text: question_type.name).click
 
           find('label', text: 'User').click
+        end
+
+        it 'creates the question for admin' do
           find('.option', text: user_admin.email).click
 
           fill_in 'Name', with: 'question name'
 
           click_button 'Create Question'
+          expect(page).to have_content 'Question was successfully created.'
         end
 
-        it 'creates the question' do
+        it 'creates the question for user' do
+          find('.option', text: user_teacher.email).click
+
+          fill_in 'Name', with: 'question name'
+
+          click_button 'Create Question'
           expect(page).to have_content 'Question was successfully created.'
         end
       end
@@ -81,9 +90,6 @@ RSpec.describe 'Question CRUD', type: :system do
 
           find('label', text: 'Question type').click
           find('.option', text: question_type.name).click
-
-          find('label', text: 'User').click
-          find('.option', text: user_teacher.email).click
 
           fill_in 'Name', with: 'question name'
 
