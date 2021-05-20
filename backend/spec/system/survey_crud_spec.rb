@@ -5,6 +5,7 @@ RSpec.describe 'Survey CRUD', type: :system do
   describe 'CRUD' do
     let!(:user_admin) { create(:user) }
     let!(:user_teacher) { create(:user_teacher) }
+
     let!(:survey) { create(:survey) }
 
     describe 'when user is admin' do
@@ -36,8 +37,9 @@ RSpec.describe 'Survey CRUD', type: :system do
 
       describe 'list' do
         it 'list the surveys' do
-          visit  admin_surveys_path
-
+          survey_teacher = create(:survey, user_id: user_teacher.id)
+          visit admin_surveys_path(user_admin)
+          expect(page).to have_text(survey_teacher.name)
           expect(page).to have_text(survey.name)
         end
       end
@@ -46,7 +48,7 @@ RSpec.describe 'Survey CRUD', type: :system do
         it 'deletes the survey' do
           visit admin_surveys_path
 
-          click_on 'Destroy'
+          first(:link, 'Destroy').click
           page.accept_alert
 
           expect(page).to have_text('Survey was successfully destroyed.')
@@ -80,7 +82,7 @@ RSpec.describe 'Survey CRUD', type: :system do
 
       describe 'list' do
         before do
-          visit admin_surveys_path
+          visit admin_surveys_path(user_teacher)
         end
 
         it 'see surveys that belongs to him' do
