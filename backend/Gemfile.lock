@@ -96,6 +96,7 @@ GEM
       autoprefixer-rails (>= 9.1.0)
       popper_js (>= 2.8.6, < 3)
       sassc-rails (>= 2.0.0)
+    brakeman (5.0.1)
     builder (3.2.4)
     bullet (6.1.4)
       activesupport (>= 3.0.0)
@@ -393,6 +394,7 @@ DEPENDENCIES
   administrate
   bootsnap (>= 1.4.4)
   bootstrap (~> 5.0.0.beta1)
+  brakeman
   bullet
   capybara
   devise
