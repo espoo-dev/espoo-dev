@@ -4,11 +4,12 @@ RSpec.describe 'UsersController', type: :request do
   describe '#create' do
     context 'when data is valid' do
       let(:user) { build(:user) }
+      let(:role_moderator) { create(:role_moderator) }
 
       before do
         user_params = {
           email: user.email,
-          role: 'moderator',
+          role_id: role_moderator.id,
           password: '123456'
         }
         post api_v1_users_path, params: user_params
@@ -22,7 +23,11 @@ RSpec.describe 'UsersController', type: :request do
         expected_attributes = {
           'id' => anything,
           'email' => user.email,
-          'role' => 'moderator'
+          'role' => {
+            'id' => role_moderator.id,
+            'role_type' => role_moderator.role_type
+          },
+          'surveys' => []
         }
         expect(response_body).to match(expected_attributes)
       end
@@ -35,11 +40,12 @@ RSpec.describe 'UsersController', type: :request do
     context 'when data is not valid' do
       context 'when user role is admin' do
         let(:user) { build(:user, email: '') }
+        let(:role_admin) { Role.find_by(role_type: Role::ADMIN) || create(:role_admin) }
 
         before do
           user_params = {
             'email' => user.email,
-            'role' => 'admin'
+            'role_id' => role_admin.id
           }
 
           post api_v1_users_path, params: user_params
@@ -49,7 +55,7 @@ RSpec.describe 'UsersController', type: :request do
 
         it { expect(User.count).to eq(0) }
 
-        it { expect(response_body).to match({ 'error_message' => "Can't create admin user :(" }) }
+        it { expect(response_body).to match({ 'error_message' => 'not allowed to create? this User' }) }
       end
 
       context 'when user email already exists' do
@@ -58,7 +64,7 @@ RSpec.describe 'UsersController', type: :request do
         before do
           user_params = {
             'email' => user_teacher.email,
-            'role' => user_teacher.role
+            'role_id' => user_teacher.role.id
           }
 
           post api_v1_users_path, params: user_params
@@ -77,20 +83,53 @@ RSpec.describe 'UsersController', type: :request do
     describe 'when has no headers' do
       before do
         create(:user)
-        get '/api/v1/users'
+        get api_v1_users_path
       end
 
       it { expect(response).to have_http_status :found }
     end
 
+    describe 'when user has survey' do
+      let!(:user_with_surveys) { create(:user_with_surveys) }
+      let!(:role) { user_with_surveys.role }
+
+      let!(:survey) { user_with_surveys.surveys.first }
+
+      before do
+        get api_v1_users_path, headers: auth_headers
+      end
+
+      it 'has user with surveys' do
+        user = response_body[0]
+        expected_attributes = {
+          'id' => user_with_surveys.id,
+          'email' => user_with_surveys.email,
+          'role' => {
+            'id' => role.id,
+            'role_type' => role.role_type
+          },
+          'surveys' => [
+            {
+              'id' => survey.id,
+              'name' => survey.name,
+              'description' => survey.description,
+              'questions_quantity' => survey.questions.size
+            }
+          ]
+        }
+        expect(user).to match(expected_attributes)
+      end
+    end
+
     describe 'when has params role' do
       context 'when users exist' do
         let!(:user_teacher) { create(:user_teacher) }
+        let!(:role) { user_teacher.role }
 
         before do
           create(:user)
           create(:user_moderator)
-          get '/api/v1/users?role=teacher', headers: auth_headers
+          get api_v1_users_path(role: 'teacher'), headers: auth_headers
         end
 
         it { expect(response).to have_http_status :success }
@@ -100,21 +139,26 @@ RSpec.describe 'UsersController', type: :request do
           expected_attributes = {
             'id' => user_teacher.id,
             'email' => user_teacher.email,
-            'role' => user_teacher.role
+            'role' => {
+              'id' => role.id,
+              'role_type' => role.role_type
+            },
+            'surveys' => []
           }
           expect(teacher).to match(expected_attributes)
         end
       end
 
-      context 'when users do not exist' do
+      context 'when users do not exist by role_id' do
         before do
           create(:user)
-          get '/api/v1/users?role=teacher', headers: auth_headers
+          role = create(:role, role_type: 'test')
+          get api_v1_users_path(role_id: role.id), headers: auth_headers
         end
 
         it { expect(response).to have_http_status :success }
 
-        it { expect(response.body).to match('[]') }
+        it { expect(response_body).to match([]) }
 
         it { expect(response_body.count).to eq(0) }
       end
@@ -123,7 +167,7 @@ RSpec.describe 'UsersController', type: :request do
     context 'when has no params' do
       before do
         create_list(:user, 5)
-        get '/api/v1/users', headers: auth_headers
+        get api_v1_users_path, headers: auth_headers
       end
 
       it { expect(response).to have_http_status :success }

@@ -1,3 +1,14 @@
 ---
 pt-br:
+  activerecord:
+    errors:
+      models:
+        role:
+          attributes:
+            users:
+              cant_destroy_role: Não é possível apagar função com %{users_count} usuários
+  admin:
+    application:
+      navigation:
+        sign_out: Sair
   app_name: Rails espoo pt-br

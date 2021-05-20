@@ -4,6 +4,8 @@ Rails.application.routes.draw do
     resources :questions
     resources :question_types
     resources :surveys
+    resources :roles
+    resources :options
 
     root to: "users#index"
   end
@@ -11,6 +13,8 @@ Rails.application.routes.draw do
   namespace :api do
     namespace :v1 do
       resources :users, only: %i[index create]
+      resources :surveys, only: %i[index show]
+      resources :roles, only: %i[index]
     end
   end
 

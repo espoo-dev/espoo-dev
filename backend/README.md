@@ -4,7 +4,7 @@
 
 1. Rails 6
 
-1. docker (docker-compose)
+1. docker 3.7 (docker-compose)
 
 1. [CI github-actions](https://github.com/espoo-dev/espoo-dev/actions) (image cache)
 

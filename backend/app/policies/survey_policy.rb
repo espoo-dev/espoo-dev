@@ -1,0 +1,2 @@
+class SurveyPolicy < GenericPolicy
+end

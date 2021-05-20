@@ -7,17 +7,8 @@ class User < ApplicationRecord
 
   has_many :surveys, dependent: :destroy
   has_many :questions, dependent: :destroy
+  belongs_to :role
 
-  ADMIN_ROLE = 'admin'.freeze
-  ROLES = [ADMIN_ROLE, 'moderator', 'teacher'].freeze
-
-  validates :role, presence: true, inclusion: { in: ROLES }
-
-  def admin?
-    role == ROLES[0]
-  end
-
-  def teacher?
-    role == ROLES[2]
-  end
+  validates :role, presence: true
+  delegate :admin?, to: :role
 end
