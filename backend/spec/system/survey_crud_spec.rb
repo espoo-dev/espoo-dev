@@ -5,7 +5,6 @@ RSpec.describe 'Survey CRUD', type: :system do
   describe 'CRUD' do
     let!(:user_admin) { create(:user) }
     let!(:user_teacher) { create(:user_teacher) }
-
     let!(:survey) { create(:survey) }
 
     describe 'when user is admin' do
