@@ -1,1 +1,4 @@
-export const useAuth = () => `token ${process.env.REACT_APP_GITHUB_KEY}`;
+export const useAuth = () => {
+  const token = localStorage.getItem('token');
+  return token;
+};
