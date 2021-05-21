@@ -1,4 +1,6 @@
 #!/bin/sh
+bundle install
+
 rake db:exists && rake db:migrate || rake db:setup
 
 rm /app/tmp/pids/*
