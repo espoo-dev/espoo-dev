@@ -22,6 +22,7 @@ module.exports = {
     'comma-dangle': 'off',
     'object-curly-newline': 'off',
     'import/prefer-default-export': 'off',
+    'import/no-unresolved': 'off',
     'no-use-before-define': 'off',
     'react/react-in-jsx-scope': 'off',
     'react/prop-types': 'off',
@@ -50,12 +51,20 @@ module.exports = {
     'react-hooks/rules-of-hooks': 'error',
     'react-hooks/exhaustive-deps': 'off',
     'no-unused-vars': 'off',
-    '@typescript-eslint/no-unused-vars': 'error',
+    '@typescript-eslint/no-unused-vars': 'warn',
     '@typescript-eslint/explicit-module-boundary-types': 'off',
     '@typescript-eslint/no-explicit-any': ['warn', {
       fixToUnknown: true,
       ignoreRestArgs: true,
-    }]
+    }],
+    'react/self-closing-comp': 'warn',
+    'semi': 'warn',
+    'quote-props': 'off',
+    'camelcase': 'off',
+    '@typescript/no-empty-function': 'off',
+    'react/require-default-props': 'off',
+    'react/no-unused-prop-types': 'off',
+    'object-curly-spacing': 'off'
   },
   settings: {
     'import/resolver': {
