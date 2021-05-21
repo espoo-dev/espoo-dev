@@ -12,7 +12,7 @@ class QuestionDashboard < Administrate::BaseDashboard
       include_blank: false
     ),
     question_type: Field::BelongsTo,
-    survey: Field::BelongsTo,
+    survey: BelongsToByUser,
     name: Field::String,
     created_at: Field::DateTime,
     updated_at: Field::DateTime

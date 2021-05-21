@@ -5,8 +5,10 @@ RSpec.describe 'Question CRUD', type: :system do
   describe 'CRUD' do
     let!(:user_admin) { create(:user) }
     let!(:user_teacher) { create(:user_teacher) }
-    let!(:question_admin) { create(:question, user: user_admin) }
-    let!(:question_teacher) { create(:question, user: user_teacher) }
+    let!(:survey_admin) { create(:survey, user: user_admin) }
+    let!(:survey_teacher) { create(:survey, user: user_teacher) }
+    let!(:question_admin) { create(:question, user: user_admin, survey: survey_admin) }
+    let!(:question_teacher) { create(:question, user: user_teacher, survey: survey_teacher) }
     let!(:question_type) { create(:question_type) }
 
     describe 'user admin' do
@@ -20,6 +22,12 @@ RSpec.describe 'Question CRUD', type: :system do
 
           find('label', text: 'Question type').click
           find('.option', text: question_type.name).click
+        end
+
+        it 'shows all surveys' do
+          find('label', text: 'Survey').click
+          expect(page).to have_selector('.option', text: survey_admin.name)
+          expect(page).to have_selector('.option', text: survey_teacher.name)
         end
 
         it 'shows user select when admin' do
@@ -96,6 +104,12 @@ RSpec.describe 'Question CRUD', type: :system do
           find('.option', text: question_type.name).click
 
           fill_in 'Name', with: 'question name'
+        end
+
+        it 'shows only teacher surveys' do
+          find('label', text: 'Survey').click
+          expect(page).not_to have_selector('.option', text: survey_admin.name)
+          expect(page).to have_selector('.option', text: survey_teacher.name)
         end
 
         it 'does not show user select when not admin' do
