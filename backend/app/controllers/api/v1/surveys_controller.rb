@@ -6,7 +6,7 @@ class Api::V1::SurveysController < Api::V1::ApiController
   end
 
   def index
-    surveys = Survey.where(params.permit(:user_id)).includes([:questions])
+    surveys = Survey.by_user(current_user).where(params.permit(:user_id))
 
     render json: surveys
   end
