@@ -6,8 +6,9 @@
     "dev": "next dev -p 4000",
     "build": "next build",
     "start": "next start -p $PORT",
-    "lint": "eslint './**/*.{js,jsx,ts,tsx,css,scss}' --fix",
-    "format": "prettier --write './**/*.{js,jsx,ts,tsx,css,scss}' --config ./.prettierrc"
+    "lint": "eslint './**/*.{js,jsx,ts,tsx,css,scss}'",
+    "format": "prettier --write './**/*.{js,jsx,ts,tsx,css,scss}' --config ./.prettierrc",
+    "e2e": "yarn run cypress open"
   },
   "dependencies": {
     "@chakra-ui/react": "^1.3.3",

@@ -9,7 +9,7 @@ blocks:
     dependencies: []
     # Run this block on changes in frontend folder 
     run:
-      when: "change_in('frontend')"
+      when: "change_in('/frontend')"
     task:
       jobs:
         - name: install client dependencies
@@ -23,7 +23,7 @@ blocks:
     dependencies: []
     # Run this block on changes in frontend folder 
     run:
-      when: "change_in('frontend')"
+      when: "change_in('/frontend')"
     task:
       jobs:
         - name: lint client
@@ -36,7 +36,7 @@ blocks:
     dependencies: []
     # Run this block on changes in frontend folder and installed dependencies 
     run:
-      when: "change_in('frontend')"
+      when: "change_in('/frontend')"
     task:
       jobs:
         - name: build client
