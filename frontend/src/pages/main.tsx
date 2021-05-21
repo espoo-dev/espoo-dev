@@ -9,7 +9,7 @@ const Main = () => {
   return (
     <div>
       Main page
-      <button type="button" onClick={logout}>
+      <button type="button" onClick={logout} id="logout-btn">
         Logout
       </button>
     </div>
