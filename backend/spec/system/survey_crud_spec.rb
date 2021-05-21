@@ -5,6 +5,7 @@ RSpec.describe 'Survey CRUD', type: :system do
   describe 'CRUD' do
     let!(:user_admin) { create(:user) }
     let!(:user_teacher) { create(:user_teacher) }
+
     let!(:survey) { create(:survey) }
 
     describe 'when user is admin' do
@@ -36,7 +37,7 @@ RSpec.describe 'Survey CRUD', type: :system do
 
       describe 'list' do
         it 'list the surveys' do
-          visit  admin_surveys_path
+          visit admin_surveys_path
 
           expect(page).to have_text(survey.name)
         end
