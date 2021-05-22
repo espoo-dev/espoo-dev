@@ -63,5 +63,41 @@ RSpec.describe 'SurveysController', type: :request do
       it { expect(response).to have_http_status :success }
       it { expect(response_body.count).to eq(1) }
     end
+
+    describe 'when can list surveys by user' do
+      let!(:admin) { create(:user) }
+      let!(:teacher) { create(:user_teacher) }
+      let!(:moderator) { create(:user_moderator) }
+      let!(:survey_teacher) { create(:survey, user_id: teacher.id) }
+
+      context 'when the user is an admin' do
+        before do
+          create(:survey, user_id: admin.id)
+          get api_v1_surveys_path, headers: auth_headers
+        end
+
+        it { expect(response).to have_http_status :success }
+        it { expect(response_body.count).to eq(2) }
+      end
+
+      context 'when the user is an teacher' do
+        before { get api_v1_surveys_path, headers: auth_headers(user: teacher) }
+
+        it 'survey expect id' do
+          resp_id = response_body[0]['id']
+          expect(survey_teacher.id).to eq(resp_id)
+        end
+
+        it { expect(response).to have_http_status :success }
+        it { expect(response_body.count).to eq(1) }
+      end
+
+      context 'when user is an moderator' do
+        before { get api_v1_surveys_path, headers: auth_headers(user: moderator) }
+
+        it { expect(response).to have_http_status :success }
+        it { expect(response_body.count).to eq(0) }
+      end
+    end
   end
 end
