@@ -36,7 +36,7 @@ RSpec.describe 'Survey CRUD', type: :system do
 
       describe 'list' do
         it 'list the surveys' do
-          visit  admin_surveys_path
+          visit admin_surveys_path
 
           expect(page).to have_text(survey.name)
         end

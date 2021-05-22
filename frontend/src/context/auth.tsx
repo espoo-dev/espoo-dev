@@ -49,7 +49,7 @@ export const AuthProvider: React.FC = ({ children }) => {
         setLoading(false);
         setUser(response.data);
         setToken(authorization);
-        localStorage.setItem('token', JSON.stringify(authorization));
+        localStorage.setItem('token', authorization);
       }
     } catch (error) {
       setLoading(false);
