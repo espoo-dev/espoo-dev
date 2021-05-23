@@ -1,9 +1,19 @@
 # espoo-dev
 
+
 <p align="center">
+  <h3>Frontend CI (semaphore)</h3>
+  <a href='https://andersonmalheiro.semaphoreci.com/badges/espoo-dev/branches/master.svg?style=shields'> <img src='https://andersonmalheiro.semaphoreci.com/badges/espoo-dev/branches/main.svg?style=shields' alt='Build Status'></a>
+</p>
+
+<p align="center">
+  <h3>Backend CI (Ruby.ci)</h3>
+
   <img src="https://ruby.ci/badges/c9e80d1d-18a0-48f0-a533-541666383998/rspec?cache=false" alt="rspec"/>
   <img src="https://ruby.ci/badges/c9e80d1d-18a0-48f0-a533-541666383998/rubocop?cache=false" alt="rubocop"/>
   <img src="https://ruby.ci/badges/c9e80d1d-18a0-48f0-a533-541666383998/simplecov?cache=false" alt="simplecov"/>
+  <img src="https://ruby.ci/badges/c9e80d1d-18a0-48f0-a533-541666383998/brakeman?cache=false" alt="simplecov"/>
+  <img src="https://ruby.ci/badges/c9e80d1d-18a0-48f0-a533-541666383998/reek?cache=false" alt="simplecov"/>
 </p>
 
 # 🐳 Run
