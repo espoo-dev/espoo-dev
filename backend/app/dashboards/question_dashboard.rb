@@ -13,6 +13,7 @@ class QuestionDashboard < Administrate::BaseDashboard
     ),
     question_type: Field::BelongsTo,
     survey: BelongsToByUser,
+    options: Field::HasMany,
     name: Field::String,
     created_at: Field::DateTime,
     updated_at: Field::DateTime
@@ -36,8 +37,7 @@ class QuestionDashboard < Administrate::BaseDashboard
     question_type
     survey
     name
-    created_at
-    updated_at
+    options
   ].freeze
 
   # FORM_ATTRIBUTES
@@ -48,6 +48,7 @@ class QuestionDashboard < Administrate::BaseDashboard
     question_type
     survey
     name
+    options
   ].freeze
 
   # COLLECTION_FILTERS
