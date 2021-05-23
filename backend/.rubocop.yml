@@ -62,4 +62,4 @@ RSpec/MultipleExpectations:
   Max: 2
 
 RSpec/MultipleMemoizedHelpers:
-  Max: 7
+  Max: 9

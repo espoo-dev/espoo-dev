@@ -92,11 +92,24 @@ RSpec.describe 'Question CRUD', type: :system do
     end
 
     describe 'user teacher' do
+      let!(:question) { create(:question, user: user_teacher) }
+      let!(:option) { create(:option, question: question) }
+
       before do
         sign_in user_teacher
       end
 
-      describe 'create' do
+      describe 'when show' do
+        before do
+          visit admin_question_path(question)
+        end
+
+        it 'shows the options that belongs to question' do
+          expect(page).to have_text(option.option_type)
+        end
+      end
+
+      describe 'when create' do
         before do
           visit new_admin_question_path
 
@@ -122,7 +135,7 @@ RSpec.describe 'Question CRUD', type: :system do
         end
       end
 
-      describe 'index' do
+      describe 'when index' do
         before do
           visit admin_questions_path
         end
@@ -138,11 +151,11 @@ RSpec.describe 'Question CRUD', type: :system do
         end
       end
 
-      context 'when delete' do
+      context 'when destroy' do
         before do
           visit admin_questions_path
 
-          click_on 'Destroy'
+          first(:link, 'Destroy').click
 
           page.accept_alert
         end
