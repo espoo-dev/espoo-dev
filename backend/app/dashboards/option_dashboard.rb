@@ -10,9 +10,7 @@ class OptionDashboard < Administrate::BaseDashboard
   ATTRIBUTE_TYPES = {
     question: Field::BelongsTo,
     id: Field::Number,
-    option_type: Field::String,
-    created_at: Field::DateTime,
-    updated_at: Field::DateTime
+    option_type: Field::String
   }.freeze
 
   # COLLECTION_ATTRIBUTES
@@ -24,7 +22,6 @@ class OptionDashboard < Administrate::BaseDashboard
     question
     id
     option_type
-    created_at
   ].freeze
 
   # SHOW_PAGE_ATTRIBUTES
@@ -33,8 +30,6 @@ class OptionDashboard < Administrate::BaseDashboard
     question
     id
     option_type
-    created_at
-    updated_at
   ].freeze
 
   # FORM_ATTRIBUTES
@@ -60,7 +55,7 @@ class OptionDashboard < Administrate::BaseDashboard
   # Overwrite this method to customize how options are displayed
   # across all pages of the admin dashboard.
   #
-  # def display_resource(option)
-  #   "Option ##{option.id}"
-  # end
+  def display_resource(option)
+    option.option_type
+  end
 end
