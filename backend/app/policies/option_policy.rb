@@ -1,2 +1,2 @@
-class OptionPolicy < ApplicationPolicy
+class OptionPolicy < GenericPolicy
 end

@@ -7,6 +7,7 @@ class User < ApplicationRecord
 
   has_many :surveys, dependent: :destroy
   has_many :questions, dependent: :destroy
+  has_many :options, dependent: :destroy
   belongs_to :role
 
   validates :role, presence: true
