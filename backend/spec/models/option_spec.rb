@@ -6,6 +6,6 @@ RSpec.describe Option, type: :model do
   it { expect(option).to be_valid }
 
   describe 'presence' do
-    it { is_expected.to validate_presence_of(:option_type) }
+    it { is_expected.to validate_presence_of(:name) }
   end
 end
