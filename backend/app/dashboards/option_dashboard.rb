@@ -10,7 +10,7 @@ class OptionDashboard < Administrate::BaseDashboard
   ATTRIBUTE_TYPES = {
     question: Field::BelongsTo,
     id: Field::Number,
-    option_type: Field::String
+    name: Field::String
   }.freeze
 
   # COLLECTION_ATTRIBUTES
@@ -21,7 +21,7 @@ class OptionDashboard < Administrate::BaseDashboard
   COLLECTION_ATTRIBUTES = %i[
     question
     id
-    option_type
+    name
   ].freeze
 
   # SHOW_PAGE_ATTRIBUTES
@@ -29,7 +29,7 @@ class OptionDashboard < Administrate::BaseDashboard
   SHOW_PAGE_ATTRIBUTES = %i[
     question
     id
-    option_type
+    name
   ].freeze
 
   # FORM_ATTRIBUTES
@@ -37,7 +37,7 @@ class OptionDashboard < Administrate::BaseDashboard
   # on the model's form (`new` and `edit`) pages.
   FORM_ATTRIBUTES = %i[
     question
-    option_type
+    name
   ].freeze
 
   # COLLECTION_FILTERS
@@ -56,6 +56,6 @@ class OptionDashboard < Administrate::BaseDashboard
   # across all pages of the admin dashboard.
   #
   def display_resource(option)
-    option.option_type
+    option.name
   end
 end

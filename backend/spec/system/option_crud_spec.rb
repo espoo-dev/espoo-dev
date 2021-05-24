@@ -19,7 +19,7 @@ RSpec.describe 'Option CRUD', type: :system do
         find('label', text: 'Question').click
         find('.option', text: question.name).click
 
-        fill_in 'Option type', with: option.option_type
+        fill_in 'Name', with: option.name
 
         click_button 'Create Option'
         expect(page).to have_content 'Option was successfully created.'
@@ -32,7 +32,7 @@ RSpec.describe 'Option CRUD', type: :system do
 
         visit admin_options_path
 
-        expect(page).to have_text(option.option_type)
+        expect(page).to have_text(option.name)
       end
     end
 

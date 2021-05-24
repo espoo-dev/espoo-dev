@@ -105,7 +105,7 @@ RSpec.describe 'Question CRUD', type: :system do
         end
 
         it 'shows the options that belongs to question' do
-          expect(page).to have_text(option.option_type)
+          expect(page).to have_text(option.name)
         end
       end
 
