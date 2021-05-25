@@ -11,7 +11,8 @@ context('Login test', () => {
 
   it('should show and type email', () => {
     cy.get('#email')
-      .type('admin@gmail.com');
+      .type('admin@gmail.com')
+      .should('have.value', 'admin@gmail.com');
   });
 
   it('should show and type password', () => {
