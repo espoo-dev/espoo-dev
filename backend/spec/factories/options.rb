@@ -1,6 +1,7 @@
 FactoryBot.define do
   factory :option do
-    option_type { 'option 1' }
+    name { 'option 1' }
     association :question
+    association :user
   end
 end
