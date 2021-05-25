@@ -51,7 +51,10 @@ const Login = () => {
             <Subtitle>
               <span>
                 Log in with your data or
-                <RegisterBtn onClick={() => goToRegister()}>
+                <RegisterBtn
+                  id="btn-register"
+                  onClick={() => goToRegister()}
+                >
                   register now.
                 </RegisterBtn>
               </span>
@@ -82,6 +85,7 @@ const Login = () => {
                 styling="primary"
                 text="Log in"
                 type="submit"
+                id="btn-login"
                 loading={loading}
               />
 
