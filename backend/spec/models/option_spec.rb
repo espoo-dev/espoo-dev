@@ -8,4 +8,8 @@ RSpec.describe Option, type: :model do
   describe 'presence' do
     it { is_expected.to validate_presence_of(:name) }
   end
+
+  describe 'relationships' do
+    it { is_expected.to belong_to(:user).required }
+  end
 end
