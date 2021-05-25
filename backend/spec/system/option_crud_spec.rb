@@ -16,6 +16,8 @@ RSpec.describe 'Option CRUD', type: :system do
       it 'creates the option' do
         visit new_admin_option_path
 
+        find('label', text: 'User').click
+        find('.option', text: user.email).click
         find('label', text: 'Question').click
         find('.option', text: question.name).click
 
