@@ -10,7 +10,8 @@ class OptionDashboard < Administrate::BaseDashboard
   ATTRIBUTE_TYPES = {
     question: Field::BelongsTo,
     id: Field::Number,
-    name: Field::String
+    name: Field::String,
+    correct: Field::Boolean
   }.freeze
 
   # COLLECTION_ATTRIBUTES
@@ -22,6 +23,7 @@ class OptionDashboard < Administrate::BaseDashboard
     question
     id
     name
+    correct
   ].freeze
 
   # SHOW_PAGE_ATTRIBUTES
@@ -30,6 +32,7 @@ class OptionDashboard < Administrate::BaseDashboard
     question
     id
     name
+    correct
   ].freeze
 
   # FORM_ATTRIBUTES
@@ -38,6 +41,7 @@ class OptionDashboard < Administrate::BaseDashboard
   FORM_ATTRIBUTES = %i[
     question
     name
+    correct
   ].freeze
 
   # COLLECTION_FILTERS
