@@ -5,14 +5,13 @@ RSpec.describe 'Option CRUD', type: :system do
   describe 'CRUD' do
     let!(:question) { create(:question) }
     let!(:user) { create(:user) }
+    let!(:option) { create(:option) }
 
     before do
       sign_in user
     end
 
     describe 'create' do
-      let!(:option) { create(:option) }
-
       it 'creates the option' do
         visit new_admin_option_path
 
@@ -20,12 +19,22 @@ RSpec.describe 'Option CRUD', type: :system do
         find('.option', text: user.email).click
         find('label', text: 'Question').click
         find('.option', text: question.name).click
-
+        find('label', text: 'Correct').click
         fill_in 'Name', with: option.name
 
         click_button 'Create Option'
         expect(page).to have_content 'Option was successfully created.'
       end
+    end
+
+    describe 'update' do
+      before do
+        visit edit_admin_option_path(option)
+        find('label', text: 'Correct').click
+        click_button 'Update Option'
+      end
+
+      it { expect(page).to have_content('true') }
     end
 
     describe 'list' do
@@ -40,8 +49,6 @@ RSpec.describe 'Option CRUD', type: :system do
 
     describe 'delete' do
       it 'deletes the option' do
-        create(:option)
-
         visit admin_options_path
 
         click_on 'Destroy'
