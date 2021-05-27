@@ -2,6 +2,7 @@ module.exports = {
   env: {
     browser: true,
     es2021: true,
+    'jest/globals': true,
   },
   extends: [
     'eslint:recommended',
@@ -64,7 +65,8 @@ module.exports = {
     '@typescript/no-empty-function': 'off',
     'react/require-default-props': 'off',
     'react/no-unused-prop-types': 'off',
-    'object-curly-spacing': 'off'
+    'object-curly-spacing': 'off',
+    'import/no-extraneous-dependencies': 'off',
   },
   settings: {
     'import/resolver': {
