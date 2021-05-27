@@ -5,25 +5,20 @@ RSpec.describe 'Role CRUD', type: :system do
   describe 'CRUD' do
     before do
       sign_in create(:user)
+      visit admin_roles_path
     end
 
     describe 'list' do
-      it 'visits roles' do
-        visit admin_roles_path
-
-        expect(page).to have_content 'Role'
-      end
+      it { expect(page).to have_content 'Role' }
     end
 
     describe 'destroy' do
-      it 'cannot destroy role' do
-        visit admin_roles_path
-
+      before do
         click_on 'Destroy'
         page.accept_alert
-
-        expect(page).to have_content "Can't destroy role with 1 users"
       end
+
+      it { expect(page).to have_content "Can't destroy role with 1 users" }
     end
   end
 end

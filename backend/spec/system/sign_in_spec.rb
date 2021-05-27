@@ -25,14 +25,14 @@ RSpec.describe 'User sign in', type: :system do
   end
 
   describe 'When data is not valid' do
-    it 'does not log in' do
+    before do
       visit new_user_session_path
       fill_in 'Email', with: user.email
       fill_in 'Password', with: 'invalid password'
 
       click_on 'Log in'
-
-      expect(page).to have_current_path(new_user_session_path)
     end
+
+    it { expect(page).to have_current_path(new_user_session_path) }
   end
 end

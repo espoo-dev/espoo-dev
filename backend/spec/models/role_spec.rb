@@ -13,6 +13,12 @@ RSpec.describe Role, type: :model do
     it { is_expected.to validate_uniqueness_of(:role_type) }
   end
 
+  describe '#admin?' do
+    let!(:admin) { create(:user) }
+
+    it { expect(admin).to be_admin }
+  end
+
   describe '#destroy' do
     describe 'When there are users for role' do
       let!(:role) { create(:user).role }
