@@ -85,9 +85,7 @@ RSpec.describe 'Question CRUD', type: :system do
           page.accept_alert
         end
 
-        it 'deletes the question' do
-          expect(page).to have_text('Question was successfully destroyed.')
-        end
+        it { expect(page).to have_text('Question was successfully destroyed.') }
       end
     end
 
@@ -160,9 +158,7 @@ RSpec.describe 'Question CRUD', type: :system do
           page.accept_alert
         end
 
-        it 'deletes the question' do
-          expect(page).to have_text('Question was successfully destroyed.')
-        end
+        it { expect(page).to have_text('Question was successfully destroyed.') }
       end
     end
   end

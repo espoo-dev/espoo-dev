@@ -6,20 +6,20 @@ RSpec.describe 'Admin', type: :system do
   let(:user) { create(:user) }
   let(:user_moderator) { create(:user_moderator) }
 
-  describe 'When user is logged' do
-    it 'goes to admin page' do
+  describe 'when logged in redirect to admin page' do
+    before do
       sign_in user
       visit admin_root_path
-
-      expect(page).to have_current_path(admin_root_path)
     end
+
+    it { expect(page).to have_current_path(admin_root_path) }
   end
 
   describe 'When user is not logged' do
-    it 'does log in' do
+    before do
       visit admin_root_path
-
-      expect(page).to have_current_path(new_user_session_path)
     end
+
+    it { expect(page).to have_current_path(new_user_session_path) }
   end
 end
