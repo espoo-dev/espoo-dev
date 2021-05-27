@@ -6,12 +6,15 @@ class Option < ApplicationRecord
 
   scope :correct, -> { where(correct: true) }
 
+  delegate :single_choice?, to: :question
+
   private
 
   def validates_correct
-    return unless question
+    return if question.nil?
 
+    correct_options_positive = question.options.correct.count.positive?
     # i18n-tasks-use t('activerecord.errors.models.option.attributes.base.cant_create_option')
-    errors.add(:base, :cant_create_option) if question.options.correct.count.positive? && question.question_type.name == 'Single Choice' && correct
+    errors.add(:base, :cant_create_option) if correct_options_positive && single_choice? && correct
   end
 end

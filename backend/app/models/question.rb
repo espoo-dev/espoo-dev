@@ -6,10 +6,15 @@ class Question < ApplicationRecord
   belongs_to :survey, optional: true
   has_many :options, dependent: :destroy
 
+  def single_choice?
+    question_type.name == QuestionType::SINGLE_CHOICE
+  end
+
   private
 
   def validates_options
+    correct_options = options.correct.count > 1
     # i18n-tasks-use t('activerecord.errors.models.question.attributes.question_type.cant_change_question_type')
-    errors.add(:question_type, :cant_change_question_type) if options.correct.count > 1 && question_type.name == 'Single Choice'
+    errors.add(:question_type, :cant_change_question_type) if correct_options && single_choice?
   end
 end

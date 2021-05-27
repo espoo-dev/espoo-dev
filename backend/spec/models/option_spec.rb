@@ -21,7 +21,18 @@ RSpec.describe Option, type: :model do
       option.valid?
     end
 
-    it { expect(option).not_to be_valid }
-    it { expect(option.errors.full_messages).to match(['Single choice questions should have no more than one correct option.']) }
+    describe 'when many options are set to correct' do
+      it { expect(option.errors.full_messages).to match(['Single choice questions should have no more than one correct option.']) }
+      it { expect(option).not_to be_valid }
+    end
+  end
+
+  describe 'scopes' do
+    before do
+      create_list(:option, 2)
+      create_list(:option, 3, correct: true)
+    end
+
+    it { expect(described_class.correct.count).to eq(3) }
   end
 end

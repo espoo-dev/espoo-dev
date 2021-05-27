@@ -4,10 +4,10 @@ FactoryBot.define do
   end
 
   factory :question_type_multiple, parent: :question_type do
-    name { 'Multiple Choice' }
+    name { QuestionType::MULTIPLE_CHOICE }
   end
 
   factory :question_type_single, parent: :question_type do
-    name { 'Single Choice' }
+    name { QuestionType::SINGLE_CHOICE }
   end
 end
