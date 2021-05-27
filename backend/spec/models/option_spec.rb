@@ -10,6 +10,7 @@ RSpec.describe Option, type: :model do
     it { is_expected.to validate_presence_of(:name) }
   end
 
+
   describe 'relationship' do
     it { is_expected.to belong_to(:question).required }
   end
@@ -22,5 +23,8 @@ RSpec.describe Option, type: :model do
 
     it { expect(option).not_to be_valid }
     it { expect(option.errors.full_messages).to match(['Single choice questions should have no more than one correct option.']) }
+
+  describe 'relationships' do
+    it { is_expected.to belong_to(:user).required }
   end
 end

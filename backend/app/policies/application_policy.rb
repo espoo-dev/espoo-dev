@@ -16,10 +16,6 @@ class ApplicationPolicy
     admin?
   end
 
-  def create?
-    admin?
-  end
-
   def new?
     admin?
   end
