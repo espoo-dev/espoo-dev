@@ -8,7 +8,8 @@
     "start": "next start -p $PORT",
     "lint": "eslint './**/*.{js,jsx,ts,tsx,css,scss}' --fix",
     "format": "prettier --write './**/*.{js,jsx,ts,tsx,css,scss}' --config ./.prettierrc",
-    "test": "jest --env=jsdom"
+    "test": "jest --env=jsdom",
+    "test:watch": "jest --env=jsdom --watch"
   },
   "dependencies": {
     "@babel/core": "^7.14.3",
