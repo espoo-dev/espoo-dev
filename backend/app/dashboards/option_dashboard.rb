@@ -11,7 +11,8 @@ class OptionDashboard < Administrate::BaseDashboard
     user: Field::BelongsTo,
     question: Field::BelongsTo,
     id: Field::Number,
-    name: Field::String
+    name: Field::String,
+    correct: Field::Boolean
   }.freeze
 
   # COLLECTION_ATTRIBUTES
@@ -24,6 +25,7 @@ class OptionDashboard < Administrate::BaseDashboard
     question
     id
     name
+    correct
   ].freeze
 
   # SHOW_PAGE_ATTRIBUTES
@@ -33,6 +35,7 @@ class OptionDashboard < Administrate::BaseDashboard
     question
     id
     name
+    correct
   ].freeze
 
   # FORM_ATTRIBUTES
@@ -42,6 +45,7 @@ class OptionDashboard < Administrate::BaseDashboard
     user
     question
     name
+    correct
   ].freeze
 
   # COLLECTION_FILTERS
