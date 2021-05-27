@@ -3,6 +3,14 @@ en:
   activerecord:
     errors:
       models:
+        option:
+          attributes:
+            base:
+              cant_create_option: Single choice questions should have no more than one correct option.
+        question:
+          attributes:
+            question_type:
+              cant_change_question_type: Can't change to single choice when having more than one correct option.
         role:
           attributes:
             users:
