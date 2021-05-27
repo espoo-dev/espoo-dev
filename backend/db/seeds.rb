@@ -1,3 +1,9 @@
+User.destroy_all
+Role.destroy_all
+QuestionType.destroy_all
+Question.destroy_all
+Survey.destroy_all
+
 role_admin = Role.create(role_type: 'admin')
 role_teacher = Role.create(role_type: 'teacher')
 
