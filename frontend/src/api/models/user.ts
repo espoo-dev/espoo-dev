@@ -1,13 +1,8 @@
+import { Role } from './role';
+
 export interface UserLogin {
   email: string;
   password: string;
-}
-
-type RoleType = 'teacher' | 'admin' | 'moderator';
-
-interface Role {
-  id: number;
-  role_type: RoleType;
 }
 
 export interface Survey {
@@ -27,7 +22,7 @@ export interface User {
 export interface UserCreate {
   email: string;
   password: string;
-  role: number;
+  role_id: number;
 }
 
 export interface UserFilters {
