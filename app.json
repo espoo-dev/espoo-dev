@@ -1,0 +1,17 @@
+{
+  "buildpacks": [
+    {
+      "url": "https://github.com/timanovsky/subdir-heroku-buildpack"
+    },
+    {
+      "url": "heroku/nodejs"
+    },
+    {
+      "url": "heroku/ruby"
+    }
+  ],
+  "env": {
+    "PROJECT_PATH": "backend",
+    "DEVISE_JWT_SECRET_KEY": "e26a21cfca4fdf67cc4e82385ba2d6ea4fb83ad1f8f5"
+  }
+}
