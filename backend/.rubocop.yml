@@ -59,7 +59,7 @@ RSpec/NestedGroups:
   Max: 4
 
 RSpec/MultipleExpectations:
-  Max: 2
+  Max: 1
 
 RSpec/MultipleMemoizedHelpers:
   Max: 9
