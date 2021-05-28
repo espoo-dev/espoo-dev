@@ -23,6 +23,7 @@ export const TeacherDetails = (props: TeacherDetailsProps) => {
         p={0}
         m={0}
         onClick={onClickClose}
+        title="close"
       >
         <HiOutlineX />
       </Button>
