@@ -23,7 +23,7 @@ export class AuthService {
   public async register(
     user: UserCreate
   ): Promise<AxiosResponse<User | undefined>> {
-    const response = await this.httpClient.post<User>('/users', user);
+    const response = await this.httpClient.post<User>('api/v1/users', user);
 
     if (response) {
       return response;

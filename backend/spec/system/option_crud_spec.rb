@@ -12,20 +12,32 @@ RSpec.describe 'Option CRUD', type: :system do
     end
 
     describe 'create' do
+
       before do
+
         visit new_admin_option_path
 
         find('label', text: 'User').click
         find('.option', text: user.email).click
         find('label', text: 'Question').click
         find('.option', text: question.name).click
-
+        find('label', text: 'Correct').click
         fill_in 'Name', with: option.name
 
         click_button 'Create Option'
       end
 
       it { expect(page).to have_content 'Option was successfully created.' }
+    end
+
+    describe 'update' do
+      before do
+        visit edit_admin_option_path(option)
+        find('label', text: 'Correct').click
+        click_button 'Update Option'
+      end
+
+      it { expect(page).to have_content('true') }
     end
 
     describe 'list' do
@@ -38,6 +50,7 @@ RSpec.describe 'Option CRUD', type: :system do
 
     describe 'delete' do
       before do
+
         visit admin_options_path
 
         click_on 'Destroy'
