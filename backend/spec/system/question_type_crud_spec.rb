@@ -9,21 +9,18 @@ RSpec.describe 'question_type CRUD', type: :system do
     describe 'when user is admin' do
       before do
         sign_in admin_user
+        visit admin_question_types_path
       end
 
-      it 'list question_type' do
-        visit admin_question_types_path
+      it { expect(page).to have_text(question_type.name) }
 
-        expect(page).to have_text(question_type.name)
-      end
+      describe 'when delete' do
+        before do
+          click_on 'Destroy'
+          page.accept_alert
+        end
 
-      it 'Delete question_type' do
-        visit admin_question_types_path
-
-        click_on 'Destroy'
-        page.accept_alert
-
-        expect(page).to have_text('Question type was successfully destroyed.')
+        it { expect(page).to have_text('Question type was successfully destroyed.') }
       end
     end
   end
