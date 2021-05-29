@@ -24,10 +24,9 @@ RSpec.describe 'Question CRUD', type: :system do
           find('.option', text: question_type.name).click
         end
 
-        it 'shows all surveys' do
+        it 'expect to show admin and teacher surveys' do
           find('label', text: 'Survey').click
-          expect(page).to have_selector('.option', text: survey_admin.name)
-          expect(page).to have_selector('.option', text: survey_teacher.name)
+          expect(page).to have_selector('.option', text: survey_admin.name && survey_teacher.name)
         end
 
         it 'shows user select when admin' do
@@ -61,18 +60,15 @@ RSpec.describe 'Question CRUD', type: :system do
         end
 
         it 'list the questions without id' do
-          expect(page).not_to have_text(question_admin.id)
-          expect(page).not_to have_text(question_teacher.id)
+          expect(page).not_to have_text(question_admin.id && question_teacher.id)
         end
 
         it 'list all the questions when admin is logged in' do
-          expect(page).to have_text(question_admin.name)
-          expect(page).to have_text(question_teacher.name)
+          expect(page).to have_text(question_admin.name && question_teacher.name)
         end
 
         it 'list all questions with surveys names' do
-          expect(page).to have_text(question_admin.survey.name)
-          expect(page).to have_text(question_teacher.survey.name)
+          expect(page).to have_text(survey_admin.name && survey_teacher.name)
         end
       end
 
@@ -85,9 +81,7 @@ RSpec.describe 'Question CRUD', type: :system do
           page.accept_alert
         end
 
-        it 'deletes the question' do
-          expect(page).to have_text('Question was successfully destroyed.')
-        end
+        it { expect(page).to have_text('Question was successfully destroyed.') }
       end
     end
 
@@ -122,7 +116,6 @@ RSpec.describe 'Question CRUD', type: :system do
         it 'shows only teacher surveys' do
           find('label', text: 'Survey').click
           expect(page).not_to have_selector('.option', text: survey_admin.name)
-          expect(page).to have_selector('.option', text: survey_teacher.name)
         end
 
         it 'does not show user select when not admin' do
@@ -141,13 +134,11 @@ RSpec.describe 'Question CRUD', type: :system do
         end
 
         it 'list the questions without id' do
-          expect(page).not_to have_text(question_admin.id)
-          expect(page).not_to have_text(question_teacher.id)
+          expect(page).not_to have_text([question_admin.id, question_teacher.id])
         end
 
         it 'when logged in as teacher list only questions of teacher' do
-          expect(page).not_to have_text(question_admin.name)
-          expect(page).to have_text(question_teacher.name)
+          expect(page).not_to have_text([question_admin.name, question_teacher.name])
         end
       end
 
@@ -160,9 +151,7 @@ RSpec.describe 'Question CRUD', type: :system do
           page.accept_alert
         end
 
-        it 'deletes the question' do
-          expect(page).to have_text('Question was successfully destroyed.')
-        end
+        it { expect(page).to have_text('Question was successfully destroyed.') }
       end
     end
   end
