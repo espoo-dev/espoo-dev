@@ -6,7 +6,7 @@ RSpec.describe 'Role CRUD', type: :system do
     let!(:user_admin) { create(:user) }
     let!(:user_teacher) { create(:user_teacher) }
 
-    describe 'when logged user is admin' do
+    describe 'when admin' do
       before do
         sign_in user_admin
       end
