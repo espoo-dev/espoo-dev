@@ -170,6 +170,7 @@ export const RegisterBtn = styled.button`
   cursor: pointer;
   font-size: 16px;
   font-weight: bold;
+  padding: 0px 4px;
 `;
 
 export const LogoImg = styled.div`
