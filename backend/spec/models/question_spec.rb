@@ -33,4 +33,8 @@ RSpec.describe Question, type: :model do
     it { expect(question_single.single_choice?).to eq(true) }
     it { expect(question_multiple.single_choice?).to eq(false) }
   end
+
+  describe 'uniqueness by user' do
+    it { is_expected.to validate_uniqueness_of(:name).scoped_to(:user_id) }
+  end
 end

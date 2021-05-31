@@ -1,5 +1,5 @@
 class Question < ApplicationRecord
-  validates :name, presence: true
+  validates :name, presence: true, uniqueness: { scope: :user_id }
   validate :validates_options
   belongs_to :user
   belongs_to :question_type
