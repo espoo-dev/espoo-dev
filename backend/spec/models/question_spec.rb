@@ -5,7 +5,6 @@ RSpec.describe Question, type: :model do
   let!(:question_multiple) { create(:multiple_choice_question) }
   let!(:question_single) { create(:single_choice_question) }
   let!(:question_type_single) { QuestionType.find_or_create_by(name: QuestionType::SINGLE_CHOICE) }
-
   it { expect(question).to be_valid }
 
   describe 'relationship' do
@@ -32,5 +31,9 @@ RSpec.describe Question, type: :model do
   describe '#single_choice?' do
     it { expect(question_single.single_choice?).to eq(true) }
     it { expect(question_multiple.single_choice?).to eq(false) }
+  end
+
+  describe 'uniqueness by user' do
+    it { is_expected.to validate_uniqueness_of(:name).scoped_to(:user_id)}
   end
 end
