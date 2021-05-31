@@ -1,9 +1,11 @@
 require 'rails_helper'
 
 RSpec.describe Question, type: :model do
+  let!(:user) { create(:user) }
+  let!(:user_teacher) { create(:user_teacher) }
   let(:question) { create(:question) }
   let!(:question_multiple) { create(:multiple_choice_question) }
-  let!(:question_single) { create(:single_choice_question) }
+  let!(:question_single) { create(:single_choice_question, name: 'test', user: user) }
   let!(:question_type_single) { QuestionType.find_or_create_by(name: QuestionType::SINGLE_CHOICE) }
 
   it { expect(question).to be_valid }
@@ -32,5 +34,10 @@ RSpec.describe Question, type: :model do
   describe '#single_choice?' do
     it { expect(question_single.single_choice?).to eq(true) }
     it { expect(question_multiple.single_choice?).to eq(false) }
+  end
+
+  describe 'uniqueness by user' do
+    it { expect(build(:question, user: user, name: 'test')).not_to be_valid }
+    it { expect(build(:question, user: user_teacher, name: 'test')).to be_valid }
   end
 end
