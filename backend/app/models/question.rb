@@ -1,5 +1,5 @@
 class Question < ApplicationRecord
-  validates :name, presence: true, uniqueness: { scope: :user }
+  validates :name, presence: true, uniqueness: { scope: :user_id }
   validate :validates_options
   belongs_to :user
   belongs_to :question_type
@@ -7,6 +7,12 @@ class Question < ApplicationRecord
   has_many :options, dependent: :destroy
 
   delegate :single_choice?, to: :question_type
+
+  scope :by_user, lambda { |user|
+    return all.includes([:options]) if user.admin?
+
+    where(user_id: user).includes([:options])
+  }
 
   private
 
