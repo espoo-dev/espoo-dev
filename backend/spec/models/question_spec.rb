@@ -7,7 +7,7 @@ RSpec.describe Question, type: :model do
   let!(:question) { create(:question) }
   let!(:question_teacher) { create(:question, user: user_teacher) }
   let!(:question_multiple) { create(:multiple_choice_question) }
-  let!(:question_single) { create(:single_choice_question, name: 'test', user: user) }
+  let!(:question_single) { create(:single_choice_question) }
   let!(:question_type_single) { QuestionType.find_or_create_by(name: QuestionType::SINGLE_CHOICE) }
 
   it { expect(question).to be_valid }
