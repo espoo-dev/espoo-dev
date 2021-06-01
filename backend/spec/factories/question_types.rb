@@ -1,6 +1,6 @@
 FactoryBot.define do
   factory :question_type do
-    name { Faker::Games::Pokemon.unique.name }
+    name { Faker::Name.unique.name }
   end
 
   factory :question_type_single, parent: :question_type do
