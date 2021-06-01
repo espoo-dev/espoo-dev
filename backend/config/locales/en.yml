@@ -20,3 +20,7 @@ en:
       navigation:
         sign_out: Logout
   app_name: Rails espoo
+  devise:
+    sessions:
+      new:
+        sign_in: Sign in

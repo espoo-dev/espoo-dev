@@ -1,0 +1,21 @@
+h1
+  = t('.sign_in')
+= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f|
+  = bootstrap_devise_error_messages!
+  - if flash[:alert]
+    span.flash_error
+      = flash[:alert]
+  .form-group
+    = f.label :email
+    = f.email_field :email, autofocus: true, autocomplete: 'email', class: 'form-control'
+  .form-group
+    = f.label :password
+    = f.password_field :password, autocomplete: 'current-password', class: 'form-control'
+  - if devise_mapping.rememberable?
+    .form-group.form-check
+      = f.check_box :remember_me, class: 'form-check-input'
+      = f.label :remember_me, class: 'form-check-label' do
+        = resource.class.human_attribute_name('remember_me')
+  .form-group
+    = f.submit 'Log in', class: 'btn btn-primary'
+= render 'devise/shared/links'
