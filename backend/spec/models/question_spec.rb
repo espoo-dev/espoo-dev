@@ -1,7 +1,11 @@
 require 'rails_helper'
 
 RSpec.describe Question, type: :model do
-  let(:question) { create(:question) }
+  let!(:user_admin) { create(:user) }
+  let!(:user_teacher) { create(:user_teacher) }
+  let!(:user_moderator) { create(:user_moderator) }
+  let!(:question) { create(:question) }
+  let!(:question_teacher) { create(:question, user: user_teacher) }
   let!(:question_multiple) { create(:multiple_choice_question) }
   let!(:question_single) { create(:single_choice_question) }
   let!(:question_type_single) { QuestionType.find_or_create_by(name: QuestionType::SINGLE_CHOICE) }
@@ -36,5 +40,11 @@ RSpec.describe Question, type: :model do
 
   describe 'uniqueness by user' do
     it { is_expected.to validate_uniqueness_of(:name).scoped_to(:user_id) }
+  end
+
+  describe '.by_user' do
+    it { expect(described_class.by_user(user_teacher)).to eq([question_teacher]) }
+    it { expect(described_class.by_user(user_admin)).to include(question_single, question, question_multiple, question_teacher) }
+    it { expect(described_class.by_user(user_moderator)).to eq([]) }
   end
 end

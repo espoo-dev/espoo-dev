@@ -9,7 +9,7 @@ class SurveyDashboard < Administrate::BaseDashboard
   # on pages throughout the dashboard.
   ATTRIBUTE_TYPES = {
     user: Field::BelongsTo,
-    questions: Field::HasMany,
+    questions: HasManyByUser,
     name: Field::String,
     description: Field::String,
     created_at: Field::DateTime,
