@@ -8,6 +8,12 @@ class Question < ApplicationRecord
 
   delegate :single_choice?, to: :question_type
 
+  scope :by_user, lambda { |user|
+    return all.includes([:options]) if user.admin?
+
+    where(user_id: user).includes([:options])
+  }
+
   private
 
   def validates_options

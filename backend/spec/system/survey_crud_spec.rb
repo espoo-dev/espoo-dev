@@ -6,6 +6,8 @@ RSpec.describe 'Survey CRUD', type: :system do
     let!(:user_admin) { create(:user) }
     let!(:user_teacher) { create(:user_teacher) }
     let!(:survey) { create(:survey) }
+    let!(:question_admin) { create(:question, user: user_admin) }
+    let!(:question_teacher) { create(:question, user: user_teacher) }
 
     describe 'when user is admin' do
       before do
@@ -15,10 +17,10 @@ RSpec.describe 'Survey CRUD', type: :system do
       describe 'create' do
         before do
           visit new_admin_survey_path
-          find('label', text: 'User').click
         end
 
         it 'creates the survey for admin' do
+          find('label', text: 'User').click
           find('.option', text: user_admin.email).click
 
           click_button 'Create Survey'
@@ -26,10 +28,16 @@ RSpec.describe 'Survey CRUD', type: :system do
         end
 
         it 'creates the survey for teacher' do
+          find('label', text: 'User').click
           find('.option', text: user_teacher.email).click
 
           click_button 'Create Survey'
           expect(page).to have_content 'Survey was successfully created.'
+        end
+
+        it 'can select questions that belongs to all users' do
+          find('label', text: 'Questions').click
+          expect(page).to have_selector('.option', text: question_admin.name && question_teacher.name)
         end
       end
 
@@ -45,7 +53,7 @@ RSpec.describe 'Survey CRUD', type: :system do
         before do
           visit admin_surveys_path
 
-          click_on 'Destroy'
+          first(:link, 'Destroy').click
           page.accept_alert
         end
 
@@ -72,11 +80,22 @@ RSpec.describe 'Survey CRUD', type: :system do
       describe 'create' do
         before do
           visit new_admin_survey_path
-
-          click_button 'Create Survey'
         end
 
-        it { expect(page).to have_content 'Survey was successfully created.' }
+        it 'creates survey' do
+          click_button 'Create Survey'
+          expect(page).to have_content 'Survey was successfully created.'
+        end
+
+        it 'can select questions that belongs to himself' do
+          find('label', text: 'Questions').click
+          expect(page).to have_selector('.option', text: question_teacher.name)
+        end
+
+        it 'cannot select questions that NOT belongs to himself' do
+          find('label', text: 'Questions').click
+          expect(page).not_to have_selector('.option', text: question_admin.name)
+        end
       end
 
       describe 'list' do
