@@ -20,3 +20,7 @@ pt-br:
       navigation:
         sign_out: Sair
   app_name: Rails espoo pt-br
+  devise:
+    sessions:
+      new:
+        sign_in: Sign in
