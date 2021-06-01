@@ -34,5 +34,6 @@ RSpec.describe 'User sign in', type: :system do
     end
 
     it { expect(page).to have_current_path(new_user_session_path) }
+    it { expect(page).to have_text('Invalid Email or password') }
   end
 end
