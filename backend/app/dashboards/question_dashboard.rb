@@ -1,6 +1,4 @@
-require 'administrate/base_dashboard'
-
-class QuestionDashboard < Administrate::BaseDashboard
+class QuestionDashboard < ApplicationDashboard
   # ATTRIBUTE_TYPES
   # a hash that describes the type of each of the model's fields.
   #
@@ -66,7 +64,4 @@ class QuestionDashboard < Administrate::BaseDashboard
   # Overwrite this method to customize how questions are displayed
   # across all pages of the admin dashboard.
   #
-  def display_resource(question)
-    question.name
-  end
 end

@@ -1,6 +1,4 @@
-require 'administrate/base_dashboard'
-
-class RoleDashboard < Administrate::BaseDashboard
+class RoleDashboard < ApplicationDashboard
   # ATTRIBUTE_TYPES
   # a hash that describes the type of each of the model's fields.
   #
@@ -22,9 +20,7 @@ class RoleDashboard < Administrate::BaseDashboard
   # Feel free to add, remove, or rearrange items.
   COLLECTION_ATTRIBUTES = %i[
     users
-    id
     role_type
-    created_at
   ].freeze
 
   # SHOW_PAGE_ATTRIBUTES

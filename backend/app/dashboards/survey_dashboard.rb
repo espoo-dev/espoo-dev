@@ -1,6 +1,4 @@
-require 'administrate/base_dashboard'
-
-class SurveyDashboard < Administrate::BaseDashboard
+class SurveyDashboard < ApplicationDashboard
   # ATTRIBUTE_TYPES
   # a hash that describes the type of each of the model's fields.
   #
@@ -63,7 +61,4 @@ class SurveyDashboard < Administrate::BaseDashboard
   # Overwrite this method to customize how surveys are displayed
   # across all pages of the admin dashboard.
   #
-  def display_resource(survey)
-    survey.name
-  end
 end
