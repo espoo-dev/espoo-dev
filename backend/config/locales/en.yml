@@ -11,6 +11,10 @@ en:
           attributes:
             question_type:
               cant_change_question_type: Can't change to single choice when having more than one correct option.
+        question_type:
+          attributes:
+            questions:
+              cant_destroy_question: Can't destroy question type with %{questions_count} questions
         role:
           attributes:
             users:
