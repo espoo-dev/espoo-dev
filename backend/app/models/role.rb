@@ -14,12 +14,12 @@ class Role < ApplicationRecord
   end
 
   def check_users_before_destroy
-    users_count = User.where(role_id: id).count
+    users_count = User.where(role_id: id)
 
-    return unless users_count.positive?
+    return unless users_count.any?
 
     # i18n-tasks-use t('activerecord.errors.models.role.attributes.users.cant_destroy_role')
-    errors.add(:users, :cant_destroy_role, users_count: users_count)
+    errors.add(:users, :cant_destroy_role, users_count: users_count.count)
 
     throw :abort
   end
