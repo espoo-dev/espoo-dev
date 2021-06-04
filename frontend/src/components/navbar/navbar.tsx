@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React, { useContext, useEffect } from 'react';
 import { FlexRow } from 'styles/utils';
 import { AuthContext } from 'context/auth';
 import { MdPerson } from 'react-icons/md';
@@ -21,7 +21,7 @@ export const Navbar = () => {
         </NavLinks>
       </FlexRow>
 
-      <NavAvatar onClick={handleLogout}>
+      <NavAvatar onClick={handleLogout} data-testid="logout_btn">
         <MdPerson size={18} color="#fff" />
       </NavAvatar>
     </Nav>
