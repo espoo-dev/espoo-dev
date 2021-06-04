@@ -7,10 +7,10 @@ FactoryBot.define do
   end
 
   factory :single_choice_question, parent: :question do
-    question_type { QuestionType.find_or_create_by(name: QuestionType::SINGLE_CHOICE) }
+    question_type { create(:question_type_single) }
   end
 
   factory :multiple_choice_question, parent: :question do
-    question_type { QuestionType.find_or_create_by(name: QuestionType::MULTIPLE_CHOICE) }
+    question_type { create(:question_type_multiple) }
   end
 end
