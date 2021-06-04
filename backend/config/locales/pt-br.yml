@@ -11,6 +11,10 @@ pt-br:
           attributes:
             question_type:
               cant_change_question_type: Não é possível mudar para uma única escolha quando há mais de uma opção correta.
+        question_type:
+          attributes:
+            questions:
+              cant_destroy_question: Não é possível destruir o tipo de pergunta com %{questions_count} perguntas
         role:
           attributes:
             users:
