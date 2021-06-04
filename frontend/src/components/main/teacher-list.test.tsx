@@ -4,8 +4,12 @@ import { fireEvent, render, screen } from 'test-utils';
 import { TeachersList } from './TeachersList';
 
 describe('Teacher list', () => {
-  it('should not render the component without the props', () => {
-    expect(() => render(<TeachersList />)).toThrow();
+  it('should not render the component without data prop', () => {
+    expect(() => render(<TeachersList onSelect={() => {}}/>)).toThrow();
+  });
+
+  it('should not render the component without onSelect prop', () => {
+    expect(() => render(<TeachersList data={[]}/>)).toThrow();
   });
 
   it('should render the item passed to the list', () => {

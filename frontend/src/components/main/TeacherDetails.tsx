@@ -42,7 +42,7 @@ export const TeacherDetails = (props: TeacherDetailsProps) => {
       </Avatar>
 
       <VStack spacing="1">
-        <Text fontWeight="bold" fontSize="lg" color="white">
+        <Text data-testid="user_email" fontWeight="bold" fontSize="lg" color="white">
           {data?.email || '---'}
         </Text>
         <Text fontSize="md" color="white">

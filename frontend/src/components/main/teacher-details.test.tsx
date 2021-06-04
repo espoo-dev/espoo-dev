@@ -47,4 +47,16 @@ describe('Teacher details', () => {
 
     expect(mockClose).toBeCalledTimes(1);
   });
+
+  it('should show dashes when email is empty', () => {
+    mockTeacher.email = '';
+
+    const { getByTestId } = render(
+      <TeacherDetails data={mockTeacher} />
+    );
+
+    const emailEl = getByTestId('user_email');
+
+    expect(emailEl).toHaveTextContent('---');
+  });
 });
