@@ -37,4 +37,10 @@ RSpec.describe QuestionType, type: :model do
       end
     end
   end
+
+  describe 'factory only creates one instance of each question type' do
+    it { expect(create(:question_type_single)).to eq(create(:question_type_single)) }
+
+    it { expect(create(:question_type_multiple)).to eq(create(:question_type_multiple)) }
+  end
 end
