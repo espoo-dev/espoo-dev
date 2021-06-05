@@ -22,9 +22,15 @@ RSpec.describe Option, type: :model do
     end
 
     describe 'when many options are set to correct' do
-      it { expect(option.errors.full_messages).to match(['Single choice questions should have no more than one correct option.']) }
+      it { expect(option.errors.full_messages).to match(['Name has already been taken', 'Single choice questions should have no more than one correct option.']) }
       it { expect(option).not_to be_valid }
     end
+  end
+
+  describe 'uniqueness' do
+    before { create(:option) }
+
+    it { is_expected.to validate_uniqueness_of(:name).scoped_to(:question_id) }
   end
 
   describe 'scopes' do
