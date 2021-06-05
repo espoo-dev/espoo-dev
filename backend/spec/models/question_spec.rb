@@ -47,4 +47,13 @@ RSpec.describe Question, type: :model do
     it { expect(described_class.by_user(user_admin)).to include(question_single, question, question_multiple, question_teacher) }
     it { expect(described_class.by_user(user_moderator)).to eq([]) }
   end
+
+  describe 'validates ready' do
+    it { expect(question.update(ready_to_be_answered: true)).to eq(false) }
+
+    it do
+      create(:option, correct: true, question: question_single)
+      expect(question_single.update(ready_to_be_answered: true)).to eq(true)
+    end
+  end
 end
