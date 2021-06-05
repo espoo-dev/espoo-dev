@@ -19,6 +19,6 @@ class Question < ApplicationRecord
   def validates_options
     many_correct_options = options.correct.count > 1
     # i18n-tasks-use t('activerecord.errors.models.question.attributes.question_type.cant_change_question_type')
-    errors.add(:question_type, :cant_change_question_type) if many_correct_options && single_choice?
+    errors.add(:question_type, :cant_change_question_type) if single_choice? && many_correct_options
   end
 end
