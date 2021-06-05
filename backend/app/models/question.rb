@@ -6,7 +6,7 @@ class Question < ApplicationRecord
   belongs_to :survey, optional: true
   has_many :options, dependent: :destroy
 
-  delegate :single_choice?, to: :question_type
+  delegate :single_choice?, to: :question_type, allow_nil: true
 
   scope :by_user, lambda { |user|
     return all.includes([:options]) if user.admin?
@@ -19,6 +19,6 @@ class Question < ApplicationRecord
   def validates_options
     many_correct_options = options.correct.count > 1
     # i18n-tasks-use t('activerecord.errors.models.question.attributes.question_type.cant_change_question_type')
-    errors.add(:question_type, :cant_change_question_type) if many_correct_options && single_choice?
+    errors.add(:question_type, :cant_change_question_type) if single_choice? && many_correct_options
   end
 end
