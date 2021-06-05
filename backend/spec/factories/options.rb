@@ -1,6 +1,6 @@
 FactoryBot.define do
   factory :option do
-    name { 'option 1' }
+    sequence(:name) { |n| "Option #{n}" }
     association :question
     association :user
   end
