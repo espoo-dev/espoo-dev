@@ -7,8 +7,12 @@ en:
           attributes:
             base:
               cant_create_option: Single choice questions should have no more than one correct option.
+            correct:
+              cant_update_correct: Can't change to false when question is ready to be answered.
         question:
           attributes:
+            base:
+              not_ready_question: Question needs at least one correct option to be ready.
             question_type:
               cant_change_question_type: Can't change to single choice when having more than one correct option.
         question_type:
