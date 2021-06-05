@@ -47,4 +47,15 @@ RSpec.describe Question, type: :model do
     it { expect(described_class.by_user(user_admin)).to include(question_single, question, question_multiple, question_teacher) }
     it { expect(described_class.by_user(user_moderator)).to eq([]) }
   end
+
+  describe '#validates_ready' do
+    it 'has no correct options' do
+      expect(question.update(ready_to_be_answered: true)).to eq(false)
+    end
+
+    it 'has correct options ' do
+      create(:correct_option, question: question)
+      expect(question.update(ready_to_be_answered: true)).to eq(true)
+    end
+  end
 end
