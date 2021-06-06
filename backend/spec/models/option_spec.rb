@@ -39,12 +39,12 @@ RSpec.describe Option, type: :model do
 
   describe 'scopes' do
     before do
-      Option.destroy_all
+      described_class.destroy_all
       create_list(:option, 2)
       create_list(:option, 3, correct: true)
     end
 
-    it { expect(described_class.correct.count).to eq(5) }
+    it { expect(described_class.correct.count).to eq(3) }
   end
 
   describe '#validates_correct' do
@@ -70,7 +70,7 @@ RSpec.describe Option, type: :model do
         it 'the option cannot have correct false' do
           option.correct = false
 
-          expect(option).to_not be_valid
+          expect(option).not_to be_valid
         end
       end
 

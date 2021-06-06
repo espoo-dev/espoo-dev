@@ -19,6 +19,7 @@ class Option < ApplicationRecord
     errors.add(:base, :cant_create_option) if correct && single_choice? && correct_options_positive
   end
 
+  # rubocop:disable Metrics/PerceivedComplexity
   def validates_ready
     one_question = question&.options&.correct&.one?
     # i18n-tasks-use t('activerecord.errors.models.option.attributes.correct.cant_update_correct')
@@ -26,4 +27,5 @@ class Option < ApplicationRecord
 
     errors.add(:correct, :cant_update_correct) if !correct && question&.ready_to_be_answered && one_question
   end
+  # rubocop:enable Metrics/PerceivedComplexity
 end
