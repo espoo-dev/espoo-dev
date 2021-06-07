@@ -20,3 +20,10 @@
 - Add tests you did to the requests.
 
 fix #issuenumber
+#### Only select what was required
+- [ ] **Model testing.**
+- [ ] **Request testing.**
+- [ ] **System testing.**
+- [ ] **No tests required.**
+
+
