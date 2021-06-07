@@ -7,8 +7,12 @@ pt-br:
           attributes:
             base:
               cant_create_option: As perguntas de escolha única não devem ter mais do que uma opção correta.
+            correct:
+              cant_update_correct: Não pode mudar para falso quando a pergunta está pronta para ser respondida.
         question:
           attributes:
+            base:
+              not_ready_question: Pergunta precisa de pelo menos uma opção correta para estar pronta.
             question_type:
               cant_change_question_type: Não é possível mudar para uma única escolha quando há mais de uma opção correta.
         question_type:
