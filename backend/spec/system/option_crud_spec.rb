@@ -12,20 +12,40 @@ RSpec.describe 'Option CRUD', type: :system do
     end
 
     describe 'create' do
-      before do
-        visit new_admin_option_path
+      context 'when data is valid' do
+        before do
+          visit new_admin_option_path
 
-        find('label', text: 'User').click
-        find('.option', text: user.email).click
-        find('label', text: 'Question').click
-        find('.option', text: question.name).click
-        find('label', text: 'Correct').click
-        fill_in 'Name', with: option.name
+          find('label', text: 'User').click
+          find('.option', text: user.email).click
+          find('label', text: 'Question').click
+          find('.option', text: question.name).click
+          find('label', text: 'Correct').click
+          fill_in 'Name', with: option.name
 
-        click_button 'Create Option'
+          click_button 'Create Option'
+        end
+
+        it { expect(page).to have_content 'Option was successfully created.' }
       end
 
-      it { expect(page).to have_content 'Option was successfully created.' }
+      context 'when data is not valid' do
+        before do
+          option_two = create(:option, question: question)
+          visit new_admin_option_path
+
+          find('label', text: 'User').click
+          find('.option', text: user.email).click
+          find('label', text: 'Question').click
+          find('.option', text: question.name).click
+          find('label', text: 'Correct').click
+          fill_in 'Name', with: option_two.name
+
+          click_button 'Create Option'
+        end
+
+        it { expect(page).to have_content 'Name has already been taken' }
+      end
     end
 
     describe 'update' do

@@ -37,6 +37,12 @@ RSpec.describe Option, type: :model do
     end
   end
 
+  describe 'uniqueness' do
+    before { create(:option) }
+
+    it { is_expected.to validate_uniqueness_of(:name).scoped_to(:question_id) }
+  end
+
   describe 'scopes' do
     before do
       described_class.destroy_all
