@@ -1,7 +1,7 @@
 class Option < ApplicationRecord
   belongs_to :user
   belongs_to :question
-  validates :name, presence: true
+  validates :name, presence: true, uniqueness: { scope: :question_id }
   validate :validates_correct
   validate :validates_ready
 
