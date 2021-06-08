@@ -25,9 +25,7 @@ RSpec.describe Question, type: :model do
 
   describe 'when updating to single choice with multiple correct options.' do
     before do
-      create(:option, name: 'option_one', correct: true, question_id: question_multiple.id)
-      create(:option, name: 'option_two', correct: true, question_id: question_multiple.id)
-      create(:option, name: 'another_option', correct: true, question_id: question_multiple.id)
+      create_list(:option, 3, correct: true, question_id: question_multiple.id)
       question_multiple.update(question_type_id: question_type_single.id)
     end
 
