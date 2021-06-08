@@ -8,7 +8,7 @@ RSpec.describe Question, type: :model do
   let!(:question_teacher) { create(:question, user: user_teacher) }
   let!(:question_multiple) { create(:multiple_choice_question) }
   let!(:question_single) { create(:single_choice_question) }
-  let!(:question_type_single) { QuestionType.find_or_create_by(name: QuestionType::SINGLE_CHOICE) }
+  let!(:question_type_single) { create(:question_type_single) }
 
   it { expect(question).to be_valid }
 
@@ -46,5 +46,16 @@ RSpec.describe Question, type: :model do
     it { expect(described_class.by_user(user_teacher)).to eq([question_teacher]) }
     it { expect(described_class.by_user(user_admin)).to include(question_single, question, question_multiple, question_teacher) }
     it { expect(described_class.by_user(user_moderator)).to eq([]) }
+  end
+
+  describe '#validates_ready' do
+    it 'has no correct options' do
+      expect(question.update(ready_to_be_answered: true)).to eq(false)
+    end
+
+    it 'has correct options ' do
+      create(:correct_option, question: question)
+      expect(question.update(ready_to_be_answered: true)).to eq(true)
+    end
   end
 end

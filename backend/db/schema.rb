@@ -41,6 +41,7 @@ ActiveRecord::Schema.define(version: 2021_06_05_141311) do
     t.integer "question_type_id", null: false
     t.integer "survey_id"
     t.integer "user_id", null: false
+    t.boolean "ready_to_be_answered", default: false
     t.index ["name", "user_id"], name: "index_questions_on_name_and_user_id", unique: true
     t.index ["question_type_id"], name: "index_questions_on_question_type_id"
     t.index ["survey_id"], name: "index_questions_on_survey_id"

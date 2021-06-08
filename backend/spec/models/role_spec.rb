@@ -42,4 +42,14 @@ RSpec.describe Role, type: :model do
       end
     end
   end
+
+  describe 'factory only creates one instance of each role' do
+    it { expect(create(:role)).to eq(create(:role)) }
+
+    it { expect(create(:role_admin)).to eq(create(:role_admin)) }
+
+    it { expect(create(:role_teacher)).to eq(create(:role_teacher)) }
+
+    it { expect(create(:role_moderator)).to eq(create(:role_moderator)) }
+  end
 end
