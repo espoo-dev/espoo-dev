@@ -13,10 +13,14 @@ module Admin
     around_action :skip_bullet, if: -> { defined?(Bullet) }
 
     rescue_from ActiveRecord::RecordNotFound, with: :render_not_found
-    rescue_from Pundit::NotAuthorizedError, with: :render_not_found
+    rescue_from Pundit::NotAuthorizedError, with: :render_unauthorized
 
     def render_not_found
       redirect_to '/404.html'
+    end
+
+    def render_unauthorized
+      redirect_to '/401.html'
     end
 
     helper_method :filter_form_attributes
