@@ -39,6 +39,16 @@ RSpec.describe 'question_type CRUD', type: :system do
 
         it { expect(page).to have_text('Question type was successfully created.') }
       end
+
+      describe 'when edit' do
+        before do
+          question_type = create(:question_type)
+          visit edit_admin_question_type_path(question_type)
+          click_button 'Update Question type'
+        end
+
+        it { expect(page).to have_text('Question type was successfully updated.') }
+      end
     end
   end
 end
