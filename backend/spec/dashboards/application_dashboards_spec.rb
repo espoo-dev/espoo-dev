@@ -11,15 +11,9 @@ RSpec.describe ApplicationDashboard do
     # rubocop:enable Rails/FilePath
     # rubocop:enable Performance/MethodObjectAsBlock
 
-    it 'does not have ID for index' do
+    it 'does not have ID, updated_at or created_at for index' do
       described_class.descendants.each do |descendent|
-        expect(descendent::COLLECTION_ATTRIBUTES).not_to include(:id), "id found for #{descendent}"
-      end
-    end
-
-    it 'does not have CREATED_AT for index' do
-      described_class.descendants.each do |descendent|
-        expect(descendent::COLLECTION_ATTRIBUTES).not_to include(:created_at), "created_at found for #{descendent}"
+        expect(descendent::COLLECTION_ATTRIBUTES).not_to include(:id, :updated_at, :created_at), "#{descendent::COLLECTION_ATTRIBUTES} found for #{descendent}"
       end
     end
   end
