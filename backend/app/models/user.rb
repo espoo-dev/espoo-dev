@@ -12,4 +12,5 @@ class User < ApplicationRecord
 
   validates :role, presence: true
   delegate :admin?, to: :role
+  delegate :student?, to: :role
 end

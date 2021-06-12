@@ -32,3 +32,6 @@ en:
     sessions:
       new:
         sign_in: Sign in
+  students:
+    index:
+      sign_out: Logout
