@@ -36,6 +36,12 @@ class Users::SessionsController < Devise::SessionsController
   # end
   private
 
+  def after_sign_in_path_for(resource)
+    return students_path if resource.student?
+
+    super
+  end
+
   def json_content_type_header?
     request.headers['Accept'] == 'application/json'
   end

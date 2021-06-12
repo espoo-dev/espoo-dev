@@ -17,4 +17,8 @@ FactoryBot.define do
   factory :role_moderator, parent: :role do
     role_type { Role::MODERATOR }
   end
+
+  factory :role_student, parent: :role do
+    role_type { Role::STUDENT }
+  end
 end

@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  resources :students, only: %i[index]
+
   namespace :admin do
     resources :users
     resources :questions
