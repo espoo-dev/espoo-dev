@@ -2,10 +2,13 @@ class Question < ApplicationRecord
   validates :name, presence: true, uniqueness: { scope: :user_id }
   validate :validates_options
   validate :validates_ready
+
   belongs_to :user
   belongs_to :question_type
   belongs_to :survey, optional: true
+
   has_many :options, dependent: :destroy
+  has_many :answers, dependent: :destroy
 
   delegate :single_choice?, to: :question_type, allow_nil: true
 
