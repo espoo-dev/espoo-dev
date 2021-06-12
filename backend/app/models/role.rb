@@ -8,9 +8,14 @@ class Role < ApplicationRecord
   ADMIN = 'admin'.freeze
   TEACHER = 'teacher'.freeze
   MODERATOR = 'moderator'.freeze
+  STUDENT = 'student'.freeze
 
   def admin?
     role_type == ADMIN
+  end
+
+  def student?
+    role_type == STUDENT
   end
 
   def check_users_before_destroy
