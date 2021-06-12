@@ -17,6 +17,7 @@ RSpec.describe Question, type: :model do
     it { is_expected.to belong_to(:survey).optional }
     it { is_expected.to belong_to(:user).required }
     it { is_expected.to have_many(:options).dependent(:destroy) }
+    it { is_expected.to have_many(:answers).dependent(:destroy) }
   end
 
   describe 'presence' do
@@ -53,7 +54,7 @@ RSpec.describe Question, type: :model do
       expect(question.update(ready_to_be_answered: true)).to eq(false)
     end
 
-    it 'has correct options ' do
+    it 'has correct options' do
       create(:correct_option, question: question)
       expect(question.update(ready_to_be_answered: true)).to eq(true)
     end
