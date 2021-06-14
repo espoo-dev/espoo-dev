@@ -106,19 +106,6 @@ RSpec.describe 'Users CRUD', type: :system do
 
         it { expect(page).to have_text('User was successfully updated.') }
       end
-
-      context 'when user is a teacher' do
-        before do
-          sign_in user_teacher
-          visit edit_admin_user_path(user_teacher)
-          fill_in 'Password', with: user_teacher.password
-          fill_in 'Phone', with: 123_456_789
-
-          click_on 'Update User'
-        end
-
-        it { expect(page).to have_text('User was successfully updated.') }
-      end
     end
 
     describe '#destroy' do
