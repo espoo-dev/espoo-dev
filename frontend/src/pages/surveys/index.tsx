@@ -2,27 +2,30 @@ import Head from 'next/head';
 import { withAuth } from 'hoc/withAuth';
 import { Container, Content, Layout } from 'styles/main.styles';
 import { Sidemenu } from 'components/sidemenu';
-import { Box, Button, Heading, Text } from '@chakra-ui/react';
+import { Box, Heading, Text } from '@chakra-ui/react';
 import { UserService } from 'api/services/user';
 import { httpClient } from 'api';
 import { errorHandler } from 'api/error-handler';
 import { useEffect, useState } from 'react';
 import { User } from 'api/models/user';
-import { HiArrowLeft, HiArrowRight, HiDocumentText} from 'react-icons/hi';
+import { HiArrowLeft, HiArrowRight } from 'react-icons/hi';
+import { SurveysList } from 'components/main/SurveysList';
+import { SurveyService } from 'api/services/survey';
+import { Survey } from 'api/models/survey';
 
 const Surveys = () => {
-  const userService = new UserService(httpClient);
-  const [teachers, setTeachers] = useState<User[]>([]);
+  const surveyService = new SurveyService(httpClient);
+  const [surveys, setSurveys] = useState<Survey[]>([]);
   const [selectedTeacher, setSelectedTeacher] = useState<User>(null);
 
   const listUsers = async () => {
     try {
-      const response = await userService.list({ role_id: 1 });
+      const response = await surveyService.list();
       if (response && response.data) {
-        setTeachers(response.data);
+        setSurveys(response.data);
       }
     } catch (error) {
-      setTeachers([]);
+      setSurveys([]);
       errorHandler(error);
     }
   };
@@ -63,29 +66,7 @@ const Surveys = () => {
               Discover a new survey!
             </Text>
 
-            <Box
-              display="flex"
-              color="#fff"
-              alignItems="center"
-              justifyContent="space-between"
-            >
-              <Box
-                display="flex"
-                alignItems="center"
-              >
-                <HiDocumentText size={40} />
-                <Box ml="10px">
-                  <Text fontWeight="bold">Veins Diagrams</Text>
-                  <Text>New!</Text>
-                </Box>
-              </Box>
-
-              <Button colorScheme="teal" size="sm">
-                Start
-              </Button>
-
-            </Box>
-
+            <SurveysList data={surveys} />
           </Box>
 
           <Box
