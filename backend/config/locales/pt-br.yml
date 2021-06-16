@@ -15,6 +15,8 @@ pt-br:
               not_ready_question: Pergunta precisa de pelo menos uma opção correta para estar pronta.
             question_type:
               cant_change_question_type: Não é possível mudar para uma única escolha quando há mais de uma opção correta.
+            ready_to_be_answered:
+              cant_update_ready_to_be_answered: Tem que estar "pronto para ser respondido" quando a pesquisa estiver pronta.
         question_type:
           attributes:
             questions:
@@ -23,6 +25,10 @@ pt-br:
           attributes:
             users:
               cant_destroy_role: Não é possível apagar função com %{users_count} usuários
+        survey:
+          attributes:
+            ready:
+              cant_update_ready: Todas as perguntas precisam estar prontas para serem respondidas antes de você preparar a pesquisa.
   admin:
     application:
       navigation:
