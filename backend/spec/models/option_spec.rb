@@ -6,6 +6,9 @@ RSpec.describe Option, type: :model do
   let!(:correct_option) { create(:correct_option, question: ready_question) }
   let!(:test_option) { build(:option, question_id: question_single.id, correct: true) }
   let!(:option) { create(:option, correct: true, question_id: question_single.id) }
+  let!(:user_admin) { create(:user) }
+  let!(:user_teacher) { create(:user_teacher) }
+  let!(:user_moderator) { create(:user_moderator) }
 
   it { expect(option).to be_valid }
 
@@ -44,7 +47,7 @@ RSpec.describe Option, type: :model do
     it { is_expected.to validate_uniqueness_of(:name).scoped_to(:question_id) }
   end
 
-  describe 'scopes' do
+  describe '.correct' do
     before do
       described_class.destroy_all
       create_list(:option, 2)
@@ -52,6 +55,15 @@ RSpec.describe Option, type: :model do
     end
 
     it { expect(described_class.correct.count).to eq(3) }
+  end
+
+  describe '.by_user' do
+    let!(:option_teacher) { create(:option, user: user_teacher) }
+    let!(:option_admin) { create(:option, user: user_admin) }
+
+    it { expect(described_class.by_user(user_teacher)).to eq([option_teacher]) }
+    it { expect(described_class.by_user(user_admin)).to include(option_teacher, option_admin) }
+    it { expect(described_class.by_user(user_moderator)).to eq([]) }
   end
 
   describe '#validates_correct' do
