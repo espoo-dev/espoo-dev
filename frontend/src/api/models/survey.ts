@@ -10,6 +10,6 @@ export interface Survey {
   questions: {
     id: number;
     name: string;
-    question_type: QuestionType
-  }[]
+    question_type: QuestionType;
+  }[];
 }
