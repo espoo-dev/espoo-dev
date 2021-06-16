@@ -11,7 +11,7 @@ class QuestionDashboard < ApplicationDashboard
     ),
     question_type: Field::BelongsTo,
     survey: BelongsToByUser,
-    options: Field::HasMany,
+    options: HasManyByUser,
     name: Field::String,
     ready_to_be_answered: Field::Boolean,
     created_at: Field::DateTime,
