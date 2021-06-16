@@ -2,6 +2,7 @@ class Question < ApplicationRecord
   validates :name, presence: true, uniqueness: { scope: :user_id }
   validate :validates_options
   validate :validates_ready
+  validate :validates_ready_survey
 
   belongs_to :user
   belongs_to :question_type
@@ -29,5 +30,10 @@ class Question < ApplicationRecord
   def validates_ready
     # i18n-tasks-use t('activerecord.errors.models.question.attributes.base.not_ready_question')
     errors.add(:base, :not_ready_question) if ready_to_be_answered && options.correct.none?
+  end
+
+  def validates_ready_survey
+    # i18n-tasks-use t('activerecord.errors.models.question.attributes.ready_to_be_answered.cant_update_ready_to_be_answered')
+    errors.add(:ready_to_be_answered, :cant_update_ready_to_be_answered) if !ready_to_be_answered && survey&.ready
   end
 end
