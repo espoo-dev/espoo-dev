@@ -9,6 +9,7 @@ class SurveyDashboard < ApplicationDashboard
     user: Field::BelongsTo,
     questions: HasManyByUser,
     name: Field::String,
+    ready: Field::Boolean,
     description: Field::String,
     created_at: Field::DateTime,
     updated_at: Field::DateTime
@@ -23,6 +24,7 @@ class SurveyDashboard < ApplicationDashboard
     user
     questions
     name
+    ready
   ].freeze
 
   # SHOW_PAGE_ATTRIBUTES
@@ -32,6 +34,7 @@ class SurveyDashboard < ApplicationDashboard
     questions
     name
     description
+    ready
     created_at
     updated_at
   ].freeze
@@ -44,6 +47,7 @@ class SurveyDashboard < ApplicationDashboard
     questions
     name
     description
+    ready
   ].freeze
 
   # COLLECTION_FILTERS
