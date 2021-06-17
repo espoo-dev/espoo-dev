@@ -2,9 +2,11 @@ module.exports = {
   env: {
     browser: true,
     es2021: true,
+    'jest/globals': true,
   },
   extends: [
     'eslint:recommended',
+    "plugin:jest/recommended",
     'plugin:@typescript-eslint/eslint-recommended',
     'plugin:@typescript-eslint/recommended',
     'airbnb',
@@ -17,7 +19,7 @@ module.exports = {
     ecmaVersion: 12,
     sourceType: 'module',
   },
-  plugins: ['react', '@typescript-eslint', 'react-hooks'],
+  plugins: ['react', '@typescript-eslint', 'react-hooks', 'jest'],
   rules: {
     'comma-dangle': 'off',
     'object-curly-newline': 'off',
@@ -64,7 +66,9 @@ module.exports = {
     '@typescript/no-empty-function': 'off',
     'react/require-default-props': 'off',
     'react/no-unused-prop-types': 'off',
-    'object-curly-spacing': 'off'
+    'object-curly-spacing': 'off',
+    'import/no-extraneous-dependencies': 'off',
+    'implicit-arrow-linebreak': 'off'
   },
   settings: {
     'import/resolver': {
