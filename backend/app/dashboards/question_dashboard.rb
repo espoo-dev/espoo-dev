@@ -1,6 +1,4 @@
-require 'administrate/base_dashboard'
-
-class QuestionDashboard < Administrate::BaseDashboard
+class QuestionDashboard < ApplicationDashboard
   # ATTRIBUTE_TYPES
   # a hash that describes the type of each of the model's fields.
   #
@@ -13,8 +11,9 @@ class QuestionDashboard < Administrate::BaseDashboard
     ),
     question_type: Field::BelongsTo,
     survey: BelongsToByUser,
-    options: Field::HasMany,
+    options: HasManyByUser,
     name: Field::String,
+    ready_to_be_answered: Field::Boolean,
     created_at: Field::DateTime,
     updated_at: Field::DateTime
   }.freeze
@@ -28,6 +27,7 @@ class QuestionDashboard < Administrate::BaseDashboard
     name
     question_type
     survey
+    ready_to_be_answered
   ].freeze
 
   # SHOW_PAGE_ATTRIBUTES
@@ -38,6 +38,7 @@ class QuestionDashboard < Administrate::BaseDashboard
     survey
     name
     options
+    ready_to_be_answered
   ].freeze
 
   # FORM_ATTRIBUTES
@@ -49,6 +50,7 @@ class QuestionDashboard < Administrate::BaseDashboard
     survey
     name
     options
+    ready_to_be_answered
   ].freeze
 
   # COLLECTION_FILTERS
@@ -66,7 +68,4 @@ class QuestionDashboard < Administrate::BaseDashboard
   # Overwrite this method to customize how questions are displayed
   # across all pages of the admin dashboard.
   #
-  def display_resource(question)
-    question.name
-  end
 end

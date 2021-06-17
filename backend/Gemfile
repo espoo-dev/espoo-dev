@@ -1,7 +1,7 @@
 source 'https://rubygems.org'
 git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
-ruby '3.0.0'
+ruby '3.0.1'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails', branch: 'main'
 gem 'rails', '~> 6.1.2', '>= 6.1.2.1'
@@ -68,7 +68,8 @@ gem 'devise-i18n'
 gem 'devise-bootstrap-views', '~> 1.0'
 gem 'devise-jwt', '~> 0.7.0'
 gem 'rack-cors'
-
+gem "sentry-ruby"
+gem "sentry-rails"
 gem 'active_model_serializers'
 
 gem "pundit"

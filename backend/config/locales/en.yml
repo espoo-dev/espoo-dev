@@ -3,12 +3,41 @@ en:
   activerecord:
     errors:
       models:
+        option:
+          attributes:
+            base:
+              cant_create_option: Single choice questions should have no more than one correct option.
+            correct:
+              cant_update_correct: Can't change to false when question is ready to be answered.
+        question:
+          attributes:
+            base:
+              not_ready_question: Question needs at least one correct option to be ready.
+            question_type:
+              cant_change_question_type: Can't change to single choice when having more than one correct option.
+            ready_to_be_answered:
+              cant_update_ready_to_be_answered: Has to be "ready to be answered" when survey is ready.
+        question_type:
+          attributes:
+            questions:
+              cant_destroy_question: Can't destroy question type with %{questions_count} questions
         role:
           attributes:
             users:
               cant_destroy_role: Can't destroy role with %{users_count} users
+        survey:
+          attributes:
+            ready:
+              cant_update_ready: All questions need to be ready to be answered before you can make the survey ready.
   admin:
     application:
       navigation:
         sign_out: Logout
   app_name: Rails espoo
+  devise:
+    sessions:
+      new:
+        sign_in: Sign in
+  students:
+    index:
+      sign_out: Logout

@@ -8,18 +8,23 @@ class Role < ApplicationRecord
   ADMIN = 'admin'.freeze
   TEACHER = 'teacher'.freeze
   MODERATOR = 'moderator'.freeze
+  STUDENT = 'student'.freeze
 
   def admin?
     role_type == ADMIN
   end
 
-  def check_users_before_destroy
-    users_count = User.where(role_id: id).count
+  def student?
+    role_type == STUDENT
+  end
 
-    return unless users_count.positive?
+  def check_users_before_destroy
+    users_count = User.where(role_id: id)
+
+    return unless users_count.any?
 
     # i18n-tasks-use t('activerecord.errors.models.role.attributes.users.cant_destroy_role')
-    errors.add(:users, :cant_destroy_role, users_count: users_count)
+    errors.add(:users, :cant_destroy_role, users_count: users_count.count)
 
     throw :abort
   end

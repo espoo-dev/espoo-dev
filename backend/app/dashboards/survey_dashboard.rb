@@ -1,6 +1,4 @@
-require 'administrate/base_dashboard'
-
-class SurveyDashboard < Administrate::BaseDashboard
+class SurveyDashboard < ApplicationDashboard
   # ATTRIBUTE_TYPES
   # a hash that describes the type of each of the model's fields.
   #
@@ -9,8 +7,9 @@ class SurveyDashboard < Administrate::BaseDashboard
   # on pages throughout the dashboard.
   ATTRIBUTE_TYPES = {
     user: Field::BelongsTo,
-    questions: Field::HasMany,
+    questions: HasManyByUser,
     name: Field::String,
+    ready: Field::Boolean,
     description: Field::String,
     created_at: Field::DateTime,
     updated_at: Field::DateTime
@@ -25,6 +24,7 @@ class SurveyDashboard < Administrate::BaseDashboard
     user
     questions
     name
+    ready
   ].freeze
 
   # SHOW_PAGE_ATTRIBUTES
@@ -34,6 +34,7 @@ class SurveyDashboard < Administrate::BaseDashboard
     questions
     name
     description
+    ready
     created_at
     updated_at
   ].freeze
@@ -46,6 +47,7 @@ class SurveyDashboard < Administrate::BaseDashboard
     questions
     name
     description
+    ready
   ].freeze
 
   # COLLECTION_FILTERS
@@ -63,7 +65,4 @@ class SurveyDashboard < Administrate::BaseDashboard
   # Overwrite this method to customize how surveys are displayed
   # across all pages of the admin dashboard.
   #
-  def display_resource(survey)
-    survey.name
-  end
 end

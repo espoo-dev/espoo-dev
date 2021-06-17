@@ -6,9 +6,11 @@ Survey.destroy_all
 
 role_admin = Role.create(role_type: 'admin')
 role_teacher = Role.create(role_type: 'teacher')
+role_student = Role.create(role_type: 'student')
 
 user_admin = User.create(email: 'admin@gmail.com', password: '123456', role: role_admin)
 user_teacher = User.create(email: 'teacher@gmail.com', password: '123456', role: role_teacher)
+user_student = User.create(email: 'student@gmail.com', password: '123456', role: role_student)
 
 question_type_single_choice = QuestionType.create(name: "Single Choice")
 question_type_free_text = QuestionType.create(name: "Free Text")

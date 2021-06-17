@@ -3,12 +3,41 @@ pt-br:
   activerecord:
     errors:
       models:
+        option:
+          attributes:
+            base:
+              cant_create_option: As perguntas de escolha única não devem ter mais do que uma opção correta.
+            correct:
+              cant_update_correct: Não pode mudar para falso quando a pergunta está pronta para ser respondida.
+        question:
+          attributes:
+            base:
+              not_ready_question: Pergunta precisa de pelo menos uma opção correta para estar pronta.
+            question_type:
+              cant_change_question_type: Não é possível mudar para uma única escolha quando há mais de uma opção correta.
+            ready_to_be_answered:
+              cant_update_ready_to_be_answered: Tem que estar "pronto para ser respondido" quando a pesquisa estiver pronta.
+        question_type:
+          attributes:
+            questions:
+              cant_destroy_question: Não é possível destruir o tipo de pergunta com %{questions_count} perguntas
         role:
           attributes:
             users:
               cant_destroy_role: Não é possível apagar função com %{users_count} usuários
+        survey:
+          attributes:
+            ready:
+              cant_update_ready: Todas as perguntas precisam estar prontas para serem respondidas antes de você preparar a pesquisa.
   admin:
     application:
       navigation:
         sign_out: Sair
   app_name: Rails espoo pt-br
+  devise:
+    sessions:
+      new:
+        sign_in: Sign in
+  students:
+    index:
+      sign_out: Sair

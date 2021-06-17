@@ -29,9 +29,9 @@ RSpec.describe 'SurveysController', type: :request do
   end
 
   describe '#index' do
-    context 'when can list all surveys' do
+    context 'when can list all ready surveys' do
       before do
-        create_list(:survey, 3)
+        create_list(:ready_survey, 3)
         get api_v1_surveys_path, headers: auth_headers
       end
 
@@ -53,10 +53,10 @@ RSpec.describe 'SurveysController', type: :request do
     context 'when list surveys by user id' do
       before do
         user = create(:user)
-        create(:survey, name: 'test 1', user_id: user.id)
-        create(:survey, name: 'test 2', user_id: user.id)
+        create(:ready_survey, name: 'test 1', user_id: user.id)
+        create(:ready_survey, name: 'test 2', user_id: user.id)
         another_user = create(:user)
-        create(:survey, name: 'test 1', user_id: another_user.id)
+        create(:ready_survey, name: 'test 1', user_id: another_user.id)
         get api_v1_surveys_path(user_id: another_user.id), headers: auth_headers
       end
 
@@ -68,11 +68,11 @@ RSpec.describe 'SurveysController', type: :request do
       let!(:admin) { create(:user) }
       let!(:teacher) { create(:user_teacher) }
       let!(:moderator) { create(:user_moderator) }
-      let!(:survey_teacher) { create(:survey, user_id: teacher.id) }
+      let!(:survey_teacher) { create(:ready_survey, user_id: teacher.id) }
 
       context 'when the user is an admin' do
         before do
-          create(:survey, user_id: admin.id)
+          create(:ready_survey, user_id: admin.id)
           get api_v1_surveys_path, headers: auth_headers
         end
 

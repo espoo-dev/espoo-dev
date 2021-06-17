@@ -1,6 +1,4 @@
-require 'administrate/base_dashboard'
-
-class OptionDashboard < Administrate::BaseDashboard
+class OptionDashboard < ApplicationDashboard
   # ATTRIBUTE_TYPES
   # a hash that describes the type of each of the model's fields.
   #
@@ -11,7 +9,8 @@ class OptionDashboard < Administrate::BaseDashboard
     user: Field::BelongsTo,
     question: Field::BelongsTo,
     id: Field::Number,
-    name: Field::String
+    name: Field::String,
+    correct: Field::Boolean
   }.freeze
 
   # COLLECTION_ATTRIBUTES
@@ -22,8 +21,8 @@ class OptionDashboard < Administrate::BaseDashboard
   COLLECTION_ATTRIBUTES = %i[
     user
     question
-    id
     name
+    correct
   ].freeze
 
   # SHOW_PAGE_ATTRIBUTES
@@ -33,6 +32,7 @@ class OptionDashboard < Administrate::BaseDashboard
     question
     id
     name
+    correct
   ].freeze
 
   # FORM_ATTRIBUTES
@@ -42,6 +42,7 @@ class OptionDashboard < Administrate::BaseDashboard
     user
     question
     name
+    correct
   ].freeze
 
   # COLLECTION_FILTERS
@@ -59,7 +60,4 @@ class OptionDashboard < Administrate::BaseDashboard
   # Overwrite this method to customize how options are displayed
   # across all pages of the admin dashboard.
   #
-  def display_resource(option)
-    option.name
-  end
 end

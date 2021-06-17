@@ -10,10 +10,30 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_05_24_194706) do
+ActiveRecord::Schema.define(version: 2021_06_15_093729) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "answers", force: :cascade do |t|
+    t.bigint "question_id", null: false
+    t.bigint "option_id", null: false
+    t.bigint "answers_survey_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["answers_survey_id"], name: "index_answers_on_answers_survey_id"
+    t.index ["option_id"], name: "index_answers_on_option_id"
+    t.index ["question_id"], name: "index_answers_on_question_id"
+  end
+
+  create_table "answers_surveys", force: :cascade do |t|
+    t.bigint "survey_id", null: false
+    t.bigint "user_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["survey_id"], name: "index_answers_surveys_on_survey_id"
+    t.index ["user_id"], name: "index_answers_surveys_on_user_id"
+  end
 
   create_table "options", force: :cascade do |t|
     t.string "name"
@@ -21,6 +41,8 @@ ActiveRecord::Schema.define(version: 2021_05_24_194706) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.bigint "user_id", null: false
+    t.boolean "correct", default: false
+    t.index ["name", "question_id"], name: "index_options_on_name_and_question_id", unique: true
     t.index ["question_id"], name: "index_options_on_question_id"
     t.index ["user_id"], name: "index_options_on_user_id"
   end
@@ -39,6 +61,8 @@ ActiveRecord::Schema.define(version: 2021_05_24_194706) do
     t.integer "question_type_id", null: false
     t.integer "survey_id"
     t.integer "user_id", null: false
+    t.boolean "ready_to_be_answered", default: false
+    t.index ["name", "user_id"], name: "index_questions_on_name_and_user_id", unique: true
     t.index ["question_type_id"], name: "index_questions_on_question_type_id"
     t.index ["survey_id"], name: "index_questions_on_survey_id"
     t.index ["user_id"], name: "index_questions_on_user_id"
@@ -57,6 +81,7 @@ ActiveRecord::Schema.define(version: 2021_05_24_194706) do
     t.bigint "user_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.boolean "ready", default: false
     t.index ["user_id"], name: "index_surveys_on_user_id"
   end
 
