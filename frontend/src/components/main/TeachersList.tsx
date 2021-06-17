@@ -52,7 +52,13 @@ export const TeachersList = (props: TeacherListProps) => {
           </ListItem>
         ))
       ) : (
-        <Flex h="full" w="full" alignItems="center" justifyContent="center" p="4">
+        <Flex
+          h="full"
+          w="full"
+          alignItems="center"
+          justifyContent="center"
+          p="4"
+        >
           <Text color="whiteAlpha.700">No data to display...</Text>
         </Flex>
       )}

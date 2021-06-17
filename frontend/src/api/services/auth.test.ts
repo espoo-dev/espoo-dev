@@ -1,6 +1,6 @@
+import { AxiosInstance } from 'axios';
 import { AuthService } from './auth';
 import { httpClient } from '../client';
-import { AxiosInstance } from 'axios';
 
 jest.mock('./auth');
 jest.mock('../client');
@@ -28,7 +28,7 @@ describe('AuthService', () => {
 
     const res = await instance.authenticate(user);
 
-    console.log(`res`, res)
+    console.log('res', res);
 
     expect(MockClient.post).toHaveBeenCalledTimes(1);
     expect(res).toHaveProperty('data');

@@ -15,7 +15,7 @@ describe('Navbar', () => {
 
     act(() => {
       render(
-        <AuthContext.Provider value={{ logout: logoutMock } as any}>
+        <AuthContext.Provider value={{ logout: logoutMock } as unknown}>
           <Navbar />
         </AuthContext.Provider>
       );

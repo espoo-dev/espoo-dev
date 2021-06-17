@@ -1,7 +1,7 @@
 import React from 'react';
 import { render, fireEvent, screen } from 'test-utils';
-import { AppButton } from './app-button';
 import { FaTrash } from 'react-icons/fa';
+import { AppButton } from './app-button';
 
 describe('App Button', () => {
   it('should create the button with the given text', () => {

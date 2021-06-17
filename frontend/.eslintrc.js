@@ -6,6 +6,7 @@ module.exports = {
   },
   extends: [
     'eslint:recommended',
+    "plugin:jest/recommended",
     'plugin:@typescript-eslint/eslint-recommended',
     'plugin:@typescript-eslint/recommended',
     'airbnb',
@@ -18,7 +19,7 @@ module.exports = {
     ecmaVersion: 12,
     sourceType: 'module',
   },
-  plugins: ['react', '@typescript-eslint', 'react-hooks'],
+  plugins: ['react', '@typescript-eslint', 'react-hooks', 'jest'],
   rules: {
     'comma-dangle': 'off',
     'object-curly-newline': 'off',
@@ -67,6 +68,7 @@ module.exports = {
     'react/no-unused-prop-types': 'off',
     'object-curly-spacing': 'off',
     'import/no-extraneous-dependencies': 'off',
+    'implicit-arrow-linebreak': 'off'
   },
   settings: {
     'import/resolver': {

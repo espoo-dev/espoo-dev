@@ -99,14 +99,14 @@ export const InputForm = styled.div`
 
   div {
     margin-bottom: 10px;
-    color: '#848484'
+    color: '#848484';
   }
 
   input {
     margin-top: 10px;
     width: 100%;
     height: 36px;
-    border: 1px solid #E2E2E2;
+    border: 1px solid #e2e2e2;
     border-radius: 5px;
     color: #565656;
     padding: 0px 8px;
@@ -131,11 +131,11 @@ export const CheckBox = styled.div`
   height: 15px;
   width: 15px;
   border-radius: 3px;
-  border: 1px solid #E2E2E2;
+  border: 1px solid #e2e2e2;
 `;
 
 export const BtnLogin = styled.button`
-  background: linear-gradient(90deg, #AE0136 0%, #E40A4D 100%);
+  background: linear-gradient(90deg, #ae0136 0%, #e40a4d 100%);
   height: 36px;
   color: #fff;
   margin-top: 20px;
