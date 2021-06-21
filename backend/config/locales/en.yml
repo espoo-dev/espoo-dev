@@ -29,6 +29,10 @@ en:
           attributes:
             ready:
               cant_update_ready: All questions need to be ready to be answered before you can make the survey ready.
+        survey_subject:
+          attributes:
+            surveys:
+              cant_destroy_survey_subject: Can't destroy survey subject with %{survey_count} surveys.
   admin:
     application:
       navigation:

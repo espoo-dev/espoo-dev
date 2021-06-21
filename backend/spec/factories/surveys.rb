@@ -3,6 +3,7 @@ FactoryBot.define do
     name { Faker::Name.unique.name }
     description { Faker::Name.unique.name }
     association :user
+    association :survey_subject
     questions { build_list :question, 1 }
   end
 
