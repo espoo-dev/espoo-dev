@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_06_15_093729) do
+ActiveRecord::Schema.define(version: 2021_06_21_130819) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -75,6 +75,13 @@ ActiveRecord::Schema.define(version: 2021_06_15_093729) do
     t.index ["role_type"], name: "index_roles_on_role_type", unique: true
   end
 
+  create_table "survey_subjects", force: :cascade do |t|
+    t.string "name"
+    t.string "description"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
   create_table "surveys", force: :cascade do |t|
     t.string "name"
     t.string "description"
@@ -82,6 +89,8 @@ ActiveRecord::Schema.define(version: 2021_06_15_093729) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.boolean "ready", default: false
+    t.bigint "survey_subject_id", null: false
+    t.index ["survey_subject_id"], name: "index_surveys_on_survey_subject_id"
     t.index ["user_id"], name: "index_surveys_on_user_id"
   end
 
@@ -102,5 +111,6 @@ ActiveRecord::Schema.define(version: 2021_06_15_093729) do
 
   add_foreign_key "options", "questions"
   add_foreign_key "options", "users"
+  add_foreign_key "surveys", "survey_subjects"
   add_foreign_key "users", "roles"
 end
