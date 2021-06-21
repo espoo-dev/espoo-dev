@@ -15,6 +15,12 @@ module Admin
     rescue_from ActiveRecord::RecordNotFound, with: :render_not_found
     rescue_from Pundit::NotAuthorizedError, with: :render_unauthorized
 
+    def new_resource
+      return resource_class.new(user: current_user) if resource_class.column_names.include?('user_id')
+
+      resource_class.new
+    end
+
     def render_not_found
       redirect_to '/404.html'
     end
