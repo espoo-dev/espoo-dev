@@ -3,10 +3,11 @@ Rails.application.routes.draw do
 
   namespace :admin do
     resources :users
-    resources :questions
-    resources :question_types
-    resources :surveys
     resources :roles
+    resources :survey_subjects
+    resources :surveys
+    resources :question_types
+    resources :questions
     resources :options
 
     root to: "users#index"
