@@ -8,6 +8,7 @@ RSpec.describe 'Survey CRUD', type: :system do
     let!(:survey) { create(:survey) }
     let!(:question_admin) { create(:question, user: user_admin) }
     let!(:question_teacher) { create(:question, user: user_teacher) }
+    let!(:survey_subject) { create(:survey_subject) }
 
     describe 'when user is admin' do
       before do
@@ -22,6 +23,8 @@ RSpec.describe 'Survey CRUD', type: :system do
         it 'creates the survey for admin' do
           find('label', text: 'User').click
           find('.option', text: user_admin.email).click
+          find('label', text: 'Survey subject').click
+          find('.option', text: survey_subject.name).click
 
           click_button 'Create Survey'
           expect(page).to have_content 'Survey was successfully created.'
@@ -30,6 +33,8 @@ RSpec.describe 'Survey CRUD', type: :system do
         it 'creates the survey for teacher' do
           find('label', text: 'User').click
           find('.option', text: user_teacher.email).click
+          find('label', text: 'Survey subject').click
+          find('.option', text: survey_subject.name).click
 
           click_button 'Create Survey'
           expect(page).to have_content 'Survey was successfully created.'
@@ -83,6 +88,9 @@ RSpec.describe 'Survey CRUD', type: :system do
         end
 
         it 'creates survey' do
+          find('label', text: 'Survey subject').click
+          find('.option', text: survey_subject.name).click
+
           click_button 'Create Survey'
           expect(page).to have_content 'Survey was successfully created.'
         end
