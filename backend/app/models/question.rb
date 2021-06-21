@@ -14,9 +14,9 @@ class Question < ApplicationRecord
   delegate :single_choice?, to: :question_type, allow_nil: true
 
   scope :by_user, lambda { |user|
-    return all.includes([:options]) if user.admin?
+    return where(user_id: user).includes([:options]) unless user.admin?
 
-    where(user_id: user).includes([:options])
+    all.includes([:options])
   }
 
   private

@@ -7,7 +7,7 @@ class OptionDashboard < ApplicationDashboard
   # on pages throughout the dashboard.
   ATTRIBUTE_TYPES = {
     user: Field::BelongsTo,
-    question: Field::BelongsTo,
+    question: BelongsToByUser,
     id: Field::Number,
     name: Field::String,
     correct: Field::Boolean
