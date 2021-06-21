@@ -1,0 +1,2 @@
+class SurveySubjectPolicy < ApplicationPolicy
+end

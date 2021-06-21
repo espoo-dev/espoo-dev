@@ -1,4 +1,6 @@
-class SurveyDashboard < ApplicationDashboard
+require 'administrate/base_dashboard'
+
+class SurveySubjectDashboard < Administrate::BaseDashboard
   # ATTRIBUTE_TYPES
   # a hash that describes the type of each of the model's fields.
   #
@@ -6,11 +8,9 @@ class SurveyDashboard < ApplicationDashboard
   # which determines how the attribute is displayed
   # on pages throughout the dashboard.
   ATTRIBUTE_TYPES = {
-    user: Field::BelongsTo,
-    survey_subject: Field::BelongsTo,
-    questions: HasManyByUser,
+    surveys: Field::HasMany,
+    id: Field::Number,
     name: Field::String,
-    ready: Field::Boolean,
     description: Field::String,
     created_at: Field::DateTime,
     updated_at: Field::DateTime
@@ -22,22 +22,18 @@ class SurveyDashboard < ApplicationDashboard
   # By default, it's limited to four items to reduce clutter on index pages.
   # Feel free to add, remove, or rearrange items.
   COLLECTION_ATTRIBUTES = %i[
-    user
-    survey_subject
-    questions
+    surveys
     name
-    ready
+    description
   ].freeze
 
   # SHOW_PAGE_ATTRIBUTES
   # an array of attributes that will be displayed on the model's show page.
   SHOW_PAGE_ATTRIBUTES = %i[
-    user
-    survey_subject
-    questions
+    surveys
+    id
     name
     description
-    ready
     created_at
     updated_at
   ].freeze
@@ -46,12 +42,9 @@ class SurveyDashboard < ApplicationDashboard
   # an array of attributes that will be displayed
   # on the model's form (`new` and `edit`) pages.
   FORM_ATTRIBUTES = %i[
-    user
-    survey_subject
-    questions
+    surveys
     name
     description
-    ready
   ].freeze
 
   # COLLECTION_FILTERS
@@ -66,7 +59,10 @@ class SurveyDashboard < ApplicationDashboard
   #   }.freeze
   COLLECTION_FILTERS = {}.freeze
 
-  # Overwrite this method to customize how surveys are displayed
+  # Overwrite this method to customize how survey subjects are displayed
   # across all pages of the admin dashboard.
   #
+  def display_resource(survey_subject)
+    survey_subject.name
+  end
 end

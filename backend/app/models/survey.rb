@@ -1,6 +1,7 @@
 class Survey < ApplicationRecord
   validate :validates_ready
   belongs_to :user
+  belongs_to :survey_subject
 
   has_many :questions, dependent: :nullify
   has_many :answers_surveys, dependent: :destroy
