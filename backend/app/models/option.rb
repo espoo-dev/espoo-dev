@@ -12,6 +12,12 @@ class Option < ApplicationRecord
 
   delegate :single_choice?, to: :question, allow_nil: true
 
+  scope :by_user, lambda { |user|
+    return where(user: user).includes([:answers]) unless user.admin?
+
+    all.includes([:answers])
+  }
+
   private
 
   def validates_correct

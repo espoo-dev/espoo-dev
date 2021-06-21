@@ -59,4 +59,21 @@ RSpec.describe Question, type: :model do
       expect(question.update(ready_to_be_answered: true)).to eq(true)
     end
   end
+
+  describe '#validates_ready_survey' do
+    let!(:survey) { create(:ready_survey) }
+
+    it 'is not valid when update ready to be answered when survey is ready' do
+      question = survey.questions.first
+      question.ready_to_be_answered = false
+      expect(question).not_to be_valid
+    end
+
+    it 'does not update ready to be answered when survey is ready' do
+      question = survey.questions.first
+      question.ready_to_be_answered = false
+      question.valid?
+      expect(question.errors.full_messages).to match(['Ready to be answered Has to be "ready to be answered" when survey is ready.'])
+    end
+  end
 end
