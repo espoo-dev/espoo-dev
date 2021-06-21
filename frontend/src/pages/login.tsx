@@ -17,7 +17,7 @@ import {
   RightContainer,
   ForgotBtn,
   RegisterBtn,
-  LogoImg
+  LogoImg,
 } from '../styles/login.styles';
 
 import { AppInput } from '../components/app-input';
@@ -51,10 +51,7 @@ const Login = () => {
             <Subtitle>
               <span>
                 Log in with your data or
-                <RegisterBtn
-                  id="btn-register"
-                  onClick={() => goToRegister()}
-                >
+                <RegisterBtn id="btn-register" onClick={() => goToRegister()}>
                   register now.
                 </RegisterBtn>
               </span>
@@ -62,7 +59,6 @@ const Login = () => {
 
             {/* Form */}
             <ContainerForm ref={formRef} onSubmit={handleFormSubmit}>
-
               <AppInput
                 id="email"
                 name="email"
@@ -88,7 +84,6 @@ const Login = () => {
                 id="btn-login"
                 loading={loading}
               />
-
             </ContainerForm>
 
             {/* <KeepLogin>
@@ -99,10 +94,8 @@ const Login = () => {
             <ForgotBtn>
               <span>Forgot password?</span>
             </ForgotBtn>
-
           </LoginFormContainer>
         </LoginContainer>
-
       </LeftContainer>
       <RightContainer />
     </PageContainer>

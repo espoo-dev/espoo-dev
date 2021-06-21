@@ -29,53 +29,42 @@ export const AuthProvider: React.FC = ({ children }) => {
   const router = useRouter();
 
   const login = useCallback(async (data: UserLogin) => {
-    try {
-      setLoading(true);
-      const response = await authService.authenticate(data);
+    setLoading(true);
+    const response = await authService.authenticate(data);
+    setLoading(false);
 
-      if (response) {
-        const { authorization } = response.headers;
+    if (response) {
+      const { authorization } = response.headers;
 
-        toast(`Welcome ${response.data.email}`, {
-          position: 'top-right',
-          type: 'success',
-          pauseOnHover: false,
-        });
+      toast(`Welcome ${response.data.email}`, {
+        position: 'top-right',
+        type: 'success',
+        pauseOnHover: false,
+      });
 
-        router.replace('/main');
+      router.replace('/main');
 
-        httpClient.defaults.headers.Authorization = authorization;
+      httpClient.defaults.headers.Authorization = authorization;
 
-        setLoading(false);
-        setUser(response.data);
-        setToken(authorization);
-        localStorage.setItem('token', authorization);
-      }
-    } catch (error) {
-      setLoading(false);
-      errorHandler(error);
+      setUser(response.data);
+      setToken(authorization);
+      localStorage.setItem('token', authorization);
     }
   }, []);
 
   const register = useCallback(async (data: UserCreate) => {
-    try {
-      setLoading(true);
-      const response = await authService.register(data);
+    setLoading(true);
+    const response = await authService.register(data);
+    setLoading(false);
 
-      if (response) {
-        toast('Successfully registered, now you can log in', {
-          position: 'top-right',
-          type: 'success',
-          pauseOnHover: false,
-        });
+    if (response) {
+      toast('Successfully registered, now you can log in', {
+        position: 'top-right',
+        type: 'success',
+        pauseOnHover: false,
+      });
 
-        router.replace('/login');
-
-        setLoading(false);
-      }
-    } catch (error) {
-      setLoading(false);
-      errorHandler(error);
+      router.replace('/login');
     }
   }, []);
 
