@@ -1,36 +1,45 @@
-import { AxiosInstance } from 'axios';
+import { AxiosResponse } from 'axios';
 import { AuthService } from './auth';
 import { httpClient } from '../client';
+import { User, UserLogin } from 'api/models/user';
 
-jest.mock('./auth');
-jest.mock('../client');
-
-const factory = () => {
-  const MockClient = httpClient as jest.Mocked<AxiosInstance>;
-  const MockService = AuthService as jest.Mock<AuthService>;
-
-  return {
-    MockClient,
-    MockService,
-  };
+const expectedRes = {
+  mock: true
 };
 
+jest.mock('../client', () => ({
+  httpClient: {
+    post: jest.fn((url: string, body: User) => Promise.resolve({ data: expectedRes }))
+  }
+}));
+
 describe('AuthService', () => {
-  it('should make a request', async () => {
-    const { MockClient, MockService } = factory();
+  let user: UserLogin;
+  let instance: AuthService;
+  let res: AxiosResponse<User>;
 
-    const user = {
-      email: 'admin@gmail.com',
-      password: '123456',
-    };
+  describe('when returns valid data', () => {
+    beforeEach(async () => {
+      user = {
+        email: 'admin@gmail.com',
+        password: '123456',
+      };
 
-    const instance = new MockService(MockClient) as jest.Mocked<AuthService>;
+      instance = new AuthService(httpClient as any);
 
-    const res = await instance.authenticate(user);
+      res = await instance.authenticate(user);
+    });
 
-    console.log('res', res);
+    it('should call the post method', async () => {
+      expect(httpClient.post).toHaveBeenCalledTimes(1);
+    });
 
-    expect(MockClient.post).toHaveBeenCalledTimes(1);
-    expect(res).toHaveProperty('data');
+    it('should return the expected data', async () => {
+      expect(res.data).toEqual(expectedRes);
+    });
+  });
+
+  describe('when return invalid data', () => {
+    // TODO
   });
 });
