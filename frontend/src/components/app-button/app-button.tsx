@@ -20,7 +20,7 @@ export const AppButton = (props: AppButtonProps) => {
   const { disabled, loading, icon, text, ...rest } = props;
   return (
     <StyledAppButton {...rest} disabled={loading || disabled}>
-      {loading && <LoadingIcon size={16} />}
+      {loading && <LoadingIcon data-testid="loading_icon" size={16} />}
       <span className="text">{text}</span>
       {icon}
     </StyledAppButton>
