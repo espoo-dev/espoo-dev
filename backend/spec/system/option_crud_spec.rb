@@ -5,6 +5,8 @@ RSpec.describe 'Option CRUD', type: :system do
   describe 'CRUD' do
     let!(:question) { create(:question) }
     let!(:user) { create(:user) }
+    let!(:teacher) { create(:user_teacher) }
+    let!(:question_teacher) { create(:question, user: teacher) }
     let!(:option) { create(:option) }
 
     before do
@@ -45,6 +47,28 @@ RSpec.describe 'Option CRUD', type: :system do
         end
 
         it { expect(page).to have_content 'Name has already been taken' }
+      end
+
+      context 'when admin shows all questions' do
+        before do
+          visit new_admin_option_path
+
+          find('label', text: 'Question').click
+        end
+
+        it { expect(page).to have_selector('.option', text: question_teacher.name && question.name) }
+      end
+
+      context 'when teacher only shows teacher questions' do
+        before do
+          sign_in teacher
+          visit new_admin_option_path
+
+          find('label', text: 'Question').click
+        end
+
+        it { expect(page).to have_selector('.option', text: question_teacher.name) }
+        it { expect(page).not_to have_selector('.option', text: question.name) }
       end
     end
 

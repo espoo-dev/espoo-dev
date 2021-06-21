@@ -2,7 +2,7 @@ import React, { useContext } from 'react';
 import Link from 'next/link';
 import { Button, Flex, Heading, List } from '@chakra-ui/react';
 import { IconType } from 'react-icons';
-import { HiAcademicCap, HiLogout } from 'react-icons/hi';
+import { HiAcademicCap, HiLogout, HiClipboardCheck } from 'react-icons/hi';
 import { AuthContext } from 'context/auth';
 import { MenuLinkOption } from './sidemenu.styles';
 
@@ -21,6 +21,11 @@ export const Sidemenu = () => {
       icon: HiAcademicCap,
       name: 'Teachers',
       url: '/main',
+    },
+    {
+      icon: HiClipboardCheck,
+      name: 'Surveys',
+      url: '/surveys',
     },
   ];
 
