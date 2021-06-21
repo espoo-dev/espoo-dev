@@ -12,7 +12,7 @@ const openEndpoints = ['/users/sign_in'];
  * HTTP client
  */
 export const httpClient: AxiosInstance = Axios.create({
-  baseURL: API_URL,
+  baseURL: 'https://espoo.herokuapp.com' || API_URL,
   headers: {
     Accept: 'application/json',
     'Content-Type': 'application/json',

@@ -8,6 +8,7 @@ export const Container = styled.div`
 export const Layout = styled.div`
   display: grid;
   grid-template-columns: 250px auto;
+  background: #181818;
 `;
 
 export const Content = styled.main`
