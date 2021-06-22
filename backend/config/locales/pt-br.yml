@@ -29,6 +29,10 @@ pt-br:
           attributes:
             ready:
               cant_update_ready: Todas as perguntas precisam estar prontas para serem respondidas antes de você preparar a pesquisa.
+        survey_subject:
+          attributes:
+            surveys:
+              cant_destroy_survey_subject: Não é possível destruir o assunto da pesquisa com %{survey_count} pesquisas.
   admin:
     application:
       navigation:
