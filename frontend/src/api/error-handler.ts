@@ -20,8 +20,9 @@ export const errorHandler = (errorInstance: AxiosError<CustomError>) => {
   }
 };
 
-const createErrorToast = (message: string) => toast(message, {
-  position: 'top-right',
-  type: 'error',
-  pauseOnHover: false,
-});
+const createErrorToast = (message: string) =>
+  toast(message, {
+    position: 'top-right',
+    type: 'error',
+    pauseOnHover: false,
+  });

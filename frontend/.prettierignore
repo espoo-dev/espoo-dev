@@ -1,2 +1,8 @@
 node_modules
 .next
+.eslintrc.js
+coverage
+*.test.ts
+*.test.tsx
+*.test.js
+*.test.jsx
