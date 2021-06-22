@@ -5,6 +5,7 @@ RSpec.describe 'SurveysController', type: :request do
     let!(:survey) { create(:survey) }
     let!(:survey_question) { survey.questions.first }
     let!(:question_type) { survey_question.question_type }
+    let!(:survey_subject) { survey.survey_subject }
 
     before { get api_v1_survey_path(survey), headers: auth_headers }
 
@@ -15,6 +16,7 @@ RSpec.describe 'SurveysController', type: :request do
         'id' => anything,
         'name' => survey.name,
         'description' => survey.description,
+        'survey_subject_id' => survey_subject.id,
         'questions' => [
           'id' => survey_question.id,
           'name' => survey_question.name,
