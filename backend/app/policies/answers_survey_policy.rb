@@ -1,0 +1,2 @@
+class AnswersSurveyPolicy < GenericPolicy
+end
