@@ -87,7 +87,7 @@ RSpec.describe Question, type: :model do
 
     it 'is not valid when question and survey have different user' do
       survey_teacher = create(:survey, user: user_teacher)
-      question_mod = create(:question, user: user_moderator, survey: survey_teacher)
+      question_mod = build(:question, user: user_moderator, survey: survey_teacher)
 
       expect(question_mod).not_to be_valid
     end
