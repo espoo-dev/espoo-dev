@@ -3,7 +3,7 @@ FROM ruby:3.0.1-alpine
 # dependencies
 RUN apk add --no-cache \
   git build-base postgresql-dev \
-  nodejs npm tzdata
+  nodejs npm tzdata less
 
 # install recent yarn
 RUN npm install -g yarn
