@@ -20,5 +20,6 @@ FactoryBot.define do
 
   factory :role_student, parent: :role do
     role_type { Role::STUDENT }
+    initialize_with { Role.find_or_create_by(role_type: Role::STUDENT) }
   end
 end

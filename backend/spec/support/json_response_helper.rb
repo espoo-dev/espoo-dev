@@ -1,11 +1,10 @@
 require 'devise/jwt/test_helpers'
 
 module JsonResponseHelper
-  def auth_headers(user: nil)
+  def auth_headers(user: create(:user))
     headers = {
       'Accept' => 'application/json'
     }
-    user ||= create(:user)
     Devise::JWT::TestHelpers.auth_headers(headers, user)
   end
 
