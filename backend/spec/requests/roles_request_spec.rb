@@ -2,9 +2,12 @@ require 'rails_helper'
 
 RSpec.describe 'RolesController', type: :request do
   describe '#list' do
-    let!(:role) { create(:role) }
+    let!(:user) { create(:user) }
+    let!(:role) { user.role }
 
-    before { get api_v1_roles_path }
+    before do
+      get api_v1_roles_path, headers: auth_headers(user: user)
+    end
 
     it { expect(response).to have_http_status :ok }
 
