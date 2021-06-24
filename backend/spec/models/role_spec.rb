@@ -52,4 +52,23 @@ RSpec.describe Role, type: :model do
 
     it { expect(create(:role_moderator)).to eq(create(:role_moderator)) }
   end
+
+  describe '.by_role' do
+    let!(:role_moderator) { create(:role_moderator) }
+    let!(:role_teacher) { create(:role_teacher) }
+    let!(:role_student) { create(:role_student) }
+    let!(:role_admin) { create(:role_admin) }
+    let!(:not_admin_roles) { [role_moderator, role_teacher, role_student] }
+    let!(:all_roles) { [*not_admin_roles, role_admin] }
+    let!(:user_teacher) { create(:user_teacher) }
+    let(:user_admin) { create(:user) }
+
+    it 'shows all roles when admin' do
+      expect(described_class.by_user(user_admin)).to match(all_roles)
+    end
+
+    it 'shows all not admin roles' do
+      expect(described_class.by_user(user_teacher)).to match(not_admin_roles)
+    end
+  end
 end
