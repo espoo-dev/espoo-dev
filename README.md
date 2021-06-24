@@ -15,7 +15,7 @@
   <img src="https://ruby.ci/badges/c9e80d1d-18a0-48f0-a533-541666383998/reek?cache=false" alt="simplecov"/>
 </p>
 
-## Project deion
+## Project definion
 Espoo-dev is a learning platform. There are three user types:
 - **Teacher:** Creates `Surveys` with many `Questions`
 - **Student:** Answers the `Questions` that belongs to a `Survey`
@@ -50,49 +50,8 @@ Espoo-dev is a learning platform. There are three user types:
  - Public surveys
  - Surveys protected by password
 
-## How to start the project
-- [Docker](http://link_to_docker_readme)
-- [Traditional way](http://link_to_traditional_way_readme)
-
-### Requirements (Traditional way)
- - Ruby 3.0.1
- - PostgreSQL
- - Google Chrome (make sure this browser is installed)
-
-# Opening a PR (backend)
-1. Fork the repo
-2. Clone the forked repo
-3. On terminal/console do
-    ```bash
-    cd espoo-dev/backend
-    bundle install
-    bundle exec rake db:create db:migrate db:seed
-    bundle exec rspec
-    ```
-
-## Running the tests
-
-# 🐳 Run
-Run project with docker!
-
-```bash
-docker-compose up
-```
-
-# 🚪 Ports
-```sh
-# Backend
-localhost:3000
-
-#Frontend
-localhost:4000
-```
-
-# 📝 Docs
-
-1. [Postman requests](https://www.postman.com/grey-zodiac-51715/workspace/espoo/overview)
-1. [Class Diagram](https://drive.google.com/file/d/1681YmHrron_fxAb8tOebmzTbqy9qGM8p/view?usp=sharing)
-
+## :smiley: Contributing
+ Please check [CONTRIBUTING.md](https://github.com/espoo-dev/espoo-dev/blob/main/CONTRIBUTING.md)
 
 # ✨ Demos
 1. [admin](https://espoo.herokuapp.com/)
