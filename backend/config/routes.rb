@@ -18,6 +18,7 @@ Rails.application.routes.draw do
       resources :users, only: %i[index create]
       resources :surveys, only: %i[index show]
       resources :roles, only: %i[index]
+      resources :answers_surveys, only: %i[create]
     end
   end
 
