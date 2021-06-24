@@ -3,7 +3,7 @@ class Api::V1::UsersController < Api::V1::ApiController
 
   def index
     users = User.where(params.permit(:role_id)).includes(%i[surveys role])
-
+    authorize users
     render json: users
   end
 
