@@ -10,20 +10,36 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_06_21_130819) do
+ActiveRecord::Schema.define(version: 2021_06_25_092530) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
+  create_table "answer_options", force: :cascade do |t|
+    t.bigint "option_id", null: false
+    t.bigint "answer_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["answer_id"], name: "index_answer_options_on_answer_id"
+    t.index ["option_id"], name: "index_answer_options_on_option_id"
+  end
+
   create_table "answers", force: :cascade do |t|
     t.bigint "question_id", null: false
-    t.bigint "option_id", null: false
     t.bigint "answers_survey_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["answers_survey_id"], name: "index_answers_on_answers_survey_id"
-    t.index ["option_id"], name: "index_answers_on_option_id"
     t.index ["question_id"], name: "index_answers_on_question_id"
+  end
+
+  create_table "answers_options", force: :cascade do |t|
+    t.bigint "answer_id", null: false
+    t.bigint "option_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["answer_id"], name: "index_answers_options_on_answer_id"
+    t.index ["option_id"], name: "index_answers_options_on_option_id"
   end
 
   create_table "answers_surveys", force: :cascade do |t|
@@ -109,6 +125,10 @@ ActiveRecord::Schema.define(version: 2021_06_21_130819) do
     t.index ["role_id"], name: "index_users_on_role_id"
   end
 
+  add_foreign_key "answer_options", "answers"
+  add_foreign_key "answer_options", "options"
+  add_foreign_key "answers_options", "answers"
+  add_foreign_key "answers_options", "options"
   add_foreign_key "options", "questions"
   add_foreign_key "options", "users"
   add_foreign_key "surveys", "survey_subjects"
