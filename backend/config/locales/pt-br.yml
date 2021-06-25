@@ -17,6 +17,8 @@ pt-br:
               cant_change_question_type: Não é possível mudar para uma única escolha quando há mais de uma opção correta.
             ready_to_be_answered:
               cant_update_ready_to_be_answered: Tem que estar "pronto para ser respondido" quando a pesquisa estiver pronta.
+            user_id:
+              must_be_same_user: deve ser o mesmo!
         question_type:
           attributes:
             questions:
