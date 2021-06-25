@@ -2,7 +2,8 @@ class Option < ApplicationRecord
   belongs_to :user
   belongs_to :question
 
-  has_many :answers, dependent: :destroy
+  has_many :answers_options, dependent: :destroy
+  has_many :answers, through: :answers_options
 
   validates :name, presence: true, uniqueness: { scope: :question_id }
   validate :validates_correct
