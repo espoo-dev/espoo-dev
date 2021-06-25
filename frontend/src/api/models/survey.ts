@@ -3,13 +3,22 @@ export interface QuestionType {
   name: string;
 }
 
+export interface QuestionOption {
+  correct: boolean;
+  id: number;
+  name: string;
+}
+
+export interface Question {
+  id: number;
+  name: string;
+  question_type: QuestionType;
+  options?: Array<QuestionOption>;
+}
+
 export interface Survey {
   id: number;
   name: string;
   description: string;
-  questions: {
-    id: number;
-    name: string;
-    question_type: QuestionType;
-  }[];
+  questions: Array<Question>;
 }
