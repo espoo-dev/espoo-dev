@@ -30,6 +30,7 @@ Metrics/AbcSize:
 
 Metrics/BlockLength:
   IgnoredMethods: ['describe', 'context']
+  Max: 35
 
 Metrics/ClassLength:
   Max: 200
@@ -59,7 +60,7 @@ RSpec/NestedGroups:
   Max: 4
 
 RSpec/MultipleExpectations:
-  Max: 1
+  Max: 2
 
 RSpec/MultipleMemoizedHelpers:
   Max: 11

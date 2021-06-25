@@ -3,6 +3,7 @@ class Question < ApplicationRecord
   validate :validates_options
   validate :validates_ready
   validate :validates_ready_survey
+  validate :survey_must_have_same_user
 
   belongs_to :user
   belongs_to :question_type
@@ -20,6 +21,13 @@ class Question < ApplicationRecord
   }
 
   private
+
+  def survey_must_have_same_user
+    return unless user&.present? && survey&.present?
+
+    # i18n-tasks-use t('activerecord.errors.models.question.attributes.user_id.must_be_same_user')
+    errors.add(:user_id, :must_be_same_user) if user != survey.user
+  end
 
   def validates_options
     many_correct_options = options.correct.count > 1

@@ -17,6 +17,8 @@ en:
               cant_change_question_type: Can't change to single choice when having more than one correct option.
             ready_to_be_answered:
               cant_update_ready_to_be_answered: Has to be "ready to be answered" when survey is ready.
+            user_id:
+              must_be_same_user: must be the same!
         question_type:
           attributes:
             questions:
