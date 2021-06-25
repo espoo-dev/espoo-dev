@@ -52,4 +52,5 @@ RSpec.describe Role, type: :model do
 
     it { expect(create(:role_moderator)).to eq(create(:role_moderator)) }
   end
+
 end
