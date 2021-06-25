@@ -90,6 +90,7 @@ RSpec.describe Question, type: :model do
       question_mod = build(:question, user: user_moderator, survey: survey_teacher)
 
       expect(question_mod).not_to be_valid
+      expect(question_mod.errors.full_messages).to match(['Question Must be the same user!'])
     end
   end
 end

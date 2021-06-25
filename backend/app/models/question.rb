@@ -24,6 +24,7 @@ class Question < ApplicationRecord
 
   def survey_must_have_same_user
     return if user.nil? || survey.nil?
+
     errors.add(:question, 'Must be the same user!') if user != survey.user
   end
 
