@@ -1,11 +1,10 @@
 module AnswerConcern
   extend ActiveSupport::Concern
 
-  def build_answer(answer_params)
+  def build_answer(answer_params, option_ids)
     answer = Answer.new(answer_params)
-    params[:option_ids].each do |option|
-      answer.options << Option.find(option)
-    end
+    options = Option.includes(:user, :question).find(option_ids)
+    answer.options = options
     answer
   end
 end
