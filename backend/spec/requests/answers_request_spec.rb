@@ -3,11 +3,12 @@ require 'rails_helper'
 RSpec.describe 'AnswersController', type: :request do
   describe '#create' do
     context 'when data is valid' do
-      let(:survey) { create(:survey) }
-      let!(:answers_survey) { create(:answers_survey) }
-      let!(:question) { create(:question) }
-      let!(:option_a) { create(:option) }
-      let!(:option_b) { create(:option) }
+      let!(:user_teacher) { create(:user_teacher) }
+      let!(:user_student) { create(:user_student) }
+      let!(:answers_survey) { create(:answers_survey, user: user_student) }
+      let!(:question) { create(:question, user: user_teacher) }
+      let!(:option_a) { create(:option, user: user_teacher) }
+      let!(:option_b) { create(:option, user: user_teacher) }
 
       before do
         answer_params = {
@@ -16,7 +17,7 @@ RSpec.describe 'AnswersController', type: :request do
           answers_survey_id: answers_survey.id
         }
 
-        post api_v1_answers_path, params: answer_params, headers: auth_headers
+        post api_v1_answers_path, params: answer_params, headers: auth_headers(user: user_student)
       end
 
       it { expect(response).to have_http_status :created }
