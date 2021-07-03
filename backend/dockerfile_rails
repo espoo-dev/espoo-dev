@@ -20,6 +20,3 @@ RUN gem install bundler
 RUN bundle config set --local path 'vendor/bundle'
 RUN bundle install --binstubs
 
-#config env to not need to use bundle exec before commands
-RUN mkdir -p .git/safe
-ENV PATH=".git/safe/../../bin:$PATH"
