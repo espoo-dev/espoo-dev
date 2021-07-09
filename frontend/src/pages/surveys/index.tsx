@@ -6,7 +6,6 @@ import { Box, Heading, Spinner, Text } from '@chakra-ui/react';
 import { httpClient } from 'api';
 import { errorHandler } from 'api/error-handler';
 import { useEffect, useState } from 'react';
-import { HiArrowLeft, HiArrowRight } from 'react-icons/hi';
 import { SurveysList } from 'components/main/SurveysList';
 import { SurveyService } from 'api/services/survey';
 import { Survey } from 'api/models/survey';

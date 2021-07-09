@@ -1,14 +1,6 @@
 import React from 'react';
 import { User } from 'api/models/user';
-import {
-  Avatar,
-  Box,
-  Flex,
-  HStack,
-  List,
-  ListItem,
-  Text,
-} from '@chakra-ui/react';
+import { Avatar, Flex, HStack, List, ListItem, Text } from '@chakra-ui/react';
 
 interface TeacherListProps {
   data: User[];
