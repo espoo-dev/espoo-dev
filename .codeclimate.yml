@@ -7,5 +7,4 @@ plugins:
   nodesecurity:
     enabled: true
 exclude_patterns:
-- frontend/node_modules/
 - backend/
