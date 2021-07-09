@@ -1,5 +1,8 @@
 import Axios, { AxiosInstance } from 'axios';
+import { AUTH_COOKIE } from 'consts';
 import { useAuth } from 'hooks';
+import Router from 'next/router';
+import { destroyCookie } from 'nookies';
 
 const API_URL =
   process.env.NODE_ENV === 'development'
@@ -12,7 +15,7 @@ const openEndpoints = ['/users/sign_in'];
  * HTTP client
  */
 export const httpClient: AxiosInstance = Axios.create({
-  baseURL: 'https://espoo.herokuapp.com' || API_URL,
+  baseURL: API_URL,
   headers: {
     Accept: 'application/json',
     'Content-Type': 'application/json',
@@ -30,4 +33,18 @@ httpClient.interceptors.request.use(
     return newConfig;
   },
   (error) => Promise.reject(error)
+);
+
+httpClient.interceptors.response.use(
+  (response) => response,
+  (error) => {
+    const { response } = error;
+
+    if (response.status === 400 || response.status === 401) {
+      destroyCookie(undefined, AUTH_COOKIE);
+      Router.push('/login');
+    }
+
+    return Promise.reject(error);
+  }
 );
