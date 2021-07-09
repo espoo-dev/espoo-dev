@@ -1,0 +1,10 @@
+version: "2"
+plugins:
+  duplication:
+    enabled: true
+  eslint:
+    enabled: true
+  nodesecurity:
+    enabled: true
+exclude_patterns:
+- backend/
