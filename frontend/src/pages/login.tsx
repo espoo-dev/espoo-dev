@@ -22,6 +22,7 @@ import {
 
 import { AppInput } from '../components/app-input';
 import { AppButton } from '../components/app-button';
+import Head from 'next/head';
 
 const Login = () => {
   const formRef = useRef();
@@ -39,6 +40,10 @@ const Login = () => {
 
   return (
     <PageContainer>
+      <Head>
+        <title>Espoolingo - Login</title>
+      </Head>
+
       <LeftContainer>
         <LoginContainer>
           <LoginFormContainer>
