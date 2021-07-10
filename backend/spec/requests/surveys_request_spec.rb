@@ -5,6 +5,8 @@ RSpec.describe 'SurveysController', type: :request do
     let!(:survey) { create(:survey) }
     let!(:survey_question) { survey.questions.first }
     let!(:question_type) { survey_question.question_type }
+    let!(:survey_subject) { survey.survey_subject }
+    let!(:option) { create(:option, question: survey_question) }
 
     before { get api_v1_survey_path(survey), headers: auth_headers }
 
@@ -15,13 +17,19 @@ RSpec.describe 'SurveysController', type: :request do
         'id' => anything,
         'name' => survey.name,
         'description' => survey.description,
+        'survey_subject_id' => survey_subject.id,
         'questions' => [
           'id' => survey_question.id,
           'name' => survey_question.name,
           'question_type' => {
             'id' => question_type.id,
             'name' => question_type.name
-          }
+          },
+          'options' => [{
+            'id' => option.id,
+            'name' => option.name,
+            'correct' => option.correct
+          }]
         ]
       }
       expect(response_body).to match(expected_attributes)
