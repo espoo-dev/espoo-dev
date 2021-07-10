@@ -19,7 +19,7 @@ const Main = () => {
   const listUsers = async () => {
     try {
       const response = await userService.list({ role_id: 1 });
-      if (response && response.data) {
+      if (response?.data) {
         setTeachers(response.data);
       }
     } catch (error) {
