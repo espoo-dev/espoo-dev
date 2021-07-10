@@ -46,3 +46,17 @@ blocks:
             - cache restore
             - yarn install
             - yarn build
+  - name: Test
+    dependencies: []
+    # Run this block on changes in frontend folder and installed dependencies 
+    run:
+      when: "change_in('/frontend')"
+    task:
+      jobs:
+        - name: run unit tests
+          commands:
+            - checkout
+            - cd frontend
+            - cache restore
+            - yarn install
+            - yarn test
