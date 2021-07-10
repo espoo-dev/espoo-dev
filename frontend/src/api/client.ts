@@ -2,7 +2,7 @@ import Axios, { AxiosInstance } from 'axios';
 import { AUTH_COOKIE } from 'consts';
 import { useAuth } from 'hooks';
 import Router from 'next/router';
-import { destroyCookie } from 'nookies';
+import nookies from 'nookies';
 
 const API_URL =
   process.env.NODE_ENV === 'development'
@@ -40,8 +40,8 @@ httpClient.interceptors.response.use(
   (error) => {
     const { response } = error;
 
-    if (response.status === 400 || response.status === 401) {
-      destroyCookie(undefined, AUTH_COOKIE);
+    if (response.status === 401) {
+      nookies.destroy(undefined, AUTH_COOKIE);
       Router.push('/login');
     }
 
