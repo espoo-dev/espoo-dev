@@ -1,11 +1,11 @@
 import React, { ButtonHTMLAttributes, ReactElement } from 'react';
 import { IconType } from 'react-icons/lib';
-import { ButtonProps } from 'styles/utils';
+import { ButtonProps } from '@styles/utils';
 import { LoadingIcon, StyledAppButton } from './app-button.styles';
 
 type CustomButton = ButtonHTMLAttributes<HTMLButtonElement> & ButtonProps;
 
-interface AppButtonProps extends CustomButton {
+export interface AppButtonProps extends CustomButton {
   loading?: boolean;
   text: string;
   icon?: ReactElement<IconType>;

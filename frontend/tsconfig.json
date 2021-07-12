@@ -4,7 +4,7 @@
     "lib": ["dom", "dom.iterable", "esnext"],
     "allowJs": true,
     "skipLibCheck": true,
-    "strict": true,
+    "strict": false,
     "forceConsistentCasingInFileNames": true,
     "noEmit": true,
     "esModuleInterop": true,
@@ -15,10 +15,13 @@
     "jsx": "preserve",
     "baseUrl": "./src",
     "paths": {
+      "@api/*": ["api/*"],
       "@components/*": ["components/*"],
-      "@pages/*": ["pages/*"],
+      "@context/*": ["context/*"],
+      "@hoc/*": ["hoc/*"],
       "@hooks/*": ["hooks/*"],
-      "@styles/*": ["styles/*"]
+      "@pages/*": ["pages/*"],
+      "@styles/*": ["styles/*"],
     }
   },
   "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx"],
