@@ -68,7 +68,8 @@ module.exports = {
     'react/no-unused-prop-types': 'off',
     'object-curly-spacing': 'off',
     'import/no-extraneous-dependencies': 'off',
-    'implicit-arrow-linebreak': 'off'
+    'implicit-arrow-linebreak': 'off',
+    'function-paren-newline': 'off'
   },
   settings: {
     'import/resolver': {
