@@ -77,4 +77,4 @@ blocks:
             - cd frontend
             - cache restore
             - yarn install
-            - yarn chromatic --project-token=CHROMATIC_PROJECT_TOKEN
+            - yarn chromatic --project-token="$CHROMATIC_PROJECT_TOKEN"
