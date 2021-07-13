@@ -7,9 +7,9 @@ agent:
 blocks:
   - name: Install dependencies
     dependencies: []
-    # Run this block on changes in frontend folder 
+    # Run this block on changes in frontend folder
     run:
-      when: "change_in('/frontend')"
+      when: "change_in('/frontend/package.json')"
     task:
       jobs:
         - name: install client dependencies
@@ -19,9 +19,10 @@ blocks:
             - cache restore
             - yarn install
             - cache store
+
   - name: Lint
-    dependencies: []
-    # Run this block on changes in frontend folder 
+    dependencies: ["Install dependencies"]
+    # Run this block on changes in frontend folder
     run:
       when: "change_in('/frontend')"
     task:
@@ -32,9 +33,10 @@ blocks:
             - cd frontend
             - cache restore
             - yarn lint
+
   - name: Build
-    dependencies: []
-    # Run this block on changes in frontend folder and installed dependencies 
+    dependencies: ["Install dependencies"]
+    # Run this block on changes in frontend folder and installed dependencies
     run:
       when: "change_in('/frontend')"
     task:
@@ -46,9 +48,10 @@ blocks:
             - cache restore
             - yarn install
             - yarn build
+
   - name: Test
-    dependencies: []
-    # Run this block on changes in frontend folder and installed dependencies 
+    dependencies: ["Install dependencies"]
+    # Run this block on changes in frontend folder and installed dependencies
     run:
       when: "change_in('/frontend')"
     task:
@@ -60,3 +63,20 @@ blocks:
             - cache restore
             - yarn install
             - yarn test
+
+  - name: Deploy storybook docs
+    dependencies: ["Build", "Lint", "Test"]
+    run:
+      when: "change_in('/frontend')"
+    task:
+      secrets:
+        - name: chromatic
+      jobs:
+        - name: deploy storybook
+          commands:
+            - checkout
+            - cd frontend
+            - cache restore
+            - yarn install
+            - echo $CHROMATIC_PROJECT_TOKEN
+            - yarn chromatic -- --project-token=$CHROMATIC_PROJECT_TOKEN
