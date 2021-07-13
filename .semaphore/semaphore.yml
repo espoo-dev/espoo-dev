@@ -11,12 +11,15 @@ blocks:
     run:
       when: "change_in('/frontend/package.json')"
     task:
+      secrets:
+        - name: chromatic
       jobs:
         - name: install client dependencies
           commands:
             - checkout
             - cd frontend
             - cache restore
+            - echo $CHROMATIC_PROJECT_TOKEN
             - yarn install
             - cache store
 
@@ -78,4 +81,5 @@ blocks:
             - cd frontend
             - cache restore
             - yarn install
+            - echo $CHROMATIC_PROJECT_TOKEN
             - yarn chromatic -- --project-token=$CHROMATIC_PROJECT_TOKEN
