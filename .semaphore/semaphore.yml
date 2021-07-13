@@ -19,8 +19,9 @@ blocks:
             - cache restore
             - yarn install
             - cache store
+
   - name: Lint
-    dependencies: []
+    dependencies: ["Install dependencies"]
     # Run this block on changes in frontend folder 
     run:
       when: "change_in('/frontend')"
@@ -32,8 +33,9 @@ blocks:
             - cd frontend
             - cache restore
             - yarn lint
+
   - name: Build
-    dependencies: []
+    dependencies: ["Install dependencies"]
     # Run this block on changes in frontend folder and installed dependencies 
     run:
       when: "change_in('/frontend')"
@@ -46,8 +48,9 @@ blocks:
             - cache restore
             - yarn install
             - yarn build
+
   - name: Test
-    dependencies: []
+    dependencies: ["Install dependencies"]
     # Run this block on changes in frontend folder and installed dependencies 
     run:
       when: "change_in('/frontend')"
@@ -60,3 +63,20 @@ blocks:
             - cache restore
             - yarn install
             - yarn test
+
+  - name: Deploy storybook docs
+    dependencies: ["Install dependencies", "Lint", "Build", "Test"]
+    # Run this block on changes in frontend folder and installed dependencies 
+    run:
+      when: "change_in('/frontend')"
+    task:
+      secrets:
+        - name: chromatic
+      jobs:
+        - name: deploy docs
+          commands:
+            - checkout
+            - cd frontend
+            - cache restore
+            - yarn install
+            - yarn chromatic --project-token="$CHROMATIC_PROJECT_TOKEN"
