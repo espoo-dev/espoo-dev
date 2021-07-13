@@ -1,12 +1,12 @@
 import Head from 'next/head';
 import { withAuth } from 'hoc/withAuth';
 import { Container, Content, Layout } from 'styles/main.styles';
-import { Sidemenu } from 'components/sidemenu';
+import { Sidemenu } from '@components/sidemenu';
 import { Box, Heading, Spinner, Text } from '@chakra-ui/react';
 import { httpClient } from 'api';
 import { errorHandler } from 'api/error-handler';
 import { useEffect, useState } from 'react';
-import { SurveysList } from 'components/main/SurveysList';
+import { SurveysList } from '@components/main/SurveysList';
 import { SurveyService } from 'api/services/survey';
 import { Survey } from 'api/models/survey';
 
