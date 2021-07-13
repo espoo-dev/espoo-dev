@@ -14,7 +14,7 @@
     "e2e": "yarn run cypress open",
     "storybook": "start-storybook -p 6006",
     "build-storybook": "build-storybook",
-    "chromatic": "npx chromatic"
+    "chromatic": "npx chromatic --exit-zero-on-changes"
   },
   "dependencies": {
     "@babel/core": "^7.14.3",
