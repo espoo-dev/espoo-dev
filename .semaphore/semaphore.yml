@@ -9,7 +9,7 @@ blocks:
     dependencies: []
     # Run this block on changes in frontend folder
     run:
-      when: "change_in('/frontend')"
+      when: "change_in('/frontend/package.json')"
     task:
       jobs:
         - name: install client dependencies
@@ -64,12 +64,13 @@ blocks:
             - yarn install
             - yarn test
 
-  - name: Deploy storybook
-    dependencies: ["Install dependencies", "Build", "Lint", "Test"]
-    # Run this block on changes in frontend folder and installed dependencies
+  - name: Deploy storybook docs
+    dependencies: ["Build", "Lint", "Test"]
     run:
       when: "change_in('/frontend')"
     task:
+      secrets:
+        - name: chromatic
       jobs:
         - name: deploy storybook
           commands:
@@ -77,4 +78,5 @@ blocks:
             - cd frontend
             - cache restore
             - yarn install
-            - yarn chromatic --project-token=CHROMATIC_PROJECT_TOKEN
+            - echo $CHROMATIC_PROJECT_TOKEN
+            - yarn chromatic -- --project-token=$CHROMATIC_PROJECT_TOKEN
