@@ -13,7 +13,8 @@
     "test:watch": "jest --env=jsdom --watch",
     "e2e": "yarn run cypress open",
     "storybook": "start-storybook -p 6006",
-    "build-storybook": "build-storybook"
+    "build-storybook": "build-storybook",
+    "chromatic": "npx chromatic --exit-zero-on-changes"
   },
   "dependencies": {
     "@babel/core": "^7.14.3",
@@ -50,6 +51,7 @@
     "@typescript-eslint/parser": "^4.22.0",
     "babel-jest": "^27.0.1",
     "babel-loader": "^8.2.2",
+    "chromatic": "^5.9.2",
     "eslint": "^7.24.0",
     "eslint-config-airbnb": "^18.2.1",
     "eslint-config-prettier": "^8.2.0",
