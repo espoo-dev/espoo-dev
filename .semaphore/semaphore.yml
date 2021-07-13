@@ -70,6 +70,8 @@ blocks:
     run:
       when: "change_in('/frontend')"
     task:
+      secrets:
+        - name: chromatic token
       jobs:
         - name: deploy docs
           commands:
