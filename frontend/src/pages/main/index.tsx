@@ -1,20 +1,20 @@
 import Head from 'next/head';
 import { withAuth } from 'hoc/withAuth';
 import { Container, Content, Layout } from 'styles/main.styles';
-import { Sidemenu } from 'components/sidemenu';
+import { Sidemenu } from '@components/sidemenu';
 import { Box, Flex, Grid, GridItem, Heading, Text } from '@chakra-ui/react';
 import { UserService } from 'api/services/user';
 import { httpClient } from 'api';
 import { errorHandler } from 'api/error-handler';
 import { useEffect, useState } from 'react';
 import { User } from 'api/models/user';
-import { TeacherDetails } from 'components/main/TeacherDetails';
-import { TeachersList } from 'components/main/TeachersList';
+import { TeacherDetails } from '@components/main/TeacherDetails';
+import { TeachersList } from '@components/main/TeachersList';
 
 const Main = () => {
   const userService = new UserService(httpClient);
   const [teachers, setTeachers] = useState<User[]>([]);
-  const [selectedTeacher, setSelectedTeacher] = useState<User>(null);
+  const [selectedTeacher, setSelectedTeacher] = useState<User | null>(null);
 
   const listUsers = async () => {
     try {

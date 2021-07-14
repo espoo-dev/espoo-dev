@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 import { MdSync } from 'react-icons/md';
-import { Button } from 'styles/utils';
+import { Button } from '@styles/utils';
 
 export const StyledAppButton = styled(Button)`
   .text {
