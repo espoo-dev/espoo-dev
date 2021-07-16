@@ -3,25 +3,14 @@ import Head from 'next/head';
 import { useRouter } from 'next/router';
 import { Container, Content, Layout } from 'styles/main.styles';
 import { Sidemenu } from 'components/sidemenu';
-import {
-  Box,
-  Button,
-  Flex,
-  Heading,
-  List,
-  ListItem,
-  Spinner,
-  Text,
-  VStack,
-} from '@chakra-ui/react';
+import { Box, Flex, Heading, Spinner } from '@chakra-ui/react';
 import { SurveyService } from 'api/services/survey';
 import { httpClient } from 'api';
 import { Survey } from 'api/models/survey';
-import { HiCheckCircle } from 'react-icons/hi';
 import { GetServerSideProps } from 'next';
 import { parseCookies } from 'nookies';
 import { AUTH_COOKIE } from 'consts';
-import { QuestionHandler } from '@/components/question';
+import { SurveyStepper } from '@components/survey-stepper';
 
 const SurveyPage = () => {
   const surveyService = new SurveyService(httpClient);
@@ -29,7 +18,6 @@ const SurveyPage = () => {
   const { survey_id } = router.query;
   const [survey, setSurvey] = useState<Survey>(null);
   const [loading, setLoading] = useState(false);
-  const letters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
 
   const loadData = async (id: number) => {
     setLoading(true);
@@ -79,11 +67,7 @@ const SurveyPage = () => {
               </Flex>
             ) : (
               <Box h="full" w="full">
-                <List spacing={3} w="full">
-                  {survey?.questions.map((question, index) => (
-                    <QuestionHandler key={question.id} question={question} />
-                  ))}
-                </List>
+                <SurveyStepper questions={survey?.questions} />
               </Box>
             )}
           </Box>
@@ -94,11 +78,7 @@ const SurveyPage = () => {
 };
 
 export const getServerSideProps: GetServerSideProps = async (ctx) => {
-  const { query } = ctx;
   const { [AUTH_COOKIE]: token } = parseCookies(ctx);
-
-  console.log('token :>> ', token);
-  console.log('query :>> ', query);
 
   if (!token) {
     return {
