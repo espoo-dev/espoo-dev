@@ -1,35 +1,38 @@
 import React, { useCallback, useEffect, useState } from 'react';
-import { Box, Text, VStack } from '@chakra-ui/react';
-import { QuestionOption } from 'api/models/survey';
+import { Button, Flex, Text } from '@chakra-ui/react';
+import { QuestionOption } from '@api/models/survey';
 
 interface ExtendedOption extends QuestionOption {
   selected?: boolean;
 }
 
 interface SingleChoiceProps {
+  /**
+   * options to render
+   */
   options: QuestionOption[];
-  name: string;
 }
 
 type StringOrNumber = string | number;
 
-const { log } = console;
-
 export const MultiChoice = (props: SingleChoiceProps) => {
-  const { name } = props;
   const [values, setValues] = useState<StringOrNumber[]>([]);
   const [options, setOptions] = useState<ExtendedOption[]>([]);
 
   const handleChange = useCallback((option: ExtendedOption) => {
-    log('option -> ', option);
-    // const { id } = option;
+    const { id } = option;
 
-    // setOptions((prev) =>
-    //   prev.map((item) => ({
-    //     ...item,
-    //     selected: item.id === id,
-    //   }))
-    // );
+    setOptions((prev) =>
+      prev.map((item) => {
+        const itemCopy = { ...item };
+
+        if (itemCopy.id === id) {
+          itemCopy.selected = !itemCopy.selected;
+        }
+
+        return itemCopy;
+      })
+    );
   }, []);
 
   const getOptionBG = (option: ExtendedOption) => {
@@ -66,22 +69,27 @@ export const MultiChoice = (props: SingleChoiceProps) => {
   }, [options]);
 
   useEffect(() => {
-    log('values :>> ', values);
+    console.log('values :>> ', values);
   }, [values]);
 
   return (
-    <VStack spacing="10px">
-      <h1>teste da goma</h1>
+    <Flex
+      alignItems="center"
+      justifyContent="center"
+      w="full"
+      flexWrap="wrap"
+      style={{ gap: '10px' }}
+    >
       {options.map((item) => (
-        <Box
-          as="label"
-          htmlFor={name}
-          key={item?.id}
+        <Button
+          onClick={() => handleChange(item)}
+          type="button"
           rounded="md"
           bg={getOptionBG(item)}
           p={4}
-          cursor="pointer"
-          minW="200px"
+          key={item?.id}
+          flex="1"
+          minW="300px"
           boxShadow="base"
           _hover={{
             boxShadow: 'md',
@@ -89,17 +97,8 @@ export const MultiChoice = (props: SingleChoiceProps) => {
           }}
         >
           <Text color="black">{item?.name}</Text>
-          <input
-            type="checkbox"
-            name={name}
-            id={name}
-            onChange={() => handleChange(item)}
-            value={item?.id}
-            checked={item?.selected}
-            hidden
-          />
-        </Box>
+        </Button>
       ))}
-    </VStack>
+    </Flex>
   );
 };

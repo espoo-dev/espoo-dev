@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { Radio, RadioGroup, Stack } from '@chakra-ui/react';
-import { QuestionOption } from 'api/models/survey';
+import { QuestionOption } from '@api/models/survey';
+import randomId from '@utils/random-id';
 
 interface SingleChoiceProps {
   options: QuestionOption[];
@@ -14,7 +15,9 @@ export const SingleChoice = (props: SingleChoiceProps) => {
     <RadioGroup onChange={setValue} value={value}>
       <Stack direction="column">
         {options.map((option) => (
-          <Radio value={option.id}>{option?.name}</Radio>
+          <Radio key={randomId()} value={option.id}>
+            {option?.name}
+          </Radio>
         ))}
       </Stack>
     </RadioGroup>
