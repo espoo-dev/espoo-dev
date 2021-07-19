@@ -35,7 +35,6 @@ blocks:
             - chmod +x ./cc-test-reporter
             - ./cc-test-reporter before-build
             - yarn test:coverage
-            - ls
             - ./cc-test-reporter format-coverage -t lcov -o codeclimate.frontend.json coverage/lcov.info
             - ./cc-test-reporter sum-coverage codeclimate.*.json -o codeclimate.total.json
             -  ./cc-test-reporter upload-coverage -r 901775431df63d8131620226e329cdb757bede481ec12d99b249da870beacb52 -i codeclimate.total.json
