@@ -19,7 +19,19 @@ blocks:
             - cache restore
             - yarn install
             - cache store
-
+  - name: Test
+    dependencies: []
+    run:
+      when: "change_in('/frontend')"
+    task:
+      jobs:
+        - name: test client
+          commands:
+            - checkout
+            - cd frontend
+            - cache restore
+            - yarn install
+            - yarn test:coverage
   - name: Lint
     dependencies: ["Install dependencies"]
     # Run this block on changes in frontend folder
