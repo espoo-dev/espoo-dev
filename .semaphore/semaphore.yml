@@ -19,7 +19,25 @@ blocks:
             - cache restore
             - yarn install
             - cache store
-
+  - name: Test
+    dependencies: []
+    run:
+      when: "change_in('/frontend')"
+    task:
+      jobs:
+        - name: test client
+          commands:
+            - checkout
+            - cd frontend
+            - cache restore
+            - yarn install
+            - curl -L https://codeclimate.com/downloads/test-reporter/test-reporter-latest-linux-amd64 > ./cc-test-reporter
+            - chmod +x ./cc-test-reporter
+            - ./cc-test-reporter before-build
+            - yarn test:coverage
+            - ./cc-test-reporter format-coverage -t lcov -o codeclimate.frontend.json coverage/lcov.info
+            - ./cc-test-reporter sum-coverage codeclimate.*.json -o codeclimate.total.json
+            - ./cc-test-reporter upload-coverage -r 901775431df63d8131620226e329cdb757bede481ec12d99b249da870beacb52 -i codeclimate.total.json
   - name: Lint
     dependencies: ["Install dependencies"]
     # Run this block on changes in frontend folder
@@ -46,24 +64,7 @@ blocks:
             - checkout
             - cd frontend
             - cache restore
-            - yarn install
             - yarn build
-
-  - name: Test
-    dependencies: ["Install dependencies"]
-    # Run this block on changes in frontend folder and installed dependencies
-    run:
-      when: "change_in('/frontend')"
-    task:
-      jobs:
-        - name: run unit tests
-          commands:
-            - checkout
-            - cd frontend
-            - cache restore
-            - yarn install
-            - yarn test
-
   - name: Deploy storybook docs
     dependencies: ["Build", "Lint", "Test"]
     run:
