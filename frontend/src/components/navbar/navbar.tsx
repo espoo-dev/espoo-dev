@@ -1,5 +1,5 @@
-import React, { useContext, useEffect } from 'react';
-import { FlexRow } from 'styles/utils';
+import React, { useContext } from 'react';
+import { FlexRow } from '@styles/utils';
 import { AuthContext } from 'context/auth';
 import { MdPerson } from 'react-icons/md';
 import { Nav, NavLogo, NavLinks, NavAvatar, StyledLink } from './navbar.styles';

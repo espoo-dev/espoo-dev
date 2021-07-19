@@ -1,6 +1,6 @@
 import Link from 'next/link';
-import { Container } from '../styles/home.styles';
-import { FlexColumn } from '../styles/utils';
+import { Container } from '@styles/home.styles';
+import { FlexColumn } from '@styles/utils';
 
 const Home = () => (
   <Container>
