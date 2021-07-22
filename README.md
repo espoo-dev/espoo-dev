@@ -3,7 +3,7 @@
 <p align="center">
   <h3>Frontend CI (semaphore)</h3>
   <a href='https://andersonmalheiro.semaphoreci.com/badges/espoo-dev/branches/master.svg?style=shields'> <img src='https://andersonmalheiro.semaphoreci.com/badges/espoo-dev/branches/main.svg?style=shields' alt='Build Status'></a>
-  <a href="https://codeclimate.com/github/espoo-dev/espoo-dev/maintainability"><img src="https://api.codeclimate.com/v1/badges/ac80c985f8b05779980f/maintainability" /></a>
+  <a href="https://codeclimate.com/github/espoo-dev/espoo-dev/maintainability"><img src="https://api.codeclimate.com/v1/badges/9979316a0c088a5cf937/maintainability" /></a>
   <a href="https://codeclimate.com/github/espoo-dev/espoo-dev/test_coverage"><img src="https://api.codeclimate.com/v1/badges/9979316a0c088a5cf937/test_coverage" /></a>
 </p>
 
