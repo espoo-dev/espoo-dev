@@ -22,9 +22,7 @@ describe('Navbar', () => {
     });
 
     const logoutBtn = screen.getByTestId('logout_btn');
-
     fireEvent.click(logoutBtn);
-
     expect(logoutMock).toHaveBeenCalledTimes(1);
   });
 });
