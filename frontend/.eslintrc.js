@@ -68,7 +68,9 @@ module.exports = {
     'react/no-unused-prop-types': 'off',
     'object-curly-spacing': 'off',
     'import/no-extraneous-dependencies': 'off',
-    'implicit-arrow-linebreak': 'off'
+    'implicit-arrow-linebreak': 'off',
+    'function-paren-newline': 'off',
+    'react/jsx-one-expression-per-line': 'off'
   },
   settings: {
     'import/resolver': {
