@@ -5,6 +5,8 @@
 
 - `docker-compose up`
 
+- `docker-compose exec espoo_server bundle exec rspec`
+
 - navigate to http://localhost:3000
 
 - username: `admin@gamil.com` password: `123456`
