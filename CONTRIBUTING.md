@@ -1,15 +1,11 @@
 
-### Requirements
-There are two options to setup your local environment, you can install everything mannualy or you can use docker :)
- - Traditional way
-   - Ruby 3.0.1
-   - PostgreSQL
-   - Google Chrome (make sure this browser is installed)
- - Docker
-   - docker
-   - docker-compose
 
-# Opening a PR (backend)
+
+# Backend
+## Install
+[backend_readme.md](https://github.com/espoo-dev/espoo-dev/blob/main/backend/README.md)
+
+## Opening a PR (backend)
 1. Fork the repo
 2. Clone the forked repo
 3. Check if the tests are working
