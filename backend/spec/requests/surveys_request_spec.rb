@@ -37,74 +37,54 @@ RSpec.describe 'SurveysController', type: :request do
   end
 
   describe '#index' do
-    context 'when can list all ready surveys' do
-      before do
-        create_list(:ready_survey, 3)
-        get api_v1_surveys_path, headers: auth_headers
-      end
-
-      it { expect(response).to have_http_status :success }
-
-      it { expect(response_body.count).to eq(3) }
-    end
-
-    context "when survey doesn't exist" do
-      before do
-        get api_v1_surveys_path, headers: auth_headers
-      end
-
-      it { expect(response).to have_http_status :success }
-      it { expect(response_body).to match([]) }
-      it { expect(response_body.count).to eq(0) }
-    end
-
-    context 'when list surveys by user id' do
-      before do
-        user = create(:user)
-        create(:ready_survey, name: 'test 1', user_id: user.id)
-        create(:ready_survey, name: 'test 2', user_id: user.id)
-        another_user = create(:user)
-        create(:ready_survey, name: 'test 1', user_id: another_user.id)
-        get api_v1_surveys_path(user_id: another_user.id), headers: auth_headers
-      end
-
-      it { expect(response).to have_http_status :success }
-      it { expect(response_body.count).to eq(1) }
-    end
-
-    describe 'when can list surveys by user' do
-      let!(:admin) { create(:user) }
-      let!(:teacher) { create(:user_teacher) }
-      let!(:moderator) { create(:user_moderator) }
-      let!(:survey_teacher) { create(:ready_survey, user_id: teacher.id) }
-
-      context 'when the user is an admin' do
+    describe 'when user is admin' do
+      context 'when many surveys exist' do
         before do
-          create(:ready_survey, user_id: admin.id)
+          create_list(:ready_survey, 3)
           get api_v1_surveys_path, headers: auth_headers
         end
 
         it { expect(response).to have_http_status :success }
-        it { expect(response_body.count).to eq(2) }
+
+        it { expect(response_body.count).to eq(3) }
       end
 
-      context 'when the user is an teacher' do
-        before { get api_v1_surveys_path, headers: auth_headers(user: teacher) }
+      context "when surveys don't exist" do
+        before do
+          get api_v1_surveys_path, headers: auth_headers
+        end
 
-        it 'survey expect id' do
-          resp_id = response_body[0]['id']
-          expect(survey_teacher.id).to eq(resp_id)
+        it { expect(response).to have_http_status :success }
+        it { expect(response_body).to match([]) }
+        it { expect(response_body.count).to eq(0) }
+      end
+
+      context 'when list surveys by user id' do
+        before do
+          user = create(:user)
+          create(:ready_survey, name: 'test 1', user_id: user.id)
+          create(:ready_survey, name: 'test 2', user_id: user.id)
+          another_user = create(:user)
+          create(:ready_survey, name: 'test 1', user_id: another_user.id)
+          get api_v1_surveys_path(user_id: another_user.id), headers: auth_headers
         end
 
         it { expect(response).to have_http_status :success }
         it { expect(response_body.count).to eq(1) }
       end
+    end
 
-      context 'when user is an moderator' do
-        before { get api_v1_surveys_path, headers: auth_headers(user: moderator) }
+    describe 'when user is student' do
+      context 'when many surveys from users with different roles exist' do
+        before do
+          create(:ready_survey, user: create(:user_admin))
+          create(:ready_survey, user: create(:user_teacher))
+          get api_v1_surveys_path, headers: auth_headers(user: create(:user_student))
+        end
 
         it { expect(response).to have_http_status :success }
-        it { expect(response_body.count).to eq(0) }
+
+        it { expect(response_body.count).to eq(2) }
       end
     end
   end
