@@ -40,7 +40,8 @@ RSpec.describe 'AnswersController', type: :request do
                           'name' => option_b.name,
                           'correct' => option_b.correct
                         }],
-          'answers_survey_id' => answers_survey.id
+          'answers_survey_id' => answers_survey.id,
+          'user_answer' => nil
         }
         expect(response_body).to match(expected_attributes)
       end
