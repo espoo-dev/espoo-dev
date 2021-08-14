@@ -9,6 +9,9 @@ FactoryBot.define do
     role { Role.find_by(role_type: Role::MODERATOR) || create(:role_moderator) }
   end
 
+  factory :user_admin, parent: :user do
+  end
+
   factory :user_teacher, parent: :user do
     role { Role.find_by(role_type: Role::TEACHER) || create(:role_teacher) }
   end
