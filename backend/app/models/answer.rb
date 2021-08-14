@@ -8,5 +8,4 @@ class Answer < ApplicationRecord
   validates :user_answer, presence: true, if: :free_text?
 
   delegate :free_text?, to: :question, allow_nil: true
-
 end
