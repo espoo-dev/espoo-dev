@@ -11,7 +11,7 @@ class Api::V1::AnswersController < Api::V1::ApiController
   private
 
   def answer_params
-    params.permit(:question_id, :answers_survey_id)
+    params.permit(:question_id, :answers_survey_id, :user_answer)
   end
 
   def option_ids
