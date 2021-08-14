@@ -1,6 +1,6 @@
 FactoryBot.define do
   factory :question do
-    name { Faker::Name.unique.name }
+    name { create(:question_type_single) }
     association :question_type
     association :user
   end
@@ -11,6 +11,10 @@ FactoryBot.define do
 
   factory :multiple_choice_question, parent: :question do
     question_type { create(:question_type_multiple) }
+  end
+
+  factory :free_text_question, parent: :question do
+    question_type { create(:question_type_free_text) }
   end
 
   factory :question_with_correct_option, parent: :question do

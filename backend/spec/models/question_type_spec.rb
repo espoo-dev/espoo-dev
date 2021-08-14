@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 RSpec.describe QuestionType, type: :model do
-  subject { create(:question_type) }
+  subject { build(:question_type) }
 
   describe 'uniqueness' do
     it { is_expected.to validate_uniqueness_of(:name).case_insensitive }

@@ -5,12 +5,17 @@ class QuestionType < ApplicationRecord
 
   before_destroy :check_questions_before_destroy, prepend: true
 
+  SINGLE_CHOICE = 'Single Choice'.freeze
+  MULTIPLE_CHOICE = 'Multiple Choice'.freeze
+  FREE_TEXT = 'Free Text'.freeze
+
   def single_choice?
     name == SINGLE_CHOICE
   end
 
-  SINGLE_CHOICE = 'Single Choice'.freeze
-  MULTIPLE_CHOICE = 'Multiple Choice'.freeze
+  def free_text?
+    name == FREE_TEXT
+  end
 
   def check_questions_before_destroy
     questions_count = Question.where(question_type_id: id)
