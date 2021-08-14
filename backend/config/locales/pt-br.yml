@@ -18,7 +18,7 @@ pt-br:
             ready_to_be_answered:
               cant_update_ready_to_be_answered: Tem que estar "pronto para ser respondido" quando a pesquisa estiver pronta.
             user_id:
-              must_be_same_user: deve ser o mesmo!
+              must_be_same_user: deve ser o mesmo na questao e no questionario!
         question_type:
           attributes:
             questions:
