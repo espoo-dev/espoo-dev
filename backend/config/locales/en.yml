@@ -18,7 +18,7 @@ en:
             ready_to_be_answered:
               cant_update_ready_to_be_answered: Has to be "ready to be answered" when survey is ready.
             user_id:
-              must_be_same_user: must be the same!
+              must_be_same_user: must be the same in question and survey
         question_type:
           attributes:
             questions:
