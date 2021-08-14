@@ -13,7 +13,7 @@ RSpec.describe Answer, type: :model do
   describe 'free_text validations' do
     it 'is not valid when has no user_answer' do
       answer = build(:free_text_answer, options: [], user_answer: nil)
-      expect(answer).to_not be_valid
+      expect(answer).not_to be_valid
     end
 
     it 'is valid when question has user_answer' do

@@ -50,7 +50,6 @@ RSpec.describe 'AnswersController', type: :request do
         let!(:user_student) { create(:user_student) }
         let!(:answers_survey) { create(:answers_survey, user: user_student) }
         let!(:question) { create(:free_text_question, user: user_teacher) }
-        let!(:option) { create(:free_text_option, question: question, user: user_teacher) }
 
         before do
           answer_params = {
