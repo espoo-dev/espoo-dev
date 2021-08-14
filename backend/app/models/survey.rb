@@ -12,7 +12,7 @@ class Survey < ApplicationRecord
     all.includes([:questions])
   }
 
-  scope :ready_surveys, -> { where(ready: true) }
+  scope :ready_surveys, -> { where(ready: true).includes([:questions]) }
 
   def validates_ready
     ready_questions = questions.all?(&:ready_to_be_answered)
