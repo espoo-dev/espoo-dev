@@ -31,6 +31,17 @@ Espoo-dev is a learning platform. There are three user types:
 - frontend (Next, React):
   - **Web Client**: The users (Student) can answer `Questions` that belongs to a `Survey`
 
+## :smiley: Contributing
+ Please check [CONTRIBUTING.md](https://github.com/espoo-dev/espoo-dev/blob/main/CONTRIBUTING.md)
+
+# ✨ Demos
+1. [admin](https://espoo.herokuapp.com/)
+1. [client](https://espoolingo.herokuapp.com/)
+
+# 🌎 Community
+1. [Slack](https://join.slack.com/t/espoo-dev/shared_invite/zt-q3od66jm-x7MNmrenB0fra86jop0jsg)
+
+
 ## Current features
 - **Backoffice app**:
   - Login, Logout
@@ -51,16 +62,3 @@ Espoo-dev is a learning platform. There are three user types:
  - Answers reports
  - Public surveys
  - Surveys protected by password
-
-## :smiley: Contributing
- Please check [CONTRIBUTING.md](https://github.com/espoo-dev/espoo-dev/blob/main/CONTRIBUTING.md)
-
-# ✨ Demos
-1. [admin](https://espoo.herokuapp.com/)
-1. [client](https://espoolingo.herokuapp.com/)
-
-# 🌎 Community
-1. [Slack](https://join.slack.com/t/espoo-dev/shared_invite/zt-q3od66jm-x7MNmrenB0fra86jop0jsg)
-
-
-
