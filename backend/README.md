@@ -1,6 +1,5 @@
 # README
 
-
 # 🐳 Run (with docker)
 
 - `docker-compose up`
@@ -12,7 +11,7 @@
 - username: `admin@gamil.com` password: `123456`
 
 # :heart: Run (standalone)
-
+- `cd backend`
 - `bundle install`
 - `bundle exec rake db:create db:migrate db:seed`
 - `bundle exec rspec` (need environment variables from `docker-compose.yml`)
