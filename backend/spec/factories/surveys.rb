@@ -18,6 +18,13 @@ FactoryBot.define do
     end
   end
 
+  factory :survey_with_2_questions, parent: :survey do
+    after(:create) do |survey|
+      survey.questions = build_list(:question, 2, user: survey.user)
+      survey.save
+    end
+  end
+
   factory :not_ready_survey, parent: :survey do
     after(:create) do |survey|
       survey.questions = [
