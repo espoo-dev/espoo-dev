@@ -3,6 +3,10 @@ pt-br:
   activerecord:
     errors:
       models:
+        answers_survey:
+          attributes:
+            base:
+              multiple_not_completed_answers_survey: Deve existir apenas um "não completo" por Questionario e Usuario.
         option:
           attributes:
             base:

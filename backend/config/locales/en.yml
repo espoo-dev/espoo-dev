@@ -3,6 +3,10 @@ en:
   activerecord:
     errors:
       models:
+        answers_survey:
+          attributes:
+            base:
+              multiple_not_completed_answers_survey: Should exist only one not completed by survey and user.
         option:
           attributes:
             base:
