@@ -10,6 +10,10 @@ RSpec.describe Answer, type: :model do
     it { is_expected.to have_many(:options) }
   end
 
+  describe 'uniqueness' do
+    it { is_expected.to validate_uniqueness_of(:question_id).scoped_to(:answers_survey_id) }
+  end
+
   describe 'free_text validations' do
     it 'is not valid when has no user_answer' do
       answer = build(:free_text_answer, options: [], user_answer: nil)
