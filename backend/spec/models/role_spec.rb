@@ -69,8 +69,12 @@ RSpec.describe Role, type: :model do
       expect(described_class.by_user(user_admin)).to match(all_roles)
     end
 
-    it 'shows all not admin roles' do
+    it 'shows all not admin roles when user is not admin' do
       expect(described_class.by_user(user_teacher)).to match(not_admin_roles)
+    end
+
+    it 'shows all not admin roles when has no user' do
+      expect(described_class.by_user(nil)).to match(not_admin_roles)
     end
   end
 end
