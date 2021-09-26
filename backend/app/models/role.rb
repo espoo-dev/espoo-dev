@@ -6,9 +6,9 @@ class Role < ApplicationRecord
   before_destroy :check_users_before_destroy, prepend: true
 
   scope :by_user, lambda { |user|
-    return where.not(role_type: Role::ADMIN) unless user&.admin?
+    return all if user&.admin?
 
-    all
+    where.not(role_type: Role::ADMIN)
   }
 
   ADMIN = 'admin'.freeze
