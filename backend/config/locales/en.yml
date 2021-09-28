@@ -3,6 +3,12 @@ en:
   activerecord:
     errors:
       models:
+        answer:
+          attributes:
+            options:
+              at_least_one_option: Should have at least one option.
+            question_id:
+              only_one_option: Can't select more than one option when single choice.
         answers_survey:
           attributes:
             base:
