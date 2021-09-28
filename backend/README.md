@@ -1,7 +1,10 @@
 # README
 
 # 🐳 Run (with docker)
-
+- Add `"true"` to the `ENV["DOCKER_ENV"]` variable, by using the following command in your terminal.
+```
+$ export DOCKER_ENV="true"
+```
 - `docker-compose up`
 
 - `docker-compose exec espoo_server bundle exec rspec`
