@@ -463,6 +463,7 @@ DEPENDENCIES
   jbuilder (~> 2.7)
   jquery-rails
   listen (~> 3.3)
+  nokogiri (~> 1.12, >= 1.12.4)
   pg (~> 1.1)
   pry-rails
   puma (~> 5.0)
