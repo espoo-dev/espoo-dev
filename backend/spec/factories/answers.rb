@@ -7,4 +7,8 @@ FactoryBot.define do
   factory :free_text_answer, parent: :answer do
     question { create(:free_text_question) }
   end
+
+  factory :answer_with_option, parent: :answer do
+    options { [create(:option)] }
+  end
 end
