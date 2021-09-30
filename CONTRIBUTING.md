@@ -1,3 +1,9 @@
+## Code of Conduct
+
+We welcome pull requests from everyone. By participating in this project, you
+agree to abide by the [frontend_readme.md](https://github.com/espoo-dev/espoo-dev/blob/main/CODE_OF_CONDUCT.md)
+.
+
 ## Getting started / Setup
 
 [frontend_readme.md](https://github.com/espoo-dev/espoo-dev/blob/main/frontend/README.md)
@@ -8,7 +14,7 @@
 1. Fork the repo
 2. Clone the forked repo
 3. Check if the tests are working
-4. Create a Pull Request tagging the related issue
+4. Create a Pull Request
 
 # 📝 Docs
 
