@@ -1,7 +1,7 @@
 ## Code of Conduct
 
 We welcome pull requests from everyone. By participating in this project, you
-agree to abide by the [frontend_readme.md](https://github.com/espoo-dev/espoo-dev/blob/main/CODE_OF_CONDUCT.md)
+agree to abide by the [CODE_OF_CONDUCT.md](https://github.com/espoo-dev/espoo-dev/blob/main/CODE_OF_CONDUCT.md)
 .
 
 ## Getting started / Setup
