@@ -1,12 +1,14 @@
 ## Getting started / Setup
 
 [frontend_readme.md](https://github.com/espoo-dev/espoo-dev/blob/main/frontend/README.md)
+
 [backend_readme.md](https://github.com/espoo-dev/espoo-dev/blob/main/backend/README.md)
 
 ## Opening a PR
 1. Fork the repo
 2. Clone the forked repo
 3. Check if the tests are working
+4. Create a Pull Request tagging the related issue
 
 # 📝 Docs
 
