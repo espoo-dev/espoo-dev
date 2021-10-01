@@ -53,7 +53,7 @@ en:
   devise:
     sessions:
       new:
-        sign_in: Sign in
+        sign_in: Login
   students:
     index:
       sign_out: Logout
