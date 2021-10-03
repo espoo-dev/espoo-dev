@@ -26,9 +26,8 @@ question_type_free_text = QuestionType.create!(name: "Free Text")
 
 
 survey_admin = Survey.create!(name: 'Colors survey - Admin', user: user_admin, survey_subject_id: color_subject.id)
-colors_survey = Survey.create!(name: 'Colors survey - for Children', user: user_admin, survey_subject_id: color_subject.id)
-ready_survey_teacher = Survey.create!(name: 'Animals survey - Teacher', user: user_teacher, survey_subject_id: animal_subject.id)
-
+colors_survey = Survey.create!(name: 'Colors survey - for Children', description: 'Favorite colors', user: user_admin, survey_subject_id: color_subject.id)
+ready_survey_teacher = Survey.create!(name: 'Animals survey - Teacher', description: 'Nice animals', user: user_teacher, survey_subject_id: animal_subject.id)
 
 Survey.create!(name: 'Dog survey - Teacher', user: user_teacher, survey_subject_id: animal_subject.id)
 Survey.create!(name: 'Bunny survey - Teacher', user: user_teacher, survey_subject_id: animal_subject.id)
@@ -67,3 +66,5 @@ question_2_colors_survey.update(ready_to_be_answered: true)
 
 ready_survey_teacher.update(ready: true)
 colors_survey.update(ready: true)
+
+FactoryBot.create_list(:ready_survey, 3)
