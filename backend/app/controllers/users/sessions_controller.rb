@@ -37,7 +37,7 @@ class Users::SessionsController < Devise::SessionsController
   private
 
   def after_sign_in_path_for(resource)
-    return students_path if resource.student?
+    return surveys_path if resource.student?
 
     super
   end

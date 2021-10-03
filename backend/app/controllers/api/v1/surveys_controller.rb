@@ -6,7 +6,7 @@ class Api::V1::SurveysController < Api::V1::ApiController
   end
 
   def index
-    surveys = Survey.ready_surveys.where(params.permit(:user_id))
+    surveys = Survey.ready_surveys_eager.where(params.permit(:user_id))
     authorize surveys
     render json: surveys
   end

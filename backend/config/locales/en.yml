@@ -45,6 +45,10 @@ en:
           attributes:
             surveys:
               cant_destroy_survey_subject: Can't destroy survey subject with %{survey_count} surveys.
+    models:
+      question:
+        one: Question
+        other: Questions
   admin:
     application:
       navigation:
@@ -54,6 +58,3 @@ en:
     sessions:
       new:
         sign_in: Login
-  students:
-    index:
-      sign_out: Logout
