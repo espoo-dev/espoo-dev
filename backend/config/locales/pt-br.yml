@@ -47,8 +47,8 @@ pt-br:
               cant_destroy_survey_subject: Não é possível destruir o assunto da pesquisa com %{survey_count} pesquisas.
     models:
       question:
-        one: questão
-        other: questões
+        one: Questão
+        other: Questões
   admin:
     application:
       navigation:

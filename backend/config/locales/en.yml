@@ -47,8 +47,8 @@ en:
               cant_destroy_survey_subject: Can't destroy survey subject with %{survey_count} surveys.
     models:
       question:
-        one: question
-        other: questions
+        one: Question
+        other: Questions
   admin:
     application:
       navigation:
