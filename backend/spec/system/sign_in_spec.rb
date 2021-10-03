@@ -33,9 +33,7 @@ RSpec.describe 'User sign in', type: :system do
       click_on 'Log in'
     end
 
-    it { expect(page).to have_current_path(students_path) }
-
-    it { expect(page).to have_link('Logout', href: destroy_user_session_path) }
+    it { expect(page).to have_current_path(surveys_path) }
   end
 
   describe 'When data is not valid' do

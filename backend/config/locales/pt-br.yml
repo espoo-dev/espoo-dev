@@ -58,6 +58,3 @@ pt-br:
     sessions:
       new:
         sign_in: Login
-  students:
-    index:
-      sign_out: Sair

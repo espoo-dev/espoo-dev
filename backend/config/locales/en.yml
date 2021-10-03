@@ -58,6 +58,3 @@ en:
     sessions:
       new:
         sign_in: Login
-  students:
-    index:
-      sign_out: Logout
