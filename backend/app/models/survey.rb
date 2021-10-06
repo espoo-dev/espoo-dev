@@ -21,4 +21,8 @@ class Survey < ApplicationRecord
     # i18n-tasks-use t('activerecord.errors.models.survey.attributes.ready.cant_update_ready')
     errors.add(:ready, :cant_update_ready) if ready && questions.any? && !ready_questions
   end
+
+  def answered_questions_quantity
+    questions.count(&:answered?)
+  end
 end

@@ -50,4 +50,22 @@ RSpec.describe Survey, type: :model do
       expect(survey).to be_valid
     end
   end
+
+  describe '#answered_questions_quantity' do
+    subject(:answered_quantity) { survey.answered_questions_quantity }
+
+    context 'when there is 1 answer' do
+      let(:user) { survey.answers_surveys.first.user }
+      let(:survey) { create(:survey_with_answer) }
+
+      it { expect(answered_quantity).to eq(1) }
+    end
+
+    context 'when there are no answers' do
+      let(:user) { survey.user }
+      let(:survey) { create(:survey) }
+
+      it { expect(answered_quantity).to eq(0) }
+    end
+  end
 end

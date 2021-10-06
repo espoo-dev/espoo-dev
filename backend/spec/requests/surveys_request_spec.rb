@@ -2,7 +2,7 @@ require 'rails_helper'
 
 RSpec.describe 'SurveysController', type: :request do
   describe '#show' do
-    let!(:survey) { create(:survey) }
+    let!(:survey) { create(:survey_with_answer) }
     let!(:survey_question) { survey.questions.first }
     let!(:question_type) { survey_question.question_type }
     let!(:survey_subject) { survey.survey_subject }
@@ -18,6 +18,7 @@ RSpec.describe 'SurveysController', type: :request do
         'name' => survey.name,
         'description' => survey.description,
         'survey_subject_id' => survey_subject.id,
+        'answered_questions_quantity' => 1,
         'questions' => [
           'id' => survey_question.id,
           'name' => survey_question.name,
