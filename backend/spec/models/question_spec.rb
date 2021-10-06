@@ -93,4 +93,20 @@ RSpec.describe Question, type: :model do
       expect(question_mod.errors.full_messages).to match(['User must be the same in question and survey'])
     end
   end
+
+  describe '#answered?' do
+    subject(:answered?) { question.answered? }
+
+    context 'when question got an answer' do
+      let(:question) { create(:question_with_answer) }
+
+      it { expect(answered?).to be_truthy }
+    end
+
+    context 'when question has no answer' do
+      let(:question) { create(:question) }
+
+      it { expect(answered?).to be_falsy }
+    end
+  end
 end

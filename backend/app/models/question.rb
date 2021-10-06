@@ -20,6 +20,9 @@ class Question < ApplicationRecord
 
     all.includes([:options])
   }
+  def answered?
+    answers.any?
+  end
 
   private
 
