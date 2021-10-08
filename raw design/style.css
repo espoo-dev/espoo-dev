@@ -1,0 +1,44 @@
+<style>
+
+img.logo{
+    height: 20%;
+    width: 20%;
+}
+
+form {
+     padding: 0;
+     margin: 5%
+ }
+
+.abc {
+     background-color: white;
+     padding: 2%;
+     margin: auto
+ }
+
+ .xyz {
+     background-color: gray;
+     padding: 2%;
+ }
+
+.bg-cover {
+  background-size: cover !important;
+}
+
+ @media only screen and (max-width: 600px) {
+     row {
+         margin-top: 5%;
+         margin-left: 1%;
+         margin-right: 1%
+     }
+     
+ }
+.vertical-center {
+  min-height: 100%;  /* Fallback for browsers do NOT support vh unit */
+  min-height: 100vh; /* These two lines are counted as one :-)       */
+
+  display: flex;
+  align-items: center;
+}
+
+</style>
