@@ -8,5 +8,7 @@
               = survey.title
             p.card-text
               = survey.description
-            a.btn.btn-primary
-              | Answer
+            = form_with url: answers_surveys_path, method: :post do |form|
+              = form.hidden_field :survey_id, value: survey.id
+              = form.submit "Answer", class: 'btn btn-primary'
+
