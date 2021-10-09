@@ -18,31 +18,39 @@
 </p>
 
 ## Project definion
+
 Espoo-dev is a learning platform. There are three user types:
+
 - **Teacher:** Creates `Surveys` with many `Questions`
 - **Student:** Answers the `Questions` that belongs to a `Survey`
 - **Admin:** (only relevant for developers) Can manage everything
 
 ## Architecture / Modules
+
 - This repository is a Monorepo, it has 2 folders named `backend` and `frontend`
 - backend (Ruby on Rails):
   - **Backoffice app (admin panel)** : The users (Teacher/Admin) can manage the Surveys, Questions, Options and see the answers/reports
   - **API**: Used by the **Web Client** to enable `Students` to answer `Questions` that belongs to a `Survey`
+  - **Web Client**: The users (Student) can answer `Questions` that belongs to a `Survey`
 - frontend (Next, React):
   - **Web Client**: The users (Student) can answer `Questions` that belongs to a `Survey`
+- **note**: We have 2 versions of Web Client, Next/React and Rails
 
 ## :smiley: Contributing
- Please check [CONTRIBUTING.md](https://github.com/espoo-dev/espoo-dev/blob/main/CONTRIBUTING.md)
+
+Please check [CONTRIBUTING.md](https://github.com/espoo-dev/espoo-dev/blob/main/CONTRIBUTING.md)
 
 # ✨ Demos
+
 1. [admin](https://espoo.herokuapp.com/)
 1. [client](https://espoolingo.herokuapp.com/)
 
 # 🌎 Community
+
 1. [Slack](https://join.slack.com/t/espoo-dev/shared_invite/zt-q3od66jm-x7MNmrenB0fra86jop0jsg)
 
-
 ## Current features
+
 - **Backoffice app**:
   - Login, Logout
   - Teacher can manage `surveys`, `questions`, `options`
@@ -56,9 +64,10 @@ Espoo-dev is a learning platform. There are three user types:
   - Login, Logout
   - List surveys
 
- ## Next features
- - Free text, image, audio, video questions
- - Free text, image, audio, video answers
- - Answers reports
- - Public surveys
- - Surveys protected by password
+## Next features
+
+- Free text, image, audio, video questions
+- Free text, image, audio, video answers
+- Answers reports
+- Public surveys
+- Surveys protected by password
