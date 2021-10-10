@@ -44,6 +44,9 @@ Please check [CONTRIBUTING.md](https://github.com/espoo-dev/espoo-dev/blob/main/
 
 1. [admin](https://espoo.herokuapp.com/)
 1. [client](https://espoolingo.herokuapp.com/)
+1. credentials
+   - email: admin@gmail.com, password: 123456
+   - email: student@gmail.com, password: 123456
 
 # 🌎 Community
 
@@ -51,17 +54,20 @@ Please check [CONTRIBUTING.md](https://github.com/espoo-dev/espoo-dev/blob/main/
 
 ## Current features
 
-- **Backoffice app**:
-  - Login, Logout
-  - Teacher can manage `surveys`, `questions`, `options`
-  - Admin manage everything that `Teacher` plus `users`, `roles`, `question types`, `surveys subjects`
 - **API**:
   - Login
   - `create`, `index` users
   - `create`, `index` surveys
   - `index` roles
-- **Web Client**
+- **Backoffice app - rails**:
   - Login, Logout
+  - Teacher can manage `surveys`, `questions`, `options`
+  - Admin manage everything that `Teacher` plus `users`, `roles`, `question types`, `surveys subjects`
+- **Web Client - react**
+  - Login, Logout, Register
+  - List surveys
+- **Web Client - rails**
+  - Login, Logout, Register
   - List surveys
 
 ## Next features
