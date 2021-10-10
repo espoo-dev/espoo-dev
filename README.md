@@ -31,8 +31,10 @@ Espoo-dev is a learning platform. There are three user types:
 - backend (Ruby on Rails):
   - **Backoffice app (admin panel)** : The users (Teacher/Admin) can manage the Surveys, Questions, Options and see the answers/reports
   - **API**: Used by the **Web Client** to enable `Students` to answer `Questions` that belongs to a `Survey`
+  - **Web Client**: The users (Student) can answer `Questions` that belongs to a `Survey`
 - frontend (Next, React):
   - **Web Client**: The users (Student) can answer `Questions` that belongs to a `Survey`
+- **note**: We have 2 versions of Web Client, Next/React and Rails
 
 ## :smiley: Contributing
 
