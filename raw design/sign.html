@@ -1,6 +1,7 @@
 <!doctype html>
 <html lang="en">
-  <head>
+
+<head>
     <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -18,44 +19,41 @@
 <body>
     <div class="container-fluid min-vh-100 d-flex">
         <div class="row flex-fill">
-            <div class="col-sm-4  text-center abc">
+            <div class="col-lg-4  text-center my-auto">
 
-                <form class="form-signin">
-                    <img src="logo.png" class="logo w-50 h-50">
+                <form class="">
+                    <img src="logo2.png" class="img-fluid">
 
-                    <h1 class="h3 mb-3 font-weight-normal">Cadastro</h1>
+                    <h1 class="h3 mb-3 font-weight-normal">Sign</h1>
+                    <div class="mb-3">
+                        <span>Enter your data.</span>
+                    </div>
 
-                    <span>Ente com suas informações ou cadastre-se.</span>
+                    <div class="mb-3">
+                        <input type="email" id="inputEmail" class="form-control" placeholder="Seu email" required autofocus>
+                    </div>
+                    <div class="mb-3">
+                        <input type="password" id="inputPassword" class="form-control" placeholder="Senha" required>
+                    </div>
+                    <div class="checkbox mb-3">
+                            <span> Choose a Role</span>
+                        <select class="form-select" aria-label="Default select example">
+                            
+                            
+                            <option selected>Role list</option>
+                            <option value="1">Student</option>
+                            <option value="2">Professor</option>
+                            <option value="3">Admin</option>
+                        </select>
+                    </div>
+                    <button class="btn btn-lg btn-info btn-block text-white" type="submit">Sign in</button>
 
-                    <p></p>
-
-                    <input type="email" id="inputEmail" class="form-control" placeholder="Seu email" required autofocus>
-                    <p></p>
-
-                    <input type="password" id="inputPassword" class="form-control" placeholder="Senha" required>
-                    <p></p>
-
-                    <span>Escolha uma função</span>
-                    <p></p>
-                    <select id="role_id" name="role_id" placeholder="teacher, moderator..." required="">
-                        <option value="">Select a role</option>
-                        <option value="107">teacher</option>
-                        <option value="108">student</option>
-                    </select>
-
-
-                    <p></p>
-                    <button class="btn btn-lg btn-info btn-block text-white" type="submit">Cadastrar</button>
 
                 </form>
             </div>
-            <div class="col-sm-8 img-responsive text-center bg-cover" style="background-image: url(https://images.pexels.com/photos/5428264/pexels-photo-5428264.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940)"> <i class="fa fa-user-circle fa-5x" aria-hidden="true"></i>
-
+            <div class="col-lg-8  bg-cover bg-image d-none d-lg-block">
 
             </div>
-
-
-
         </div>
     </div>
 
