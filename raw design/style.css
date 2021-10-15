@@ -1,0 +1,6 @@
+.bg-image {
+  background-image: url("https://images.pexels.com/photos/5428264/pexels-photo-5428264.jpeg");
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+}
