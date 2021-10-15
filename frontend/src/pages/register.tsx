@@ -33,16 +33,13 @@ const Login = () => {
 
   const handleFormSubmit = (data: UserCreate) => {
     const { role_id } = data;
-    console.log('data', data);
 
     const payload: UserCreate = {
       ...data,
       role_id: Number(role_id),
     };
 
-    console.log(payload);
-
-    // register(payload);
+    register(payload);
   };
 
   const getRoles = async () => {
@@ -99,36 +96,19 @@ const Login = () => {
                 required
               />
 
-              { isRolesLoading ? (
+              {isRolesLoading ? (
                 <Flex justify="center">
                   <Spinner />
                 </Flex>
-              ): (
+              ) : (
                 <AppRadioButton
                   name="role_id"
-                  key="id"
+                  keyAttrs="id"
                   label="Roles"
                   options={roles}
                   value="id"
                   text="role_type"
                 />
-                // <FormControl
-                //   isRequired
-                //   id="role_id"
-                // >
-                //   <FormLabel htmlFor="role_id">Role</FormLabel>
-                //   <RadioGroup
-                //     name="role_id"
-                //     onChange={setRadioValue}
-                //     value={radioValue}
-                //   >
-                //     <Stack direction="row">
-                //       {roles.map((role: Role) => (
-                //         <Radio key={role.id} value={`${role.id}`}>{role.role_type}</Radio>
-                //       ))}
-                //     </Stack>
-                //   </RadioGroup>
-                // </FormControl>
               )}
 
               <AppButton
