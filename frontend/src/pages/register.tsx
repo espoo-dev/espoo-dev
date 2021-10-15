@@ -58,9 +58,7 @@ const Login = () => {
   }, []);
 
   useEffect(() => {
-    setTimeout(() => {
-      setIsRolesLoading(false);
-    }, 2000);
+    setIsRolesLoading(false);
   }, [roles])
 
   return (
