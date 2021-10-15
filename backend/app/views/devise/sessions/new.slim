@@ -1,36 +1,19 @@
-div.container-fluid.min-vh-100.d-flex
-  div.row.flex-fill
-    div.col-sm-4.text-center.abc
-      = form_for( resource,
-                  as: resource_name,
-                  url: session_path(resource_name),
-                  html: { class: 'form-signin' }) do |f|
-
-        = image_tag("logo.png", class: "logo w-50 h-50")
-
-        h1.h3.mb-3.font-weight-normal Login
-
-        span Entre com suas informações ou cadastre-se.
-
-        p
-
+.row.h-100
+  div.container.align-self-center.col-10.col-lg-6
+    h1.text-center.mb-4
+      = t('.sign_in')
+    = form_for(resource, as: resource_name, url: session_path(resource_name)) do |f|
+      div.d-flex.flex-column.align-items-center
         = bootstrap_devise_error_messages!
         - if flash[:alert]
           span.flash_error
             = flash[:alert]
-
-        = f.email_field :email, autofocus: true, autocomplete: 'email', class: 'form-control', placeholder: "Seu email"
-
-        = f.password_field :password, autocomplete: 'current-password', class: 'form-control', placeholder: "Senha"
-
-        div.checkbox.mb-3
-          label
-            input type="checkbox" value="remember-me" Lembrar de mim
-
-        button.btn.btn-lg.btn-info.btn-block type="submit" Login
-
-        p
-
-        = link_to "Sign up", new_registration_path(resource_name), class: 'btn btn-lg btn-info btn-block'
-    div.col-sm-8.img-responsive.text-center.bg-cover style="background-image: url(https://images.pexels.com/photos/5428264/pexels-photo-5428264.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940)"
-      i.fa.fa-user-circle.fa-5x aria-hidden="true"
+        .form-group.mb-3.w-100
+          = f.label :email
+          = f.email_field :email, autofocus: true, autocomplete: 'email', class: 'form-control'
+        .form-group.mb-4.w-100
+          = f.label :password
+          = f.password_field :password, autocomplete: 'current-password', class: 'form-control'
+        .form-group.mb-3
+          = f.submit 'Log in', class: 'btn btn-primary'
+        = link_to "Sign up", new_registration_path(resource_name)
