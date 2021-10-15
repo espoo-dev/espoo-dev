@@ -25,6 +25,7 @@ RSpec.describe 'AnswersSurveysController', type: :request do
       it 'matches AnswersSurvey attributes' do
         expected_attributes = {
           'id' => anything,
+          'status' => AnswersSurvey::NOT_STARTED,
           'survey' => {
             'id' => anything,
             'name' => survey.name,

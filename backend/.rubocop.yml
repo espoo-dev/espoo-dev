@@ -31,6 +31,8 @@ Metrics/AbcSize:
 Metrics/BlockLength:
   IgnoredMethods: ['describe', 'context']
   Max: 35
+  Exclude:
+    - 'spec/factories/*'
 
 Metrics/ClassLength:
   Max: 200

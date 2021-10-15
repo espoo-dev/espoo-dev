@@ -7,9 +7,6 @@ agent:
 blocks:
   - name: Install dependencies
     dependencies: []
-    # Run this block on changes in frontend folder
-    run:
-      when: "change_in('/frontend/package.json')"
     task:
       jobs:
         - name: install client dependencies

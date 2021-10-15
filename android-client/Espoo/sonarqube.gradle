@@ -1,0 +1,24 @@
+//apply plugin: "org.sonarqube"
+//
+//sonarqube {
+//    properties {
+//        property "sonar.host.url", "http://localhost:9000/"
+//        property "sonar.projectKey", "espoo-dev"
+//        property "sonar.projectName", "espoo-dev"
+//        property "sonar.login", "05f21b34399130ddecf8e97bfc42f7e74bf648a3"
+//        property "sonar.tests", "src/test/java"
+//        property "sonar.test.inclusions", "**/*Test*/**"
+//        property "sonar.sourceEncoding", "UTF-8"
+//        property "sonar.sources", "src/main/java"
+//        property "sonar.exclusions", '**/*Test*/**,' +
+//                'build/**' +
+//                '*.json,' +
+//                '**/*test*/**,' +
+//                '**/.gradle/**,' +
+//                '**/R.class'
+//        property "sonar.java.coveragePlugin", "jacoco"
+//        property "sonar.junit.reportPaths", "**/test-results/**/*.xml"
+//        property "sonar.coverage.jacoco.xmlReportPaths", "**/jacocoTestReport/jacocoTestReport.xml"
+//        property "sonar.coverage.exclusions", "${coverageExclusions.join(', ')}"
+//    }
+//}
