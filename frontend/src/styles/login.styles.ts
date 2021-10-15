@@ -71,10 +71,15 @@ export const LoginContainer = styled.div`
 `;
 
 export const LoginFormContainer = styled.div`
-  width: 400px;
   display: flex;
   flex-direction: column;
   padding: 26px;
+  width: 400px;
+
+  @media (max-width: 375px) {
+    max-width: 400px;
+    width: max-content;
+  }
 `;
 
 export const LoginTitle = styled.div`
