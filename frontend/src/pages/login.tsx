@@ -1,4 +1,6 @@
 import React, { useContext, useRef } from 'react';
+import Head from 'next/head';
+import Link from 'next/link';
 import { AuthContext } from 'context/auth';
 import { UserLogin } from 'api/models/user';
 import {
@@ -17,8 +19,6 @@ import {
 
 import { AppInput } from '../components/app-input';
 import { AppButton } from '../components/app-button';
-import Head from 'next/head';
-import Link from "next/link";
 
 const Login = () => {
   const formRef = useRef();

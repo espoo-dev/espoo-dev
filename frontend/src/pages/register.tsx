@@ -7,6 +7,8 @@ import { Role } from 'api/models/role';
 import { UserCreate } from 'api/models/user';
 import { RoleService } from 'api/services';
 import { httpClient } from 'api';
+import { Flex, Spinner } from '@chakra-ui/react';
+import Link from 'next/link';
 import {
   BackLink,
   PageContainer,
@@ -19,8 +21,6 @@ import {
   LogoImg,
 } from '../styles/login.styles';
 import { AppInput } from '../components';
-import { Flex, Spinner } from '@chakra-ui/react'
-import Link from "next/link";
 
 const Login = () => {
   const formRef = useRef();
@@ -28,7 +28,6 @@ const Login = () => {
   const { register, loading } = context;
   const [roles, setRoles] = useState<Role[]>([]);
   const [isRolesLoading, setIsRolesLoading] = useState(true);
-  const [radioValue, setRadioValue] = useState('');
   const roleService = new RoleService(httpClient);
 
   const handleFormSubmit = (data: UserCreate) => {
@@ -59,7 +58,7 @@ const Login = () => {
 
   useEffect(() => {
     setIsRolesLoading(false);
-  }, [roles])
+  }, [roles]);
 
   return (
     <PageContainer>

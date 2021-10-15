@@ -1,37 +1,48 @@
 import { useEffect, useRef, useState } from 'react';
-import { FormControl, FormLabel, Radio, RadioGroup, Stack } from '@chakra-ui/react'
-import { useField } from "@unform/core";
+import { useField } from '@unform/core';
+import {
+  FormControl,
+  FormLabel,
+  Radio,
+  RadioGroup,
+  Stack
+} from '@chakra-ui/react';
 
-const defaultProps = {};
+const defaultProps = {
+  isRequired: true,
+};
 
-export const AppRadioButton = ({ options, keyAttrs, value, label, name, text }) => {
+export const AppRadioButton = ({
+  options, keyAttrs, value, label, name, text, isRequired,
+}) => {
   const [radioValue, setRadioValue] = useState('');
 
   const inputRefs = useRef([]);
-  const { fieldName, registerField, defaultValue } = useField(name);
+  const { fieldName, registerField } = useField(name);
 
   useEffect(() => {
     registerField({
       name: fieldName,
       ref: inputRefs,
-      getValue: refs => {
-        return refs.current.find(input => input?.checked)?.value
-      },
+      getValue: (refs) => refs.current.find((input) => input?.checked)?.value,
       setValue: (refs, id) => {
-        const inputRef = refs.current.find(ref => ref.id === id)
-        if (inputRef) inputRef.checked = true
+        const inputRef = refs.current.find((ref) => ref.id === id);
+        if (inputRef) inputRef.checked = true;
       },
-      clearValue: refs => {
-        const inputRef = refs.current.find(ref => ref.checked === true)
-        if (inputRef) inputRef.checked = false
+      clearValue: (refs) => {
+        const inputRef = refs.current.find((ref) => ref.checked === true);
+        if (inputRef) inputRef.checked = false;
       },
-    })
-  }, [fieldName, registerField])
+    });
+  }, [fieldName, registerField]);
 
+  const setRef = (elRef, index) => {
+    inputRefs.current[index] = elRef;
+  };
 
   return (
     <FormControl
-      isRequired
+      isRequired={isRequired}
       id={name}
     >
       <FormLabel htmlFor={name}>{label}</FormLabel>
@@ -44,7 +55,7 @@ export const AppRadioButton = ({ options, keyAttrs, value, label, name, text }) 
           {options.map((option, index) => (
             <Radio
               key={option[keyAttrs]}
-              ref={elRef => (inputRefs.current[index] = elRef)}
+              ref={(elRef) => setRef(elRef, index)}
               value={`${option[value]}`}
             >
               {option[text]}
@@ -53,7 +64,7 @@ export const AppRadioButton = ({ options, keyAttrs, value, label, name, text }) 
         </Stack>
       </RadioGroup>
     </FormControl>
-  )
-}
+  );
+};
 
 AppRadioButton.defaultProps = defaultProps;
