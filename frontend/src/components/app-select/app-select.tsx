@@ -1,8 +1,8 @@
-import React, { useEffect, useRef } from 'react';
+import { useEffect, useRef, SelectHTMLAttributes } from 'react';
 import { useField } from '@unform/core';
 import { InputWrapper } from './app-select.styles';
 
-interface AppInputProps extends React.SelectHTMLAttributes<HTMLSelectElement> {
+interface AppInputProps extends SelectHTMLAttributes<HTMLSelectElement> {
   label: string;
 }
 

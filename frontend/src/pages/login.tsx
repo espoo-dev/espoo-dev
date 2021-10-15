@@ -1,9 +1,4 @@
-/* eslint-disable import/no-unresolved */
-/* eslint-disable import/order */
-/* eslint-disable import/no-extraneous-dependencies */
-/* eslint-disable @typescript-eslint/no-unused-vars */
 import React, { useContext, useRef } from 'react';
-import { useRouter } from 'next/router';
 import { AuthContext } from 'context/auth';
 import { UserLogin } from 'api/models/user';
 import {
@@ -15,27 +10,23 @@ import {
   Subtitle,
   ContainerForm,
   RightContainer,
-  ForgotBtn,
-  RegisterBtn,
+  ForgotLink,
+  RegisterLink,
   LogoImg,
 } from '../styles/login.styles';
 
 import { AppInput } from '../components/app-input';
 import { AppButton } from '../components/app-button';
 import Head from 'next/head';
+import Link from "next/link";
 
 const Login = () => {
   const formRef = useRef();
   const context = useContext(AuthContext);
   const { login, loading } = context;
-  const router = useRouter();
 
   const handleFormSubmit = (data: UserLogin) => {
     login(data);
-  };
-
-  const goToRegister = () => {
-    router.replace('/register');
   };
 
   return (
@@ -56,9 +47,11 @@ const Login = () => {
             <Subtitle>
               <span>
                 Log in with your data or
-                <RegisterBtn id="btn-register" onClick={() => goToRegister()}>
-                  register now.
-                </RegisterBtn>
+                <Link href="/register" passHref>
+                  <RegisterLink id="btn-register">
+                    register now.
+                  </RegisterLink>
+                </Link>
               </span>
             </Subtitle>
 
@@ -96,9 +89,11 @@ const Login = () => {
               <span>Keep me logged in</span>
             </KeepLogin> */}
 
-            <ForgotBtn>
-              <span>Forgot password?</span>
-            </ForgotBtn>
+            <Link href="/forgot-password" passHref>
+              <ForgotLink>
+                <span>Forgot password?</span>
+              </ForgotLink>
+            </Link>
           </LoginFormContainer>
         </LoginContainer>
       </LeftContainer>
