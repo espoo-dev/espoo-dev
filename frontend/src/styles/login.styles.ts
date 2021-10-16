@@ -66,7 +66,8 @@ export const LoginContainer = styled.div`
   display: flex;
   height: 100%;
   justify-content: center;
-  align-items: center;
+  align-items: start;
+  padding-top: 5vh;
   flex-direction: row;
 `;
 
