@@ -9,7 +9,7 @@ body {
 }
 
 .bg-image {
-  background-image: url("https://images.pexels.com/photos/5428264/pexels-photo-5428264.jpeg");
+  background-image: url(asset-path("login-signin-background.jpg"));
   background-repeat: no-repeat;
   background-size: cover;
   background-position: center;
