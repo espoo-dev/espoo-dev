@@ -60,6 +60,10 @@ export const PageContainer = styled.div`
 export const LeftContainer = styled.div`
   flex: 3;
   color: #525252;
+
+  @media (max-width: 800px) {
+    font-size: 1.2em;
+  }
 `;
 
 export const LoginContainer = styled.div`
@@ -78,7 +82,7 @@ export const LoginFormContainer = styled.div`
 
   @media (max-width: 375px) {
     max-width: 400px;
-    width: max-content;
+    width: 100%;
   }
 `;
 
@@ -97,6 +101,10 @@ export const ContainerForm = styled(Form)`
   margin-top: 70px;
   display: grid;
   gap: 24px;
+
+  @media (max-width: 800px) {
+    margin-top: 20px;
+  }
 `;
 
 export const InputForm = styled.div`
@@ -158,6 +166,10 @@ export const RightContainer = styled.div`
   flex: 2;
   background-position: top;
   background-size: cover;
+
+  @media (max-width: 800px) {
+    flex: 0;
+  }
 `;
 
 export const ForgotBtn = styled.button`
