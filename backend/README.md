@@ -8,7 +8,7 @@
 
 - navigate to http://localhost:3000
 
-- username: `admin@gamil.com` password: `123456`
+- username: `admin@gmail.com` password: `123456`
 
 # :heart: Run (standalone)
 - `cd backend`
