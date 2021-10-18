@@ -1,7 +1,11 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Box, Button, List, ListItem, Text } from '@chakra-ui/react';
 import { HiDocumentText } from 'react-icons/hi';
+import { toast } from 'react-toastify';
 import { Survey } from 'api/models/survey';
+import { httpClient } from 'api';
+import { errorHandler } from 'api/error-handler';
+import { AnswerSurveyService } from 'api/services/answer_survey';
 
 interface SurveyListProps {
   data: Survey[];
@@ -9,6 +13,30 @@ interface SurveyListProps {
 
 export const SurveysList = (props: SurveyListProps) => {
   const { data } = props;
+
+  const answerSurveyService = new AnswerSurveyService(httpClient);
+  const [loading, setLoading] = useState(false);
+  const [selectedSurvey, setSelectedSurvey] = useState(null);
+
+  const registerAnswerSurvey = async (survey_id) => {
+    setSelectedSurvey(survey_id);
+    setLoading(true);
+    try {
+      const response = await answerSurveyService.register({ survey_id });
+      if (response && response.data) {
+        toast('Answer Survey created successfully', {
+          position: 'top-right',
+          type: 'success',
+          pauseOnHover: false,
+        });
+      }
+    } catch (error) {
+      errorHandler(error);
+    }
+
+    setLoading(false);
+  };
+
   return (
     <List mt="10" maxH="490px" overflow="auto">
       {data.map((item) => (
@@ -30,7 +58,14 @@ export const SurveysList = (props: SurveyListProps) => {
               </Box>
             </Box>
 
-            <Button colorScheme="teal" size="sm" mt={{ sm: '10px' }}>
+            <Button
+              isLoading={loading && selectedSurvey === item.id}
+              colorScheme="teal"
+              size="sm"
+              mt={{ sm: '10px' }}
+              onClick={() => registerAnswerSurvey(item.id)}
+              data-testid={item.name}
+            >
               Start
             </Button>
           </Box>
