@@ -1,13 +1,16 @@
-import React, { useContext, useEffect, useRef, useState } from 'react';
+import { useContext, useEffect, useRef, useState } from 'react';
 import { errorHandler } from 'api/error-handler';
-import { useRouter } from 'next/router';
 import { AppButton } from 'components/app-button';
+import { AppRadioButton } from 'components/app-radio-button';
 import { AuthContext } from 'context/auth';
 import { Role } from 'api/models/role';
 import { UserCreate } from 'api/models/user';
 import { RoleService } from 'api/services';
 import { httpClient } from 'api';
+import { Flex, Spinner } from '@chakra-ui/react';
+import Link from 'next/link';
 import {
+  BackLink,
   PageContainer,
   LeftContainer,
   LoginContainer,
@@ -15,31 +18,27 @@ import {
   LoginTitle,
   ContainerForm,
   RightContainer,
-  ForgotBtn,
   LogoImg,
 } from '../styles/login.styles';
-import { AppInput, AppSelect } from '../components';
+import { AppInput } from '../components';
 
 const Login = () => {
   const formRef = useRef();
   const context = useContext(AuthContext);
   const { register, loading } = context;
-  const router = useRouter();
   const [roles, setRoles] = useState<Role[]>([]);
+  const [isRolesLoading, setIsRolesLoading] = useState(true);
   const roleService = new RoleService(httpClient);
 
   const handleFormSubmit = (data: UserCreate) => {
     const { role_id } = data;
+
     const payload: UserCreate = {
       ...data,
       role_id: Number(role_id),
     };
 
     register(payload);
-  };
-
-  const goToLogin = () => {
-    router.replace('/login');
   };
 
   const getRoles = async () => {
@@ -56,6 +55,10 @@ const Login = () => {
   useEffect(() => {
     getRoles();
   }, []);
+
+  useEffect(() => {
+    setIsRolesLoading(false);
+  }, [roles]);
 
   return (
     <PageContainer>
@@ -90,20 +93,20 @@ const Login = () => {
                 required
               />
 
-              <AppSelect
-                id="role_id"
-                name="role_id"
-                label="Role"
-                placeholder="teacher, moderator..."
-                required
-              >
-                <option value="">Select a role</option>
-                {roles.map((role) => (
-                  <option key={role.id} value={role.id}>
-                    {role.role_type}
-                  </option>
-                ))}
-              </AppSelect>
+              {isRolesLoading ? (
+                <Flex justify="center">
+                  <Spinner />
+                </Flex>
+              ) : (
+                <AppRadioButton
+                  name="role_id"
+                  keyAttrs="id"
+                  label="Roles"
+                  options={roles}
+                  value="id"
+                  text="role_type"
+                />
+              )}
 
               <AppButton
                 styling="primary"
@@ -111,11 +114,14 @@ const Login = () => {
                 type="submit"
                 id="btn-login"
                 loading={loading}
+                disabled={isRolesLoading}
               />
 
-              <ForgotBtn onClick={() => goToLogin()}>
-                <span>Back to login</span>
-              </ForgotBtn>
+              <Link href="/login" passHref>
+                <BackLink>
+                  <span>Back to login</span>
+                </BackLink>
+              </Link>
             </ContainerForm>
 
           </LoginFormContainer>

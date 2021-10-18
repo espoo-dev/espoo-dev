@@ -7,3 +7,10 @@ html {
 body {
   height: 100%;
 }
+
+.bg-image {
+  background-image: url(asset-path("login-signin-background.jpg"));
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+}

@@ -70,7 +70,8 @@ export const LoginContainer = styled.div`
   display: flex;
   height: 100%;
   justify-content: center;
-  align-items: center;
+  align-items: start;
+  padding-top: 5vh;
   flex-direction: row;
 `;
 
@@ -172,19 +173,14 @@ export const RightContainer = styled.div`
   }
 `;
 
-export const ForgotBtn = styled.button`
+export const ForgotLink = styled.a`
   color: #51a7a7;
   margin-top: 33px;
-  background: none;
-  border: none;
-  cursor: pointer;
+  text-align: center;
 `;
 
-export const RegisterBtn = styled.button`
+export const RegisterLink = styled.a`
   color: #51a7a7;
-  background: none;
-  border: none;
-  cursor: pointer;
   font-size: 16px;
   font-weight: bold;
   padding: 0px 4px;
@@ -195,4 +191,10 @@ export const LogoImg = styled.div`
     height: 100px;
     margin-left: -40px;
   }
+`;
+
+export const BackLink = styled.a`
+  color: #51a7a7;
+  margin-top: 33px;
+  text-align: center;
 `;
