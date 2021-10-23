@@ -10,7 +10,7 @@ RSpec.describe 'User sign in', type: :system do
       fill_in 'Email', with: user.email
       fill_in 'Password', with: user.password
 
-      click_on 'Log in'
+      click_on 'Login'
     end
 
     it { expect(page).to have_current_path('/') }
@@ -30,7 +30,7 @@ RSpec.describe 'User sign in', type: :system do
       visit new_user_session_path
       fill_in 'Email', with: user_student.email
       fill_in 'Password', with: user_student.password
-      click_on 'Log in'
+      click_on 'Login'
     end
 
     it { expect(page).to have_current_path(surveys_path) }
@@ -42,7 +42,7 @@ RSpec.describe 'User sign in', type: :system do
       fill_in 'Email', with: user.email
       fill_in 'Password', with: 'invalid password'
 
-      click_on 'Log in'
+      click_on 'Login'
     end
 
     it { expect(page).to have_current_path(new_user_session_path) }

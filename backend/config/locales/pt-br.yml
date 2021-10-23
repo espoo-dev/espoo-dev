@@ -58,3 +58,7 @@ pt-br:
     sessions:
       new:
         sign_in: Login
+        sign_up: Inscrever-se
+  surveys:
+    answers:
+      submit: Responder
