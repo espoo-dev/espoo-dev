@@ -1,23 +1,22 @@
 .container-fluid.min-vh-100.d-flex
   .row.flex-fill
-    .col-lg-4.text-center.d-flex.flex-column.justify-content-center
-      div
-        img.img-fluid src=image_url('logo.png')
-        h1.text-center.mb-4
-          = t('.sign_in')
-        = form_for(resource, as: resource_name, url: session_path(resource_name)) do |f|
-          div.d-flex.flex-column.align-items-center
-            = bootstrap_devise_error_messages!
-            - if flash[:alert]
-              span.flash_error
-                = flash[:alert]
-            .form-group.mb-3.w-100
-              = f.label :email
-              = f.email_field :email, autofocus: true, autocomplete: 'email', class: 'form-control'
-            .form-group.mb-4.w-100
-              = f.label :password
-              = f.password_field :password, autocomplete: 'current-password', class: 'form-control'
-            .form-group.mb-3
-              = f.submit 'Log in', class: 'btn btn-primary'
-            = link_to "Sign up", new_registration_path(resource_name)
+    .col-lg-4.text-center
+      img.img-fluid src=image_url('logo.png')
+      h1.text-center.mb-4
+        = t('.sign_in')
+      = form_for(resource, as: resource_name, url: session_path(resource_name)) do |f|
+        div.d-flex.flex-column.align-items-center
+          = bootstrap_devise_error_messages!
+          - if flash[:alert]
+            span.flash_error
+              = flash[:alert]
+          .form-group.mb-3.w-100
+            = f.label :email
+            = f.email_field :email, autofocus: true, autocomplete: 'email', class: 'form-control'
+          .form-group.mb-4.w-100
+            = f.label :password
+            = f.password_field :password, autocomplete: 'current-password', class: 'form-control'
+          .form-group.mb-3
+            = f.submit 'Log in', class: 'btn btn-primary'
+          = link_to "Sign up", new_registration_path(resource_name)
     .col-lg-8.bg-cover.bg-image.d-none.d-lg-block
