@@ -3,15 +3,15 @@
     .col-lg-4.text-center.d-flex.flex-column.justify-content-center
       div
         =form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f|
-          img.img-fluid src=image_url('logo.png')
-          h1.h3.mb-3.font-weight-normal Sign up
+          = image_tag("logo.png", size: "100", class: "img-fluid")
+          h1.h3.m-3.font-weight-normal Sign up
           .mb-3
             =render "devise/shared/error_messages", resource: resource
           .mb-3
             =f.email_field :email, id: 'inputEmail', class: 'form-control', autofocus: true, autocomplete: "email", placeholder: 'Email'
           .mb-3
             = f.password_field :password, id: 'inputPassword', class: 'form-control', autocomplete: "new-password", required: true, placeholder: 'Password'
-            .mb-3
+          .mb-3
             = f.password_field :password_confirmation, id: 'inputPasswordConfirmation', class: 'form-control', autocomplete: "new-password", required: true, placeholder: 'Password Confirmation'
           .mb-1.d-flex
             span.text-left Role*
