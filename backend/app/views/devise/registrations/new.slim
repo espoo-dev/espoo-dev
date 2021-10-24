@@ -23,6 +23,6 @@
               =f.radio_button :role_id, student_role.id, id: 'inlineRadio2', class: 'form-check-input'
               label.form-check-label for="inlineRadio2"  Student
           .form-group.mb-3
-            = f.submit 'Sign up', class: 'btn btn-lg btn-info btn-block text-white'
-          = link_to "Log in", new_session_path(resource_name)
+            = f.submit t('devise.sessions.new.sign_up'), class: 'btn btn-lg btn-info btn-block text-white'
+          = link_to t('devise.sessions.new.sign_in'), new_session_path(resource_name)
     .col-lg-8.bg-cover.bg-image.d-none.d-lg-block
