@@ -12,6 +12,10 @@ class SurveySerializer < ActiveModel::Serializer
     answers_surveys.last
   end
 
+  def answered_questions_quantity
+    current_answers_survey.answers.count
+  end
+
   def self.model_name
     'Survey'
   end
