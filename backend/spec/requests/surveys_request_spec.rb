@@ -63,6 +63,7 @@ RSpec.describe 'SurveysController', type: :request do
           'status' => answers_survey.status
         }
       }
+
       expect(response_body).to match(expected_attributes)
     end
   end
