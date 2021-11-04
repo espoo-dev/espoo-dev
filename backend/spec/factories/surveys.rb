@@ -42,4 +42,14 @@ FactoryBot.define do
       survey.save
     end
   end
+
+  factory :survey_with_answer, parent: :survey do
+    after(:create) do |survey|
+      answersurvey = create(:answers_survey_with_some_answers)
+      answer = answersurvey.answers.first
+      survey.questions.first.answers << answer
+      survey.answers_surveys << answersurvey
+      survey.save
+    end
+  end
 end
