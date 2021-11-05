@@ -76,6 +76,7 @@ gem 'jquery-rails'
 gem 'rack-cors'
 gem 'sentry-rails'
 gem 'sentry-ruby'
+gem 'rswag'
 
 gem 'pundit'
 
