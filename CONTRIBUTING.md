@@ -16,7 +16,7 @@ agree to abide by the [CODE_OF_CONDUCT.md](https://github.com/espoo-dev/espoo-de
 3. Check if the tests are working
 4. Create a Pull Request
 
-# 📝 Docs
+# 📝 Docs (requests)
 
 1. [Postman requests](https://www.postman.com/grey-zodiac-51715/workspace/espoo/overview)
-1. [Class Diagram](https://drive.google.com/file/d/1681YmHrron_fxAb8tOebmzTbqy9qGM8p/view?usp=sharing)
+1. [Swagger](https://espoo.herokuapp.com/api-docs/index.html)
