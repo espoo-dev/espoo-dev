@@ -34,6 +34,8 @@ Espoo-dev is a learning platform. There are three user types:
   - **Web Client**: The users (Student) can answer `Questions` that belongs to a `Survey`
 - frontend (Next, React):
   - **Web Client**: The users (Student) can answer `Questions` that belongs to a `Survey`
+- Mobile (Android, Kotlin):
+  - **Mobile Client**: The users (Student) can answer `Questions` that belongs to a `Survey`
 - **note**: We have 2 versions of Web Client, Next/React and Rails
 
 ## :smiley: Contributing
