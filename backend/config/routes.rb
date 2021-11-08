@@ -1,6 +1,6 @@
 Rails.application.routes.draw do
   resources :answers_surveys, only: %i[create]
-  resources :surveys, only: %i[index]
+  resources :surveys, only: %i[index show]
 
   namespace :admin do
     resources :users
