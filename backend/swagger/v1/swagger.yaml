@@ -1,0 +1,85 @@
+---
+openapi: 3.0.1
+components:
+  securitySchemes:
+    ApiKeyAuth:
+      type: apiKey
+      in: header
+      name: Authorization
+
+  schemas:
+    Role:
+      type: object
+      properties:
+        id:
+          type: number
+        role_type:
+          type: string
+        role:
+          $ref: '#/components/schemas/AuthData'
+    Survey:
+      type: object
+      properties:
+        id:
+          type: number
+        name:
+          type: string
+        description:
+          type: string
+        questions_quantity:
+          type: number
+    User:
+      type: object
+      properties:
+        id:
+          type: number
+        email:
+          type: string
+        role:
+          $ref: '#/components/schemas/Role'
+        surveys:
+          type: array
+          items:
+            $ref: '#/components/schemas/Survey'
+    SignInRequestBody:
+      type: object
+      properties:
+        user:
+          $ref: '#/components/schemas/AuthData'
+    AuthData:
+      type: object
+      properties:
+        email:
+          type: string
+        password:
+          type: string
+security:
+  - ApiKeyAuth: []
+
+info:
+  title: Espoo dev
+  version: v1
+paths:
+  '/users/sign_in':
+    post:
+      summary: Authorization
+      description: "example data: email: admin@gmail.com, password:123456"
+      tags:
+        - Login
+      responses:
+        '200':
+          description: Login authorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/User'
+
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SignInRequestBody'
+
+servers:
+  - url: https://espoo.herokuapp.com
+  - url: http://localhost:3000
