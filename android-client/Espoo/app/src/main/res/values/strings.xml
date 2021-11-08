@@ -1,3 +1,10 @@
 <resources>
     <string name="app_name">Espoo</string>
+    <string name="login_title">Log in.</string>
+    <string name="login_subtitle">Log in with your data or</string>
+    <string name="register_now">register now.</string>
+    <string name="login_username">Email / username</string>
+    <string name="login_password">Password </string>
+    <string name="login_btn">Log in</string>
+    <string name="login_forgot_password">Forgot password?</string>
 </resources>
