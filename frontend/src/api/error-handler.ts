@@ -3,6 +3,7 @@ import { toast } from 'react-toastify';
 
 interface CustomError {
   error?: string;
+  error_message?: string;
 }
 
 export const errorHandler = (errorInstance: AxiosError<CustomError>) => {
@@ -13,6 +14,9 @@ export const errorHandler = (errorInstance: AxiosError<CustomError>) => {
   if (response && response.data && response.data.error) {
     const { error } = response.data;
     createErrorToast(error);
+  } else if (response && response.data && response.data.error_message) {
+    const { error_message } = response.data;
+    createErrorToast(error_message);
   } else if (message) {
     createErrorToast(message);
   } else {
