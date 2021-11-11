@@ -15,8 +15,6 @@ components:
           type: number
         role_type:
           type: string
-        role:
-          $ref: '#/components/schemas/AuthData'
     Survey:
       type: object
       properties:
@@ -46,6 +44,15 @@ components:
       properties:
         user:
           $ref: '#/components/schemas/AuthData'
+    CreateUserRequestBody:
+      type: object
+      properties:
+        email:
+          type: string
+        role_id:
+          type: number
+        password:
+          type: string
     AuthData:
       type: object
       properties:
@@ -79,6 +86,25 @@ paths:
           application/json:
             schema:
               $ref: '#/components/schemas/SignInRequestBody'
+  '/api/v1/users':
+    post:
+      summary: Create user
+      description: "Creates users that will be able to login"
+      tags:
+        - Users
+      responses:
+        '200':
+          description: User created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/User'
+
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateUserRequestBody'
 
 servers:
   - url: https://espoo.herokuapp.com
