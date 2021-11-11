@@ -1,6 +1,9 @@
 class AnswersSurveysController < ApplicationController
   def create
-    AnswersSurvey.create!(create_answers_survey_params)
+    AnswersSurvey.find_or_create_by!(create_answers_survey_params)
+
+    survey = Survey.find(params[:survey_id])
+    redirect_to question_path(survey.questions.first)
   end
 
   private

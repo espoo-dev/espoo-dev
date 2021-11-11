@@ -1,0 +1,16 @@
+h1
+  = @question.name
+ul
+  - @question.options.each do |option|
+    |  <label for="
+    = option.id
+    | "> 
+    = option.name
+    |  <input type="radio" name="
+    = @question.id
+    | " id="
+    = option.id
+    | " value="
+    = option.name
+    | "> 
+    
