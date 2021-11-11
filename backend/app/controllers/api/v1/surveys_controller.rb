@@ -1,8 +1,14 @@
 class Api::V1::SurveysController < Api::V1::ApiController
   def show
-    survey = Survey.find_by!(params.permit(:id))
+    survey = Survey.where(params.permit(:id)).includes(questions: %i[question_type options]).take!
+
+    answered_questions_quantity = AnswersSurvey.by_user_and_survey(current_user, survey).size
+
     authorize survey
-    render json: survey
+    render json: {
+      survey: SurveySerializer.new(survey),
+      answered_questions_quantity: answered_questions_quantity
+    }
   end
 
   def index
