@@ -2,36 +2,50 @@ require 'rails_helper'
 
 RSpec.describe 'SurveysController', type: :request do
   describe '#show' do
-    let!(:survey) { create(:survey) }
-    let!(:survey_question) { survey.questions.first }
-    let!(:question_type) { survey_question.question_type }
+    let(:answers_survey) { create(:answers_survey_with_some_answers) }
+    let!(:survey) { answers_survey.survey }
+    let!(:first_survey_question) { survey.questions.first }
+    let!(:last_survey_question) { survey.questions.last }
+    let!(:first_question_type) { first_survey_question.question_type }
+    let!(:last_question_type) { last_survey_question.question_type }
     let!(:survey_subject) { survey.survey_subject }
-    let!(:option) { create(:option, question: survey_question) }
+    let!(:option) { create(:option, question: first_survey_question) }
 
-    before { get api_v1_survey_path(survey), headers: auth_headers }
+    before { get api_v1_survey_path(survey), headers: auth_headers(user: answers_survey.user) }
 
     it { expect(response).to have_http_status :ok }
 
     it 'matches surveys attributes' do
       expected_attributes = {
-        'id' => anything,
-        'name' => survey.name,
-        'description' => survey.description,
-        'survey_subject_id' => survey_subject.id,
-        'questions' => [
-          'id' => survey_question.id,
-          'name' => survey_question.name,
-          'question_type' => {
-            'id' => question_type.id,
-            'name' => question_type.name
-          },
-          'options' => [{
-            'id' => option.id,
-            'name' => option.name,
-            'correct' => option.correct
-          }]
-        ]
+        'survey' => {
+          'id' => anything,
+          'name' => survey.name,
+          'description' => survey.description,
+          'survey_subject_id' => survey_subject.id,
+          'questions' => [
+            { 'id' => first_survey_question.id,
+              'name' => first_survey_question.name,
+              'question_type' => {
+                'id' => first_question_type.id,
+                'name' => first_question_type.name
+              },
+              'options' => [{
+                'id' => option.id,
+                'name' => option.name,
+                'correct' => option.correct
+              }] },
+            'id' => last_survey_question.id,
+            'name' => last_survey_question.name,
+            'question_type' => {
+              'id' => last_question_type.id,
+              'name' => last_question_type.name
+            },
+            'options' => []
+          ]
+        },
+        'answered_questions_quantity' => 1
       }
+
       expect(response_body).to match(expected_attributes)
     end
   end
