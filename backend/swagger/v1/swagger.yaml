@@ -105,7 +105,21 @@ paths:
           application/json:
             schema:
               $ref: '#/components/schemas/CreateUserRequestBody'
-
+  '/api/v1/roles':
+    get:
+      summary: Get roles
+      description: "Get available roles"
+      tags:
+        - Roles
+      responses:
+        '200':
+          description: Available roles
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Role'
 servers:
   - url: https://espoo.herokuapp.com
   - url: http://localhost:3000
