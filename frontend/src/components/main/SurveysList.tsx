@@ -6,6 +6,7 @@ import { Survey } from 'api/models/survey';
 import { httpClient } from 'api';
 import { errorHandler } from 'api/error-handler';
 import { AnswerSurveyService } from 'api/services/answer_survey';
+import { SurveyItem } from '@components/survey-item/survey-item';
 
 interface SurveyListProps {
   data: Survey[];
@@ -71,6 +72,7 @@ export const SurveysList = (props: SurveyListProps) => {
           </Box>
         </ListItem>
       ))}
+      <SurveyItem description="description" title="title" />
     </List>
   );
 };
