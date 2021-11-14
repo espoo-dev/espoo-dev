@@ -52,7 +52,12 @@ RSpec.describe 'SurveysController', type: :request do
             'user_id' => answers_survey.user.id,
             'status' => answers_survey.status
           }
-        ]
+        ],
+        'current_answers_survey' => {
+          'id' => answers_survey.id,
+          'user_id' => answers_survey.user.id,
+          'status' => answers_survey.status
+        }
       }
       expect(response_body).to match(expected_attributes)
     end

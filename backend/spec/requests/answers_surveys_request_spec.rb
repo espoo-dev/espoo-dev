@@ -32,6 +32,7 @@ RSpec.describe 'AnswersSurveysController', type: :request do
             'description' => survey.description,
             'survey_subject_id' => survey_subject.id,
             'answers_surveys' => [],
+            'current_answers_survey' => nil,
             'questions' => [
               'id' => survey_question.id,
               'name' => survey_question.name,
