@@ -5,4 +5,8 @@ class SurveySerializer < ActiveModel::Serializer
   def answers_surveys
     @instance_options[:answer_surveys]&.map { |answer_survey| SimpleAnswersSurveySerializer.new(answer_survey) } || []
   end
+
+  def self.model_name
+    'Survey'
+  end
 end
