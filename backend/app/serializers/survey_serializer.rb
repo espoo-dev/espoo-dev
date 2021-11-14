@@ -3,7 +3,7 @@ class SurveySerializer < ActiveModel::Serializer
   has_many :questions
 
   def answers_surveys
-    @instance_options[:answer_surveys]&.map { |answer_survey| SimpleAnswersSurveySerializer.new(answer_survey) } || []
+    instance_options[:answer_surveys]&.map { |answer_survey| SimpleAnswersSurveySerializer.new(answer_survey) } || []
   end
 
   def current_answers_survey
