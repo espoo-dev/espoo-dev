@@ -1,4 +1,6 @@
 class Survey < ApplicationRecord
+  attr_accessor :answers_surveys_by_user
+
   validate :validates_ready
   belongs_to :user
   belongs_to :survey_subject
