@@ -61,6 +61,8 @@ directories:
   "app/models":
     InstanceVariableAssumption:
       enabled: false
+    Attribute:
+      enabled: false
 ### Excluding directories
 
 # Directories and files below will not be scanned at all
