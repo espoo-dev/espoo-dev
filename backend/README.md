@@ -19,7 +19,7 @@
 - `bundle exec rspec`
 - `bundle exec rails s -b 0`
 
-## Reference projects
+# Reference projects
 
 1. [Chatwoot](https://www.chatwoot.com/)
    - [Repository](https://github.com/chatwoot/chatwoot)
