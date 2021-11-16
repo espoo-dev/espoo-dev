@@ -72,19 +72,6 @@ Please check [CONTRIBUTING.md](https://github.com/espoo-dev/espoo-dev/blob/main/
   - Login, Logout, Register
   - List surveys
 
-## Reference projects
-
-To help with any questions, these projects have been developed in ruby on rails and they will be used as references:
-
-1. [Chatwoot](https://www.chatwoot.com/)
-   - [Repository](https://github.com/chatwoot/chatwoot)
-1. [Dev.to](https://dev.to/)
-   - [Repositiory](https://github.com/forem/forem)
-1. [Gitlab](https://about.gitlab.com/)
-   - [Repository](https://github.com/gitlabhq/gitlabhq)
-
- - **Note**: If you find some project that can be used as reference, you can add it.
-
 ## Next features
 
 - Free text, image, audio, video questions
