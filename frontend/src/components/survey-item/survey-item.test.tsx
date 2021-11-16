@@ -4,30 +4,26 @@ import { SurveyItem, SurveyItemProps } from './survey-item';
 const mockSurveyDefault: SurveyItemProps = {
   title: 'Wild Animals',
   description: 'Animals that live in the wild',
-  numberQuestions: 5
+  numberQuestions: 5,
 };
 
 describe('SurveyItem', () => {
   it('should render component on screen', () => {
-    const rendered = render(
-      <SurveyItem {...mockSurveyDefault} />
-    );
+    const rendered = render(<SurveyItem {...mockSurveyDefault} />);
     expect(rendered).toBeTruthy();
   });
 
   it('should render the title of survey and description', () => {
-    const rendered = render(
-      <SurveyItem {...mockSurveyDefault} />
-    );
+    const rendered = render(<SurveyItem {...mockSurveyDefault} />);
     expect(rendered.getByText(mockSurveyDefault.title)).toBeTruthy();
     expect(rendered.getByText(mockSurveyDefault.description)).toBeTruthy();
   });
 
   it('should have the number correct of questions on card', () => {
-    const rendered = render(
-      <SurveyItem {...mockSurveyDefault} />
-    );
-    expect(rendered.getByText(mockSurveyDefault.numberQuestions)).toBeTruthy();
+    const rendered = render(<SurveyItem {...mockSurveyDefault} />);
+    expect(
+      rendered.getByText(`${mockSurveyDefault.numberQuestions} Questions`)
+    ).toBeTruthy();
   });
 
   it('should have random image in cover', () => {
@@ -50,5 +46,51 @@ describe('SurveyItem', () => {
       />
     );
     expect(rendered.getByText('No questions')).toBeTruthy();
+  });
+
+  it('should show resume button when started survey', () => {
+    const startedSurvey: SurveyItemProps = {
+      title: 'Wild Animals',
+      description: 'Animals that live in the wild',
+      numberQuestions: 5,
+      surveyData: {
+        id: 1,
+        current_answers_survey: [],
+        description: 'Animals that live in the wild',
+        name: 'Wild Animals',
+        questions: [],
+        survey_subject_id: 1,
+        answers_surveys: [
+          {
+            id: 1,
+            status: 'Not started',
+            user_id: 394,
+          },
+        ],
+      },
+    };
+
+    const rendered = render(<SurveyItem {...startedSurvey} />);
+    expect(rendered.getByText('Click to resume')).toBeTruthy();
+  });
+
+  it('not should show resume button when started survey', () => {
+    const startedSurvey: SurveyItemProps = {
+      title: 'Wild Animals',
+      description: 'Animals that live in the wild',
+      numberQuestions: 5,
+      surveyData: {
+        id: 1,
+        current_answers_survey: [],
+        description: 'Animals that live in the wild',
+        name: 'Wild Animals',
+        questions: [],
+        survey_subject_id: 1,
+        answers_surveys: [],
+      },
+    };
+
+    const rendered = render(<SurveyItem {...startedSurvey} />);
+    expect(rendered.queryAllByText('Click to resume')).toHaveLength(0);
   });
 });

@@ -6,9 +6,9 @@ export const SurveyContainer = styled.div`
   margin: 10px;
 `;
 
-export const ImageSurvey = styled.div<{cover: string}>`
+export const ImageSurvey = styled.div<{ cover: string }>`
   height: 100px;
-  background-image: url(${props => props.cover});
+  background-image: url(${(props) => props.cover});
   background-size: cover;
   border-top-left-radius: 6px;
   border-top-right-radius: 6px;
@@ -43,9 +43,14 @@ export const QuestionsSurvey = styled.div`
   font-size: 12px;
   color: #747474;
   padding-top: 12px;
-  justify-content: flex-end;
+  justify-content: space-between;
 `;
 
 export const NumberQuestions = styled.div`
   padding-left: 6px;
+`;
+
+export const QuestionsSection = styled.div`
+  display: flex;
+  align-items: center;
 `;

@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
-import { Box, Button, List, ListItem, Text } from '@chakra-ui/react';
-import { HiDocumentText } from 'react-icons/hi';
+import { Grid } from '@chakra-ui/react';
 import { toast } from 'react-toastify';
 import { Survey } from 'api/models/survey';
 import { httpClient } from 'api';
@@ -39,40 +38,18 @@ export const SurveysList = (props: SurveyListProps) => {
   };
 
   return (
-    <List mt="10" maxH="490px" overflow="auto">
+    <Grid templateColumns="repeat(auto-fit, minmax(450px, 1fr))" gap={4}>
       {data.map((item) => (
-        <ListItem key={item.id} mb="8">
-          <Box
-            display={{ md: 'flex', lg: 'flex' }}
-            color="#fff"
-            alignItems="center"
-            justifyContent="space-between"
-          >
-            <Box display="flex" alignItems="center">
-              <HiDocumentText size={40} />
-              <Box ml="10px">
-                <Text fontWeight="bold">{item.name}</Text>
-                <Text>
-                  {item.questions.length}
-                  &nbsp;questions
-                </Text>
-              </Box>
-            </Box>
-
-            <Button
-              isLoading={loading && selectedSurvey === item.id}
-              colorScheme="teal"
-              size="sm"
-              mt={{ sm: '10px' }}
-              onClick={() => registerAnswerSurvey(item.id)}
-              data-testid={item.name}
-            >
-              Start
-            </Button>
-          </Box>
-        </ListItem>
+        <SurveyItem
+          key={item.id}
+          title={item.name}
+          description={item.description}
+          numberQuestions={item.questions.length}
+          onClick={() => registerAnswerSurvey(item.id)}
+          loading={loading && selectedSurvey === item.id}
+          surveyData={item}
+        />
       ))}
-      <SurveyItem description="description" title="title" />
-    </List>
+    </Grid>
   );
 };

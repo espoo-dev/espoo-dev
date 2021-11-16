@@ -3,22 +3,37 @@ import {
   DetailsSurvey,
   ImageSurvey,
   NumberQuestions,
+  QuestionsSection,
   QuestionsSurvey,
   SurveyContainer,
   TitleSurvey,
 } from './survey-item.style';
 import { RiQuestionAnswerLine } from 'react-icons/ri';
-import { useEffect, useState } from 'react';
+import { MouseEventHandler, useEffect, useState } from 'react';
+import { Progress } from '@chakra-ui/progress';
+import { Survey } from '@api/models/survey';
+import { textDecoration } from '@chakra-ui/styled-system';
 
 export interface SurveyItemProps {
   title: string;
   description: string;
   numberQuestions?: number;
   cover?: string;
+  onClick?: MouseEventHandler<HTMLDivElement>;
+  loading?: boolean;
+  surveyData?: Survey;
 }
 
 export const SurveyItem = (props: SurveyItemProps) => {
-  const { title, description, numberQuestions, cover } = props;
+  const {
+    title,
+    description,
+    numberQuestions,
+    cover,
+    onClick,
+    loading,
+    surveyData,
+  } = props;
   const [coverImage, setCoverImage] = useState<string>('');
 
   const randomImage = () => {
@@ -35,7 +50,7 @@ export const SurveyItem = (props: SurveyItemProps) => {
   }, []);
 
   return (
-    <SurveyContainer>
+    <SurveyContainer data-testid={title} onClick={onClick}>
       <ImageSurvey data-testid="random-image" cover={coverImage} />
       <DetailsSurvey>
         <TitleSurvey>
@@ -45,13 +60,19 @@ export const SurveyItem = (props: SurveyItemProps) => {
           <span>{description}</span>
         </DescriptionSurvey>
         <QuestionsSurvey>
-          <RiQuestionAnswerLine size={20} />
-          {numberQuestions > 0 ? (
-            <NumberQuestions>{numberQuestions}</NumberQuestions>
-          ) : (
-            <NumberQuestions>No questions</NumberQuestions>
-          )}
+          <span>
+            {surveyData?.answers_surveys.length ? 'Click to resume' : ''}
+          </span>
+          <QuestionsSection>
+            <RiQuestionAnswerLine size={20} />
+            {numberQuestions > 0 ? (
+              <NumberQuestions>{numberQuestions} Questions</NumberQuestions>
+            ) : (
+              <NumberQuestions>No questions</NumberQuestions>
+            )}
+          </QuestionsSection>
         </QuestionsSurvey>
+        {loading && <Progress size="xs" isIndeterminate mt="2" />}
       </DetailsSurvey>
     </SurveyContainer>
   );
