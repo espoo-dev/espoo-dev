@@ -8,6 +8,15 @@ components:
       name: Authorization
 
   schemas:
+    AnswersSurvey:
+      type: object
+      properties:
+        id:
+          type: number
+        user_id:
+          type: number
+        status:
+          type: string
     Role:
       type: object
       properties:
@@ -15,7 +24,50 @@ components:
           type: number
         role_type:
           type: string
+    Option:
+      type: object
+      properties:
+        id:
+          type: number
+        name:
+          type: string
+        correct:
+          type: boolean
+    Question:
+      type: object
+      properties:
+        id:
+          type: number
+        name:
+          type: string
+        options:
+          type: array
+          items:
+            $ref: '#/components/schemas/Option'
     Survey:
+      type: object
+      properties:
+        id:
+          type: number
+        survey_subject_id:
+          type: number
+        name:
+          type: string
+        description:
+          type: string
+        role_type:
+          type: string
+        current_answers_survey:
+          $ref: '#/components/schemas/AnswersSurvey'
+        answers_surveys:
+          type: array
+          items:
+            $ref: '#/components/schemas/AnswersSurvey'
+        questions:
+          type: array
+          items:
+            $ref: '#/components/schemas/Question'
+    SimpleSurvey:
       type: object
       properties:
         id:
@@ -38,7 +90,7 @@ components:
         surveys:
           type: array
           items:
-            $ref: '#/components/schemas/Survey'
+            $ref: '#/components/schemas/SimpleSurvey'
     SignInRequestBody:
       type: object
       properties:
@@ -120,6 +172,21 @@ paths:
                 type: array
                 items:
                   $ref: '#/components/schemas/Role'
+  '/api/v1/surveys':
+    get:
+      summary: Get surveys
+      description: "Get ready surveys"
+      tags:
+        - Surveys
+      responses:
+        '200':
+          description: Ready surveys
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Survey'
 servers:
   - url: https://espoo.herokuapp.com
   - url: http://localhost:3000
