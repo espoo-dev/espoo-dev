@@ -44,6 +44,7 @@ RSpec.describe Role, type: :model do
   end
 
   describe 'factory only creates one instance of each role' do
+    # rubocop:disable RSpec/IdenticalEqualityAssertion
     it { expect(create(:role)).to eq(create(:role)) }
 
     it { expect(create(:role_admin)).to eq(create(:role_admin)) }
@@ -51,6 +52,7 @@ RSpec.describe Role, type: :model do
     it { expect(create(:role_teacher)).to eq(create(:role_teacher)) }
 
     it { expect(create(:role_moderator)).to eq(create(:role_moderator)) }
+    # rubocop:enable RSpec/IdenticalEqualityAssertion
   end
 
   describe '.by_role' do
@@ -67,8 +69,12 @@ RSpec.describe Role, type: :model do
       expect(described_class.by_user(user_admin)).to match(all_roles)
     end
 
-    it 'shows all not admin roles' do
+    it 'shows all not admin roles when user is not admin' do
       expect(described_class.by_user(user_teacher)).to match(not_admin_roles)
+    end
+
+    it 'shows all not admin roles when has no user' do
+      expect(described_class.by_user(nil)).to match(not_admin_roles)
     end
   end
 end

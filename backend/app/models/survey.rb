@@ -1,4 +1,6 @@
 class Survey < ApplicationRecord
+  attr_accessor :answers_surveys_by_user
+
   validate :validates_ready
   belongs_to :user
   belongs_to :survey_subject
@@ -12,7 +14,9 @@ class Survey < ApplicationRecord
     all.includes([:questions])
   }
 
-  scope :ready_surveys, -> { where(ready: true).includes([:questions]) }
+  scope :ready_surveys, -> { where(ready: true) }
+
+  scope :ready_surveys_eager, -> { ready_surveys.includes([:questions]) }
 
   def validates_ready
     ready_questions = questions.all?(&:ready_to_be_answered)

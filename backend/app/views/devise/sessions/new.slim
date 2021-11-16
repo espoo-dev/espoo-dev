@@ -1,21 +1,23 @@
-h1
-  = t('.sign_in')
-= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f|
-  = bootstrap_devise_error_messages!
-  - if flash[:alert]
-    span.flash_error
-      = flash[:alert]
-  .form-group
-    = f.label :email
-    = f.email_field :email, autofocus: true, autocomplete: 'email', class: 'form-control'
-  .form-group
-    = f.label :password
-    = f.password_field :password, autocomplete: 'current-password', class: 'form-control'
-  - if devise_mapping.rememberable?
-    .form-group.form-check
-      = f.check_box :remember_me, class: 'form-check-input'
-      = f.label :remember_me, class: 'form-check-label' do
-        = resource.class.human_attribute_name('remember_me')
-  .form-group
-    = f.submit 'Log in', class: 'btn btn-primary'
-= render 'devise/shared/links'
+.container-fluid.min-vh-100.d-flex
+  .row.flex-fill
+    .col-lg-4.text-center.d-flex.flex-column.justify-content-center
+      div
+        = image_tag("logo.png", size: "100", class: "img-fluid")
+        h1.text-center.m-4
+          = t('.sign_in')
+        = form_for(resource, as: resource_name, url: session_path(resource_name)) do |f|
+          div.d-flex.flex-column.align-items-center
+            = bootstrap_devise_error_messages!
+            - if flash[:alert]
+              span.flash_error
+                = flash[:alert]
+            .form-group.mb-3.w-100
+              = f.label :email
+              = f.email_field :email, autofocus: true, autocomplete: 'email', class: 'form-control mt-3'
+            .form-group.mb-4.w-100
+              = f.label :password
+              = f.password_field :password, autocomplete: 'current-password', class: 'form-control mt-3'
+            .form-group.mb-3
+              = f.submit t('devise.sessions.new.sign_in'), class: 'btn btn-primary'
+            = link_to t('devise.sessions.new.sign_up'), new_registration_path(resource_name)
+    .col-lg-8.bg-cover.bg-image.d-none.d-lg-block

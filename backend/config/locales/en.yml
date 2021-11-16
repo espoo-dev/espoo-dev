@@ -3,6 +3,16 @@ en:
   activerecord:
     errors:
       models:
+        answer:
+          attributes:
+            options:
+              at_least_one_option: Should have at least one option.
+            question_id:
+              only_one_option: Can't select more than one option when single choice.
+        answers_survey:
+          attributes:
+            base:
+              multiple_not_completed_answers_survey: Should exist only one not completed by survey and user.
         option:
           attributes:
             base:
@@ -35,6 +45,10 @@ en:
           attributes:
             surveys:
               cant_destroy_survey_subject: Can't destroy survey subject with %{survey_count} surveys.
+    models:
+      question:
+        one: Question
+        other: Questions
   admin:
     application:
       navigation:
@@ -43,7 +57,8 @@ en:
   devise:
     sessions:
       new:
-        sign_in: Sign in
-  students:
-    index:
-      sign_out: Logout
+        sign_in: Login
+        sign_up: Sign Up
+  surveys:
+    answers:
+      submit: Answer

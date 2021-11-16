@@ -23,6 +23,8 @@ detectors:
   DataClump:
     max_copies: 3
     min_clump_size: 3
+  FeatureEnvy:
+    enabled: false
 
 ### Directory specific configuration
 
@@ -58,6 +60,8 @@ directories:
       enabled: false
   "app/models":
     InstanceVariableAssumption:
+      enabled: false
+    Attribute:
       enabled: false
 ### Excluding directories
 

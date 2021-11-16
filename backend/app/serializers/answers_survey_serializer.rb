@@ -1,5 +1,5 @@
-class AnswersSurveySerializer < ActiveModel::Serializer
-  attributes :id, :survey, :user_id
+class AnswersSurveySerializer < SimpleAnswersSurveySerializer
+  attributes :survey
 
   def survey
     SurveySerializer.new(object.survey)

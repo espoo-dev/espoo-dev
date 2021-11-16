@@ -60,21 +60,31 @@ export const PageContainer = styled.div`
 export const LeftContainer = styled.div`
   flex: 3;
   color: #525252;
+
+  @media (max-width: 800px) {
+    font-size: 1.2em;
+  }
 `;
 
 export const LoginContainer = styled.div`
   display: flex;
   height: 100%;
   justify-content: center;
-  align-items: center;
+  align-items: start;
+  padding-top: 5vh;
   flex-direction: row;
 `;
 
 export const LoginFormContainer = styled.div`
-  width: 400px;
   display: flex;
   flex-direction: column;
   padding: 26px;
+  width: 400px;
+
+  @media (max-width: 375px) {
+    max-width: 400px;
+    width: 100%;
+  }
 `;
 
 export const LoginTitle = styled.div`
@@ -92,6 +102,10 @@ export const ContainerForm = styled(Form)`
   margin-top: 70px;
   display: grid;
   gap: 24px;
+
+  @media (max-width: 800px) {
+    margin-top: 20px;
+  }
 `;
 
 export const InputForm = styled.div`
@@ -153,21 +167,20 @@ export const RightContainer = styled.div`
   flex: 2;
   background-position: top;
   background-size: cover;
+
+  @media (max-width: 800px) {
+    flex: 0;
+  }
 `;
 
-export const ForgotBtn = styled.button`
+export const ForgotLink = styled.a`
   color: #51a7a7;
   margin-top: 33px;
-  background: none;
-  border: none;
-  cursor: pointer;
+  text-align: center;
 `;
 
-export const RegisterBtn = styled.button`
+export const RegisterLink = styled.a`
   color: #51a7a7;
-  background: none;
-  border: none;
-  cursor: pointer;
   font-size: 16px;
   font-weight: bold;
   padding: 0px 4px;
@@ -178,4 +191,10 @@ export const LogoImg = styled.div`
     height: 100px;
     margin-left: -40px;
   }
+`;
+
+export const BackLink = styled.a`
+  color: #51a7a7;
+  margin-top: 33px;
+  text-align: center;
 `;

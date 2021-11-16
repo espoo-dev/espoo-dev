@@ -3,6 +3,16 @@ pt-br:
   activerecord:
     errors:
       models:
+        answer:
+          attributes:
+            options:
+              at_least_one_option: Deve ter pelo menos uma opção.
+            question_id:
+              only_one_option: Não é possível selecionar mais de uma opção em uma única escolha.
+        answers_survey:
+          attributes:
+            base:
+              multiple_not_completed_answers_survey: Deve existir apenas um "não completo" por Questionario e Usuario.
         option:
           attributes:
             base:
@@ -35,6 +45,10 @@ pt-br:
           attributes:
             surveys:
               cant_destroy_survey_subject: Não é possível destruir o assunto da pesquisa com %{survey_count} pesquisas.
+    models:
+      question:
+        one: Questão
+        other: Questões
   admin:
     application:
       navigation:
@@ -43,7 +57,8 @@ pt-br:
   devise:
     sessions:
       new:
-        sign_in: Sign in
-  students:
-    index:
-      sign_out: Sair
+        sign_in: Login
+        sign_up: Inscrever-se
+  surveys:
+    answers:
+      submit: Responder

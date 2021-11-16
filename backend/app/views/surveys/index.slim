@@ -1,0 +1,14 @@
+.row
+  div.container.d-flex.align-content-start.flex-wrap.justify-content-start.mt-5
+    - @surveys.each do | survey|
+      .col.col-12.col-lg-6.mb-4
+        .card.mx-3
+          .card-body
+            h5.card-title
+              = survey.title
+            p.card-text
+              = survey.description
+            = form_with url: answers_surveys_path, method: :post do |form|
+              = form.hidden_field :survey_id, value: survey.id
+              = form.submit t('surveys.answers.submit'), class: 'btn btn-primary'
+

@@ -1,0 +1,28 @@
+.container-fluid.min-vh-100.d-flex
+  .row.flex-fill
+    .col-lg-4.text-center.d-flex.flex-column.justify-content-center
+      div
+        =form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f|
+          = image_tag("logo.png", size: "100", class: "img-fluid")
+          h1.h3.m-3.font-weight-normal Sign up
+          .mb-3
+            =render "devise/shared/error_messages", resource: resource
+          .mb-3
+            =f.email_field :email, id: 'inputEmail', class: 'form-control', autofocus: true, autocomplete: "email", placeholder: 'Email'
+          .mb-3
+            = f.password_field :password, id: 'inputPassword', class: 'form-control', autocomplete: "new-password", required: true, placeholder: 'Password'
+          .mb-3
+            = f.password_field :password_confirmation, id: 'inputPasswordConfirmation', class: 'form-control', autocomplete: "new-password", required: true, placeholder: 'Password Confirmation'
+          .mb-1.d-flex
+            span.text-left Role*
+          .checkbox.mb-3.d-flex
+            .form-check.form-check-inline
+              =f.radio_button :role_id, teacher_role.id, id: 'inlineRadio1', class: 'form-check-input'
+              label.form-check-label for="inlineRadio1"  Teacher
+            .form-check.form-check-inline
+              =f.radio_button :role_id, student_role.id, id: 'inlineRadio2', class: 'form-check-input'
+              label.form-check-label for="inlineRadio2"  Student
+          .form-group.mb-3
+            = f.submit t('devise.sessions.new.sign_up'), class: 'btn btn-lg btn-info btn-block text-white'
+          = link_to t('devise.sessions.new.sign_in'), new_session_path(resource_name)
+    .col-lg-8.bg-cover.bg-image.d-none.d-lg-block
