@@ -79,4 +79,3 @@ Please check [CONTRIBUTING.md](https://github.com/espoo-dev/espoo-dev/blob/main/
 - Answers reports
 - Public surveys
 - Surveys protected by password
-
