@@ -48,9 +48,7 @@ const Login = () => {
               <span>
                 Log in with your data or
                 <Link href="/register" passHref>
-                  <RegisterLink id="btn-register">
-                    register now.
-                  </RegisterLink>
+                  <RegisterLink id="btn-register">register now.</RegisterLink>
                 </Link>
               </span>
             </Subtitle>
