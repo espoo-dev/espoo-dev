@@ -1,5 +1,5 @@
 class SurveysController < ApplicationController
   def index
-    @surveys = Survey.ready_surveys.decorate
+    @surveys = SurveyWithAnsweredQuestions.call(Survey.ready_surveys.decorate, current_user)
   end
 end
