@@ -84,13 +84,16 @@ RSpec.describe Option, type: :model do
   describe '#validates_ready' do
     let!(:question) { create(:multiple_choice_ready_question) }
     let!(:option) { question.options.first }
+    let!(:option2) { question.options.second }
 
     describe 'when question is ready' do
       describe 'and there is only one correct option' do
         it 'the option cannot have correct false' do
           option.correct = false
+          option.save
+          option2.correct = false
 
-          expect(option).not_to be_valid
+          expect(option2).not_to be_valid
         end
       end
 
