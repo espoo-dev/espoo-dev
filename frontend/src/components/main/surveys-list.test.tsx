@@ -19,7 +19,11 @@ describe('Surveys list', () => {
       name: 'Animals survey',
       description: 'Nice animals',
       answers_surveys: [],
-      current_answers_survey: [],
+      current_answers_survey: {
+        id: 1,
+        status: 'not started',
+        user_id: 439,
+      },
       questions: [
         {
           id: 1,

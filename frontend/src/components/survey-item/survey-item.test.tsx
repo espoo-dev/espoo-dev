@@ -13,7 +13,11 @@ const startedSurvey: SurveyItemProps = {
   numberQuestions: 5,
   surveyData: {
     id: 1,
-    current_answers_survey: [],
+    current_answers_survey: {
+      id: 1,
+      status: 'not started',
+      user_id: 439,
+    },
     description: 'Animals that live in the wild',
     name: 'Wild Animals',
     questions: [],
@@ -78,7 +82,7 @@ describe('SurveyItem', () => {
     const notStartedSurvey = startedSurvey;
     notStartedSurvey.surveyData.answers_surveys = [];
 
-    const rendered = render(<SurveyItem {...startedSurvey} />);
+    const rendered = render(<SurveyItem {...notStartedSurvey} />);
     expect(rendered.queryAllByText('Click to resume')).toHaveLength(0);
   });
 });
