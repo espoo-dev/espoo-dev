@@ -1,3 +1,7 @@
+import { RiQuestionAnswerLine } from 'react-icons/ri';
+import { MouseEventHandler, useEffect, useState } from 'react';
+import { Progress } from '@chakra-ui/progress';
+import { Survey } from '@api/models/survey';
 import {
   DescriptionSurvey,
   DetailsSurvey,
@@ -8,11 +12,6 @@ import {
   SurveyContainer,
   TitleSurvey,
 } from './survey-item.style';
-import { RiQuestionAnswerLine } from 'react-icons/ri';
-import { MouseEventHandler, useEffect, useState } from 'react';
-import { Progress } from '@chakra-ui/progress';
-import { Survey } from '@api/models/survey';
-import { textDecoration } from '@chakra-ui/styled-system';
 
 export interface SurveyItemProps {
   title: string;
@@ -38,15 +37,21 @@ export const SurveyItem = (props: SurveyItemProps) => {
 
   const randomImage = () => {
     const images = [
-      'https://images.pexels.com/photos/7103/writing-notes-idea-conference.jpg?cs=srgb&dl=pexels-startup-stock-photos-7103.jpg&fm=jpg',
-      'https://images.pexels.com/photos/1326947/pexels-photo-1326947.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940',
-      'https://images.pexels.com/photos/351961/pexels-photo-351961.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940',
+      'https://images.pexels.com/photos/7103/writing-' +
+        'notes-idea-conference.jpg?cs=srgb&dl=' +
+        'pexels-startup-stock-photos-7103.jpg&fm=jpg',
+      'https://images.pexels.com/photos/1326947/' +
+        'pexels-photo-1326947.jpeg?auto=compress' +
+        's&cs=tinysrgb&dpr=2&h=650&w=940',
+      'https://images.pexels.com/photos/351961/' +
+        'pexels-photo-351961.jpeg?auto=compress' +
+        '&cs=tinysrgb&dpr=2&h=650&w=940',
     ];
     return images[Math.floor(Math.random() * images.length)];
   };
 
   useEffect(() => {
-    setCoverImage(cover ? cover : randomImage());
+    setCoverImage(cover || randomImage());
   }, []);
 
   return (
@@ -66,7 +71,11 @@ export const SurveyItem = (props: SurveyItemProps) => {
           <QuestionsSection>
             <RiQuestionAnswerLine size={20} />
             {numberQuestions > 0 ? (
-              <NumberQuestions>{numberQuestions} Questions</NumberQuestions>
+              <NumberQuestions>
+                {numberQuestions}
+                {' '}
+                Questions
+              </NumberQuestions>
             ) : (
               <NumberQuestions>No questions</NumberQuestions>
             )}
