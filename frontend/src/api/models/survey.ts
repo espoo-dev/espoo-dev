@@ -11,7 +11,7 @@ export interface AnswersSurvey {
 
 export interface Survey {
   answers_surveys: AnswersSurvey[] | null;
-  current_answers_survey: AnswersSurvey;
+  current_answers_survey: AnswersSurvey | null;
   id: number;
   name: string;
   description: string;
