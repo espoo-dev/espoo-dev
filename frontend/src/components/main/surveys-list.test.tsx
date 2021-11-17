@@ -8,8 +8,8 @@ import { httpClient } from '../../api/client';
 
 jest.mock('../../api/client', () => ({
   httpClient: {
-    post: jest.fn()
-  }
+    post: jest.fn(),
+  },
 }));
 
 describe('Surveys list', () => {
@@ -18,21 +18,24 @@ describe('Surveys list', () => {
       id: 1,
       name: 'Animals survey',
       description: 'Nice animals',
-      questions: [{
-        id: 1,
-        name: 'What is your favorite animal?',
-        question_type: {
+      answers_surveys: [],
+      current_answers_survey: [],
+      questions: [
+        {
           id: 1,
-          name: 'Single Choice',
+          name: 'What is your favorite animal?',
+          question_type: {
+            id: 1,
+            name: 'Single Choice',
+          },
         },
-      }],
+      ],
+      survey_subject_id: 12,
     },
   ];
 
   it('should render the item passed to the list', () => {
-    const { getByText } = render(
-      <SurveysList data={data} />
-    );
+    const { getByText } = render(<SurveysList data={data} />);
 
     const surveyName = getByText('Animals survey');
 
@@ -41,26 +44,25 @@ describe('Surveys list', () => {
 
   it('should call the function when clicked', async () => {
     const mockResponse = {
-      mock: true
+      mock: true,
     };
 
-    (httpClient as jest.Mocked<AxiosInstance>)
-      .post
-      .mockImplementationOnce(
-        jest.fn((url: string, body: AnswerSurveyCreate) => {
-          return Promise.resolve({ data: mockResponse });
-        }
-      )
+    (httpClient as jest.Mocked<AxiosInstance>).post.mockImplementationOnce(
+      jest.fn((url: string, body: AnswerSurveyCreate) => {
+        return Promise.resolve({ data: mockResponse });
+      })
     );
 
-    const { getByTestId } = render(
-      <SurveysList data={data} />
-    );
+    const { getByTestId } = render(<SurveysList data={data} />);
 
     const buttonItem = getByTestId('Animals survey');
 
     fireEvent.click(buttonItem);
 
-    await waitFor(() => expect(httpClient.post).toHaveBeenCalledWith('api/v1/answers_surveys', {"survey_id": 1}));
+    await waitFor(() =>
+      expect(httpClient.post).toHaveBeenCalledWith('api/v1/answers_surveys', {
+        survey_id: 1,
+      })
+    );
   });
 });
