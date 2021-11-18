@@ -5,7 +5,7 @@ import {
   FormLabel,
   Radio,
   RadioGroup,
-  Stack
+  Stack,
 } from '@chakra-ui/react';
 
 const defaultProps = {
@@ -13,7 +13,13 @@ const defaultProps = {
 };
 
 export const AppRadioButton = ({
-  options, keyAttrs, value, label, name, text, isRequired,
+  options,
+  keyAttrs,
+  value,
+  label,
+  name,
+  text,
+  isRequired,
 }) => {
   const [radioValue, setRadioValue] = useState('');
 
@@ -41,16 +47,9 @@ export const AppRadioButton = ({
   };
 
   return (
-    <FormControl
-      isRequired={isRequired}
-      id={name}
-    >
+    <FormControl isRequired={isRequired} id={name}>
       <FormLabel htmlFor={name}>{label}</FormLabel>
-      <RadioGroup
-        name={name}
-        onChange={setRadioValue}
-        value={radioValue}
-      >
+      <RadioGroup name={name} onChange={setRadioValue} value={radioValue}>
         <Stack direction="row">
           {options.map((option, index) => (
             <Radio
