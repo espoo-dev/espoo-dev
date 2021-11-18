@@ -8,6 +8,16 @@ components:
       name: Authorization
 
   schemas:
+    SimpleAnswersSurvey:
+      type: object
+      properties:
+        id:
+          type: number
+        user_id:
+          type: number
+        status:
+          type: string
+
     AnswersSurvey:
       type: object
       properties:
@@ -17,6 +27,11 @@ components:
           type: number
         status:
           type: string
+        questions:
+          type: array
+          items:
+            $ref: '#/components/schemas/Question'
+
     Role:
       type: object
       properties:
@@ -58,11 +73,11 @@ components:
         role_type:
           type: string
         current_answers_survey:
-          $ref: '#/components/schemas/AnswersSurvey'
+          $ref: '#/components/schemas/SimpleAnswersSurvey'
         answers_surveys:
           type: array
           items:
-            $ref: '#/components/schemas/AnswersSurvey'
+            $ref: '#/components/schemas/SimpleAnswersSurvey'
         questions:
           type: array
           items:
@@ -105,6 +120,11 @@ components:
           type: number
         password:
           type: string
+    CreateAnswersSurveyRequestBody:
+      type: object
+      properties:
+        survey_id:
+          type: number
     AuthData:
       type: object
       properties:
@@ -187,6 +207,25 @@ paths:
                 type: array
                 items:
                   $ref: '#/components/schemas/Survey'
+  '/api/v1/answers_surveys':
+    post:
+      summary: Create Answers Survey
+      description: Create Answers Survey
+      tags:
+        - AnswerSurvey
+      responses:
+        '200':
+          description: AnswersSurvey created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AnswersSurvey'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateAnswersSurveyRequestBody'
+
 servers:
   - url: https://espoo.herokuapp.com
   - url: http://localhost:3000
