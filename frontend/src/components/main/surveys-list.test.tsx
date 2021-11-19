@@ -1,7 +1,7 @@
 import React from 'react';
 import { Survey } from 'api/models/survey';
 import { AnswerSurveyCreate } from 'api/models/answer_survey';
-import { fireEvent, render, waitFor } from 'test-utils';
+import { fireEvent, render, screen, waitFor } from 'test-utils';
 import { SurveysList } from './SurveysList';
 import { AxiosInstance } from 'axios';
 import { httpClient } from '../../api/client';
@@ -68,5 +68,24 @@ describe('Surveys list', () => {
         survey_id: 1,
       })
     );
+  });
+
+  it('not should show a survey when api return error', async () => {
+    const mockResponse = {
+      mock: true,
+    };
+
+    (httpClient as jest.Mocked<AxiosInstance>).post.mockImplementationOnce(
+      jest.fn((url: string, body: AnswerSurveyCreate) => {
+        return Promise.reject({ response: { data: mockResponse } });
+      })
+    );
+
+    await waitFor(() =>
+      expect(httpClient.post).toHaveBeenCalledWith('api/v1/answers_surveys', {
+        survey_id: 1,
+      })
+    );
+    expect(screen.queryByText('Animals survey')).toBeNull();
   });
 });
