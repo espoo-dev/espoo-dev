@@ -70,7 +70,7 @@ describe('Surveys list', () => {
     );
   });
 
-  it('not should show a survey when api return error', async () => {
+  it('should not show a survey when api return error', async () => {
     const mockResponse = {
       mock: true,
     };
