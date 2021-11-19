@@ -207,6 +207,25 @@ paths:
                 type: array
                 items:
                   $ref: '#/components/schemas/Survey'
+  '/api/v1/surveys/{id}':
+    get:
+      summary: Get survey
+      description: "Get ready survey"
+      tags:
+        - Surveys
+      parameters:
+        - in: path
+          name: id
+          schema:
+            type: integer
+          required: true
+      responses:
+        '200':
+          description: Ready surveys
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Survey'
   '/api/v1/answers_surveys':
     post:
       summary: Create Answers Survey
