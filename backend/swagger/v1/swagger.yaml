@@ -111,6 +111,21 @@ components:
       properties:
         user:
           $ref: '#/components/schemas/AuthData'
+    Answer:
+      type: object
+      properties:
+        id:
+          type: number
+        question_id:
+          type: number
+        answers_survey_id:
+          type: number
+        user_answer:
+          type: string
+        options:
+          type: array
+          items:
+            $ref: '#/components/schemas/Option'
     CreateUserRequestBody:
       type: object
       properties:
@@ -125,6 +140,19 @@ components:
       properties:
         survey_id:
           type: number
+    CreateAnswerRequestBody:
+      type: object
+      properties:
+        question_id:
+          type: number
+        answers_survey_id:
+          type: number
+        user_answer:
+          type: string
+        option_ids:
+          type: array
+          items:
+            type: number
     AuthData:
       type: object
       properties:
@@ -177,6 +205,27 @@ paths:
           application/json:
             schema:
               $ref: '#/components/schemas/CreateUserRequestBody'
+  '/api/v1/users':
+    get:
+      summary: List user
+      description: List users according to token
+      tags:
+        - Users
+      parameters:
+        - in: query
+          name: role_id
+          schema:
+            type: integer
+          description: Get users by role_id
+      responses:
+        '200':
+          description: Users available by token
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/User'
   '/api/v1/roles':
     get:
       summary: Get roles
@@ -207,6 +256,25 @@ paths:
                 type: array
                 items:
                   $ref: '#/components/schemas/Survey'
+  '/api/v1/surveys/{id}':
+    get:
+      summary: Get survey
+      description: "Get ready survey"
+      tags:
+        - Surveys
+      parameters:
+        - in: path
+          name: id
+          schema:
+            type: integer
+          required: true
+      responses:
+        '200':
+          description: Ready surveys
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Survey'
   '/api/v1/answers_surveys':
     post:
       summary: Create Answers Survey
@@ -225,6 +293,24 @@ paths:
           application/json:
             schema:
               $ref: '#/components/schemas/CreateAnswersSurveyRequestBody'
+  '/api/v1/answers':
+    post:
+      summary: Create Answers
+      description: Create Answers
+      tags:
+        - Answers
+      responses:
+        '200':
+          description: Answer created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Answer'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateAnswerRequestBody'
 
 servers:
   - url: https://espoo.herokuapp.com
