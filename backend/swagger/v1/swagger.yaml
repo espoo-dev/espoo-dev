@@ -177,6 +177,27 @@ paths:
           application/json:
             schema:
               $ref: '#/components/schemas/CreateUserRequestBody'
+  '/api/v1/users':
+    get:
+      summary: List user
+      description: List users according to token
+      tags:
+        - Users
+      parameters:
+        - in: query
+          name: role_id
+          schema:
+            type: integer
+          description: Get users by role_id
+      responses:
+        '200':
+          description: Users available by token
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/User'
   '/api/v1/roles':
     get:
       summary: Get roles
