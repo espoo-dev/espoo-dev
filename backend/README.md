@@ -4,7 +4,7 @@
 
 - `docker-compose up`
 
-- `docker-compose exec espoo_server bundle exec rspec`
+- `docker-compose exec espoo_server validate_all.sh`
 
 - navigate to http://localhost:3000
 
