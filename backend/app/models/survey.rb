@@ -14,7 +14,7 @@ class Survey < ApplicationRecord
     all.includes([:questions])
   }
 
-  scope :ready_surveys, -> { where(ready: true) }
+  scope :ready_surveys, -> { where(ready: true).order(id: :desc) }
 
   scope :ready_surveys_eager, -> { ready_surveys.includes([:questions]) }
 
