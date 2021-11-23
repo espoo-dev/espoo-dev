@@ -29,7 +29,7 @@ Metrics/AbcSize:
   Max: 80
 
 Metrics/BlockLength:
-  IgnoredMethods: ['describe', 'context']
+  IgnoredMethods: ['describe', 'context', 'it']
   Max: 35
   Exclude:
     - 'spec/factories/*'
@@ -56,7 +56,7 @@ Style/TernaryParentheses:
   EnforcedStyle: require_parentheses_when_complex
 
 RSpec/ExampleLength:
-  Max: 30
+  Max: 50
 
 RSpec/NestedGroups:
   Max: 4

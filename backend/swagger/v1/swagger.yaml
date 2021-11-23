@@ -8,6 +8,30 @@ components:
       name: Authorization
 
   schemas:
+    SimpleAnswersSurvey:
+      type: object
+      properties:
+        id:
+          type: number
+        user_id:
+          type: number
+        status:
+          type: string
+
+    AnswersSurvey:
+      type: object
+      properties:
+        id:
+          type: number
+        user_id:
+          type: number
+        status:
+          type: string
+        questions:
+          type: array
+          items:
+            $ref: '#/components/schemas/Question'
+
     Role:
       type: object
       properties:
@@ -15,9 +39,50 @@ components:
           type: number
         role_type:
           type: string
-        role:
-          $ref: '#/components/schemas/AuthData'
+    Option:
+      type: object
+      properties:
+        id:
+          type: number
+        name:
+          type: string
+        correct:
+          type: boolean
+    Question:
+      type: object
+      properties:
+        id:
+          type: number
+        name:
+          type: string
+        options:
+          type: array
+          items:
+            $ref: '#/components/schemas/Option'
     Survey:
+      type: object
+      properties:
+        id:
+          type: number
+        survey_subject_id:
+          type: number
+        name:
+          type: string
+        description:
+          type: string
+        role_type:
+          type: string
+        current_answers_survey:
+          $ref: '#/components/schemas/SimpleAnswersSurvey'
+        answers_surveys:
+          type: array
+          items:
+            $ref: '#/components/schemas/SimpleAnswersSurvey'
+        questions:
+          type: array
+          items:
+            $ref: '#/components/schemas/Question'
+    SimpleSurvey:
       type: object
       properties:
         id:
@@ -40,12 +105,54 @@ components:
         surveys:
           type: array
           items:
-            $ref: '#/components/schemas/Survey'
+            $ref: '#/components/schemas/SimpleSurvey'
     SignInRequestBody:
       type: object
       properties:
         user:
           $ref: '#/components/schemas/AuthData'
+    Answer:
+      type: object
+      properties:
+        id:
+          type: number
+        question_id:
+          type: number
+        answers_survey_id:
+          type: number
+        user_answer:
+          type: string
+        options:
+          type: array
+          items:
+            $ref: '#/components/schemas/Option'
+    CreateUserRequestBody:
+      type: object
+      properties:
+        email:
+          type: string
+        role_id:
+          type: number
+        password:
+          type: string
+    CreateAnswersSurveyRequestBody:
+      type: object
+      properties:
+        survey_id:
+          type: number
+    CreateAnswerRequestBody:
+      type: object
+      properties:
+        question_id:
+          type: number
+        answers_survey_id:
+          type: number
+        user_answer:
+          type: string
+        option_ids:
+          type: array
+          items:
+            type: number
     AuthData:
       type: object
       properties:
@@ -79,6 +186,131 @@ paths:
           application/json:
             schema:
               $ref: '#/components/schemas/SignInRequestBody'
+  '/api/v1/users':
+    post:
+      summary: Create user
+      description: "Creates users that will be able to login"
+      tags:
+        - Users
+      responses:
+        '200':
+          description: User created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/User'
+
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateUserRequestBody'
+  '/api/v1/users':
+    get:
+      summary: List user
+      description: List users according to token
+      tags:
+        - Users
+      parameters:
+        - in: query
+          name: role_id
+          schema:
+            type: integer
+          description: Get users by role_id
+      responses:
+        '200':
+          description: Users available by token
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/User'
+  '/api/v1/roles':
+    get:
+      summary: Get roles
+      description: "Get available roles"
+      tags:
+        - Roles
+      responses:
+        '200':
+          description: Available roles
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Role'
+  '/api/v1/surveys':
+    get:
+      summary: Get surveys
+      description: "Get ready surveys"
+      tags:
+        - Surveys
+      responses:
+        '200':
+          description: Ready surveys
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Survey'
+  '/api/v1/surveys/{id}':
+    get:
+      summary: Get survey
+      description: "Get ready survey"
+      tags:
+        - Surveys
+      parameters:
+        - in: path
+          name: id
+          schema:
+            type: integer
+          required: true
+      responses:
+        '200':
+          description: Ready surveys
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Survey'
+  '/api/v1/answers_surveys':
+    post:
+      summary: Create Answers Survey
+      description: Create Answers Survey
+      tags:
+        - AnswerSurvey
+      responses:
+        '200':
+          description: AnswersSurvey created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AnswersSurvey'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateAnswersSurveyRequestBody'
+  '/api/v1/answers':
+    post:
+      summary: Create Answers
+      description: Create Answers
+      tags:
+        - Answers
+      responses:
+        '200':
+          description: Answer created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Answer'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateAnswerRequestBody'
 
 servers:
   - url: https://espoo.herokuapp.com

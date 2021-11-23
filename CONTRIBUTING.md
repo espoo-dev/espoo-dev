@@ -18,5 +18,4 @@ agree to abide by the [CODE_OF_CONDUCT.md](https://github.com/espoo-dev/espoo-de
 
 # 📝 Docs (requests)
 
-1. [Postman requests](https://www.postman.com/grey-zodiac-51715/workspace/espoo/overview)
 1. [Swagger](https://espoo.herokuapp.com/api-docs/index.html)
