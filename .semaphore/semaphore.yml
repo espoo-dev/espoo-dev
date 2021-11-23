@@ -19,7 +19,7 @@ blocks:
   - name: Test
     dependencies: []
     run:
-      when: "change_in('/frontend')"
+      when: "change_in('/frontend', {default_branch: 'main'})"
     task:
       jobs:
         - name: test client
@@ -39,7 +39,7 @@ blocks:
     dependencies: ["Install dependencies"]
     # Run this block on changes in frontend folder
     run:
-      when: "change_in('/frontend')"
+      when: "change_in('/frontend', {default_branch: 'main'})"
     task:
       jobs:
         - name: lint client
@@ -53,7 +53,7 @@ blocks:
     dependencies: ["Install dependencies"]
     # Run this block on changes in frontend folder and installed dependencies
     run:
-      when: "change_in('/frontend')"
+      when: "change_in('/frontend', {default_branch: 'main'})"
     task:
       jobs:
         - name: build client
@@ -65,7 +65,7 @@ blocks:
   - name: Deploy storybook docs
     dependencies: ["Build", "Lint", "Test"]
     run:
-      when: "change_in('/frontend')"
+      when: "change_in('/frontend', {default_branch: 'main'})"
     task:
       secrets:
         - name: chromatic
