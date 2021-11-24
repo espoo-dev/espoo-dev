@@ -4,6 +4,29 @@ import { fireEvent, render } from 'test-utils';
 import { TeachersList } from './TeachersList';
 
 describe('Teacher list', () => {
+  it('should throw error when data is not passed', () => {
+    const element = () => { render(<TeachersList data={undefined} onSelect={() => {}}/>) };
+    expect(element).toThrow(Error);
+    expect(element).toThrow('data is required');
+  })
+
+  it('should throw error when onSelect function is not passed', () => {
+    const data: User[] = [
+      {
+        email: 'admin@gmail.com',
+        id: 1,
+        phone: '',
+        role: {
+          id: 1,
+          role_type: 'admin',
+        },
+      },
+    ];
+    const element = () => { render(<TeachersList data={data} onSelect={undefined}/>) };
+    expect(element).toThrow(Error);
+    expect(element).toThrow('onSelect is required');
+  })
+
   it('should render the item passed to the list', () => {
     const data: User[] = [
       {
