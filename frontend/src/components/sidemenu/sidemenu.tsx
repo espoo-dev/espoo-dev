@@ -1,9 +1,10 @@
 import React, { useContext } from 'react';
 import Link from 'next/link';
-import { Button, Flex, Heading, List } from '@chakra-ui/react';
+import { Button, Flex, Heading, List, Tooltip } from '@chakra-ui/react';
 import { IconType } from 'react-icons';
-import { HiAcademicCap, HiLogout, HiClipboardCheck } from 'react-icons/hi';
+import { HiAcademicCap, HiClipboardCheck } from 'react-icons/hi';
 import { AuthContext } from 'context/auth';
+import { RiLogoutCircleLine } from 'react-icons/ri';
 import { MenuLinkOption } from './sidemenu.styles';
 
 interface MenuLink {
@@ -57,17 +58,19 @@ export const Sidemenu = () => {
           })}
         </List>
 
-        <Button
-          p={0}
-          m={0}
-          rounded="lg"
-          bg="teal.400"
-          colorScheme="teal"
-          w="30px"
-          onClick={logout}
-        >
-          <HiLogout color="white" style={{ transform: 'rotate(180deg)' }} />
-        </Button>
+        <Tooltip label="Logout">
+          <Button
+            p={0}
+            m={0}
+            rounded="lg"
+            bg="teal.400"
+            colorScheme="teal"
+            w="30px"
+            onClick={logout}
+          >
+            <RiLogoutCircleLine color="white" />
+          </Button>
+        </Tooltip>
       </Flex>
     </Flex>
   );
