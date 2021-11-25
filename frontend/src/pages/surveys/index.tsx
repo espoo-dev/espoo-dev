@@ -74,9 +74,8 @@ const Surveys = () => {
                 <Spacer />
                 <Tooltip label="Refresh" placement="top">
                   <Button
-                    p={0}
-                    m={0}
                     rounded="lg"
+                    p={0}
                     bg="teal.400"
                     colorScheme="teal"
                     w="30px"
