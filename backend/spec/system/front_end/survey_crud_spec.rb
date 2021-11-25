@@ -8,14 +8,13 @@ RSpec.describe 'Survey CRUD', type: :system do
 
     describe '#index' do
       before do
-        binding.pry
         sign_in user_student
-        visit "/"
+        visit surveys_path
       end
 
       it { expect(page).to have_text(survey.name) }
 
-      it { expect(page).to have_text("1 question answered") }
+      it { expect(page).to have_text('1 question answered') }
     end
   end
 end

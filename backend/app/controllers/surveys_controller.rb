@@ -1,5 +1,13 @@
 class SurveysController < ApplicationController
   def index
-    @surveys = SurveyWithAnsweredQuestions.call(Survey.ready_surveys.decorate, current_user)
+    @surveys = survey_presenters
+  end
+
+  private
+
+  def survey_presenters
+    Survey.ready_surveys.decorate.map do |survey|
+      SurveyWithAnsweredQuestionsPresenter.payload(survey, current_user)
+    end
   end
 end

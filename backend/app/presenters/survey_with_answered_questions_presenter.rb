@@ -1,18 +1,18 @@
-class SurveyWithAnsweredQuestions < Base
-  def initialize(surveys, user)
-    @surveys = surveys
+class SurveyWithAnsweredQuestionsPresenter < BasePresenter
+  def initialize(survey, user)
+    @survey = survey
     @user = user
 
     super()
   end
 
-  def call
-    @surveys.map { |survey| survey_constructor(survey) }
+  def payload
+    survey_constructor(@survey)
   end
 
   private
 
-  def survey_constructor(survey)
+  def survey_constructor(@survey)
     {
       title: survey.title,
       description: survey.description,
