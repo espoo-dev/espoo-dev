@@ -13,6 +13,8 @@ import com.example.espoo.model.UserLogin
 import com.google.gson.Gson
 import com.google.gson.GsonBuilder
 import kotlinx.android.synthetic.main.activity_login.*
+import okhttp3.Interceptor
+import okhttp3.OkHttpClient
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -27,8 +29,25 @@ class LoginActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_login)
 
+        val httpClient = OkHttpClient.Builder()
+        httpClient.addInterceptor { chain ->
+            val request = chain
+                .request()
+                .newBuilder()
+                .header("Accept", "application/json")
+                .header("Content-Type", "application/json")
+                .build()
+
+            chain.proceed(request)
+        }
+
+        //TODO handle timeout exception in first request to wake up heroku app
+
+        val okHttpClient = httpClient.build()
+
         service = Retrofit.Builder()
             .baseUrl("https://espoo.herokuapp.com")
+            .client(okHttpClient)
             .addConverterFactory(GsonConverterFactory.create())
             .build()
             .create(UserService::class.java)
