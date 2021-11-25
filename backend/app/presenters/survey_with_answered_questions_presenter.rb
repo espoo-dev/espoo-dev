@@ -12,9 +12,9 @@ class SurveyWithAnsweredQuestionsPresenter < BasePresenter
 
   private
 
-  def survey_constructor(@survey)
+  def survey_constructor(survey)
     {
-      title: survey.title,
+      name: survey.name,
       description: survey.description,
       id: survey.id,
       answered_questions: AnswersSurvey.by_user_and_survey(@user, survey).size
