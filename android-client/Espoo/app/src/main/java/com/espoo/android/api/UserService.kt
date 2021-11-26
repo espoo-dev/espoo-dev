@@ -1,8 +1,7 @@
-package com.example.espoo.api
+package com.espoo.android.api
 
-import com.example.espoo.model.AuthData
-import com.example.espoo.model.User
-import com.example.espoo.model.UserLogin
+import com.espoo.android.model.AuthData
+import com.espoo.android.model.User
 import retrofit2.Call
 import retrofit2.http.Body
 import retrofit2.http.POST

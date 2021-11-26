@@ -1,11 +1,11 @@
-package com.example.espoo.view
+package com.espoo.android.view
 
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
-import com.example.espoo.R
-import com.example.espoo.helper.SessionManager
+import com.espoo.android.R
+import com.espoo.android.helper.SessionManager
 
 class MainActivity : AppCompatActivity() {
 

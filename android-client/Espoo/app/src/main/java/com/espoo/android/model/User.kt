@@ -1,4 +1,4 @@
-package com.example.espoo.model
+package com.espoo.android.model
 
 data class User(var id: Int, var email: String, var role: Role, var surveys: Array<Survey>) {
     override fun equals(other: Any?): Boolean {

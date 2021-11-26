@@ -12,7 +12,7 @@ android {
     buildToolsVersion "30.0.3"
 
     defaultConfig {
-        applicationId "com.example.espoo"
+        applicationId "com.espoo.android"
         minSdkVersion 16
         targetSdkVersion 30
         versionCode 1

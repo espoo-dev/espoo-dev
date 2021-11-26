@@ -1,4 +1,4 @@
-package com.example.espoo.view
+package com.espoo.android.view
 
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
@@ -6,12 +6,15 @@ import android.os.Bundle
 import android.util.Log
 import android.view.View
 import android.widget.Toast
-import com.example.espoo.R
-import com.example.espoo.api.UserService
-import com.example.espoo.helper.SessionManager
-import com.example.espoo.model.AuthData
-import com.example.espoo.model.User
-import com.example.espoo.model.UserLogin
+import com.espoo.android.R
+import com.espoo.android.api.UserService
+import com.espoo.android.helper.SessionManager
+import com.espoo.android.helper.SessionManager.PreferencesConstants.IS_LOGIN
+import com.espoo.android.helper.SessionManager.PreferencesConstants.USER_ID
+import com.espoo.android.helper.SessionManager.PreferencesConstants.EMAIL
+import com.espoo.android.model.AuthData
+import com.espoo.android.model.User
+import com.espoo.android.model.UserLogin
 import kotlinx.android.synthetic.main.activity_login.*
 import okhttp3.OkHttpClient
 import retrofit2.Call
@@ -65,15 +68,15 @@ class LoginActivity : AppCompatActivity() {
 
                     val user = response.body()
                     user?.let {
-                        sessionManager.storeUserId(it.id)
-                        sessionManager.storeEmail(it.email)
+                        sessionManager.storeData(USER_ID, it.id)
+                        sessionManager.storeData(EMAIL, it.email)
                         Toast.makeText(
                             applicationContext,
                             "${getString(R.string.welcome)} ${it.email}",
                             Toast.LENGTH_LONG
                         ).show()
                     }
-                    sessionManager.login()
+                    sessionManager.storeData(IS_LOGIN, true)
                     openMainActivity()
                 }
 

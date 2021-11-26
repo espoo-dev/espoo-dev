@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.example.espoo">
+    package="com.espoo.android">
 
     <uses-permission android:name="android.permission.INTERNET" />
 
@@ -12,9 +12,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Espoo">
         <activity
-            android:name=".view.MainActivity"
+            android:name="com.espoo.android.view.MainActivity"
             android:exported="false" />
-        <activity android:name=".view.LoginActivity">
+        <activity android:name="com.espoo.android.view.LoginActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
