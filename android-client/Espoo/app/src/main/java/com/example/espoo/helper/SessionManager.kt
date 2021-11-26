@@ -7,7 +7,6 @@ import android.content.SharedPreferences
 class SessionManager(val context: Context) {
     private var preferences: SharedPreferences
     private var editor: SharedPreferences.Editor
-    private var preferencesFileName: String = context.packageName
 
     object PreferencesConstants {
         const val KEY_USER_ID = "user_id"
@@ -16,12 +15,14 @@ class SessionManager(val context: Context) {
     }
 
     init {
+        var preferencesFileName: String = context.packageName
         preferences = context.getSharedPreferences(preferencesFileName, MODE_PRIVATE)
         editor = preferences.edit()
     }
 
     internal fun storeUserId(userId: Int) {
         editor.putInt(PreferencesConstants.KEY_USER_ID, userId)
+        editor.apply()
     }
 
     internal fun readUserId() : Int {
@@ -30,6 +31,7 @@ class SessionManager(val context: Context) {
 
     internal fun storeEmail(email: String) {
         editor.putString(PreferencesConstants.KEY_EMAIL, email)
+        editor.apply()
     }
 
     internal fun readEmail(): String? {
@@ -38,6 +40,7 @@ class SessionManager(val context: Context) {
 
     internal fun login() {
         editor.putBoolean(PreferencesConstants.KEY_IS_LOGIN, true)
+        editor.apply()
     }
 
     internal fun isLogin(): Boolean {
