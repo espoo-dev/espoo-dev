@@ -2,13 +2,23 @@ import Head from 'next/head';
 import { withAuth } from 'hoc/withAuth';
 import { Container, Content, Layout } from 'styles/main.styles';
 import { Sidemenu } from '@components/sidemenu';
-import { Box, Heading, Spinner, Text } from '@chakra-ui/react';
+import {
+  Box,
+  Heading,
+  Spinner,
+  Text,
+  Flex,
+  Button,
+  Tooltip,
+  Spacer
+} from '@chakra-ui/react';
 import { httpClient } from 'api';
 import { errorHandler } from 'api/error-handler';
 import { useEffect, useState } from 'react';
 import { SurveysList } from '@components/main/SurveysList';
 import { SurveyService } from 'api/services/survey';
 import { Survey } from 'api/models/survey';
+import { HiRefresh } from 'react-icons/hi';
 
 const Surveys = () => {
   const surveyService = new SurveyService(httpClient);
@@ -57,9 +67,24 @@ const Surveys = () => {
             {loading ? (
               <Spinner color="white" />
             ) : (
-              <Text color="white" textAlign="center" mb="10px">
-                {surveys.length ? 'Discover a new survey!' : 'No surveys =/'}
-              </Text>
+              <Flex alignItems="center">
+                <Text color="white" textAlign="center" mb="10px">
+                  {surveys.length ? 'Discover a new survey!' : 'No surveys =/'}
+                </Text>
+                <Spacer />
+                <Tooltip label="Refresh" placement="top">
+                  <Button
+                    rounded="lg"
+                    p={0}
+                    bg="teal.400"
+                    colorScheme="teal"
+                    w="30px"
+                    onClick={listSurveys}
+                  >
+                    <HiRefresh color="white" />
+                  </Button>
+                </Tooltip>
+              </Flex>
             )}
 
             <SurveysList data={surveys} />
