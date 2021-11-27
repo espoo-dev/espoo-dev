@@ -2,7 +2,7 @@ import { render, screen } from '@testing-library/react';
 import { Sidemenu } from '.';
 
 describe('Sidemenu', () => {
-  it('should render sidemenu and check system name in screen', () => {
+  it('should check system name', () => {
     render(<Sidemenu />);
     expect(screen.getByText('Espoolingo')).toBeInTheDocument();
   });
