@@ -25,7 +25,7 @@ describe('AnswerSurveyService', () => {
   let res: AxiosResponse<AnswerSurvey>;
 
   describe('register method', () => {
-    describe('when returns the expected data', () => {
+    describe('when returns expected data', () => {
       beforeEach(async () => {
         // mocking post implementation to return the expected value
         (httpClient as jest.Mocked<AxiosInstance>)
@@ -42,11 +42,11 @@ describe('AnswerSurveyService', () => {
         res = await instance.register(mockAnswerSurveyCreate);
       })
 
-      it('should call the post method once', () => {
+      it('should call post method once', () => {
         expect(httpClient.post).toHaveBeenCalled();
       });
 
-      it('should return the expected data', () => {
+      it('should return expected data', () => {
         expect(res.data).toEqual(mockResponse);
       });
     });
@@ -68,11 +68,11 @@ describe('AnswerSurveyService', () => {
         res = await instance.register(mockAnswerSurveyCreate);
       });
 
-      it('should call the post method', () => {
+      it('should call post method', () => {
         expect(httpClient.post).toHaveBeenCalled();
       });
 
-      it('should return the expected data', () => {
+      it('should return expected data', () => {
         expect(res).toEqual(undefined);
       });
     });
