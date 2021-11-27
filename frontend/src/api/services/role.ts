@@ -1,3 +1,4 @@
+import { errorHandler } from '@api/error-handler';
 import { Role } from 'api/models/role';
 import { AxiosInstance, AxiosResponse } from 'axios';
 
@@ -14,7 +15,7 @@ export class RoleService {
         return response;
       }
     } catch (error) {
-      throw new Error(error);
+      errorHandler(error);
     }
 
     return undefined;
