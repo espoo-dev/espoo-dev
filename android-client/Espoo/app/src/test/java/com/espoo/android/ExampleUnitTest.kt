@@ -1,4 +1,4 @@
-package com.example.espoo
+package com.espoo.android
 
 import org.junit.Test
 

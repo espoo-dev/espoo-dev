@@ -45,7 +45,7 @@ RSpec.describe Survey, type: :model do
     it 'can update ready when all questions are ready' do
       not_ready_question = survey.questions.find_by(ready_to_be_answered: false)
       not_ready_question.ready_to_be_answered = true
-      not_ready_question.save
+      not_ready_question.save!
       survey.reload.ready = true
       expect(survey).to be_valid
     end

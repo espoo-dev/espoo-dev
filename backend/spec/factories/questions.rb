@@ -35,4 +35,11 @@ FactoryBot.define do
       question.save!
     end
   end
+
+  factory :question_with_answer, parent: :question do
+    after(:create) do |question|
+      create(:answer_with_option, question: question)
+      question.save!
+    end
+  end
 end
