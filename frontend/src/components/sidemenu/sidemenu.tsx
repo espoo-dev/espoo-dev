@@ -67,6 +67,7 @@ export const Sidemenu = () => {
             colorScheme="teal"
             w="30px"
             onClick={logout}
+            data-testid="logout-button"
           >
             <RiLogoutCircleLine color="white" />
           </Button>
