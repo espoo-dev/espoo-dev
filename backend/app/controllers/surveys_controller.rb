@@ -7,7 +7,7 @@ class SurveysController < ApplicationController
 
   def survey_presenters
     Survey.ready_surveys.decorate.map do |survey|
-      SurveyWithAnsweredQuestionsPresenter.payload(survey, current_user)
+      SurveyPresenter.payload(survey, current_user)
     end
   end
 end
