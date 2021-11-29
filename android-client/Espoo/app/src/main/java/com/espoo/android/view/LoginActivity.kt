@@ -9,6 +9,7 @@ import android.widget.Toast
 import com.espoo.android.R
 import com.espoo.android.api.UserService
 import com.espoo.android.helper.SessionManager
+import com.espoo.android.helper.SessionManager.PreferencesConstants.API_TOKEN
 import com.espoo.android.helper.SessionManager.PreferencesConstants.IS_LOGIN
 import com.espoo.android.helper.SessionManager.PreferencesConstants.USER_ID
 import com.espoo.android.helper.SessionManager.PreferencesConstants.EMAIL
@@ -75,6 +76,9 @@ class LoginActivity : AppCompatActivity() {
                             "${getString(R.string.welcome)} ${it.email}",
                             Toast.LENGTH_LONG
                         ).show()
+                    }
+                    response.headers()["Authorization"]?.let {
+                        sessionManager.storeData(API_TOKEN, it)
                     }
                     sessionManager.storeData(IS_LOGIN, true)
                     openMainActivity()

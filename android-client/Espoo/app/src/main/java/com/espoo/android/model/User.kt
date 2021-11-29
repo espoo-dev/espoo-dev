@@ -1,6 +1,6 @@
 package com.espoo.android.model
 
-data class User(var id: Int, var email: String, var role: Role, var surveys: Array<Survey>) {
+data class User(var id: Int, var email: String, var role: Role, var surveys: Array<SimpleSurvey>) {
     override fun equals(other: Any?): Boolean {
         if (this === other) return true
         if (javaClass != other?.javaClass) return false
