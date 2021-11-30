@@ -24,19 +24,19 @@ const mockResponse = {
 
 describe('Client interceptors', () => {
   describe('Request interceptors', () => {
-    it('should request to an open endpoint without authorization', () => {
+    it('should work without authorization when endpoint is public', () => {
       mockRequest.url = '/users/sign_in';
       const resolvedReq = requestInterceptor().fulfilled(mockRequest);
       expect(resolvedReq).toMatchObject(mockRequest);
       expect('Authorization' in resolvedReq.headers).toBeFalsy();
     });
-    it('should request closed endpoints with authorization', () => {
+    it('should work with authorization when endpoint is private', () => {
       mockRequest.url = '/users/test';
       const resolvedReq = requestInterceptor().fulfilled(mockRequest);
       expect(resolvedReq).toMatchObject(mockRequest);
       expect('Authorization' in resolvedReq.headers).toBeTruthy();
     });
-    it('should return error', () => {
+    it('should fail without authorization when endpoint is private', () => {
       const mockError = new Error('test');
       const rejectedReq = requestInterceptor().rejected(mockError);
       expect(rejectedReq).rejects.toMatchObject<Error>(mockError);
