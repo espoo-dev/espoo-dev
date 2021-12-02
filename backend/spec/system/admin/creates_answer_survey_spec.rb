@@ -1,8 +1,6 @@
 require 'rails_helper'
 
 RSpec.describe 'Creates AnswerSurvey', type: :system do
-  include Devise::Test::IntegrationHelpers
-
   context 'when logged user is at surveys page and click on "answer" button' do
     let(:user_student) { create(:user_student) }
     let!(:survey) { create(:ready_survey) }

@@ -1,0 +1,6 @@
+h1 = @question.name
+h5 = "This is a #{@question.question_type.name.downcase} question."
+ul
+  - @question.options.each do |option|
+    li = option.name
+button Next
