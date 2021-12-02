@@ -14,4 +14,3 @@
             = form_with url: answers_surveys_path, method: :post do |form|
               = form.hidden_field :survey_id, value: survey[:id]
               = form.submit t('surveys.answers.submit'), class: 'btn btn-primary'
-
