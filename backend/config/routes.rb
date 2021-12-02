@@ -3,6 +3,9 @@ Rails.application.routes.draw do
   mount Rswag::Api::Engine => '/api-docs'
   resources :answers_surveys, only: %i[create]
   resources :surveys, only: %i[index]
+  resources :questions, only: %i[show]
+
+  root "surveys#index"
 
   namespace :admin do
     resources :users
