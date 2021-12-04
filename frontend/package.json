@@ -30,6 +30,7 @@
     "nookies": "^2.5.2",
     "react": "17.0.1",
     "react-dom": "17.0.1",
+    "react-hook-form": "^7.20.5",
     "react-icons": "^4.2.0",
     "react-toastify": "^7.0.3",
     "styled-components": "^5.2.3"
