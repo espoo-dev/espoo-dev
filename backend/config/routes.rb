@@ -5,8 +5,6 @@ Rails.application.routes.draw do
   resources :surveys, only: %i[index]
   resources :questions, only: %i[show]
 
-  root "surveys#index"
-
   namespace :admin do
     resources :users
     resources :roles

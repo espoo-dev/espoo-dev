@@ -4,8 +4,8 @@ class AnswersSurveysController < ApplicationController
     AnswersSurvey.find_or_create_by!(create_answers_survey_params)
 
     redirect_to @first_question
-  rescue StandardError => err
-    redirect_to root_path, flash: err.message
+  rescue StandardError => err # rubocop:disable Naming/RescuedExceptionsVariableName
+    redirect_to surveys_path, flash: err.message
   end
 
   private
