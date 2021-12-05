@@ -3,9 +3,8 @@ import {
   FormErrorMessage,
   FormLabel,
 } from '@chakra-ui/form-control';
-import { Select, SelectProps } from '@chakra-ui/select';
-import { SelectHTMLAttributes } from 'react';
-import { FieldValues, FormState, UseFormRegister } from 'react-hook-form';
+import { Select } from '@chakra-ui/select';
+import { FieldValues, UseFormRegister } from 'react-hook-form';
 
 export interface FormSelectProps {
   label?: string;
