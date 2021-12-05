@@ -1,4 +1,5 @@
 import { render, screen, fireEvent } from '@testing-library/react';
+import { ErrorOption } from 'react-hook-form';
 import { FormSelect, FormSelectProps } from './form-select';
 
 const mockOptions = [
@@ -8,7 +9,7 @@ const mockOptions = [
 ];
 
 const mockRegister = jest.fn();
-const mockErros = jest.fn();
+const mockErros = jest.fn() as ErrorOption;
 
 const defaultProps: FormSelectProps = {
   register: mockRegister,

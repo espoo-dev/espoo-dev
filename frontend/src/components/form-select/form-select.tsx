@@ -4,7 +4,7 @@ import {
   FormLabel,
 } from '@chakra-ui/form-control';
 import { Select } from '@chakra-ui/select';
-import { FieldValues, UseFormRegister } from 'react-hook-form';
+import { ErrorOption, FieldValues, UseFormRegister } from 'react-hook-form';
 
 export interface FormSelectProps {
   label?: string;
@@ -13,9 +13,9 @@ export interface FormSelectProps {
     value: string;
     label: string;
   }[];
-  errors: any;
+  errors: ErrorOption;
   register: UseFormRegister<FieldValues>;
-  validations?: any;
+  validations?: FieldValues;
 }
 
 export const FormSelect = (props: FormSelectProps) => {
