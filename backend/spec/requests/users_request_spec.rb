@@ -113,7 +113,8 @@ RSpec.describe 'UsersController', type: :request do
               'id' => survey.id,
               'name' => survey.name,
               'description' => survey.description,
-              'questions_quantity' => survey.questions.size
+              'total_questions_quantity' => survey.questions.size,
+              'answered_questions_quantity' => survey.last_answers_quantity
             }
           ]
         }

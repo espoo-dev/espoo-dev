@@ -2,7 +2,7 @@ class UserSerializer < ActiveModel::Serializer
   attributes :id, :email, :role, :surveys
 
   def surveys
-    object.surveys.map { |survey| SimpleSurveySerializer.new(survey) }
+    object.surveys.map { |survey| SimpleSurveyPresenter.new(survey).payload }
   end
 
   def role
