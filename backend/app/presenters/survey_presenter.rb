@@ -1,12 +1,13 @@
 class SurveyPresenter < BasePresenter
-  def initialize(survey, user = nil)
+  def initialize(survey, user = nil, simple = false)
     @survey = survey
     @user = user
+    @simple = simple
 
     super()
   end
 
-  def payload(simple: false)
+  def payload
     simple ? simple_payload : complete_payload
   end
 
