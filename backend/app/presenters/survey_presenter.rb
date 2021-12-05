@@ -1,14 +1,6 @@
-class SurveyPresenter < BasePresenter
-  def initialize(survey, user = nil, simple = false)
-    @survey = survey
-    @user = user
-    @simple = simple
-
-    super()
-  end
-
+class SurveyPresenter < SimpleSurveyPresenter
   def payload
-    simple ? simple_payload : complete_payload
+    complete_payload
   end
 
   private
@@ -20,16 +12,6 @@ class SurveyPresenter < BasePresenter
         last_answers_survey: answers_surveys_payload.last
       }
     )
-  end
-
-  def simple_payload
-    {
-      id: @survey.id,
-      name: @survey.name,
-      description: @survey.description,
-      total_questions_quantity: @survey.questions.size,
-      answered_questions_quantity: @survey.last_answers_quantity
-    }
   end
 
   def answers_surveys_payload
