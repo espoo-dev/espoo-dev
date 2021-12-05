@@ -6,7 +6,13 @@ class SurveyPresenter < BasePresenter
     super()
   end
 
-  def payload
+  def payload(simple: false)
+    simple ? simple_payload : complete_payload
+  end
+
+  private
+
+  def complete_payload
     simple_payload.merge(
       {
         answers_surveys: answers_surveys_payload,
@@ -24,8 +30,6 @@ class SurveyPresenter < BasePresenter
       answered_questions_quantity: @survey.last_answers_quantity
     }
   end
-
-  private
 
   def answers_surveys_payload
     @answers_surveys_payload ||= AnswersSurvey.by_user_and_survey(@user, @survey).map do |answer_survey|

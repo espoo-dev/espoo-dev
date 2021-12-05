@@ -14,7 +14,7 @@ RSpec.describe SurveyPresenter do
   it { expect(presenter).to respond_to(:payload).with(0).arguments }
 
   describe '#payload' do
-    it 'matches expected attributes' do
+    it 'matches expected attributes when complete' do
       answers_survey_payload = {
         id: last_answers_survey.id,
         status: last_answers_survey.status,
@@ -31,10 +31,8 @@ RSpec.describe SurveyPresenter do
       }
       expect(presenter.payload).to eq expected_payload
     end
-  end
 
-  describe '#simple_payload' do
-    it 'matches expected attributes' do
+    it 'matches expected attributes when simple' do
       expected_payload = {
         id: survey.id,
         name: survey.name,
@@ -42,7 +40,7 @@ RSpec.describe SurveyPresenter do
         total_questions_quantity: survey.questions.size,
         answered_questions_quantity: survey.last_answers_quantity
       }
-      expect(presenter.simple_payload).to eq expected_payload
+      expect(presenter.payload(simple: true)).to eq expected_payload
     end
   end
 end
