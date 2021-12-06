@@ -2,7 +2,7 @@
 
 # 🐳 Run (with docker)
 
-- `docker-compose up`
+- `docker-compose up espoo_server`
 
 - `docker-compose exec espoo_server validate_all.sh`
 
