@@ -1,6 +1,6 @@
 class AnswersSurveysController < ApplicationController
   def create
-    @first_question = @survey.questions.includes(%i[options question_type]).first
+    @first_question = survey.questions.first
     AnswersSurvey.find_or_create_by!(create_answers_survey_params)
 
     redirect_to @first_question
@@ -11,7 +11,7 @@ class AnswersSurveysController < ApplicationController
   private
 
   def survey
-    @survey = Survey.find(params[:survey_id])
+    @survey ||= Survey.find(params[:survey_id])
   end
 
   def create_answers_survey_params

@@ -25,7 +25,7 @@ RSpec.describe 'Question CRUD', type: :system do
       end
 
       it 'displays the question type of the question' do
-        expect(page).to have_content "This is a #{first_question.question_type.name} question."
+        expect(page).to have_content "This is a multiple choice question."
       end
     end
   end
