@@ -1,0 +1,7 @@
+- flash.each do |type, msg|
+  |  <div class="alert alert-
+  = type
+  |  alert-dismissible fade show col-8 offset-2"> 
+  = msg
+  button.close[type="button" data-dismiss="alert" aria-label="Close"]
+    span[aria-hidden="true"]

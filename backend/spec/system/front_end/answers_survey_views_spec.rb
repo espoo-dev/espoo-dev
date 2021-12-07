@@ -24,7 +24,7 @@ RSpec.describe 'AnswersSurvey', type: :system do
 
     context 'when not valid' do
       before do
-        allow(AnswersSurvey).to receive(:create!).and_raise(StandardError)
+        allow(AnswersSurvey).to receive(:create!).and_raise(StandardError, 'test error')
         sign_in user
         visit surveys_path
         click_on 'Answer'
@@ -32,6 +32,10 @@ RSpec.describe 'AnswersSurvey', type: :system do
 
       it 'redirects to the surveys page' do
         expect(page).to have_current_path surveys_path
+      end
+
+      it 'displays the error message' do
+        expect(page).to have_content 'test error'
       end
     end
   end
