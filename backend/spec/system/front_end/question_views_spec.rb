@@ -10,7 +10,7 @@ RSpec.describe 'Question', type: :system do
       visit question_path question
     end
 
-    it 'displays the name of the first question' do
+    it 'displays the name of the question' do
       expect(page).to have_content question.name
     end
 
