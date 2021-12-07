@@ -1,7 +1,6 @@
 require 'rails_helper'
 
 RSpec.describe 'Option CRUD', type: :system do
-  include Devise::Test::IntegrationHelpers
   describe 'CRUD' do
     let!(:question) { create(:question) }
     let!(:user) { create(:user) }
