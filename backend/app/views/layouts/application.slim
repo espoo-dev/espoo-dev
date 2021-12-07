@@ -8,4 +8,5 @@ html
     = csp_meta_tag
     = stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload'
   body
+    = render "layouts/shared/error_messages"
     = yield

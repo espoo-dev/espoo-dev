@@ -1,0 +1,32 @@
+h1
+  = @question.name
+h5
+  | This is a 
+  = @question.question_type.name.downcase
+  |  question.
+ul
+  - @question.options.each do |option|
+    - if @question.single_choice?
+      |  <input type='radio' id="
+      = option.name
+      | " name='
+      = @question.name
+      | ' value="
+      = option.name
+      | "> <label for="
+      =option.name
+      | "> 
+      = option.name
+    - elsif @question.multiple_choice?
+      |  <input type="checkbox" id="
+      = option.name
+      | " value="
+      = option.name
+      | "> <label for="
+      =option.name
+      | "> 
+      = option.name
+    - else
+      input[type="text"]
+button
+  | Next

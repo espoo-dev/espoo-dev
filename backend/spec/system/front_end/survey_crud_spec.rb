@@ -1,7 +1,6 @@
 require 'rails_helper'
 
 RSpec.describe 'Survey CRUD', type: :system do
-  include Devise::Test::IntegrationHelpers
   describe 'CRUD' do
     let!(:user_student) { create(:user_student) }
     let!(:survey) { create(:survey_with_answer, user: user_student) }
