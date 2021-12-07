@@ -1,8 +1,6 @@
 require 'rails_helper'
 
 RSpec.describe 'Admin', type: :system do
-  include Devise::Test::IntegrationHelpers
-
   let(:user) { create(:user) }
   let(:user_moderator) { create(:user_moderator) }
 

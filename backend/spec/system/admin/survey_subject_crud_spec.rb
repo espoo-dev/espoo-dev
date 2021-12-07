@@ -1,7 +1,6 @@
 require 'rails_helper'
 
 RSpec.describe 'SurveySubject CRUD', type: :system do
-  include Devise::Test::IntegrationHelpers
   describe 'CRUD' do
     before do
       create(:survey)
