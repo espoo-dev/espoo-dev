@@ -6,6 +6,7 @@ import android.os.Bundle
 import android.util.Log
 import android.view.View
 import com.espoo.android.R
+import com.espoo.android.adapter.SurveysAdapter
 import com.espoo.android.api.SurveyService
 import com.espoo.android.helper.SessionManager
 import com.espoo.android.model.Survey
@@ -15,6 +16,7 @@ import retrofit2.Callback
 import retrofit2.Response
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
+import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity() {
 
@@ -25,6 +27,9 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         sessionManager = SessionManager(applicationContext)
+
+        val adapter = SurveysAdapter()
+        recyclerViewSurvey.adapter = adapter
 
         val httpClient = OkHttpClient.Builder()
         httpClient.addInterceptor { chain ->
@@ -54,6 +59,9 @@ class MainActivity : AppCompatActivity() {
             .enqueue(object : Callback<List<Survey>> {
                 override fun onResponse(call: Call<List<Survey>>, response: Response<List<Survey>>) {
                     Log.d("TAG_", "onResponse: ${response.body()}")
+                    response.body()?.let {
+                        adapter.data = it
+                    }
                 }
 
                 override fun onFailure(call: Call<List<Survey>>, t: Throwable) {
