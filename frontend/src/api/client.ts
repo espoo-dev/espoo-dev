@@ -40,6 +40,8 @@ httpClient.interceptors.response.use(
   (error) => {
     const { response } = error;
 
+    console.log(error);
+
     if (response.status === 401) {
       nookies.destroy(undefined, AUTH_COOKIE);
       Router.push('/login');

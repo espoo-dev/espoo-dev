@@ -1,4 +1,5 @@
 import Head from 'next/head';
+import Link from 'next/link';
 import { withAuth } from 'hoc/withAuth';
 import { Container, Content, Layout } from 'styles/main.styles';
 import { Sidemenu } from '@components/sidemenu';
@@ -10,7 +11,7 @@ import {
   Flex,
   Button,
   Tooltip,
-  Spacer
+  Spacer,
 } from '@chakra-ui/react';
 import { httpClient } from 'api';
 import { errorHandler } from 'api/error-handler';
