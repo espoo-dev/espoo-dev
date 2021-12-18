@@ -25,6 +25,7 @@ const Surveys = () => {
   const surveyService = new SurveyService(httpClient);
   const [surveys, setSurveys] = useState<Survey[]>([]);
   const [loading, setLoading] = useState(false);
+  const [surveySelected, setSurveySelected] = useState<Survey | null>(null);
 
   const listSurveys = async () => {
     setLoading(true);
@@ -88,7 +89,12 @@ const Surveys = () => {
               </Flex>
             )}
 
-            <SurveysList data={surveys} />
+            <SurveysList data={surveys} setSurveySelected={setSurveySelected} />
+            {surveySelected && (
+              <h1 style={{ color: '#fff' }}>
+                TEM SURVEY! {surveySelected.name}
+              </h1>
+            )}
           </Box>
 
           {/* Paggination buttons */}
