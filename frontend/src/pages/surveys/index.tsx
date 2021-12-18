@@ -20,6 +20,7 @@ import { SurveysList } from '@components/main/SurveysList';
 import { SurveyService } from 'api/services/survey';
 import { Survey } from 'api/models/survey';
 import { HiRefresh } from 'react-icons/hi';
+import SurveyPage from './survey';
 
 const Surveys = () => {
   const surveyService = new SurveyService(httpClient);
@@ -90,11 +91,7 @@ const Surveys = () => {
             )}
 
             <SurveysList data={surveys} setSurveySelected={setSurveySelected} />
-            {surveySelected && (
-              <h1 style={{ color: '#fff' }}>
-                TEM SURVEY! {surveySelected.name}
-              </h1>
-            )}
+            {surveySelected ? <SurveyPage survey={surveySelected} /> : null}
           </Box>
 
           {/* Paggination buttons */}
