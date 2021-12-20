@@ -59,6 +59,7 @@ class MainActivity : AppCompatActivity() {
             .enqueue(object : Callback<List<Survey>> {
                 override fun onResponse(call: Call<List<Survey>>, response: Response<List<Survey>>) {
                     Log.d("TAG_", "onResponse: ${response.body()}")
+                    Log.d("TAG_", "onResponse: ${response.raw()}")
                     response.body()?.let {
                         adapter.data = it
                     }
