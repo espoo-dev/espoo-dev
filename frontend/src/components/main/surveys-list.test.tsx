@@ -39,7 +39,9 @@ describe('Surveys list', () => {
   ];
 
   it('should render the item passed to the list', () => {
-    const { getByText } = render(<SurveysList data={data} />);
+    const { getByText } = render(
+      <SurveysList setSurveySelected={jest.fn()} data={data} />
+    );
 
     const surveyName = getByText('Animals survey');
 
@@ -57,7 +59,9 @@ describe('Surveys list', () => {
       })
     );
 
-    const { getByTestId } = render(<SurveysList data={data} />);
+    const { getByTestId } = render(
+      <SurveysList setSurveySelected={jest.fn()} data={data} />
+    );
 
     const buttonItem = getByTestId('Animals survey');
 
