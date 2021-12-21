@@ -1,6 +1,6 @@
 import { Survey } from '@api/models/survey';
+import SurveyPage from '@pages/survey';
 import { render, screen } from 'test-utils';
-import SurveyPage from './survey';
 
 const surveyDefault: Survey = {
   id: 1,

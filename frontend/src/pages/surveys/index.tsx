@@ -19,13 +19,13 @@ import { SurveysList } from '@components/main/SurveysList';
 import { SurveyService } from 'api/services/survey';
 import { Survey } from 'api/models/survey';
 import { HiRefresh } from 'react-icons/hi';
-import SurveyPage from './survey';
+import SurveyPage from '../survey';
 
 const Surveys = () => {
   const surveyService = new SurveyService(httpClient);
   const [surveys, setSurveys] = useState<Survey[]>([]);
   const [loading, setLoading] = useState(false);
-  const [surveySelected, setSurveySelected] = useState<Survey | null>(null);
+  const [surveySelected, setSurveySelected] = useState<Survey>(null);
 
   const listSurveys = async () => {
     setLoading(true);
@@ -98,6 +98,7 @@ const Surveys = () => {
             ) : (
               <SurveysList
                 data={surveys}
+                selectedSurvey={surveySelected}
                 setSurveySelected={setSurveySelected}
               />
             )}

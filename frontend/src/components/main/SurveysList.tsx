@@ -9,18 +9,19 @@ import { SurveyItem } from '@components/survey-item/survey-item';
 
 interface SurveyListProps {
   data: Survey[];
+  selectedSurvey: Survey;
   setSurveySelected: Dispatch<SetStateAction<Survey>>;
 }
 
 export const SurveysList = (props: SurveyListProps) => {
-  const { data, setSurveySelected } = props;
+  const { data, setSurveySelected, selectedSurvey } = props;
 
   const answerSurveyService = new AnswerSurveyService(httpClient);
   const [loading, setLoading] = useState(false);
-  const [selectedSurvey, setSelectedSurvey] = useState(null);
+  // const [selectedSurvey, setSelectedSurvey] = useState(null);
 
-  const registerAnswerSurvey = async (survey_id, survey) => {
-    setSelectedSurvey(survey_id);
+  const registerAnswerSurvey = async (survey_id: number, survey: Survey) => {
+    // setSelectedSurvey(survey_id);
     setLoading(true);
 
     // TODO: move to promise when register return success.
@@ -50,7 +51,7 @@ export const SurveysList = (props: SurveyListProps) => {
           description={item.description}
           numberQuestions={item.questions.length}
           onClick={() => registerAnswerSurvey(item.id, item)}
-          loading={loading && selectedSurvey === item.id}
+          loading={loading && selectedSurvey.id === item.id}
           surveyData={item}
         />
       ))}
