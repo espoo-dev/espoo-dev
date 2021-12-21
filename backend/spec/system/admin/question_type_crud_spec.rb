@@ -1,7 +1,6 @@
 require 'rails_helper'
 
 RSpec.describe 'question_type CRUD', type: :system do
-  include Devise::Test::IntegrationHelpers
   describe 'CRUD' do
     let!(:question_type) { create(:question_type) }
     let!(:question_type_single) { create(:question_type_single) }
