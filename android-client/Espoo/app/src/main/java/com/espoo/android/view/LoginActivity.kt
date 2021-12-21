@@ -66,21 +66,7 @@ class LoginActivity : AppCompatActivity() {
         service.login(AuthData(UserLogin(editTextUsername.text.toString(), editTextPassword.text.toString())))
             .enqueue(object :Callback<User> {
                 override fun onResponse(call: Call<User>, response: Response<User>) {
-
-                    val user = response.body()
-                    user?.let {
-                        sessionManager.storeData(USER_ID, it.id)
-                        sessionManager.storeData(EMAIL, it.email)
-                        Toast.makeText(
-                            applicationContext,
-                            "${getString(R.string.welcome)} ${it.email}",
-                            Toast.LENGTH_LONG
-                        ).show()
-                    }
-                    response.headers()["Authorization"]?.let {
-                        sessionManager.storeData(API_TOKEN, it)
-                    }
-                    sessionManager.storeData(IS_LOGIN, true)
+                    storeLoginData(response)
                     openMainActivity()
                 }
 
@@ -88,12 +74,28 @@ class LoginActivity : AppCompatActivity() {
                     Log.e("TAG_", "onFailure: An error happened!")
                     t.printStackTrace()
                 }
-
             })
     }
 
     private fun openMainActivity() {
         startActivity(Intent(this, MainActivity::class.java))
         finish()
+    }
+
+    private fun storeLoginData(response: Response<User>) {
+        val user = response.body()
+        user?.let {
+            sessionManager.storeData(USER_ID, it.id)
+            sessionManager.storeData(EMAIL, it.email)
+            Toast.makeText(
+                applicationContext,
+                "${getString(R.string.welcome)} ${it.email}",
+                Toast.LENGTH_LONG
+            ).show()
+        }
+        response.headers()["Authorization"]?.let {
+            sessionManager.storeData(API_TOKEN, it)
+        }
+        sessionManager.storeData(IS_LOGIN, true)
     }
 }
