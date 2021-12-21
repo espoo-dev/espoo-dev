@@ -22,6 +22,8 @@ export const SurveysList = (props: SurveyListProps) => {
   const registerAnswerSurvey = async (survey_id, survey) => {
     setSelectedSurvey(survey_id);
     setLoading(true);
+
+    // TODO: move to promise when register return success.
     setSurveySelected(survey);
     try {
       const response = await answerSurveyService.register({ survey_id });

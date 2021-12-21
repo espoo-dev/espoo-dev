@@ -1,5 +1,4 @@
 import Head from 'next/head';
-import Link from 'next/link';
 import { withAuth } from 'hoc/withAuth';
 import { Container, Content, Layout } from 'styles/main.styles';
 import { Sidemenu } from '@components/sidemenu';

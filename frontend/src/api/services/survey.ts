@@ -20,7 +20,7 @@ export class SurveyService {
 
   public async get(id: number): Promise<AxiosResponse<Survey | undefined>> {
     const response = await this.httpClient.get<Survey>(
-      '/api/v1/surveys/' + id,
+      `/api/v1/surveys/${id}`,
       {
         params: {},
       }
