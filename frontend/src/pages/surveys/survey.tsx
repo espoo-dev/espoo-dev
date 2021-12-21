@@ -10,20 +10,13 @@ const SurveyPage = (props: SurveyPageProps) => {
   const { survey } = props;
   const [questionCount, setQuestionCount] = useState(0);
 
-  useEffect(() => {
-    console.log(survey.questions[questionCount].options);
-  }, []);
-
   const selectOption = () => {
     setQuestionCount(questionCount + 1);
   };
 
   return (
     <Box style={{ color: '#fff' }}>
-      <h1>{survey.name}</h1>
-      <p>{survey.description}</p>
-
-      <Box mt={14}>
+      <Box m={6}>
         <h1>
           <strong>Q{questionCount} -</strong>{' '}
           {survey.questions[questionCount] &&

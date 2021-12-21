@@ -23,18 +23,18 @@ export const SurveysList = (props: SurveyListProps) => {
     setSelectedSurvey(survey_id);
     setLoading(true);
     setSurveySelected(survey);
-    // try {
-    //   const response = await answerSurveyService.register({ survey_id });
-    //   if (response && response.data) {
-    //     toast('Answer Survey created successfully', {
-    //       position: 'top-right',
-    //       type: 'success',
-    //       pauseOnHover: false,
-    //     });
-    //   }
-    // } catch (error) {
-    //   errorHandler(error);
-    // }
+    try {
+      const response = await answerSurveyService.register({ survey_id });
+      if (response && response.data) {
+        toast('Answer Survey created successfully', {
+          position: 'top-right',
+          type: 'success',
+          pauseOnHover: false,
+        });
+      }
+    } catch (error) {
+      errorHandler(error);
+    }
 
     setLoading(false);
   };
