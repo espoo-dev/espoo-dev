@@ -12,6 +12,7 @@ class SessionManager(val context: Context) {
         const val USER_ID = "user_id"
         const val EMAIL = "email"
         const val IS_LOGIN = "is_login"
+        const val API_TOKEN = "api_token"
     }
 
     init {
@@ -39,6 +40,10 @@ class SessionManager(val context: Context) {
 
     internal fun isLogin(): Boolean {
         return preferences.getBoolean(PreferencesConstants.IS_LOGIN, false)
+    }
+
+    internal fun readAPIToken() : String? {
+        return preferences.getString(PreferencesConstants.API_TOKEN, "")
     }
 
     internal fun logout() {
