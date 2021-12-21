@@ -12,31 +12,31 @@ jest.mock('../../api/client', () => ({
   },
 }));
 
-describe('Surveys list', () => {
-  const data: Survey[] = [
+const surveyDefault: Survey = {
+  id: 1,
+  name: 'Animals survey',
+  description: 'Nice animals',
+  answers_surveys: [],
+  current_answers_survey: {
+    id: 1,
+    status: 'not started',
+    user_id: 439,
+  },
+  questions: [
     {
       id: 1,
-      name: 'Animals survey',
-      description: 'Nice animals',
-      answers_surveys: [],
-      current_answers_survey: {
+      name: 'What is your favorite animal?',
+      question_type: {
         id: 1,
-        status: 'not started',
-        user_id: 439,
+        name: 'Single Choice',
       },
-      questions: [
-        {
-          id: 1,
-          name: 'What is your favorite animal?',
-          question_type: {
-            id: 1,
-            name: 'Single Choice',
-          },
-        },
-      ],
-      survey_subject_id: 12,
     },
-  ];
+  ],
+  survey_subject_id: 12,
+};
+
+describe('Surveys list', () => {
+  const data: Survey[] = [surveyDefault];
 
   it('should render the item passed to the list', () => {
     const { getByText } = render(

@@ -98,7 +98,6 @@ const Surveys = () => {
             ) : (
               <SurveysList
                 data={surveys}
-                selectedSurvey={surveySelected}
                 setSurveySelected={setSurveySelected}
               />
             )}
