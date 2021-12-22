@@ -1,4 +1,5 @@
 import { fireEvent, render, screen } from 'test-utils';
+import SingleChoice from './single-choice';
 
 const options = [
   {
@@ -15,6 +16,13 @@ const options = [
   },
 ];
 
+interface CreateAnswer {
+  question_id: number;
+  answers_survey_id: number;
+  user_answer: string;
+  option_ids: [number];
+}
+
 describe('SingleChoice', () => {
   it('should render all options', () => {
     render(<SingleChoice options={options} />);
@@ -27,7 +35,7 @@ describe('SingleChoice', () => {
     const mockResponse = {
       mock: true,
     };
-    const mockPost = jest.fn((url: string, body: AnswerSurveyCreate) => {
+    const mockPost = jest.fn((url: string, body: CreateAnswer) => {
       return Promise.resolve({ data: mockResponse });
     });
 
