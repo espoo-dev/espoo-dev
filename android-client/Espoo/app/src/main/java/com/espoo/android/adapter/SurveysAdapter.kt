@@ -21,6 +21,7 @@ class SurveysAdapter : RecyclerView.Adapter<SurveysAdapter.SurveyViewHolder>() {
         val surveyNameTextView : TextView = itemView.findViewById(R.id.textViewSurveyName)
         val surveyDescriptionTextView : TextView = itemView.findViewById(R.id.textViewSurveyDescription)
         val surveyImageView : ImageView = itemView.findViewById(R.id.imageViewSurveyImage)
+        val surveyQuestionsTextView : TextView = itemView.findViewById(R.id.textViewSurveyQuestions)
     }
 
     override fun getItemCount() = data.size
@@ -66,6 +67,8 @@ class SurveysAdapter : RecyclerView.Adapter<SurveysAdapter.SurveyViewHolder>() {
         }
         //TODO Needs to holder.surveyImageView.viewTreeObserver.removeOnPreDrawListener after it triggered
 
+        val questionText = if (item.questions.size <= 1) "Question" else "Questions"
+        holder.surveyQuestionsTextView.text = "${item.questions.size} $questionText"
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): SurveyViewHolder {
