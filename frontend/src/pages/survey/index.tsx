@@ -1,6 +1,7 @@
-import { Survey } from '@api/models/survey';
-import { Box, Grid } from '@chakra-ui/layout';
-import { useState } from 'react';
+import { Question, Survey } from '@api/models/survey';
+import { Box } from '@chakra-ui/layout';
+import SingleChoice from '@components/single-choice/single-choice';
+import { useEffect, useState } from 'react';
 
 interface SurveyPageProps {
   survey: Survey;
@@ -9,33 +10,33 @@ interface SurveyPageProps {
 const SurveyPage = (props: SurveyPageProps) => {
   const { survey } = props;
   const [questionCount, setQuestionCount] = useState(0);
+  const [result, setResult] = useState<number[]>([]);
+  const [question, setQuestion] = useState<Question>(
+    (survey && survey.questions[0]) || null
+  );
 
-  const selectOption = () => {
+  useEffect(() => {
     setQuestionCount(questionCount + 1);
-  };
+    setQuestion(survey.questions[questionCount]);
+  }, [result]);
 
   return (
     <Box style={{ color: '#fff' }}>
-      {survey && survey.questions.length > 0 ? (
+      {question ? (
         <Box m={6}>
           <h2>{`Question ${questionCount}`}</h2>
-          <h1>
-            {survey.questions[questionCount] &&
-              survey.questions[questionCount].name}
-          </h1>
+          <h1>{question && question.name}</h1>
 
-          <Grid templateColumns="repeat(3, 1fr)" gap={4} mt={6}>
-            {survey.questions[questionCount] &&
-              survey.questions[questionCount].options &&
-              survey.questions[questionCount].options.map((option) => (
-                <Box onClick={selectOption} key={option.id}>
-                  {option.name}
-                </Box>
-              ))}
-          </Grid>
+          {question && question.question_type.name === 'Single Choice' ? (
+            <Box mt={4}>
+              <SingleChoice options={question.options} setResult={setResult} />
+            </Box>
+          ) : null}
         </Box>
       ) : (
-        <h1>No questions</h1>
+        <h1>
+          {survey && survey.questions.length ? 'Finish!' : 'No questions :/'}
+        </h1>
       )}
     </Box>
   );

@@ -1,4 +1,7 @@
-import { fireEvent, render, screen } from 'test-utils';
+import { httpClient } from '@api/client';
+import { AnswerCreate } from '@api/models/answer';
+import { AxiosInstance } from 'axios';
+import { fireEvent, render, screen, waitFor } from 'test-utils';
 import SingleChoice from './single-choice';
 
 const options = [
@@ -16,33 +19,44 @@ const options = [
   },
 ];
 
-interface CreateAnswer {
-  question_id: number;
-  answers_survey_id: number;
-  user_answer: string;
-  option_ids: [number];
-}
+jest.mock('../../api/client', () => ({
+  httpClient: {
+    post: jest.fn(),
+  },
+}));
 
 describe('SingleChoice', () => {
   it('should render all options', () => {
-    render(<SingleChoice options={options} />);
+    render(<SingleChoice options={options} setResult={jest.fn()} />);
     options.map((option) => {
       expect(screen.getByText(option.name)).toBeInTheDocument();
     });
   });
 
-  it('should call api when click in any option', () => {
+  it('should call api when click in any option', async () => {
     const mockResponse = {
       mock: true,
     };
-    const mockPost = jest.fn((url: string, body: CreateAnswer) => {
-      return Promise.resolve({ data: mockResponse });
-    });
 
-    const { getByText } = render(<SingleChoice options={options} />);
+    (httpClient as jest.Mocked<AxiosInstance>).post.mockImplementationOnce(
+      jest.fn((url: string, body: AnswerCreate) => {
+        return Promise.resolve({ data: mockResponse });
+      })
+    );
+
+    const { getByText } = render(
+      <SingleChoice options={options} setResult={jest.fn()} />
+    );
     const buttonItem = getByText('Cat');
     fireEvent.click(buttonItem);
 
-    expect(mockPost).toHaveBeenCalled();
+    await waitFor(() =>
+      expect(httpClient.post).toHaveBeenCalledWith('api/v1/answers', {
+        question_id: 853,
+        answers_survey_id: 121,
+        user_answer: 'student@gmail.com',
+        option_ids: [1],
+      })
+    );
   });
 });
