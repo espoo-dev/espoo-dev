@@ -7,20 +7,17 @@ import android.util.Log
 import android.view.View
 import com.espoo.android.R
 import com.espoo.android.adapter.SurveysAdapter
-import com.espoo.android.api.SurveyService
+import com.espoo.android.api.ApiService
 import com.espoo.android.helper.SessionManager
 import com.espoo.android.model.Survey
-import okhttp3.OkHttpClient
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
-import retrofit2.Retrofit
-import retrofit2.converter.gson.GsonConverterFactory
 import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity() {
 
-    private lateinit var service: SurveyService
+    private lateinit var service: ApiService
     private lateinit var sessionManager : SessionManager
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -31,29 +28,7 @@ class MainActivity : AppCompatActivity() {
         val adapter = SurveysAdapter()
         recyclerViewSurvey.adapter = adapter
 
-        val httpClient = OkHttpClient.Builder()
-        httpClient.addInterceptor { chain ->
-            val request = chain
-                .request()
-                .newBuilder()
-                .header("Accept", "application/json")
-                .header("Content-Type", "application/json")
-
-            sessionManager.readAPIToken()?.let {
-                request.header("Authorization", it)
-            }
-
-            chain.proceed(request.build())
-        }
-
-        val okHttpClient = httpClient.build()
-
-        service = Retrofit.Builder()
-            .baseUrl("https://espoo.herokuapp.com")
-            .client(okHttpClient)
-            .addConverterFactory(GsonConverterFactory.create())
-            .build()
-            .create(SurveyService::class.java)
+        service = ApiService.create(sessionManager.readAPIToken())
 
         service.getSurveys()
             .enqueue(object : Callback<List<Survey>> {
