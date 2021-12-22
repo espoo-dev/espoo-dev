@@ -43,10 +43,13 @@ class SurveysAdapter : RecyclerView.Adapter<SurveysAdapter.SurveyViewHolder>() {
             holder.surveyImageView.drawable ?: false
 
             val drawable = holder.surveyImageView.drawable
-            val imageWidth: Float = (holder.surveyImageView.width - holder.surveyImageView.paddingLeft -
-                    holder.surveyImageView.paddingRight).toFloat()
-            val imageHeight : Float = (holder.surveyImageView.height - holder.surveyImageView.paddingTop -
-                    holder.surveyImageView.paddingBottom).toFloat()
+
+            val imageWidth: Float = calculateMeasures(holder.surveyImageView.width,
+                arrayOf(holder.surveyImageView.paddingLeft, holder.surveyImageView.paddingRight)).toFloat()
+
+            val imageHeight: Float = calculateMeasures(holder.surveyImageView.height,
+                arrayOf(holder.surveyImageView.paddingTop, holder.surveyImageView.paddingBottom)).toFloat()
+
             val drawableWidth = drawable.intrinsicWidth
             val drawableHeight = drawable.intrinsicHeight
 
@@ -70,6 +73,11 @@ class SurveysAdapter : RecyclerView.Adapter<SurveysAdapter.SurveyViewHolder>() {
         val view = layoutInflater.inflate(R.layout.survey_item_view, parent, false)
 
         return SurveyViewHolder(view)
+    }
+
+    private fun calculateMeasures (measure: Int, valuesToSubtract : Array<Int>) : Int {
+        valuesToSubtract.forEach { measure - it }
+        return measure
     }
 
 }
