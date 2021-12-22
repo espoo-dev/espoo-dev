@@ -36,21 +36,21 @@ const surveyDefault: Survey = {
 };
 
 describe('SurveyPage', () => {
-  it('should render firts question', () => {
+  it('should render first question', () => {
     render(<SurveyPage survey={surveyDefault} />);
     expect(
       screen.getByText('What is your favorite animal?')
     ).toBeInTheDocument();
   });
 
-  it('should render all options to question', () => {
+  it('should render all question options to question', () => {
     render(<SurveyPage survey={surveyDefault} />);
     surveyDefault.questions[0].options.map((option) => {
       expect(screen.getByText(option.name)).toBeInTheDocument();
     });
   });
 
-  it('should select a option', () => {
+  it('should select an option', () => {
     render(<SurveyPage survey={surveyDefault} />);
     const option = surveyDefault.questions[0].options[0];
     const optionElement = screen.getByText(option.name);
