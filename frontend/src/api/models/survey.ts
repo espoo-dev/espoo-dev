@@ -19,6 +19,10 @@ export interface Survey {
     id: number;
     name: string;
     question_type: QuestionType;
+    options?: {
+      id: number;
+      name: string;
+    }[];
   }[];
   survey_subject_id: number;
 }
