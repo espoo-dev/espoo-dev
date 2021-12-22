@@ -1,3 +1,5 @@
 package com.espoo.android.model
 
-data class Role(var id: Int, var role_type: String)
+import com.google.gson.annotations.SerializedName
+
+data class Role(var id: Int, @SerializedName("role_type") var roleType: String)
