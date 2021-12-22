@@ -20,7 +20,7 @@ class SurveysAdapter : RecyclerView.Adapter<SurveysAdapter.SurveyViewHolder>() {
     class SurveyViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         val surveyNameTextView : TextView = itemView.findViewById(R.id.textViewSurveyName)
         val surveyDescriptionTextView : TextView = itemView.findViewById(R.id.textViewSurveyDescription)
-        val surveyImageView : ImageView = itemView.findViewById(R.id.imageView3)
+        val surveyImageView : ImageView = itemView.findViewById(R.id.imageViewSurveyImage)
     }
 
     override fun getItemCount() = data.size
