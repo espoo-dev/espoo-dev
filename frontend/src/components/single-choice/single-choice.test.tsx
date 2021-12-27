@@ -66,7 +66,7 @@ describe('SingleChoice', () => {
     });
   });
 
-  it('not should call api when click in option without question and current survey', async () => {
+  it('should not call api when click in option without question and current survey', async () => {
     const mockResponse = {
       mock: true,
     };
@@ -84,11 +84,7 @@ describe('SingleChoice', () => {
     fireEvent.click(buttonItem);
 
     await waitFor(() =>
-      expect(httpClient.post).not.toHaveBeenCalledWith('api/v1/answers', {
-        question_id: 853,
-        answers_survey_id: 121,
-        option_ids: [1],
-      })
+      expect(httpClient.post).not.toHaveBeenCalledWith('api/v1/answers')
     );
   });
 
