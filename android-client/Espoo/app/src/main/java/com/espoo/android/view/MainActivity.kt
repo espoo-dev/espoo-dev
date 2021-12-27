@@ -36,7 +36,7 @@ class MainActivity : AppCompatActivity() {
                     Log.d("TAG_", "onResponse: ${response.body()}")
                     Log.d("TAG_", "onResponse: ${response.raw()}")
                     response.body()?.let {
-                        adapter.data = it
+                        adapter.submitList(it)
                     }
                 }
 
