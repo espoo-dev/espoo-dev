@@ -11,4 +11,6 @@
 
     <string name="welcome">Welcome</string>
     <string name="logout">Logout</string>
+
+    <string name="survey_call_to_action">Tap to resume</string>
 </resources>
