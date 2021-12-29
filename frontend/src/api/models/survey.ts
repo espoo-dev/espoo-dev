@@ -5,7 +5,7 @@ export interface QuestionType {
 
 export interface AnswersSurvey {
   id: number;
-  status: string;
+  status: AnswerSurveyStatus;
   user_id: number;
 }
 
@@ -29,4 +29,10 @@ export interface Survey {
   description: string;
   questions: Question[];
   survey_subject_id: number;
+}
+
+export enum AnswerSurveyStatus {
+  NotStarted = 'Not started',
+  Started = 'Started',
+  Completed = 'Completed',
 }

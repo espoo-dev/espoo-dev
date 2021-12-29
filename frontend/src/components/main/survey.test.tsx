@@ -1,4 +1,4 @@
-import { Survey } from '@api/models/survey';
+import { AnswerSurveyStatus, Survey } from '@api/models/survey';
 import SurveyPage from '@pages/survey';
 import { render, screen } from 'test-utils';
 
@@ -9,7 +9,7 @@ const surveyDefault: Survey = {
   answers_surveys: [],
   current_answers_survey: {
     id: 1,
-    status: 'not started',
+    status: AnswerSurveyStatus.NotStarted,
     user_id: 439,
   },
   questions: [
