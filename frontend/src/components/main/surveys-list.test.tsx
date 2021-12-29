@@ -1,5 +1,5 @@
 import React from 'react';
-import { Survey } from 'api/models/survey';
+import { AnswerSurveyStatus, Survey } from 'api/models/survey';
 import { AnswerSurveyCreate } from 'api/models/answer_survey';
 import { fireEvent, render, screen, waitFor } from 'test-utils';
 import { SurveysList } from './SurveysList';
@@ -19,7 +19,7 @@ const surveyDefault: Survey = {
   answers_surveys: [],
   current_answers_survey: {
     id: 1,
-    status: 'Not started',
+    status: AnswerSurveyStatus.NotStarted,
     user_id: 439,
   },
   questions: [
@@ -54,7 +54,8 @@ describe('Surveys list', () => {
     };
 
     const surveyCompleted: Survey = { ...surveyDefault };
-    surveyCompleted.current_answers_survey.status = 'Completed';
+    surveyCompleted.current_answers_survey.status =
+      AnswerSurveyStatus.Completed;
 
     (httpClient as jest.Mocked<AxiosInstance>).post.mockImplementationOnce(
       jest.fn((url: string, body: AnswerSurveyCreate) => {

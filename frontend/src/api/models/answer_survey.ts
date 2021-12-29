@@ -1,9 +1,11 @@
+import { AnswerSurveyStatus } from './survey';
+
 export interface AnswerSurveyCreate {
   survey_id: number;
 }
 
 export interface AnswerSurvey {
   id: number;
-  status: 'Not started' | 'Started' | 'Completed';
+  status: AnswerSurveyStatus;
   user_id: number;
 }

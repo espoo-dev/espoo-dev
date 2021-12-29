@@ -1,3 +1,4 @@
+import { AnswerSurveyStatus } from '@api/models/survey';
 import { fireEvent, render } from 'test-utils';
 import { SurveyItem, SurveyItemProps } from './survey-item';
 
@@ -15,7 +16,7 @@ const startedSurvey: SurveyItemProps = {
     id: 1,
     current_answers_survey: {
       id: 1,
-      status: 'not started',
+      status: AnswerSurveyStatus.NotStarted,
       user_id: 439,
     },
     description: 'Animals that live in the wild',
@@ -25,7 +26,7 @@ const startedSurvey: SurveyItemProps = {
     answers_surveys: [
       {
         id: 1,
-        status: 'Not started',
+        status: AnswerSurveyStatus.NotStarted,
         user_id: 394,
       },
     ],

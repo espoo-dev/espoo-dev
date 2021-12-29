@@ -1,7 +1,7 @@
 import React, { Dispatch, SetStateAction, useState } from 'react';
 import { Grid } from '@chakra-ui/react';
 import { toast } from 'react-toastify';
-import { Survey } from 'api/models/survey';
+import { AnswerSurveyStatus, Survey } from 'api/models/survey';
 import { httpClient } from 'api';
 import { errorHandler } from 'api/error-handler';
 import { AnswerSurveyService } from 'api/services/answer_survey';
@@ -27,7 +27,8 @@ export const SurveysList = (props: SurveyListProps) => {
 
     if (
       surveyToRegister.current_answers_survey &&
-      surveyToRegister.current_answers_survey.status === 'Not started'
+      surveyToRegister.current_answers_survey.status ===
+        AnswerSurveyStatus.NotStarted
     ) {
       setSurveySelected(surveyToRegister);
       return;

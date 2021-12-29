@@ -1,6 +1,6 @@
 import { httpClient } from '@api/client';
 import { AnswerCreate } from '@api/models/answer';
-import { Survey } from '@api/models/survey';
+import { AnswerSurveyStatus, Survey } from '@api/models/survey';
 import { AxiosInstance } from 'axios';
 import { fireEvent, render, screen, waitFor } from 'test-utils';
 import SingleChoice from './single-choice';
@@ -26,10 +26,14 @@ const survey: Survey = {
   description: 'Nice animals',
   survey_subject_id: 365,
   answers_surveys: [
-    { id: 129, user_id: 692, status: 'Completed' },
-    { id: 130, user_id: 692, status: 'Completed' },
+    { id: 129, user_id: 692, status: AnswerSurveyStatus.Completed },
+    { id: 130, user_id: 692, status: AnswerSurveyStatus.Completed },
   ],
-  current_answers_survey: { id: 130, user_id: 692, status: 'Completed' },
+  current_answers_survey: {
+    id: 130,
+    user_id: 692,
+    status: AnswerSurveyStatus.Completed,
+  },
   questions: [
     {
       id: 877,
