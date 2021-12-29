@@ -27,11 +27,18 @@ const SurveyPage = (props: SurveyPageProps) => {
           <h2>{`Question ${questionCount}`}</h2>
           <h1>{question && question.name}</h1>
 
-          {question && question.question_type.name === 'Single Choice' ? (
+          {survey &&
+          question &&
+          question.question_type.name === 'Single Choice' ? (
             <Box mt={4}>
-              <SingleChoice options={question.options} setResult={setResult} />
+              <SingleChoice
+                options={question.options}
+                setResult={setResult}
+                question_id={question.id}
+                current_answers_survey_id={survey.current_answers_survey.id}
+              />
             </Box>
-          ) : null}
+            ) : null}
         </Box>
       ) : (
         <h1>

@@ -1,7 +1,7 @@
 import React, { Dispatch, SetStateAction, useState } from 'react';
 import { Grid } from '@chakra-ui/react';
 import { toast } from 'react-toastify';
-import { Survey } from 'api/models/survey';
+import { AnswerSurveyStatus, Survey } from 'api/models/survey';
 import { httpClient } from 'api';
 import { errorHandler } from 'api/error-handler';
 import { AnswerSurveyService } from 'api/services/answer_survey';
@@ -23,8 +23,17 @@ export const SurveysList = (props: SurveyListProps) => {
     setSelectedSurvey(survey_id);
     setLoading(true);
 
-    // TODO: move to promise when register return success.
-    setSurveySelected(survey);
+    const surveyToRegister = survey;
+
+    if (
+      surveyToRegister.current_answers_survey &&
+      surveyToRegister.current_answers_survey.status ===
+        AnswerSurveyStatus.NotStarted
+    ) {
+      setSurveySelected(surveyToRegister);
+      return;
+    }
+
     try {
       const response = await answerSurveyService.register({ survey_id });
       if (response && response.data) {
@@ -33,6 +42,12 @@ export const SurveysList = (props: SurveyListProps) => {
           type: 'success',
           pauseOnHover: false,
         });
+        surveyToRegister.current_answers_survey = {
+          id: response.data.id,
+          status: response.data.status,
+          user_id: response.data.user_id,
+        };
+        setSurveySelected(surveyToRegister);
       }
     } catch (error) {
       errorHandler(error);
