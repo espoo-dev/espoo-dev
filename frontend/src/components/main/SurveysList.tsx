@@ -23,8 +23,16 @@ export const SurveysList = (props: SurveyListProps) => {
     setSelectedSurvey(survey_id);
     setLoading(true);
 
-    // TODO: move to promise when register return success.
-    setSurveySelected(survey);
+    const surveyToRegister = survey;
+
+    if (
+      surveyToRegister.current_answers_survey &&
+      surveyToRegister.current_answers_survey.status === 'Not started'
+    ) {
+      setSurveySelected(surveyToRegister);
+      return;
+    }
+
     try {
       const response = await answerSurveyService.register({ survey_id });
       if (response && response.data) {
@@ -33,6 +41,12 @@ export const SurveysList = (props: SurveyListProps) => {
           type: 'success',
           pauseOnHover: false,
         });
+        surveyToRegister.current_answers_survey = {
+          id: response.data.id,
+          status: response.data.status,
+          user_id: response.data.user_id,
+        };
+        setSurveySelected(surveyToRegister);
       }
     } catch (error) {
       errorHandler(error);

@@ -19,7 +19,7 @@ const surveyDefault: Survey = {
   answers_surveys: [],
   current_answers_survey: {
     id: 1,
-    status: 'not started',
+    status: 'Not started',
     user_id: 439,
   },
   questions: [
@@ -53,6 +53,9 @@ describe('Surveys list', () => {
       mock: true,
     };
 
+    const surveyCompleted: Survey = { ...surveyDefault };
+    surveyCompleted.current_answers_survey.status = 'Completed';
+
     (httpClient as jest.Mocked<AxiosInstance>).post.mockImplementationOnce(
       jest.fn((url: string, body: AnswerSurveyCreate) => {
         return Promise.resolve({ data: mockResponse });
@@ -60,7 +63,7 @@ describe('Surveys list', () => {
     );
 
     const { getByTestId } = render(
-      <SurveysList setSurveySelected={jest.fn()} data={data} />
+      <SurveysList setSurveySelected={jest.fn()} data={[surveyCompleted]} />
     );
 
     const buttonItem = getByTestId('Animals survey');
@@ -74,7 +77,7 @@ describe('Surveys list', () => {
     );
   });
 
-  it('should not show a survey when api return error', async () => {
+  it('should not call api when select survey not started', async () => {
     const mockResponse = {
       mock: true,
     };
@@ -86,9 +89,7 @@ describe('Surveys list', () => {
     );
 
     await waitFor(() =>
-      expect(httpClient.post).toHaveBeenCalledWith('api/v1/answers_surveys', {
-        survey_id: 1,
-      })
+      expect(httpClient.post).not.toHaveBeenCalledWith('api/v1/answers_surveys')
     );
     expect(screen.queryByText('Animals survey')).toBeNull();
   });

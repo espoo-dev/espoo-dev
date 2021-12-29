@@ -5,7 +5,7 @@ export interface QuestionType {
 
 export interface AnswersSurvey {
   id: number;
-  status: string;
+  status: 'Not started' | 'Started' | 'Completed';
   user_id: number;
 }
 

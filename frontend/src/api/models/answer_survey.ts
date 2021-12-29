@@ -4,6 +4,6 @@ export interface AnswerSurveyCreate {
 
 export interface AnswerSurvey {
   id: number;
-  status: string;
+  status: 'Not started' | 'Started' | 'Completed';
   user_id: number;
 }
