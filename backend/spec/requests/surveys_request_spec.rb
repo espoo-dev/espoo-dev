@@ -17,50 +17,66 @@ RSpec.describe 'SurveysController', type: :request do
     it { expect(response).to have_http_status :ok }
 
     it 'matches surveys attributes' do
+      answered_question_attributes = {
+          'id' => survey_question.id,
+          'name' => survey_question.name,
+          'question_type' => {
+            'id' => question_type.id,
+            'name' => question_type.name
+          },
+          'options' => [{
+            'id' => option.id,
+            'name' => option.name,
+            'correct' => option.correct
+          }]
+        }
+
+      unanswered_question_attributes = {
+        'id' => survey_question2.id,
+        'name' => survey_question2.name,
+        'question_type' => {
+          'id' => question_type.id,
+          'name' => question_type.name
+        },
+        'options' => [{
+          'id' => option2.id,
+          'name' => option2.name,
+          'correct' => option2.correct
+        }]
+      }
+
+      question_attributes = [
+        answered_question_attributes,
+        unanswered_question_attributes
+      ]
+
       expected_attributes = {
         'id' => anything,
         'name' => survey.name,
         'description' => survey.description,
         'survey_subject_id' => survey_subject.id,
-        'questions' => [
-          {
-            'id' => survey_question.id,
-            'name' => survey_question.name,
-            'question_type' => {
-              'id' => question_type.id,
-              'name' => question_type.name
-            },
-            'options' => [{
-              'id' => option.id,
-              'name' => option.name,
-              'correct' => option.correct
-            }]
-          },
-          {
-            'id' => survey_question2.id,
-            'name' => survey_question2.name,
-            'question_type' => {
-              'id' => question_type.id,
-              'name' => question_type.name
-            },
-            'options' => [{
-              'id' => option2.id,
-              'name' => option2.name,
-              'correct' => option2.correct
-            }]
-          }
-        ],
+        'answered_questions_quantity' => 1,
+        'total_questions_quantity' => 2,
+        'questions' => question_attributes,
         'answers_surveys' => [
           {
             'id' => answers_survey.id,
             'user_id' => answers_survey.user.id,
-            'status' => answers_survey.status
+            'status' => answers_survey.status,
+            'questions' => question_attributes,
+            'answered_questions' => [answered_question_attributes],
+            'not_answered_questions' => [unanswered_question_attributes],
+            'current_question_index' => 1
           }
         ],
         'current_answers_survey' => {
           'id' => answers_survey.id,
           'user_id' => answers_survey.user.id,
-          'status' => answers_survey.status
+          'status' => answers_survey.status,
+          'questions' => question_attributes,
+          'answered_questions' => [answered_question_attributes],
+          'not_answered_questions' => [unanswered_question_attributes],
+          'current_question_index' => 1
         }
       }
 

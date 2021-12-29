@@ -23,6 +23,6 @@ class Api::V1::SurveysController < Api::V1::ApiController
 
   def survey_json(survey)
     survey.answers_surveys_by_user = answers_surveys(current_user, survey)
-    SurveySerializer.new(survey)
+    SurveyPresenter.new(survey, current_user).payload
   end
 end
