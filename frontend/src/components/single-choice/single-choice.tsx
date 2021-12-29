@@ -8,19 +8,23 @@ import { OptionSingleChoice } from './single-choice.styles';
 export interface SingleChoiceProps {
   options: OptionQuestion[];
   setResult: Dispatch<SetStateAction<number[]>>;
+  current_answers_survey_id?: number;
+  question_id?: number;
 }
 
 const SingleChoice = (props: SingleChoiceProps) => {
-  const { options, setResult } = props;
+  const { options, setResult, current_answers_survey_id, question_id } = props;
   const answerService = new AnswerService(httpClient);
 
   const selectOption = async (id: number) => {
-    await answerService.create({
-      question_id: 853,
-      answers_survey_id: 121,
-      user_answer: 'student@gmail.com',
-      option_ids: [id],
-    });
+    if (current_answers_survey_id && question_id) {
+      await answerService.create({
+        question_id,
+        answers_survey_id: current_answers_survey_id,
+        option_ids: [id],
+      });
+    }
+
     setResult([id]);
   };
 
