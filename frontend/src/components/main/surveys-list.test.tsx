@@ -93,7 +93,7 @@ describe('Surveys list', () => {
     expect(screen.queryByText('Animals survey')).toBeNull();
   });
 
-  it('should select survey when her not started', async () => {
+  it('should select survey when it is not started', async () => {
     const mockSurveySelected = jest.fn();
     const rendered = render(
       <SurveysList setSurveySelected={mockSurveySelected} data={data} />
