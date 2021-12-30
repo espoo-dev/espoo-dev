@@ -8,7 +8,6 @@ RSpec.describe 'AnswersSurveysController', type: :request do
       let!(:survey) { create(:survey) }
       let!(:survey_question) { survey.questions.first }
       let!(:question_type) { survey_question.question_type }
-      let!(:survey_subject) { survey.survey_subject }
       let!(:option) { create(:option, question: survey_question) }
 
       before do
@@ -23,30 +22,26 @@ RSpec.describe 'AnswersSurveysController', type: :request do
       it { expect(AnswersSurvey.count).to eq(1) }
 
       it 'matches AnswersSurvey attributes' do
+        question_attributes = {
+          'id' => survey_question.id,
+          'name' => survey_question.name,
+          'question_type' => {
+            'id' => question_type.id,
+            'name' => question_type.name
+          },
+          'options' => [{
+            'id' => option.id,
+            'name' => option.name,
+            'correct' => option.correct
+          }]
+        }
         expected_attributes = {
           'id' => anything,
           'status' => AnswersSurvey::NOT_STARTED,
-          'survey' => {
-            'id' => anything,
-            'name' => survey.name,
-            'description' => survey.description,
-            'survey_subject_id' => survey_subject.id,
-            'answers_surveys' => [],
-            'current_answers_survey' => nil,
-            'questions' => [
-              'id' => survey_question.id,
-              'name' => survey_question.name,
-              'question_type' => {
-                'id' => question_type.id,
-                'name' => question_type.name
-              },
-              'options' => [{
-                'id' => option.id,
-                'name' => option.name,
-                'correct' => option.correct
-              }]
-            ]
-          },
+          'answered_questions' => [],
+          'not_answered_questions' => [question_attributes],
+          'questions' => [question_attributes],
+          'current_question_index' => 0,
           'user_id' => user.id
         }
         expect(response_body).to match(expected_attributes)

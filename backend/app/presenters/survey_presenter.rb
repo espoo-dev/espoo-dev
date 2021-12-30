@@ -18,7 +18,7 @@ class SurveyPresenter < SimpleSurveyPresenter
 
   def answers_surveys_payload
     @answers_surveys_payload ||= AnswersSurvey.by_user_and_survey(@user, @survey).map do |answer_survey|
-      AnswersSurveyPresenter.new(answer_survey, @user).payload
+      AnswersSurveyPresenter.new(answer_survey).payload
     end
   end
 

@@ -4,8 +4,8 @@ class Api::V1::AnswersSurveysController < Api::V1::ApiController
     authorize answers_survey
     answers_survey.save!
 
-    answers_survey_presenter = AnswersSurveyPresenter.new(answers_survey, @current_user)
-    render json: answers_survey_presenter, status: :created
+    answers_survey_presenter = AnswersSurveyPresenter.new(answers_survey)
+    render json: answers_survey_presenter.payload, status: :created
   end
 
   private

@@ -3,9 +3,8 @@ class AnswersSurveyPresenter < BasePresenter
 
   delegate :answers, to: :answers_survey
 
-  def initialize(answers_survey, user)
+  def initialize(answers_survey)
     @answers_survey = answers_survey
-    @user = user
 
     super()
   end
@@ -13,7 +12,7 @@ class AnswersSurveyPresenter < BasePresenter
   def payload
     {
       id: @answers_survey.id,
-      user_id: @answers_survey.user_id,
+      user_id: @answers_survey.user.id,
       status: @answers_survey.status,
       questions: questions,
       answered_questions: answered_questions,
@@ -25,15 +24,15 @@ class AnswersSurveyPresenter < BasePresenter
   private
 
   def questions
-    @answers_survey.survey.questions.map { |question|
+    @answers_survey.survey.questions.map do |question|
       QuestionPresenter.new(question).payload
-    }
+    end
   end
 
   def answered_questions
-    Question.answered_by_answers_survey(@answers_survey).map { |question|
+    Question.answered_by_answers_survey(@answers_survey).map do |question|
       QuestionPresenter.new(question).payload
-    }
+    end
   end
 
   def not_answered_questions

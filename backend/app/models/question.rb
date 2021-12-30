@@ -22,7 +22,7 @@ class Question < ApplicationRecord
   }
 
   scope :answered_by_answers_survey, lambda { |answers_survey|
-    joins(:answers).where(answers: {answers_survey_id: answers_survey.id})
+    joins(:answers).where(answers: { answers_survey_id: answers_survey.id })
   }
 
   private
