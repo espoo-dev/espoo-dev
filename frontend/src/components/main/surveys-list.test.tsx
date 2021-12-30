@@ -94,4 +94,26 @@ describe('Surveys list', () => {
     );
     expect(screen.queryByText('Animals survey')).toBeNull();
   });
+
+  it('should select survey when her not started', async () => {
+    const mockResponse = {
+      mock: true,
+    };
+    const mockSurveySelected = jest.fn();
+    const rendered = render(
+      <SurveysList setSurveySelected={mockSurveySelected} data={data} />
+    );
+    const buttonItem = rendered.getByTestId('Animals survey');
+
+    fireEvent.click(buttonItem);
+    (httpClient as jest.Mocked<AxiosInstance>).post.mockImplementationOnce(
+      jest.fn((url: string, body: AnswerSurveyCreate) => {
+        return Promise.reject({ response: { data: mockResponse } });
+      })
+    );
+
+    await waitFor(() =>
+      expect(httpClient.post).not.toHaveBeenCalledWith('api/v1/answers_surveys')
+    );
+  });
 });
