@@ -11,6 +11,56 @@ RSpec.describe 'SurveysController', type: :request do
     let!(:option) { survey_question.options.first }
     let!(:option2) { survey_question2.options.first }
     let!(:question_type) { survey_question.question_type }
+    let(:answered_question_attributes) do
+      {
+        'id' => survey_question.id,
+        'name' => survey_question.name,
+        'question_type' => {
+          'id' => question_type.id,
+          'name' => question_type.name
+        },
+        'options' => [{
+          'id' => option.id,
+          'name' => option.name,
+          'correct' => option.correct
+        }]
+      }
+    end
+    let(:unanswered_question_attributes) do
+      {
+        'id' => survey_question2.id,
+        'name' => survey_question2.name,
+        'question_type' => {
+          'id' => question_type.id,
+          'name' => question_type.name
+        },
+        'options' => [{
+          'id' => option2.id,
+          'name' => option2.name,
+          'correct' => option2.correct
+        }]
+      }
+    end
+    let(:question_attributes) do
+      [
+        answered_question_attributes,
+        unanswered_question_attributes
+      ]
+    end
+    let(:answers_surveys_attributes) do
+      [
+        {
+          'id' => answers_survey.id,
+          'user_id' => answers_survey.user.id,
+          'status' => answers_survey.status,
+          'questions' => question_attributes,
+          'answered_questions' => [answered_question_attributes],
+          'not_answered_questions' => [unanswered_question_attributes],
+          'current_question_index' => 1
+        }
+      ]
+    end
+    let(:current_answers_survey_attributes) { answers_surveys_attributes.first }
 
     before { get api_v1_survey_path(survey), headers: auth_headers(user: user_student) }
 
@@ -22,46 +72,11 @@ RSpec.describe 'SurveysController', type: :request do
         'name' => survey.name,
         'description' => survey.description,
         'survey_subject_id' => survey_subject.id,
-        'questions' => [
-          {
-            'id' => survey_question.id,
-            'name' => survey_question.name,
-            'question_type' => {
-              'id' => question_type.id,
-              'name' => question_type.name
-            },
-            'options' => [{
-              'id' => option.id,
-              'name' => option.name,
-              'correct' => option.correct
-            }]
-          },
-          {
-            'id' => survey_question2.id,
-            'name' => survey_question2.name,
-            'question_type' => {
-              'id' => question_type.id,
-              'name' => question_type.name
-            },
-            'options' => [{
-              'id' => option2.id,
-              'name' => option2.name,
-              'correct' => option2.correct
-            }]
-          }
-        ],
-        'answers_surveys' => [
-          {
-            'id' => answers_survey.id,
-            'user_id' => answers_survey.user.id,
-            'status' => answers_survey.status
-          }
-        ],
-        'current_answers_survey' => {
-          'id' => answers_survey.id,
-          'user_id' => answers_survey.user.id,
-          'status' => answers_survey.status
-        }
+        'answered_questions_quantity' => 1,
+        'total_questions_quantity' => 2,
+        'questions' => question_attributes,
+        'answers_surveys' => answers_surveys_attributes,
+        'current_answers_survey' => current_answers_survey_attributes
       }
 
       expect(response_body).to match(expected_attributes)
@@ -80,7 +95,56 @@ RSpec.describe 'SurveysController', type: :request do
         let!(:option) { survey_question.options.first }
         let!(:option2) { survey_question2.options.first }
         let!(:question_type) { survey_question.question_type }
-        let!(:question_type2) { survey_question.question_type }
+        let(:answered_question_attributes) do
+          {
+            'id' => survey_question.id,
+            'name' => survey_question.name,
+            'question_type' => {
+              'id' => question_type.id,
+              'name' => question_type.name
+            },
+            'options' => [{
+              'id' => option.id,
+              'name' => option.name,
+              'correct' => option.correct
+            }]
+          }
+        end
+        let(:unanswered_question_attributes) do
+          {
+            'id' => survey_question2.id,
+            'name' => survey_question2.name,
+            'question_type' => {
+              'id' => question_type.id,
+              'name' => question_type.name
+            },
+            'options' => [{
+              'id' => option2.id,
+              'name' => option2.name,
+              'correct' => option2.correct
+            }]
+          }
+        end
+        let(:question_attributes) do
+          [
+            answered_question_attributes,
+            unanswered_question_attributes
+          ]
+        end
+        let(:answers_surveys_attributes) do
+          [
+            {
+              'id' => answers_survey.id,
+              'user_id' => answers_survey.user.id,
+              'status' => answers_survey.status,
+              'questions' => question_attributes,
+              'answered_questions' => [answered_question_attributes],
+              'not_answered_questions' => [unanswered_question_attributes],
+              'current_question_index' => 1
+            }
+          ]
+        end
+        let(:current_answers_survey_attributes) { answers_surveys_attributes.first }
 
         before { get api_v1_surveys_path, headers: auth_headers(user: user_student) }
 
@@ -92,46 +156,11 @@ RSpec.describe 'SurveysController', type: :request do
             'name' => survey.name,
             'description' => survey.description,
             'survey_subject_id' => survey_subject.id,
-            'questions' => [
-              {
-                'id' => survey_question.id,
-                'name' => survey_question.name,
-                'question_type' => {
-                  'id' => question_type.id,
-                  'name' => question_type.name
-                },
-                'options' => [{
-                  'id' => option.id,
-                  'name' => option.name,
-                  'correct' => option.correct
-                }]
-              },
-              {
-                'id' => survey_question2.id,
-                'name' => survey_question2.name,
-                'question_type' => {
-                  'id' => question_type2.id,
-                  'name' => question_type2.name
-                },
-                'options' => [{
-                  'id' => option2.id,
-                  'name' => option2.name,
-                  'correct' => option2.correct
-                }]
-              }
-            ],
-            'answers_surveys' => [
-              {
-                'id' => answers_survey.id,
-                'user_id' => answers_survey.user.id,
-                'status' => answers_survey.status
-              }
-            ],
-            'current_answers_survey' => {
-              'id' => answers_survey.id,
-              'user_id' => answers_survey.user.id,
-              'status' => answers_survey.status
-            }
+            'answered_questions_quantity' => 1,
+            'total_questions_quantity' => 2,
+            'questions' => question_attributes,
+            'answers_surveys' => answers_surveys_attributes,
+            'current_answers_survey' => current_answers_survey_attributes
           }]
 
           expect(response_body).to match(expected_attributes)
