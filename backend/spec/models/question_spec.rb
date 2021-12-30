@@ -49,6 +49,13 @@ RSpec.describe Question, type: :model do
     it { expect(described_class.by_user(user_moderator)).to eq([]) }
   end
 
+  describe '.answered_by_answers_survey' do
+    let!(:answers_survey) { create(:answers_survey_with_some_answers) }
+    let!(:answered_question) { answers_survey.answers.first.question }
+
+    it { expect(described_class.answered_by_answers_survey(answers_survey)).to eq([answered_question]) }
+  end
+
   describe '#validates_ready' do
     it 'has no correct options' do
       expect(question.update(ready_to_be_answered: true)).to eq(false)
