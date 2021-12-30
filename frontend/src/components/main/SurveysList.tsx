@@ -41,21 +41,23 @@ export const SurveysList = (props: SurveyListProps) => {
     }
   };
 
+  const statusToCreate = [AnswerSurveyStatus.Completed];
+
+  const canCreateAnswerSurvey = (survey: Survey): boolean => {
+    if (!survey.current_answers_survey) {
+      return true;
+    }
+    return statusToCreate.includes(survey.current_answers_survey.status);
+  };
+
   const registerAnswerSurvey = async (survey_id: number, survey: Survey) => {
     setSelectedSurvey(survey_id);
     setLoading(true);
 
-    const surveyToRegister = survey;
-
-    // TODO: This if will a method to check if can be create answer or not
-    if (
-      surveyToRegister.current_answers_survey &&
-      surveyToRegister.current_answers_survey.status ===
-        AnswerSurveyStatus.NotStarted
-    ) {
-      setSurveySelected(surveyToRegister);
+    if (canCreateAnswerSurvey(survey)) {
+      initSurveySelect(survey);
     } else {
-      initSurveySelect(surveyToRegister);
+      setSurveySelected(survey);
     }
     setLoading(false);
   };
