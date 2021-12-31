@@ -1,7 +1,6 @@
 class QuestionPresenter < BasePresenter
-  def initialize(question, user = nil)
+  def initialize(question)
     @question = question
-    @user = user
 
     super()
   end
