@@ -9,7 +9,7 @@ FactoryBot.define do
   end
 
   factory :answer_with_option, parent: :answer do
-    options { [create(:option)] }
+    options { [create(:option, question: question)] }
     question { create(:single_choice_question) }
   end
 end
