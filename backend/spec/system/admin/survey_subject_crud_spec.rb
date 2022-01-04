@@ -3,7 +3,7 @@ require 'rails_helper'
 RSpec.describe 'SurveySubject CRUD', type: :system do
   describe 'CRUD' do
     before do
-      create(:survey)
+      create(:survey_with_1_question)
       sign_in create(:user)
       visit admin_survey_subjects_path
     end

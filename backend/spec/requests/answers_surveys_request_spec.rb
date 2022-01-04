@@ -5,7 +5,7 @@ RSpec.describe 'AnswersSurveysController', type: :request do
 
   describe '#create' do
     context 'when data is valid' do
-      let!(:survey) { create(:survey) }
+      let!(:survey) { create(:survey_with_1_question) }
       let!(:survey_question) { survey.questions.first }
       let!(:question_type) { survey_question.question_type }
       let!(:option) { create(:option, question: survey_question) }

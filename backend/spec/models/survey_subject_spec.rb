@@ -12,7 +12,7 @@ RSpec.describe SurveySubject, type: :model do
 
   describe '#destroy' do
     describe 'When there are surveys for survey subject' do
-      let!(:survey_subject) { create(:survey).survey_subject }
+      let!(:survey_subject) { create(:survey_with_1_question).survey_subject }
 
       before do
         survey_subject.destroy
