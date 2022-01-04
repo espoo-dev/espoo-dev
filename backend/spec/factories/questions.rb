@@ -29,11 +29,11 @@ FactoryBot.define do
       question.save!
     end
 
-    after(:create) do |question|
-      create(:correct_option, question: question)
-      question.ready_to_be_answered = true
-      question.save!
-    end
+    # after(:create) do |question|
+    #   create(:correct_option, question: question)
+    #   question.ready_to_be_answered = true
+    #   question.save!
+    # end
   end
 
   factory :question_with_answer, parent: :question do
