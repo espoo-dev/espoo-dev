@@ -355,7 +355,22 @@ paths:
           application/json:
             schema:
               $ref: '#/components/schemas/CreateAnswerRequestBody'
-
+  '/api/v1/seed_database':
+      get:
+        summary: Get seeds
+        description: "Get ready seeds"
+        tags:
+          - Seeds
+        responses:
+          '200':
+            description: Ready seeds
+            content:
+              application/json:
+                schema:
+                  type: object
+                  properties:
+                    message:
+                      type: string
 servers:
   - url: https://espoo.herokuapp.com
   - url: http://localhost:3000
