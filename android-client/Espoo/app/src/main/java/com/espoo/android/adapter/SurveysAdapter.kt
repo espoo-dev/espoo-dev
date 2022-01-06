@@ -12,7 +12,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.espoo.android.R
 import com.espoo.android.model.Survey
 
-class SurveysAdapter : ListAdapter<Survey, SurveysAdapter.SurveyViewHolder>(SurveyDiffCallback()) {
+class SurveysAdapter(private val clickListener: SurveyClickListener) : ListAdapter<Survey, SurveysAdapter.SurveyViewHolder>(SurveyDiffCallback()) {
 
     class SurveyViewHolder private constructor (itemView: View) : RecyclerView.ViewHolder(itemView) {
         private val surveyNameTextView : TextView = itemView.findViewById(R.id.textViewSurveyName)
@@ -20,7 +20,7 @@ class SurveysAdapter : ListAdapter<Survey, SurveysAdapter.SurveyViewHolder>(Surv
         private val surveyImageView : ImageView = itemView.findViewById(R.id.imageViewSurveyImage)
         private val surveyQuestionsTextView : TextView = itemView.findViewById(R.id.textViewSurveyQuestions)
 
-        fun bin(item: Survey) {
+        fun bin(clickListener: SurveyClickListener, item: Survey) {
             surveyNameTextView.text = item.name
             surveyDescriptionTextView.text = item.description
 
@@ -62,6 +62,10 @@ class SurveysAdapter : ListAdapter<Survey, SurveysAdapter.SurveyViewHolder>(Surv
 
             val questionText = if (item.questions.size <= 1) "Question" else "Questions"
             surveyQuestionsTextView.text = "${item.questions.size} $questionText"
+
+            itemView.setOnClickListener{
+                clickListener.onClick(item)
+            }
         }
 
         private fun calculateMeasures (measure: Int, valuesToSubtract : Array<Int>) : Int {
@@ -80,7 +84,7 @@ class SurveysAdapter : ListAdapter<Survey, SurveysAdapter.SurveyViewHolder>(Surv
 
     override fun onBindViewHolder(holder: SurveyViewHolder, position: Int) {
         val item = getItem(position)
-        holder.bin(item)
+        holder.bin(clickListener, item)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): SurveyViewHolder {
@@ -98,4 +102,8 @@ class SurveyDiffCallback : DiffUtil.ItemCallback<Survey>() {
         return oldItem == newItem
     }
 
+}
+
+class SurveyClickListener(val clickListener: (surveyId: Int) -> Unit) {
+    fun onClick(survey: Survey) = clickListener(survey.id)
 }
