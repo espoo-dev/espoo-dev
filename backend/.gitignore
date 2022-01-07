@@ -33,3 +33,6 @@ coverage
 /vendor/*
 .bundle/config
 dockerfile_rails.tar
+
+.env.local
+.env.test
