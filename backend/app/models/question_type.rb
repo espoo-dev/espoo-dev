@@ -13,10 +13,6 @@ class QuestionType < ApplicationRecord
     name == SINGLE_CHOICE
   end
 
-  def multiple_choice?
-    name == MULTIPLE_CHOICE
-  end
-
   def free_text?
     name == FREE_TEXT
   end

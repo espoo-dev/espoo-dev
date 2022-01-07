@@ -13,7 +13,6 @@ class Question < ApplicationRecord
   has_many :answers, dependent: :destroy
 
   delegate :single_choice?, to: :question_type, allow_nil: true
-  delegate :multiple_choice?, to: :question_type, allow_nil: true
   delegate :free_text?, to: :question_type, allow_nil: true
 
   scope :by_user, lambda { |user|
