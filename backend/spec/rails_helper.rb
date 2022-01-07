@@ -64,15 +64,4 @@ RSpec.configure do |config|
   # config.filter_gems_from_backtrace("gem name")
   config.include JsonResponseHelper
   config.include Devise::Test::IntegrationHelpers
-
-  # These two blocks check for scenarios with bullet: :skip, and if they find
-  # one before they run tests, they will set Bullet.enable to false and then
-  # set it back to true after.
-  config.before(:each, bullet: :skip) do
-    Bullet.enable = false
-  end
-
-  config.after(:each, bullet: :skip) do
-    Bullet.enable = true
-  end
 end
