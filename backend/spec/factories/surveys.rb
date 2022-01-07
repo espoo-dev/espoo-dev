@@ -20,7 +20,7 @@ FactoryBot.define do
 
   factory :survey_with_2_questions, parent: :survey do
     after(:create) do |survey|
-      survey.questions = build_list(:multiple_choice_ready_question, 2, user: survey.user)
+      survey.questions = create_list(:multiple_choice_ready_question, 2, user: survey.user)
       survey.ready = true
       survey.save!
     end
