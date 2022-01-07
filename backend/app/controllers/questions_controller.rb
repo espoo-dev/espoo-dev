@@ -7,6 +7,6 @@ class QuestionsController < ApplicationController
   private
 
   def translation_key(question)
-    question.question_type.name.downcase.split.join("_")
+    question.question_type.name.downcase.split.join('_')
   end
 end
