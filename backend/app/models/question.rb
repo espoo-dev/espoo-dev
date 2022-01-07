@@ -13,6 +13,7 @@ class Question < ApplicationRecord
   has_many :answers, dependent: :destroy
 
   delegate :single_choice?, to: :question_type, allow_nil: true
+  delegate :multiple_choice?, to: :question_type, allow_nil: true
   delegate :free_text?, to: :question_type, allow_nil: true
 
   scope :by_user, lambda { |user|
@@ -46,6 +47,7 @@ class Question < ApplicationRecord
   end
 
   def validates_ready_survey
+    return if !ready_to_be_answered_was
     # i18n-tasks-use t('activerecord.errors.models.question.attributes.ready_to_be_answered.cant_update_ready_to_be_answered')
     errors.add(:ready_to_be_answered, :cant_update_ready_to_be_answered) if !ready_to_be_answered && survey&.ready
   end
