@@ -56,4 +56,11 @@ FactoryBot.define do
       survey.save!
     end
   end
+
+  factory :survey_with_two_answers, parent: :ready_survey do
+    after(:create) do |survey|
+      answersurvey = create(:answers_survey, survey: survey, user: survey.user)
+      create_list(:answer_with_option, 2, answers_survey: answersurvey)
+    end
+  end
 end
