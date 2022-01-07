@@ -24,7 +24,7 @@ class AnswersSurveyPresenter < BasePresenter
   protected
 
   def questions
-    @answers_survey.survey.questions.map do |question|
+    @answers_survey.survey.questions.includes([:question_type]).map do |question|
       QuestionPresenter.new(question).payload
     end
   end
