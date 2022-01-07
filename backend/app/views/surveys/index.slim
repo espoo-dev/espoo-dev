@@ -9,7 +9,7 @@
             p.card-text
               = survey[:description]
             p.card-text
-              = pluralize(survey[:answered_questions_quantity], 'question')
+              =  t('surveys.index.question', count: survey[:answered_questions_quantity])
               |  answered.
             = form_with url: answers_surveys_path, method: :post do |form|
               = form.hidden_field :survey_id, value: survey[:id]
