@@ -20,8 +20,20 @@ RSpec.describe 'Question', type: :system do
       end
     end
 
-    it 'displays the question type of the question' do
-      expect(page).to have_content 'This is a multiple choice question.'
+    context 'single question type' do
+      let(:question) { create(:single_choice_question) }
+
+      it { expect(page).to have_content 'Single choice question' }
+    end
+
+    context 'multiple question type' do
+      it { expect(page).to have_content 'Multiple choice question' }
+    end
+
+    context 'free text question type' do
+      let(:question) { create(:free_text_question) }
+
+      it { expect(page).to have_content 'Free text question' }
     end
   end
 end
