@@ -1,6 +1,13 @@
 h1 = @question.name
-h5 = "This is a #{@question.question_type.name.downcase} question."
+
+- if @question.single_choice?
+    h5 = "#{t('questions.show.single_choice')}."
+- elsif @question.multiple_choice?
+    h5 = "#{t('questions.show.multiple_choice')}."
+- else
+    h5 = "#{t('questions.show.free_text')}."
+
 ul
   - @question.options.each do |option|
     li = option.name
-button Next
+button = t('questions.show.button')
