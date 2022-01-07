@@ -88,21 +88,18 @@ RSpec.describe Option, type: :model do
 
     describe 'when question is ready' do
       describe 'and there is only one correct option' do
-        it 'the option cannot have correct false' do
-          option.correct = false
-          option.save!
-          option2.correct = false
+        it 'can have correct true' do
+          create(:option, question: question, correct: false)
 
-          expect(option2).not_to be_valid
+          expect(option).to be_valid
         end
       end
 
-      describe 'and there are many correct options' do
-        it 'one of the options can have correct false' do
-          create(:correct_option, question: question)
+      describe 'and there are no correct options' do
+        it 'can not have correct false' do
           option.correct = false
 
-          expect(option).to be_valid
+          expect(option).to_not be_valid
         end
       end
     end
