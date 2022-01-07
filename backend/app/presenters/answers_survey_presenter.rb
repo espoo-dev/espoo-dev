@@ -30,7 +30,7 @@ class AnswersSurveyPresenter < BasePresenter
   end
 
   def answered_questions
-    Question.answered_by_answers_survey(@answers_survey).map do |question|
+    Question.answered_by_answers_survey(@answers_survey).includes(%i[question_type options]).map do |question|
       QuestionPresenter.new(question).payload
     end
   end

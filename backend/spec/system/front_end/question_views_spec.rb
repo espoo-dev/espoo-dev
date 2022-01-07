@@ -20,17 +20,17 @@ RSpec.describe 'Question', type: :system do
       end
     end
 
-    context 'single question type' do
+    context 'when single question type' do
       let(:question) { create(:single_choice_question) }
 
       it { expect(page).to have_content 'Single choice question' }
     end
 
-    context 'multiple question type' do
+    context 'when multiple question type' do
       it { expect(page).to have_content 'Multiple choice question' }
     end
 
-    context 'free text question type' do
+    context 'when free text question type' do
       let(:question) { create(:free_text_question) }
 
       it { expect(page).to have_content 'Free text question' }
