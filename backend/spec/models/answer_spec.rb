@@ -34,7 +34,7 @@ RSpec.describe Answer, type: :model do
     end
 
     it 'is valid when there are options' do
-      answer = build(:answer_with_option)
+      answer = create(:answer_with_option)
       expect(answer).to be_valid
     end
   end
