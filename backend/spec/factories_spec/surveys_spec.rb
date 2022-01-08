@@ -8,7 +8,6 @@ RSpec.describe 'Surveys' do
 
     it { expect(Survey.count).to eq(1) }
 
-    # TODO: this spec is not working
-    # it { expect(Question.count).to eq(2) }
+    it { expect(Question.count).to eq(2) }
   end
 end

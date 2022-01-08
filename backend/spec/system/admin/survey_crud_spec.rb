@@ -4,7 +4,7 @@ RSpec.describe 'Survey CRUD', type: :system do
   describe 'CRUD' do
     let!(:user_admin) { create(:user) }
     let!(:user_teacher) { create(:user_teacher) }
-    let!(:survey) { create(:survey) }
+    let!(:survey) { create(:survey_with_1_question) }
     let!(:question_admin) { create(:question, user: user_admin) }
     let!(:question_teacher) { create(:question, user: user_teacher) }
     let!(:survey_subject) { create(:survey_subject) }
@@ -74,8 +74,8 @@ RSpec.describe 'Survey CRUD', type: :system do
     end
 
     describe 'when user is not admin' do
-      let!(:survey1) { create(:survey, user: user_teacher) }
-      let!(:survey2) { create(:survey) }
+      let!(:survey1) { create(:survey_with_1_question, user: user_teacher) }
+      let!(:survey2) { create(:survey_with_1_question) }
 
       before do
         sign_in user_teacher
