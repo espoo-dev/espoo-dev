@@ -9,6 +9,7 @@ RSpec.describe 'SurveysController', type: :request do
     let!(:survey_question) { survey.questions.first }
     let!(:survey_question2) { survey.questions.second }
     let!(:option) { survey_question.options.first }
+    let!(:option3) { survey_question.options.second }
     let!(:option2) { survey_question2.options.first }
     let!(:question_type) { survey_question.question_type }
     let(:answered_question_attributes) do
@@ -23,6 +24,10 @@ RSpec.describe 'SurveysController', type: :request do
           'id' => option.id,
           'name' => option.name,
           'correct' => option.correct
+        }, {
+          'id' => option3.id,
+          'name' => option3.name,
+          'correct' => option3.correct
         }]
       }
     end
@@ -93,6 +98,7 @@ RSpec.describe 'SurveysController', type: :request do
         let!(:survey_question) { survey.questions.first }
         let!(:survey_question2) { survey.questions.second }
         let!(:option) { survey_question.options.first }
+        let!(:option3) { survey_question.options.second }
         let!(:option2) { survey_question2.options.first }
         let!(:question_type) { survey_question.question_type }
         let(:answered_question_attributes) do
@@ -107,6 +113,10 @@ RSpec.describe 'SurveysController', type: :request do
               'id' => option.id,
               'name' => option.name,
               'correct' => option.correct
+            }, {
+              'id' => option3.id,
+              'name' => option3.name,
+              'correct' => option3.correct
             }]
           }
         end
