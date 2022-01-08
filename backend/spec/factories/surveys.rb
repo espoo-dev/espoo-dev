@@ -4,16 +4,18 @@ FactoryBot.define do
     description { Faker::Name.unique.name }
     association :user
     association :survey_subject
-
-    after(:create) do |survey|
-      survey.questions = build_list(:question, 1, user: survey.user)
-      survey.save!
-    end
   end
 
   factory :survey_without_questions, parent: :survey do
     after(:create) do |survey|
       survey.questions = []
+      survey.save!
+    end
+  end
+
+  factory :survey_with_1_question, parent: :survey do
+    after(:create) do |survey|
+      survey.questions = build_list(:question, 1, user: survey.user)
       survey.save!
     end
   end

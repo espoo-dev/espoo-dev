@@ -12,8 +12,8 @@ RSpec.describe Survey, type: :model do
     let!(:admin) { create(:user) }
     let!(:teacher) { create(:user_teacher) }
     let!(:moderator) { create(:user_moderator) }
-    let!(:survey_teacher) { create(:survey, user_id: teacher.id) }
-    let!(:survey_admin) { create(:survey, user_id: admin.id) }
+    let!(:survey_teacher) { create(:survey_with_1_question, user_id: teacher.id) }
+    let!(:survey_admin) { create(:survey_with_1_question, user_id: admin.id) }
 
     it { expect(described_class.by_user(teacher)).to eq([survey_teacher]) }
     it { expect(described_class.by_user(admin)).to eq([survey_teacher, survey_admin]) }

@@ -86,14 +86,14 @@ RSpec.describe Question, type: :model do
 
   describe 'validate survey same user' do
     it 'is valid when question and survey have the same user' do
-      survey_teacher = create(:survey, user: user_teacher)
+      survey_teacher = create(:survey_with_1_question, user: user_teacher)
       question = create(:question, user: user_teacher, survey: survey_teacher)
 
       expect(question).to be_valid
     end
 
     it 'is not valid when question and survey have different user' do
-      survey_teacher = create(:survey, user: user_teacher)
+      survey_teacher = create(:survey_with_1_question, user: user_teacher)
       question_mod = build(:question, user: user_moderator, survey: survey_teacher)
 
       expect(question_mod).not_to be_valid

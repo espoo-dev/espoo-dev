@@ -35,7 +35,7 @@ RSpec.describe AnswersSurvey, type: :model do
 
   describe '#unique_not_completed_by_survey' do
     let(:user) { create(:user) }
-    let(:survey) { create(:survey) }
+    let(:survey) { create(:survey_with_1_question) }
 
     describe 'when answers_survey is unique "not completed" by survey' do
       let(:answers_survey) { create(:answers_survey) }
