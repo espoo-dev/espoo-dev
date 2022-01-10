@@ -1,15 +1,17 @@
 class QuestionPresenter < BasePresenter
-  def initialize(question, user = nil)
+  attr_reader :question, :answers_survey
+
+  def initialize(question, answers_survey = nil)
     @question = question
-    @user = user
+    @answers_survey = answers_survey
 
     super()
   end
 
   def payload
     {
-      id: @question.id,
-      name: @question.name,
+      id: question.id,
+      name: question.name,
       question_type: question_type,
       options: options
     }
@@ -18,11 +20,11 @@ class QuestionPresenter < BasePresenter
   private
 
   def question_type
-    QuestionTypePresenter.new(@question.question_type).payload
+    QuestionTypePresenter.new(question.question_type).payload
   end
 
   def options
-    @question.options.map do |option|
+    question.options.map do |option|
       OptionPresenter.new(option).payload
     end
   end
