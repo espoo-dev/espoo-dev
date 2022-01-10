@@ -32,6 +32,30 @@ components:
           items:
             $ref: '#/components/schemas/Question'
 
+    AnswersSurveyWithAnswers:
+      type: object
+      properties:
+        id:
+          type: number
+        user_id:
+          type: number
+        status:
+          type: string
+        questions:
+          type: array
+          items:
+            $ref: '#/components/schemas/Question'
+        answered_questions:
+          type: array
+          items:
+            $ref: '#/components/schemas/Question'
+        not_answered_questions:
+          type: array
+          items:
+            $ref: '#/components/schemas/Question'
+        current_question_index:
+          type: number
+
     Role:
       type: object
       properties:
@@ -282,7 +306,7 @@ paths:
       tags:
         - AnswerSurvey
       responses:
-        '200':
+        '201':
           description: AnswersSurvey created
           content:
             application/json:
@@ -293,6 +317,26 @@ paths:
           application/json:
             schema:
               $ref: '#/components/schemas/CreateAnswersSurveyRequestBody'
+  '/api/v1/answers_surveys/{id}':
+    get:
+      summary: Get Answers Survey
+      description: With answered questions, unanswered questions and current_question_index
+      tags:
+        - AnswerSurvey
+      parameters:
+        - in: path
+          name: id
+          schema:
+            type: integer
+          required: true
+      responses:
+        '200':
+          description: AnswersSurvey returned
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AnswersSurveyWithAnswers'
+
   '/api/v1/answers':
     post:
       summary: Create Answers
