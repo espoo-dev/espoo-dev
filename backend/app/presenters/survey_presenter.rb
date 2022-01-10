@@ -24,7 +24,7 @@ class SurveyPresenter < SimpleSurveyPresenter
 
   def questions_payload
     survey.questions.map do |question|
-      QuestionPresenter.new(question, user).payload
+      QuestionPresenter.new(question).payload
     end
   end
 end
