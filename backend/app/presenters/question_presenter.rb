@@ -1,6 +1,5 @@
 class QuestionPresenter < BasePresenter
-  attr_reader :question
-  attr_reader :answers_survey
+  attr_reader :question, :answers_survey
 
   def initialize(question, answers_survey = nil)
     @question = question
