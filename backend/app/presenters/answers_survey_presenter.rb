@@ -21,7 +21,7 @@ class AnswersSurveyPresenter < BasePresenter
     }
   end
 
-  private
+  protected
 
   def questions
     @answers_survey.survey.questions.includes([:question_type]).map do |question|
