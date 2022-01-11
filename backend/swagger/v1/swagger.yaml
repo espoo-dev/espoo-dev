@@ -355,7 +355,22 @@ paths:
           application/json:
             schema:
               $ref: '#/components/schemas/CreateAnswerRequestBody'
-
+  '/api/v1/seed_database':
+      get:
+        summary: Refreshing the database - This can only be produced in development mode
+        description: "It will delete the existing database and create a simple new one to be easy to test the api requests ."
+        tags:
+          - Seeds
+        responses:
+          '200':
+            description: successful operation in development mode
+            content:
+              application/json:
+                schema:
+                  type: object
+                  properties:
+                    message:
+                      type: string
 servers:
   - url: https://espoo.herokuapp.com
   - url: http://localhost:3000

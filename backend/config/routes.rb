@@ -29,6 +29,7 @@ Rails.application.routes.draw do
 
   get '/jwt_example', to: 'jwt_example#index'
   get '/', to: 'admin/users#index'
+  get '/api/v1/seed_database', to: 'api/v1/api#seed_database'
 
   devise_for :users, controllers: {
     sessions: 'users/sessions'
