@@ -24,13 +24,13 @@ class AnswersSurveyPresenter < BasePresenter
   protected
 
   def questions
-    @answers_survey.survey.questions.map do |question|
+    @answers_survey.survey.questions.includes([:question_type]).map do |question|
       QuestionPresenter.new(question).payload
     end
   end
 
   def answered_questions
-    Question.answered_by_answers_survey(@answers_survey).map do |question|
+    Question.answered_by_answers_survey(@answers_survey).includes(%i[question_type options]).map do |question|
       QuestionPresenter.new(question).payload
     end
   end
