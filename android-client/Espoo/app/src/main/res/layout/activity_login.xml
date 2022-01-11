@@ -26,6 +26,7 @@
         android:layout_marginStart="16dp"
         android:layout_marginLeft="16dp"
         android:layout_marginTop="32dp"
+        android:fontFamily="@font/roboto"
         android:text="@string/login_title"
         android:textColor="@color/black"
         android:textSize="24sp"
