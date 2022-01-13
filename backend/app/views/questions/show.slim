@@ -1,6 +1,8 @@
 h1 = @question.name
-h5 = "This is a #{@question.question_type.name.downcase} question."
+
+h5 = t("questions.show.#{@translation_key}")
+
 ul
   - @question.options.each do |option|
     li = option.name
-button Next
+button = t('questions.show.button')
