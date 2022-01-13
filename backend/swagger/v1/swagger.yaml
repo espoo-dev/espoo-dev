@@ -32,6 +32,29 @@ components:
           items:
             $ref: '#/components/schemas/Question'
 
+    AnsweredQuestion:
+      type: object
+      properties:
+        id:
+          type: number
+        name:
+          type: string
+        question_type:
+          type: object
+          properties:
+            id:
+              type: integer
+            name:
+              type: string
+        options:
+          type: array
+          items:
+            $ref: '#/components/schemas/Option'
+        answered_options:
+              type: array
+              items:
+              $ref: '#/components/schemas/Option'
+
     AnswersSurveyWithAnswers:
       type: object
       properties:
@@ -44,7 +67,7 @@ components:
         questions:
           type: array
           items:
-            $ref: '#/components/schemas/Question'
+            $ref: '#/components/schemas/AnsweredQuestion'
         answered_questions:
           type: array
           items:
@@ -79,6 +102,13 @@ components:
           type: number
         name:
           type: string
+        question_type:
+          type: object
+          properties:
+            id:
+              type: integer
+            name:
+              type: string
         options:
           type: array
           items:
