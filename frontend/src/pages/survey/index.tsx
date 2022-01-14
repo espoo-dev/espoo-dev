@@ -15,10 +15,27 @@ const SurveyPage = (props: SurveyPageProps) => {
     (survey && survey.questions[0]) || null
   );
 
+  const getCurrentIndex = () : number => {
+    const currentIndex = survey.current_answers_survey.current_question_index;
+    return currentIndex;
+  };
+
+  const hasAnswer = () : boolean => getCurrentIndex() > 0;
+
+  const nextQuestion = (index: number) => {
+    setQuestionCount(index + 1);
+    setQuestion(survey.questions[index]);
+  };
+
   useEffect(() => {
-    setQuestionCount(questionCount + 1);
-    setQuestion(survey.questions[questionCount]);
+    nextQuestion(questionCount);
   }, [result]);
+
+  useEffect(() => {
+    if (hasAnswer()) {
+      nextQuestion(getCurrentIndex());
+    }
+  }, []);
 
   return (
     <Box style={{ color: '#fff' }}>

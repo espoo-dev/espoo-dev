@@ -7,6 +7,10 @@ export interface AnswersSurvey {
   id: number;
   status: AnswerSurveyStatus;
   user_id: number;
+  answered_questions?: Question[];
+  current_question_index?: number;
+  questions?: Question[];
+  not_answered_questions?: Question[];
 }
 
 export interface OptionQuestion {
