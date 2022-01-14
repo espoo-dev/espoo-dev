@@ -40,12 +40,7 @@ components:
         name:
           type: string
         question_type:
-          type: object
-          properties:
-            id:
-              type: integer
-            name:
-              type: string
+          $ref: '#/components/schemas/QuestionType'
         options:
           type: array
           items:
@@ -95,6 +90,14 @@ components:
           type: string
         correct:
           type: boolean
+    QuestionType:
+      type: object
+      properties:
+        id:
+          type: integer
+        name:
+          type: string
+
     Question:
       type: object
       properties:
@@ -103,12 +106,7 @@ components:
         name:
           type: string
         question_type:
-          type: object
-          properties:
-            id:
-              type: integer
-            name:
-              type: string
+            $ref: '#/components/schemas/QuestionType'
         options:
           type: array
           items:
