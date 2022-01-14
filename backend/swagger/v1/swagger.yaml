@@ -17,7 +17,10 @@ components:
           type: number
         status:
           type: string
-
+        questions:
+          type: array
+          items:
+            $ref: '#/components/schemas/Question'
     AnswersSurvey:
       type: object
       properties:
@@ -46,9 +49,9 @@ components:
           items:
             $ref: '#/components/schemas/Option'
         answered_options:
-              type: array
-              items:
-              $ref: '#/components/schemas/Option'
+          type: array
+          items:
+            $ref: '#/components/schemas/Option'
 
     AnswersSurveyWithAnswers:
       type: object
@@ -116,24 +119,26 @@ components:
       properties:
         id:
           type: number
-        survey_subject_id:
-          type: number
         name:
           type: string
         description:
           type: string
-        role_type:
-          type: string
-        current_answers_survey:
-          $ref: '#/components/schemas/SimpleAnswersSurvey'
+        total_questions_quantity:
+          type: number
+        answered_questions_quantity:
+          type: number
         answers_surveys:
           type: array
           items:
-            $ref: '#/components/schemas/SimpleAnswersSurvey'
+            $ref: '#/components/schemas/AnswersSurveyWithAnswers'
+        current_answers_survey:
+          $ref: '#/components/schemas/AnswersSurveyWithAnswers'
         questions:
           type: array
           items:
             $ref: '#/components/schemas/Question'
+        survey_subject_id:
+          type: number
     SimpleSurvey:
       type: object
       properties:
@@ -143,7 +148,9 @@ components:
           type: string
         description:
           type: string
-        questions_quantity:
+        total_questions_quantity:
+          type: number
+        answered_question_quantity:
           type: number
     User:
       type: object
@@ -227,7 +234,7 @@ paths:
         - Login
       responses:
         '200':
-          description: Login authorized
+          description: Successful operation - Login authorized
           content:
             application/json:
               schema:
@@ -246,7 +253,7 @@ paths:
         - Users
       responses:
         '200':
-          description: User created
+          description: Successful operation - User created
           content:
             application/json:
               schema:
@@ -280,7 +287,7 @@ paths:
                   $ref: '#/components/schemas/User'
   '/api/v1/roles':
     get:
-      summary: Get roles
+      summary: List all roles
       description: "Get available roles"
       tags:
         - Roles
@@ -295,13 +302,13 @@ paths:
                   $ref: '#/components/schemas/Role'
   '/api/v1/surveys':
     get:
-      summary: Get surveys
-      description: "Get ready surveys"
+      summary: List all Surveys
+      description: "Returns an array with all Surveys"
       tags:
         - Surveys
       responses:
         '200':
-          description: Ready surveys
+          description: Successful operation - Surveys returned.
           content:
             application/json:
               schema:
@@ -310,8 +317,8 @@ paths:
                   $ref: '#/components/schemas/Survey'
   '/api/v1/surveys/{id}':
     get:
-      summary: Get survey
-      description: "Get ready survey"
+      summary: List a single Survey by ID
+      description: "Returns a single Survey found by ID"
       tags:
         - Surveys
       parameters:
@@ -322,7 +329,7 @@ paths:
           required: true
       responses:
         '200':
-          description: Ready surveys
+          description: Successful operation - Survey with a given ID returned.
           content:
             application/json:
               schema:
@@ -330,12 +337,12 @@ paths:
   '/api/v1/answers_surveys':
     post:
       summary: Create Answers Survey
-      description: Create Answers Survey
+      description: Successful operation - Create Answers Survey
       tags:
         - AnswerSurvey
       responses:
         '201':
-          description: AnswersSurvey created
+          description: Successful operation - AnswersSurvey created.
           content:
             application/json:
               schema:
@@ -347,7 +354,7 @@ paths:
               $ref: '#/components/schemas/CreateAnswersSurveyRequestBody'
   '/api/v1/answers_surveys/{id}':
     get:
-      summary: Get Answers Survey
+      summary: Get Answers Survey by ID
       description: With answered questions, unanswered questions and current_question_index
       tags:
         - AnswerSurvey
@@ -359,7 +366,7 @@ paths:
           required: true
       responses:
         '200':
-          description: AnswersSurvey returned
+          description: Successful operation - AnswersSurvey returned.
           content:
             application/json:
               schema:
@@ -373,7 +380,7 @@ paths:
         - Answers
       responses:
         '200':
-          description: Answer created
+          description: Successful operation - Answer created.
           content:
             application/json:
               schema:
@@ -386,12 +393,12 @@ paths:
   '/api/v1/seed_database':
       get:
         summary: Refreshing the database - This can only be produced in development mode
-        description: "It will delete the existing database and create a simple new one to be easy to test the api requests ."
+        description: "It will delete the existing database and create a simple new one for easier testing of the api requests ."
         tags:
           - Seeds
         responses:
           '200':
-            description: successful operation in development mode
+            description: Successful operation in development mode.
             content:
               application/json:
                 schema:
