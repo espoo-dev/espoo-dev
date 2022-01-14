@@ -31,6 +31,20 @@ const surveyDefault: Survey = {
         },
       ],
     },
+    {
+      id: 1023,
+      name: 'What is the bigger animal?',
+      options: [
+        {
+          id: 1370,
+          name: 'Cat'
+        }
+      ],
+      question_type: {
+        id: 328,
+        name: 'Single Choice'
+      }
+    }
   ],
   survey_subject_id: 12,
 };
@@ -40,6 +54,10 @@ describe('SurveyPage', () => {
     render(<SurveyPage survey={surveyDefault} />);
     expect(
       screen.getByText('What is your favorite animal?')
+    ).toBeInTheDocument();
+
+    expect(
+      screen.getByText('Question 1')
     ).toBeInTheDocument();
   });
 
@@ -56,5 +74,51 @@ describe('SurveyPage', () => {
     const optionElement = screen.getByText(option.name);
     expect(optionElement).toBeInTheDocument();
     optionElement.click();
+  });
+
+  it('should render second question when continue a survey with one answer', () => {
+    const surveyIncomplet = {...surveyDefault};
+    surveyIncomplet.current_answers_survey.answered_questions = [
+      {
+        id: 1022,
+        name: 'What is your favorite animal?',
+        options: [
+          {
+            id: 1,
+            name: 'Cat'
+          }
+        ],
+        question_type: {
+          id: 328,
+          name: 'Single Choice'
+        }
+      }
+    ];
+    surveyIncomplet.current_answers_survey.current_question_index = 1;
+    surveyIncomplet.current_answers_survey.not_answered_questions = [
+      {
+        id: 1023,
+        name: 'What is the bigger animal?',
+        options: [
+          {
+            id: 1370,
+            name: 'Cat'
+          }
+        ],
+        question_type: {
+          id: 328,
+          name: 'Single Choice'
+        }
+      }
+    ];
+
+    render(<SurveyPage survey={surveyIncomplet} />);
+    expect(
+      screen.getByText(surveyIncomplet.questions[1].name)
+    ).toBeInTheDocument();
+
+    expect(
+      screen.getByText('Question 2')
+    ).toBeInTheDocument();
   });
 });
