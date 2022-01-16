@@ -17,6 +17,7 @@ AllCops:
     - 'log/**/*'
     - 'vendor/**/*'
     - 'node_modules/**/*'
+    - 'spec/support/hash_helper.rb'
   TargetRubyVersion: 2.6.2
 
 Layout/LineLength:
