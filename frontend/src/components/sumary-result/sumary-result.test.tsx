@@ -75,7 +75,7 @@ describe('SumaryResult', () => {
     expect(screen.getByText('1 incorrect')).toBeInTheDocument();
   });
 
-  it('should show questions corrects and incorrects', () => {
+  it('should show correct and incorrect questions', () => {
     render(<SumaryResult {...answerSurvey} />);
     answerSurvey.questions.forEach((question) => {
       expect(screen.getByText(question.name)).toBeInTheDocument();
