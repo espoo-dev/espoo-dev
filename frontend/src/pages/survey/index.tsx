@@ -87,19 +87,23 @@ const SurveyPage = (props: SurveyPageProps) => {
                 current_answers_survey_id={survey.current_answers_survey.id}
               />
             </Box>
-          ) : null}
+            ) : null}
         </Box>
       ) : (
         <h1>
           {survey && survey.questions.length && answerSurvey ? (
             <SumaryResult {...answerSurvey} />
-          ) : isLoadingResult ? (
-            <Box textAlign={'center'}>
-              <Spinner color="white" />
-              <span>Calculating result...</span>
-            </Box>
           ) : (
-            'No question :/'
+            <Box textAlign="center">
+              {isLoadingResult ? (
+                <Box>
+                  <Spinner color="white" />
+                  <span>Calculating result...</span>
+                </Box>
+              ) : (
+                'No questions'
+              )}
+            </Box>
           )}
         </h1>
       )}
