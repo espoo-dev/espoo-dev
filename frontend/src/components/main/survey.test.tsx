@@ -37,14 +37,14 @@ const surveyDefault: Survey = {
       options: [
         {
           id: 1370,
-          name: 'Cat'
-        }
+          name: 'Cat',
+        },
       ],
       question_type: {
         id: 328,
-        name: 'Single Choice'
-      }
-    }
+        name: 'Single Choice',
+      },
+    },
   ],
   survey_subject_id: 12,
 };
@@ -56,9 +56,7 @@ describe('SurveyPage', () => {
       screen.getByText('What is your favorite animal?')
     ).toBeInTheDocument();
 
-    expect(
-      screen.getByText('Question 1')
-    ).toBeInTheDocument();
+    expect(screen.getByText('Question 1')).toBeInTheDocument();
   });
 
   it('should render all question options to question', () => {
@@ -77,7 +75,7 @@ describe('SurveyPage', () => {
   });
 
   it('should render second question when continue a survey with one answer', () => {
-    const surveyIncomplet = {...surveyDefault};
+    const surveyIncomplet = { ...surveyDefault };
     surveyIncomplet.current_answers_survey.answered_questions = [
       {
         id: 1022,
@@ -85,14 +83,14 @@ describe('SurveyPage', () => {
         options: [
           {
             id: 1,
-            name: 'Cat'
-          }
+            name: 'Cat',
+          },
         ],
         question_type: {
           id: 328,
-          name: 'Single Choice'
-        }
-      }
+          name: 'Single Choice',
+        },
+      },
     ];
     surveyIncomplet.current_answers_survey.current_question_index = 1;
     surveyIncomplet.current_answers_survey.not_answered_questions = [
@@ -102,14 +100,14 @@ describe('SurveyPage', () => {
         options: [
           {
             id: 1370,
-            name: 'Cat'
-          }
+            name: 'Cat',
+          },
         ],
         question_type: {
           id: 328,
-          name: 'Single Choice'
-        }
-      }
+          name: 'Single Choice',
+        },
+      },
     ];
 
     render(<SurveyPage survey={surveyIncomplet} />);
@@ -117,8 +115,6 @@ describe('SurveyPage', () => {
       screen.getByText(surveyIncomplet.questions[1].name)
     ).toBeInTheDocument();
 
-    expect(
-      screen.getByText('Question 2')
-    ).toBeInTheDocument();
+    expect(screen.getByText('Question 2')).toBeInTheDocument();
   });
 });
