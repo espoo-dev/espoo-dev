@@ -137,7 +137,8 @@ module HashHelper
         'id' => option3.id,
         'name' => option3.name,
         'correct' => option3.correct
-      }]
+      }],
+      'correct' => false
     }
   end
 
@@ -161,7 +162,8 @@ module HashHelper
         'name' => option2.name,
         'correct' => option2.correct
       }],
-      'answered_options' => []
+      'answered_options' => [],
+      'correct' => false
     }
 
     questions_attributes = [
