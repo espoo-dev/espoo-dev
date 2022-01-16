@@ -81,7 +81,7 @@ describe('AnswerSurveyService', () => {
     });
   });
 
-  describe('get method', () => {
+  describe('get', () => {
     describe('when returns expected data', () => {
       beforeEach(async () => {
         // mocking post implementation to return the expected value
