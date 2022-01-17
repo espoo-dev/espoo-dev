@@ -37,6 +37,8 @@ Metrics/BlockLength:
 
 Metrics/ClassLength:
   Max: 200
+  Exclude:
+    - 'app/services/seeds.rb'
 
 Metrics/CyclomaticComplexity:
   Max: 15
