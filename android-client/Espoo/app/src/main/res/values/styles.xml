@@ -2,7 +2,6 @@
 <resources>
 
     <style name="ButtonStyle">
-        <item name="style">@style/Widget.AppCompat.Button.Colored</item>
         <item name="android:layout_width">0dp</item>
         <item name="android:layout_height">wrap_content</item>
         <item name="android:layout_marginStart">@dimen/layout_horizontal_margin</item>
