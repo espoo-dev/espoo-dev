@@ -18,12 +18,16 @@ RSpec.describe Seeds do
       expect(QuestionType.count).to eq(3)
     end
 
-    it 'creates 2 survey subjects' do
-      expect(SurveySubject.count).to eq(2)
+    it 'creates 3 survey subjects' do
+      expect(SurveySubject.count).to eq(3)
     end
 
-    it 'creates 6 questions' do
-      expect(Question.count).to eq(6)
+    it 'creates 9 questions' do
+      expect(Question.count).to eq(9)
+    end
+
+    it 'creates 20 options' do
+      expect(Option.count).to eq(20)
     end
   end
 end
