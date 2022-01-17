@@ -52,6 +52,48 @@ class Seeds < Base
     option_incorrect_question_2_survey_teacher
     options_for_question_one_color
     options_for_question_two_color
+    create_question_one_to_be_survey_ready
+    create_question_two_to_be_survey_ready
+    create_question_three_to_be_survey_ready
+  end
+
+  def create_question_one_to_be_survey_ready
+    question = Question.create!(
+      name: 'She _____ happy!',
+      user: @user_teacher,
+      survey: @to_be_ready_survey,
+      question_type: @question_type_single_choice
+    )
+    Option.create!(name: 'is', question: question, user: @user_admin, correct: true)
+    Option.create!(name: 'am', question: question, user: @user_admin, correct: false)
+    Option.create!(name: 'are', question: question, user: @user_admin, correct: false)
+    question.update!(ready_to_be_answered: true)
+  end
+
+  def create_question_two_to_be_survey_ready
+    question = Question.create!(
+      name: 'I _____ happy!',
+      user: @user_teacher,
+      survey: @to_be_ready_survey,
+      question_type: @question_type_single_choice
+    )
+    Option.create!(name: 'is', question: question, user: @user_admin, correct: false)
+    Option.create!(name: 'am', question: question, user: @user_admin, correct: true)
+    Option.create!(name: 'are', question: question, user: @user_admin, correct: false)
+    question.update!(ready_to_be_answered: true)
+  end
+
+  def create_question_three_to_be_survey_ready
+    question = Question.create!(
+      name: 'You _____ happy!',
+      user: @user_teacher,
+      survey: @to_be_ready_survey,
+      question_type: @question_type_single_choice
+    )
+    Option.create!(name: 'is', question: question, user: @user_admin, correct: false)
+    Option.create!(name: 'am', question: question, user: @user_admin, correct: false)
+    Option.create!(name: 'are', question: question, user: @user_admin, correct: true)
+    question.update!(ready_to_be_answered: true)
   end
 
   def question_one_admin
@@ -171,15 +213,20 @@ class Seeds < Base
   def create_survey_subjects
     @animal_subject = SurveySubject.create!(name: 'Animal', description: 'All the surveys contain questions related to animals.')
     @color_subject = SurveySubject.create!(name: 'Color', description: 'All the surveys contain questions related to colors.')
+    @english_subject = SurveySubject.create!(name: 'English', description: "Let's learn English together :)")
   end
 
   def create_surveys
     create_survey_subjects
     animal_subject_id = @animal_subject.id
     color_subject_id = @color_subject.id
+    english_subject_id = @english_subject.id
+
     @survey_admin = Survey.create!(name: 'Colors survey - Admin', user: @user_admin, survey_subject_id: color_subject_id)
     @colors_survey_ready = Survey.create!(name: 'Colors survey - for Children', description: 'Favorite colors', user: @user_admin, survey_subject_id: color_subject_id)
     @teacher_ready_survey = Survey.create!(name: 'Animals survey - Teacher', description: 'Nice animals', user: @user_teacher, survey_subject_id: animal_subject_id)
+    @to_be_ready_survey = Survey.create!(name: 'To Be Verb', description: 'Select one option to fill the gap on the sentence', user: @user_teacher, survey_subject_id: english_subject_id)
+
     Survey.create!(name: 'Dog survey - Teacher', user: @user_teacher, survey_subject_id: animal_subject_id)
     Survey.create!(name: 'Bunny survey - Teacher', user: @user_teacher, survey_subject_id: animal_subject_id)
   end
@@ -187,6 +234,7 @@ class Seeds < Base
   def set_survey_ready
     @teacher_ready_survey.update!(ready: true)
     @colors_survey_ready.update!(ready: true)
+    @to_be_ready_survey.update!(ready: true)
   end
 
   # Answer Surveys and Answers
