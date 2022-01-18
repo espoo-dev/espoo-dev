@@ -40,6 +40,11 @@ android {
             testCoverageEnabled true
         }
     }
+
+    dataBinding {
+        enabled = true
+    }
+
     testOptions {
         execution 'ANDROID_TEST_ORCHESTRATOR'
         animationsDisabled true

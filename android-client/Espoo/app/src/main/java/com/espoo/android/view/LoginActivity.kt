@@ -6,8 +6,10 @@ import android.os.Bundle
 import android.util.Log
 import android.view.View
 import android.widget.Toast
+import androidx.databinding.DataBindingUtil
 import com.espoo.android.R
 import com.espoo.android.api.ApiService
+import com.espoo.android.databinding.ActivityLoginBinding
 import com.espoo.android.helper.SessionManager
 import com.espoo.android.helper.SessionManager.PreferencesConstants.API_TOKEN
 import com.espoo.android.helper.SessionManager.PreferencesConstants.IS_LOGIN
@@ -16,7 +18,6 @@ import com.espoo.android.helper.SessionManager.PreferencesConstants.EMAIL
 import com.espoo.android.model.AuthData
 import com.espoo.android.model.User
 import com.espoo.android.model.UserLogin
-import kotlinx.android.synthetic.main.activity_login.*
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -25,10 +26,11 @@ class LoginActivity : AppCompatActivity() {
 
     private lateinit var service: ApiService
     private lateinit var sessionManager : SessionManager
+    private lateinit var binding: ActivityLoginBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_login)
+        binding = DataBindingUtil.setContentView(this, R.layout.activity_login)
 
         sessionManager = SessionManager(applicationContext)
         if (sessionManager.isLogin()) {
@@ -39,7 +41,10 @@ class LoginActivity : AppCompatActivity() {
     }
 
     fun login(view: View) {
-        service.login(AuthData(UserLogin(editTextUsername.text.toString(), editTextPassword.text.toString())))
+        service.login(AuthData(
+            UserLogin(
+                binding.editTextUsername.text.toString(),
+                binding.editTextPassword.text.toString())))
             .enqueue(object :Callback<User> {
                 override fun onResponse(call: Call<User>, response: Response<User>) {
                     storeLoginData(response)
