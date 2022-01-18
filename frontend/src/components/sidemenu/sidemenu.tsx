@@ -36,7 +36,7 @@ export const Sidemenu = () => {
       h="100vh"
       w="250px"
       p="2em"
-      borderRight="1px solid"
+      borderRight='1px solid'
     >
       <Heading as="h1" color="white" fontSize="26" m="0">
         Espoolingo
