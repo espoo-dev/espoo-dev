@@ -18,7 +18,7 @@ import { useEffect, useState } from 'react';
 import { SurveysList } from '@components/main/SurveysList';
 import { SurveyService } from 'api/services/survey';
 import { Survey } from 'api/models/survey';
-import { HiRefresh } from 'react-icons/hi';
+import { HiArrowLeft, HiRefresh } from 'react-icons/hi';
 import SurveyPage from '../survey';
 
 const Surveys = () => {
@@ -26,6 +26,11 @@ const Surveys = () => {
   const [surveys, setSurveys] = useState<Survey[]>([]);
   const [loading, setLoading] = useState(false);
   const [surveySelected, setSurveySelected] = useState<Survey>(null);
+
+  const backToList = () => {
+    listSurveys();
+    setSurveySelected(null);
+  };
 
   const listSurveys = async () => {
     setLoading(true);
@@ -94,7 +99,21 @@ const Surveys = () => {
             )}
 
             {surveySelected ? (
-              <SurveyPage survey={surveySelected} />
+              <Box>
+                <Tooltip label="Back to list" placement="top">
+                  <Button
+                    rounded="lg"
+                    p={0}
+                    bg="teal.400"
+                    colorScheme="teal"
+                    w="30px"
+                    onClick={backToList}
+                  >
+                    <HiArrowLeft color="white" />
+                  </Button>
+                </Tooltip>
+                <SurveyPage survey={surveySelected} />
+              </Box>
             ) : (
               <SurveysList
                 data={surveys}
