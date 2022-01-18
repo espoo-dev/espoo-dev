@@ -1,0 +1,3 @@
+{
+  "src/**/*.{js,jsx,ts,tsx,json,css,scss}": ["eslint --max-warnings=0", "prettier --write", "npm run test"]
+}
