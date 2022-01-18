@@ -22,13 +22,14 @@ Rails.application.routes.draw do
       resources :users, only: %i[index create]
       resources :surveys, only: %i[index show]
       resources :roles, only: %i[index]
-      resources :answers_surveys, only: %i[create]
+      resources :answers_surveys, only: %i[create show]
       resources :answers, only: %i[create]
     end
   end
 
   get '/jwt_example', to: 'jwt_example#index'
   get '/', to: 'admin/users#index'
+  get '/api/v1/seed_database', to: 'api/v1/api#seed_database'
 
   devise_for :users, controllers: {
     sessions: 'users/sessions'

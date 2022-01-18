@@ -21,6 +21,14 @@ class Question < ApplicationRecord
     all.includes([:options])
   }
 
+  scope :answered_by_answers_survey, lambda { |answers_survey|
+    joins(:answers).where(answers: { answers_survey_id: answers_survey.id })
+  }
+
+  def correct_options
+    options.select(&:correct)
+  end
+
   private
 
   def survey_must_have_same_user

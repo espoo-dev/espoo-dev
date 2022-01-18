@@ -9,14 +9,22 @@ class SurveyPresenter < SimpleSurveyPresenter
     simple_payload.merge(
       {
         answers_surveys: answers_surveys_payload,
-        last_answers_survey: answers_surveys_payload.last
+        current_answers_survey: answers_surveys_payload.last,
+        questions: questions_payload,
+        survey_subject_id: survey.survey_subject.id
       }
     )
   end
 
   def answers_surveys_payload
-    @answers_surveys_payload ||= AnswersSurvey.by_user_and_survey(@user, @survey).map do |answer_survey|
+    @answers_surveys_payload ||= AnswersSurvey.by_user_and_survey(user, survey).map do |answer_survey|
       AnswersSurveyPresenter.new(answer_survey).payload
+    end
+  end
+
+  def questions_payload
+    survey.questions.map do |question|
+      QuestionPresenter.new(question).payload
     end
   end
 end

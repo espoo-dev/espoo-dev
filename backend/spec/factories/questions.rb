@@ -22,13 +22,6 @@ FactoryBot.define do
   end
 
   factory :multiple_choice_ready_question, parent: :multiple_choice_question do
-    # TODO: refactor this
-    after(:build) do |question|
-      create(:correct_option, question: question)
-      question.ready_to_be_answered = true
-      question.save!
-    end
-
     after(:create) do |question|
       create(:correct_option, question: question)
       question.ready_to_be_answered = true
@@ -39,6 +32,8 @@ FactoryBot.define do
   factory :question_with_answer, parent: :question do
     after(:create) do |question|
       create(:answer_with_option, question: question)
+      create(:correct_option, question: question)
+      question.ready_to_be_answered = true
       question.save!
     end
   end

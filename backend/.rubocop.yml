@@ -17,6 +17,7 @@ AllCops:
     - 'log/**/*'
     - 'vendor/**/*'
     - 'node_modules/**/*'
+    - 'spec/support/hash_helper.rb'
   TargetRubyVersion: 2.6.2
 
 Layout/LineLength:
@@ -36,6 +37,8 @@ Metrics/BlockLength:
 
 Metrics/ClassLength:
   Max: 200
+  Exclude:
+    - 'app/services/seeds.rb'
 
 Metrics/CyclomaticComplexity:
   Max: 15
@@ -65,4 +68,4 @@ RSpec/MultipleExpectations:
   Max: 2
 
 RSpec/MultipleMemoizedHelpers:
-  Max: 11
+  Max: 15

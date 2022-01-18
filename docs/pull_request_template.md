@@ -7,6 +7,6 @@ fix #issuenumber
 #### Only select the appropriate.
 
 - [ ] **Model testing.**
-- [ ] **Request testing.**
+- [ ] **Request testing and swagger doc update.**
 - [ ] **System testing.**
 - [ ] **No tests required.**

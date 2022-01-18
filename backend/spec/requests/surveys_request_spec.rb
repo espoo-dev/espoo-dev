@@ -5,64 +5,13 @@ RSpec.describe 'SurveysController', type: :request do
     let!(:user_student) { create(:user_student) }
     let!(:answers_survey) { create(:answers_survey_with_some_answers, user: user_student) }
     let!(:survey) { answers_survey.survey }
-    let!(:survey_subject) { survey.survey_subject }
-    let!(:survey_question) { survey.questions.first }
-    let!(:survey_question2) { survey.questions.second }
-    let!(:option) { survey_question.options.first }
-    let!(:option2) { survey_question2.options.first }
-    let!(:question_type) { survey_question.question_type }
 
     before { get api_v1_survey_path(survey), headers: auth_headers(user: user_student) }
 
     it { expect(response).to have_http_status :ok }
 
     it 'matches surveys attributes' do
-      expected_attributes = {
-        'id' => anything,
-        'name' => survey.name,
-        'description' => survey.description,
-        'survey_subject_id' => survey_subject.id,
-        'questions' => [
-          {
-            'id' => survey_question.id,
-            'name' => survey_question.name,
-            'question_type' => {
-              'id' => question_type.id,
-              'name' => question_type.name
-            },
-            'options' => [{
-              'id' => option.id,
-              'name' => option.name,
-              'correct' => option.correct
-            }]
-          },
-          {
-            'id' => survey_question2.id,
-            'name' => survey_question2.name,
-            'question_type' => {
-              'id' => question_type.id,
-              'name' => question_type.name
-            },
-            'options' => [{
-              'id' => option2.id,
-              'name' => option2.name,
-              'correct' => option2.correct
-            }]
-          }
-        ],
-        'answers_surveys' => [
-          {
-            'id' => answers_survey.id,
-            'user_id' => answers_survey.user.id,
-            'status' => answers_survey.status
-          }
-        ],
-        'current_answers_survey' => {
-          'id' => answers_survey.id,
-          'user_id' => answers_survey.user.id,
-          'status' => answers_survey.status
-        }
-      }
+      expected_attributes = survey_hash(survey, answers_survey)
 
       expect(response_body).to match(expected_attributes)
     end
@@ -74,65 +23,13 @@ RSpec.describe 'SurveysController', type: :request do
         let!(:user_student) { create(:user_student) }
         let!(:answers_survey) { create(:answers_survey_with_some_answers, user: user_student) }
         let!(:survey) { answers_survey.survey }
-        let!(:survey_subject) { survey.survey_subject }
-        let!(:survey_question) { survey.questions.first }
-        let!(:survey_question2) { survey.questions.second }
-        let!(:option) { survey_question.options.first }
-        let!(:option2) { survey_question2.options.first }
-        let!(:question_type) { survey_question.question_type }
-        let!(:question_type2) { survey_question.question_type }
 
         before { get api_v1_surveys_path, headers: auth_headers(user: user_student) }
 
         it { expect(response).to have_http_status :ok }
 
         it 'matches surveys attributes' do
-          expected_attributes = [{
-            'id' => anything,
-            'name' => survey.name,
-            'description' => survey.description,
-            'survey_subject_id' => survey_subject.id,
-            'questions' => [
-              {
-                'id' => survey_question.id,
-                'name' => survey_question.name,
-                'question_type' => {
-                  'id' => question_type.id,
-                  'name' => question_type.name
-                },
-                'options' => [{
-                  'id' => option.id,
-                  'name' => option.name,
-                  'correct' => option.correct
-                }]
-              },
-              {
-                'id' => survey_question2.id,
-                'name' => survey_question2.name,
-                'question_type' => {
-                  'id' => question_type2.id,
-                  'name' => question_type2.name
-                },
-                'options' => [{
-                  'id' => option2.id,
-                  'name' => option2.name,
-                  'correct' => option2.correct
-                }]
-              }
-            ],
-            'answers_surveys' => [
-              {
-                'id' => answers_survey.id,
-                'user_id' => answers_survey.user.id,
-                'status' => answers_survey.status
-              }
-            ],
-            'current_answers_survey' => {
-              'id' => answers_survey.id,
-              'user_id' => answers_survey.user.id,
-              'status' => answers_survey.status
-            }
-          }]
+          expected_attributes = [survey_hash(survey, answers_survey)]
 
           expect(response_body).to match(expected_attributes)
         end

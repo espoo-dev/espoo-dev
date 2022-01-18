@@ -3,7 +3,17 @@ class Api::V1::AnswersSurveysController < Api::V1::ApiController
     answers_survey = AnswersSurvey.new(answers_surveys_params)
     authorize answers_survey
     answers_survey.save!
-    render json: answers_survey, status: :created
+
+    answers_survey_presenter = AnswersSurveyPresenter.new(answers_survey)
+    render json: answers_survey_presenter.payload, status: :created
+  end
+
+  def show
+    answers_survey = AnswersSurvey.where(params.permit(:id)).includes(survey: [questions: %i[question_type options]]).take!
+
+    authorize answers_survey
+
+    render json: AnswersSurveyWithAnswersPresenter.payload(answers_survey), status: :ok
   end
 
   private

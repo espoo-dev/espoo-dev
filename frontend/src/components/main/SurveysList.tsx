@@ -1,7 +1,7 @@
 import React, { Dispatch, SetStateAction, useState } from 'react';
 import { Grid } from '@chakra-ui/react';
 import { toast } from 'react-toastify';
-import { Survey } from 'api/models/survey';
+import { AnswerSurveyStatus, Survey } from 'api/models/survey';
 import { httpClient } from 'api';
 import { errorHandler } from 'api/error-handler';
 import { AnswerSurveyService } from 'api/services/answer_survey';
@@ -19,25 +19,46 @@ export const SurveysList = (props: SurveyListProps) => {
   const [loading, setLoading] = useState(false);
   const [selectedSurvey, setSelectedSurvey] = useState(null);
 
-  const registerAnswerSurvey = async (survey_id: number, survey: Survey) => {
-    setSelectedSurvey(survey_id);
-    setLoading(true);
-
-    // TODO: move to promise when register return success.
-    setSurveySelected(survey);
+  const initSurveySelect = async (survey: Survey) => {
+    const surveyToInit = survey;
     try {
-      const response = await answerSurveyService.register({ survey_id });
+      const response = await answerSurveyService.register({
+        survey_id: surveyToInit.id,
+      });
       if (response && response.data) {
         toast('Answer Survey created successfully', {
           position: 'top-right',
           type: 'success',
           pauseOnHover: false,
         });
+        surveyToInit.current_answers_survey = {
+          ...response.data,
+        };
+        setSurveySelected(surveyToInit);
       }
     } catch (error) {
       errorHandler(error);
     }
+  };
 
+  const statusToCreate = [AnswerSurveyStatus.Completed];
+
+  const canCreateAnswerSurvey = (survey: Survey): boolean => {
+    if (!survey.current_answers_survey) {
+      return true;
+    }
+    return statusToCreate.includes(survey.current_answers_survey.status);
+  };
+
+  const registerAnswerSurvey = async (survey_id: number, survey: Survey) => {
+    setSelectedSurvey(survey_id);
+    setLoading(true);
+
+    if (canCreateAnswerSurvey(survey)) {
+      initSurveySelect(survey);
+    } else {
+      setSurveySelected(survey);
+    }
     setLoading(false);
   };
 

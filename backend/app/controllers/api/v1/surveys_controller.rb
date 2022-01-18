@@ -6,7 +6,7 @@ class Api::V1::SurveysController < Api::V1::ApiController
   end
 
   def index
-    surveys = Survey.ready_surveys.includes(questions: %i[question_type options])
+    surveys = Survey.ready_surveys.includes(questions: %i[question_type options]).includes([:survey_subject])
     authorize surveys
     render json: parsed_surveys(surveys)
   end
@@ -23,6 +23,6 @@ class Api::V1::SurveysController < Api::V1::ApiController
 
   def survey_json(survey)
     survey.answers_surveys_by_user = answers_surveys(current_user, survey)
-    SurveySerializer.new(survey)
+    SurveyPresenter.new(survey, current_user).payload
   end
 end

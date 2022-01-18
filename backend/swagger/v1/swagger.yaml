@@ -32,6 +32,48 @@ components:
           items:
             $ref: '#/components/schemas/Question'
 
+    AnsweredQuestion:
+      type: object
+      properties:
+        id:
+          type: number
+        name:
+          type: string
+        question_type:
+          $ref: '#/components/schemas/QuestionType'
+        options:
+          type: array
+          items:
+            $ref: '#/components/schemas/Option'
+        answered_options:
+              type: array
+              items:
+              $ref: '#/components/schemas/Option'
+
+    AnswersSurveyWithAnswers:
+      type: object
+      properties:
+        id:
+          type: number
+        user_id:
+          type: number
+        status:
+          type: string
+        questions:
+          type: array
+          items:
+            $ref: '#/components/schemas/AnsweredQuestion'
+        answered_questions:
+          type: array
+          items:
+            $ref: '#/components/schemas/Question'
+        not_answered_questions:
+          type: array
+          items:
+            $ref: '#/components/schemas/Question'
+        current_question_index:
+          type: number
+
     Role:
       type: object
       properties:
@@ -48,6 +90,14 @@ components:
           type: string
         correct:
           type: boolean
+    QuestionType:
+      type: object
+      properties:
+        id:
+          type: integer
+        name:
+          type: string
+
     Question:
       type: object
       properties:
@@ -55,6 +105,8 @@ components:
           type: number
         name:
           type: string
+        question_type:
+            $ref: '#/components/schemas/QuestionType'
         options:
           type: array
           items:
@@ -282,7 +334,7 @@ paths:
       tags:
         - AnswerSurvey
       responses:
-        '200':
+        '201':
           description: AnswersSurvey created
           content:
             application/json:
@@ -293,6 +345,26 @@ paths:
           application/json:
             schema:
               $ref: '#/components/schemas/CreateAnswersSurveyRequestBody'
+  '/api/v1/answers_surveys/{id}':
+    get:
+      summary: Get Answers Survey
+      description: With answered questions, unanswered questions and current_question_index
+      tags:
+        - AnswerSurvey
+      parameters:
+        - in: path
+          name: id
+          schema:
+            type: integer
+          required: true
+      responses:
+        '200':
+          description: AnswersSurvey returned
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AnswersSurveyWithAnswers'
+
   '/api/v1/answers':
     post:
       summary: Create Answers
@@ -311,7 +383,22 @@ paths:
           application/json:
             schema:
               $ref: '#/components/schemas/CreateAnswerRequestBody'
-
+  '/api/v1/seed_database':
+      get:
+        summary: Refreshing the database - This can only be produced in development mode
+        description: "It will delete the existing database and create a simple new one to be easy to test the api requests ."
+        tags:
+          - Seeds
+        responses:
+          '200':
+            description: successful operation in development mode
+            content:
+              application/json:
+                schema:
+                  type: object
+                  properties:
+                    message:
+                      type: string
 servers:
   - url: https://espoo.herokuapp.com
   - url: http://localhost:3000
