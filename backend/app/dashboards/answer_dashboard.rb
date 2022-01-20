@@ -1,4 +1,4 @@
-require "administrate/base_dashboard"
+require 'administrate/base_dashboard'
 
 class AnswerDashboard < Administrate::BaseDashboard
   # ATTRIBUTE_TYPES
@@ -15,7 +15,7 @@ class AnswerDashboard < Administrate::BaseDashboard
     id: Field::Number,
     created_at: Field::DateTime,
     updated_at: Field::DateTime,
-    user_answer: Field::String,
+    user_answer: Field::String
   }.freeze
 
   # COLLECTION_ATTRIBUTES
@@ -69,7 +69,7 @@ class AnswerDashboard < Administrate::BaseDashboard
   #
   def display_resource(answer)
     question_name = answer.question.name
-    answer_options =  answer.options.map(&:name).join(", ")
+    answer_options =  answer.options.map(&:name).join(', ')
     "#{question_name} (#{answer_options})"
   end
 end

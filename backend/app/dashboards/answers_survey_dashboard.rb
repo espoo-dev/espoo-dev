@@ -1,5 +1,3 @@
-require "administrate/base_dashboard"
-
 class AnswersSurveyDashboard < Administrate::BaseDashboard
   # ATTRIBUTE_TYPES
   # a hash that describes the type of each of the model's fields.
@@ -13,7 +11,7 @@ class AnswersSurveyDashboard < Administrate::BaseDashboard
     answers: Field::HasMany,
     id: Field::Number,
     created_at: Field::DateTime,
-    updated_at: Field::DateTime,
+    updated_at: Field::DateTime
   }.freeze
 
   # COLLECTION_ATTRIBUTES
