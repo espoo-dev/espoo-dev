@@ -25,7 +25,7 @@ import retrofit2.Response
 class LoginActivity : AppCompatActivity() {
 
     private lateinit var service: ApiService
-    private lateinit var sessionManager : SessionManager
+    lateinit var sessionManager : SessionManager
     private lateinit var binding: ActivityLoginBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -47,8 +47,14 @@ class LoginActivity : AppCompatActivity() {
                 binding.editTextPassword.text.toString())))
             .enqueue(object :Callback<User> {
                 override fun onResponse(call: Call<User>, response: Response<User>) {
-                    storeLoginData(response)
-                    openMainActivity()
+                    response.body()?.let {
+                        storeLoginData(it)
+                        openMainActivity()
+                    }
+                    response.headers()["Authorization"]?.let {
+                        sessionManager.storeData(API_TOKEN, it)
+                    }
+
                 }
 
                 override fun onFailure(call: Call<User>, t: Throwable) {
@@ -63,20 +69,14 @@ class LoginActivity : AppCompatActivity() {
         finish()
     }
 
-    private fun storeLoginData(response: Response<User>) {
-        val user = response.body()
-        user?.let {
-            sessionManager.storeData(USER_ID, it.id)
-            sessionManager.storeData(EMAIL, it.email)
-            Toast.makeText(
-                applicationContext,
-                "${getString(R.string.welcome)} ${it.email}",
-                Toast.LENGTH_LONG
-            ).show()
-        }
-        response.headers()["Authorization"]?.let {
-            sessionManager.storeData(API_TOKEN, it)
-        }
+    fun storeLoginData(user: User) {
+        sessionManager.storeData(USER_ID, user.id)
+        sessionManager.storeData(EMAIL, user.email)
+        Toast.makeText(
+            applicationContext,
+            "${getString(R.string.welcome)} ${user.email}",
+            Toast.LENGTH_LONG
+        ).show()
         sessionManager.storeData(IS_LOGIN, true)
     }
 }
