@@ -44,7 +44,8 @@ Please check [CONTRIBUTING.md](https://github.com/espoo-dev/espoo-dev/blob/main/
 
 # ✨ Demos
 
-1. [admin](https://espoo.herokuapp.com/)
+1. [admin-prod](https://espoo.herokuapp.com/)
+1. [admin-staging](https://espoo-staging.herokuapp.com/) - (mobile and web clients should use this for development)
 1. [client](https://espoolingo.herokuapp.com/)
 1. credentials
    - email: admin@gmail.com, password: 123456

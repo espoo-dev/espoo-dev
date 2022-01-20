@@ -1,5 +1,7 @@
 class Seeds < Base
   def call
+    return if Rails.env.production?
+
     clean_database
     create_users
     create_question_types

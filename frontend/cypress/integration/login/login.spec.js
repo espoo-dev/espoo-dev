@@ -20,7 +20,7 @@ context('Login test', () => {
   });
 
   it('try login with invalid user', () => {
-    cy.intercept('https://espoo.herokuapp.com/users/sign_in*').as('sign_in');
+    cy.intercept('https://espoo-staging.herokuapp.com/users/sign_in*').as('sign_in');
 
     cy.get('#email').type('invaliduser@gmail.com');
 
@@ -34,7 +34,7 @@ context('Login test', () => {
   });
 
   it('should do login and check has logout button', () => {
-    cy.intercept('https://espoo.herokuapp.com/users/sign_in*').as('sign_in');
+    cy.intercept('https://espoo-staging.herokuapp.com/users/sign_in*').as('sign_in');
 
     cy.get('#email').type('admin@gmail.com');
 

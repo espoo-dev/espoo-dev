@@ -400,5 +400,5 @@ paths:
                     message:
                       type: string
 servers:
-  - url: https://espoo.herokuapp.com
+  - url: https://espoo-staging.herokuapp.com
   - url: http://localhost:3000
