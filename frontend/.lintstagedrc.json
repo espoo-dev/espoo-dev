@@ -1,0 +1,10 @@
+{
+  "src/**/*.{js,jsx,ts,tsx,json,css,scss}": [
+    "npx pretty-quick --staged",
+    "npm run lint --max-warnings=0",
+    "git add"
+  ],
+  "src/**/*.test.{js,jsx,ts,tsx}": [
+    "npm run test -b --passWithNoTests --silent --findRelatedTests"
+  ]
+}
