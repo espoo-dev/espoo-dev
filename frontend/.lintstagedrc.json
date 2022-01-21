@@ -1,10 +1,9 @@
 {
   "src/**/*.{js,jsx,ts,tsx,json,css,scss}": [
     "npx pretty-quick --staged",
-    "npm run lint --max-warnings=0",
-    "git add"
+    "yarn lint --max-warnings=0"
   ],
   "src/**/*.test.{js,jsx,ts,tsx}": [
-    "npm run test -b --passWithNoTests --silent --findRelatedTests"
+    "yarn test -b --passWithNoTests --silent --findRelatedTests"
   ]
 }
