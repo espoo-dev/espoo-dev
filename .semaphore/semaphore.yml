@@ -22,7 +22,7 @@ blocks:
       when: "change_in('/frontend', {default_branch: 'main'})"
     task:
       secrets:
-        - codeclimane
+        - name: codeclimane
       jobs:
         - name: test client
           commands:
