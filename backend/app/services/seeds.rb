@@ -43,8 +43,6 @@ class Seeds < Base
 
   def create_question_types
     @question_type_single_choice = QuestionType.create!(name: 'Single Choice')
-    @question_type_multiple_choice = QuestionType.create!(name: 'Multiple Choice')
-    @question_type_free_text = QuestionType.create!(name: 'Free Text')
   end
 
   def create_questions_and_options
@@ -181,7 +179,7 @@ class Seeds < Base
       name: 'Translate red',
       user: @user_admin,
       survey: @colors_survey_ready,
-      question_type: @question_type_free_text
+      question_type: @question_type_single_choice
     )
   end
 
