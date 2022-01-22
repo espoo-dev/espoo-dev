@@ -28,10 +28,11 @@ Espoo-dev is a learning platform. There are three roles:
 ## Architecture / Modules
 
 - This repository is a Monorepo, it has 3 folders named `android-client`, `backend` and `frontend`
+
   - **Client apps** 1 - (Next, React, TS), 2 - (Rails fullstack), 3 - (Android, Kotlin): The `users` (`Student`) can answer `Questions` that belongs to a `Survey`
   - **API - Ruby on Rails**: Used by client apps to enable `Students` to answer `Questions` that belongs to a `Survey`
 
-- **note**: We have 3 versions of Web Client: React, Android and Rails.
+- **note**: There are 3 clients: React, Android and Rails.
 
 ## :smiley: Contributing
 
@@ -52,10 +53,9 @@ Please check [CONTRIBUTING.md](https://github.com/espoo-dev/espoo-dev/blob/main/
 
 ## Current features
 
-|                       | Login              | Register                 | Logout                   | List surveys             | Select survey            | Answer questions         | Show survey summary      |
-| --------------------- | ------------------ | ------------------------ | ------------------------ | ------------------------ | ------------------------ | ------------------------ | ------------------------ |
-| Web (React, TS, Next) | :heavy_check_mark: | :heavy_check_mark:       | :heavy_check_mark:       | :heavy_check_mark:       | :heavy_check_mark:       | :heavy_check_mark:       | :heavy_check_mark:       |
-| Mobile (Kotlin)       | :heavy_check_mark: | :heavy_multiplication_x: | :heavy_multiplication_x: | :heavy_check_mark:       | :heavy_multiplication_x: | :heavy_multiplication_x: | :heavy_multiplication_x: |
-| Fullstack (Rails)     | :heavy_check_mark: | :heavy_check_mark:       | :heavy_multiplication_x: | :heavy_check_mark:       | :heavy_multiplication_x: | :heavy_multiplication_x: | :heavy_multiplication_x: |
-| API (Rails)           | :heavy_check_mark: | :heavy_check_mark:       | :heavy_check_mark:       | :heavy_check_mark:       | :heavy_check_mark:       | :heavy_check_mark:       | :heavy_check_mark:       |
-
+|                       | Login              | Register                 | Logout                   | List surveys       | Select survey            | Answer questions         | Show survey summary      |
+| --------------------- | ------------------ | ------------------------ | ------------------------ | ------------------ | ------------------------ | ------------------------ | ------------------------ |
+| Web (React, TS, Next) | :heavy_check_mark: | :heavy_check_mark:       | :heavy_check_mark:       | :heavy_check_mark: | :heavy_check_mark:       | :heavy_check_mark:       | :heavy_check_mark:       |
+| Mobile (Kotlin)       | :heavy_check_mark: | :heavy_multiplication_x: | :heavy_multiplication_x: | :heavy_check_mark: | :heavy_multiplication_x: | :heavy_multiplication_x: | :heavy_multiplication_x: |
+| Fullstack (Rails)     | :heavy_check_mark: | :heavy_check_mark:       | :heavy_multiplication_x: | :heavy_check_mark: | :heavy_multiplication_x: | :heavy_multiplication_x: | :heavy_multiplication_x: |
+| API (Rails)           | :heavy_check_mark: | :heavy_check_mark:       | :heavy_check_mark:       | :heavy_check_mark: | :heavy_check_mark:       | :heavy_check_mark:       | :heavy_check_mark:       |
