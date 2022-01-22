@@ -74,12 +74,48 @@ describe('SurveyItem', () => {
     expect(rendered.getByText('No questions')).toBeTruthy();
   });
 
+  describe('should show current status of survey', () => {
+    it('should show completed tag when survey is completed', () => {
+      const rendered = render(
+        <SurveyItem
+          title="Survey name"
+          description="Available your instincts now"
+          numberQuestions={1}
+          status={AnswerSurveyStatus.Completed}
+        />
+      );
+      expect(rendered.getByText(AnswerSurveyStatus.Completed)).toBeTruthy();
+    });
+    it('should show started tag when survey is started', () => {
+      const rendered = render(
+        <SurveyItem
+          title="Survey name"
+          description="Available your instincts now"
+          numberQuestions={1}
+          status={AnswerSurveyStatus.Started}
+        />
+      );
+      expect(rendered.getByText(AnswerSurveyStatus.Started)).toBeTruthy();
+    });
+    it('should show not started tag when survey is not started', () => {
+      const rendered = render(
+        <SurveyItem
+          title="Survey name"
+          description="Available your instincts now"
+          numberQuestions={1}
+          status={AnswerSurveyStatus.NotStarted}
+        />
+      );
+      expect(rendered.getByText(AnswerSurveyStatus.NotStarted)).toBeTruthy();
+    });
+  });
+
   it('should show resume button when started survey', () => {
     const rendered = render(<SurveyItem {...startedSurvey} />);
     expect(rendered.getByText('Click to resume')).toBeTruthy();
   });
 
-  it('not should show resume button when started survey', () => {
+  it('should not show resume button when started survey', () => {
     const notStartedSurvey = startedSurvey;
     notStartedSurvey.surveyData.answers_surveys = [];
 
