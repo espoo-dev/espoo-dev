@@ -25,6 +25,12 @@ export interface SurveyItemProps {
   status?: AnswerSurveyStatus;
 }
 
+const StatusTagColors = {
+  [AnswerSurveyStatus.NotStarted]: 'red',
+  [AnswerSurveyStatus.Started]: 'yellow',
+  [AnswerSurveyStatus.Completed]: 'green',
+};
+
 export const SurveyItem = (props: SurveyItemProps) => {
   const {
     title,
@@ -53,19 +59,6 @@ export const SurveyItem = (props: SurveyItemProps) => {
     return images[Math.floor(Math.random() * images.length)];
   };
 
-  const getStatusColor = () => {
-    switch (status) {
-      case AnswerSurveyStatus.Completed:
-        return 'green';
-      case AnswerSurveyStatus.Started:
-        return 'yellow';
-      case AnswerSurveyStatus.NotStarted:
-        return 'red';
-      default:
-        return 'gray';
-    }
-  };
-
   useEffect(() => {
     setCoverImage(cover || randomImage());
   }, []);
@@ -84,7 +77,7 @@ export const SurveyItem = (props: SurveyItemProps) => {
           <span>
             {surveyData?.answers_surveys.length ? 'Click to resume' : ''}
           </span>
-          <Tag size="sm" colorScheme={getStatusColor()}>
+          <Tag size="sm" colorScheme={StatusTagColors[status]}>
             {status}
           </Tag>
           <QuestionsSection>
