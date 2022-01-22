@@ -6,13 +6,13 @@ import { httpClient } from '../client';
 // Mocking httpClient
 jest.mock('../client', () => ({
   httpClient: {
-    post: jest.fn()
-  }
+    post: jest.fn(),
+  },
 }));
 
 // expected result to tests
 const mockResponse = {
-  mock: true
+  mock: true,
 };
 
 // mocked user
@@ -24,7 +24,7 @@ const mockUserLogin: UserLogin = {
 const mockUserCreate: UserCreate = {
   email: 'admin@gmail.com',
   password: '123456',
-  role_id: 1
+  role_id: 1,
 };
 
 describe('AuthService', () => {
@@ -35,13 +35,10 @@ describe('AuthService', () => {
     describe('when returns valid data', () => {
       beforeEach(async () => {
         // mocking post implementation to return the expected value
-        (httpClient as jest.Mocked<AxiosInstance>)
-          .post
-          .mockImplementationOnce(
-            jest.fn((url: string, body: UserLogin) => {
-              return Promise.resolve({ data: mockResponse });
-            }
-          )
+        (httpClient as jest.Mocked<AxiosInstance>).post.mockImplementationOnce(
+          jest.fn((url: string, body: UserLogin) => {
+            return Promise.resolve({ data: mockResponse });
+          })
         );
 
         instance = new AuthService(httpClient as any);
@@ -61,13 +58,10 @@ describe('AuthService', () => {
     describe('when request throw error', () => {
       beforeEach(async () => {
         // mocking post implementation to throw error
-        (httpClient as jest.Mocked<AxiosInstance>)
-          .post
-          .mockImplementationOnce(
-            jest.fn((url: string, body: UserLogin) => {
-              return Promise.reject(new Error('test error'));
-            }
-          )
+        (httpClient as jest.Mocked<AxiosInstance>).post.mockImplementationOnce(
+          jest.fn((url: string, body: UserLogin) => {
+            return Promise.reject(new Error('test error'));
+          })
         );
 
         instance = new AuthService(httpClient as any);
@@ -89,13 +83,10 @@ describe('AuthService', () => {
     describe('when returns the expected data', () => {
       beforeEach(async () => {
         // mocking post implementation to return the expected value
-        (httpClient as jest.Mocked<AxiosInstance>)
-          .post
-          .mockImplementationOnce(
-            jest.fn((url: string, body: UserCreate) => {
-              return Promise.resolve({ data: mockResponse });
-            }
-          )
+        (httpClient as jest.Mocked<AxiosInstance>).post.mockImplementationOnce(
+          jest.fn((url: string, body: UserCreate) => {
+            return Promise.resolve({ data: mockResponse });
+          })
         );
 
         instance = new AuthService(httpClient as any);
@@ -115,13 +106,10 @@ describe('AuthService', () => {
     describe('when the request throw error', () => {
       beforeEach(async () => {
         // mocking post implementation to return the expected value
-        (httpClient as jest.Mocked<AxiosInstance>)
-          .post
-          .mockImplementationOnce(
-            jest.fn((url: string, body: UserCreate) => {
-              return Promise.reject(new Error('test error'));
-            }
-          )
+        (httpClient as jest.Mocked<AxiosInstance>).post.mockImplementationOnce(
+          jest.fn((url: string, body: UserCreate) => {
+            return Promise.reject(new Error('test error'));
+          })
         );
 
         instance = new AuthService(httpClient as any);

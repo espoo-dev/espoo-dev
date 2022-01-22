@@ -28,6 +28,8 @@ httpClient.interceptors.request.use(
 
     if (!openEndpoints.includes(newConfig.url)) {
       newConfig.headers.Authorization = useAuth();
+    } else {
+      delete newConfig.headers.Authorization;
     }
 
     return newConfig;
