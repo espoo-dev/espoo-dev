@@ -1,5 +1,4 @@
 ---
-
 ### Generic smell configuration
 
 detectors:
@@ -81,4 +80,3 @@ exclude_paths:
   - bin/
   - vendor/
   - db/migrate
-  - spec/support/hash_helper.rb

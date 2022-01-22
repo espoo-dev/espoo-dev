@@ -1,4 +1,10 @@
 module HashHelper
+  def self.included(base)
+    base.class_eval do
+      include HashHelperMethods
+    end
+  end
+
   def answers_survey_sym(answers_survey)
     survey = answers_survey.survey
     survey_question = survey.questions.first
@@ -7,52 +13,18 @@ module HashHelper
     option3 = survey_question.options.second
     option2 = survey_question2.options.first
     question_type = survey_question.question_type
-    answered_question_attributes = {
-      'id' => survey_question.id,
-      'name' => survey_question.name,
-      'question_type' => {
-        'id' => question_type.id,
-        'name' => question_type.name
-      }.transform_keys(&:to_sym),
-      'options' => [{
-        'id' => option.id,
-        'name' => option.name,
-        'correct' => option.correct
-      }.transform_keys(&:to_sym),
-                    {
-                      'id' => option3.id,
-                      'name' => option3.name,
-                      'correct' => option3.correct
-                    }.transform_keys(&:to_sym)]
-    }.transform_keys(&:to_sym)
-    unanswered_question_attributes = {
-      'id' => survey_question2.id,
-      'name' => survey_question2.name,
-      'question_type' => {
-        'id' => question_type.id,
-        'name' => question_type.name
-      }.transform_keys(&:to_sym),
-      'options' => [{
-        'id' => option2.id,
-        'name' => option2.name,
-        'correct' => option2.correct
-      }.transform_keys(&:to_sym)]
-    }.transform_keys(&:to_sym)
+
+    answered_question_attributes = answered_question_attributes_sym(survey_question, question_type, [option, option3])
+
+    unanswered_question_attributes = answered_question_attributes_sym(survey_question2, question_type, [option2])
 
     question_attributes = [
       answered_question_attributes,
       unanswered_question_attributes
     ]
 
-    {
-      id: answers_survey.id,
-      user_id: answers_survey.user_id,
-      status: answers_survey.status,
-      questions: question_attributes,
-      answered_questions: [answered_question_attributes],
-      not_answered_questions: [unanswered_question_attributes],
-      current_question_index: 1
-    }.transform_keys(&:to_sym)
+    asnwers_survey_returned_params({ answers_survey: answers_survey, question_attributes: question_attributes, answered_question_attributes: answered_question_attributes,
+                                     unanswered_question_attributes: unanswered_question_attributes }).transform_keys(&:to_sym)
   end
 
   def answers_survey_hash(answers_survey)
@@ -63,52 +35,18 @@ module HashHelper
     option3 = survey_question.options.second
     option2 = survey_question2.options.first
     question_type = survey_question.question_type
-    answered_question_attributes = {
-      'id' => survey_question.id,
-      'name' => survey_question.name,
-      'question_type' => {
-        'id' => question_type.id,
-        'name' => question_type.name
-      },
-      'options' => [{
-        'id' => option.id,
-        'name' => option.name,
-        'correct' => option.correct
-      },
-                    {
-                      'id' => option3.id,
-                      'name' => option3.name,
-                      'correct' => option3.correct
-                    }]
-    }
-    unanswered_question_attributes = {
-      'id' => survey_question2.id,
-      'name' => survey_question2.name,
-      'question_type' => {
-        'id' => question_type.id,
-        'name' => question_type.name
-      },
-      'options' => [{
-        'id' => option2.id,
-        'name' => option2.name,
-        'correct' => option2.correct
-      }]
-    }
+
+    answered_question_attributes = answers_survey_question_attributes_hash(survey_question, question_type, [option, option3])
+
+    unanswered_question_attributes = answers_survey_question_attributes_hash(survey_question2, question_type, [option2])
 
     question_attributes = [
       answered_question_attributes,
       unanswered_question_attributes
     ]
 
-    {
-      'id' => answers_survey.id,
-      'user_id' => answers_survey.user_id,
-      'status' => answers_survey.status,
-      'questions' => question_attributes,
-      'answered_questions' => [answered_question_attributes],
-      'not_answered_questions' => [unanswered_question_attributes],
-      'current_question_index' => 1
-    }
+    asnwers_survey_returned_params({ answers_survey: answers_survey, question_attributes: question_attributes, answered_question_attributes: answered_question_attributes,
+                                     unanswered_question_attributes: unanswered_question_attributes })
   end
 
   def answered_question_hash(answers_survey)
@@ -117,27 +55,13 @@ module HashHelper
     option = survey_question.options.first
     option3 = survey_question.options.second
     question_type = survey_question.question_type
+
     {
       'id' => survey_question.id,
       'name' => survey_question.name,
-      'question_type' => {
-        'id' => question_type.id,
-        'name' => question_type.name
-      },
-      'options' => [{
-        'id' => option.id,
-        'name' => option.name,
-        'correct' => option.correct
-      }, {
-        'id' => option3.id,
-        'name' => option3.name,
-        'correct' => option3.correct
-      }],
-      'answered_options' => [{
-        'id' => option3.id,
-        'name' => option3.name,
-        'correct' => option3.correct
-      }],
+      'question_type' => question_type(question_type),
+      'options' => options_hash([option, option3]),
+      'answered_options' => options_hash([option3]),
       'correct' => false
     }
   end
@@ -148,69 +72,44 @@ module HashHelper
     survey_question2 = survey.questions.second
     option2 = survey_question2.options.first
     question_type = survey_question.question_type
+
     answered_question_attributes = answered_question_hash(answers_survey)
 
     unanswered_question_attributes = {
       'id' => survey_question2.id,
       'name' => survey_question2.name,
-      'question_type' => {
-        'id' => question_type.id,
-        'name' => question_type.name
-      },
-      'options' => [{
-        'id' => option2.id,
-        'name' => option2.name,
-        'correct' => option2.correct
-      }],
+      'question_type' => question_type(question_type),
+      'options' => options_hash([option2]),
       'answered_options' => [],
       'correct' => false
     }
 
-    questions_attributes = [
+    question_attributes = [
       answered_question_attributes,
       unanswered_question_attributes
     ]
 
-    {
-      'id' => answers_survey.id,
-      'user_id' => answers_survey.user.id,
-      'status' => answers_survey.status,
-      'questions' => questions_attributes,
-      'answered_questions' => [answered_question_attributes],
-      'not_answered_questions' => [unanswered_question_attributes],
-      'current_question_index' => 1
-    }
+    asnwers_survey_returned_params({ answers_survey: answers_survey, question_attributes: question_attributes, answered_question_attributes: answered_question_attributes,
+                                     unanswered_question_attributes: unanswered_question_attributes })
   end
 
-  def survey_hash(survey, answers_survey)
+  def survey_hash(_survey, answers_survey)
     answers_survey_attributes = answers_survey_hash(answers_survey)
 
     {
-      'id' => survey.id,
-      'name' => survey.name,
-      'description' => survey.description,
-      'survey_subject_id' => survey.survey_subject.id,
-      'answered_questions_quantity' => 1,
-      'total_questions_quantity' => 2,
       'questions' => answers_survey_attributes['questions'],
       'answers_surveys' => [answers_survey_attributes],
       'current_answers_survey' => answers_survey_attributes
-    }
+    }.merge(survey_helper.transform_keys(&:to_s))
   end
 
-  def survey_sym(survey, answers_survey)
+  def survey_sym(_survey, answers_survey)
     answers_survey_attributes = answers_survey_sym(answers_survey)
 
     {
-      id: survey.id,
-      name: survey.name,
-      description: survey.description,
-      survey_subject_id: survey.survey_subject.id,
-      answered_questions_quantity: 1,
-      total_questions_quantity: 2,
       questions: answers_survey_attributes[:questions],
       answers_surveys: [answers_survey_attributes],
       current_answers_survey: answers_survey_attributes
-    }
+    }.merge(survey_helper)
   end
 end
