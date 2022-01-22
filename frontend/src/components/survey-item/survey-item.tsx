@@ -87,7 +87,7 @@ export const SurveyItem = (props: SurveyItemProps) => {
           {status ? (
             <Tag
               size="sm"
-              data-testId="status-current-tag"
+              data-testid="status-current-tag"
               colorScheme={StatusTagColors[status]}
             >
               {status}

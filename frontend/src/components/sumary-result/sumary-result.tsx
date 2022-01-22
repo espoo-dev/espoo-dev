@@ -1,9 +1,10 @@
-import { Box } from '@chakra-ui/react';
+import { Box, Grid } from '@chakra-ui/react';
 import { HiOutlineCheck } from 'react-icons/hi';
 import { MdClose } from 'react-icons/md';
 import { useEffect, useState } from 'react';
 import { AnswerSurveyReceive } from '@api/models/answer_survey';
-import { Result, ResultContainer, ResultText } from './sumary-result.styles';
+import AsnweredQuestion from '@components/answered-question/answered-question';
+import { ResultContainer } from './sumary-result.styles';
 
 const SumaryResult = (props: AnswerSurveyReceive) => {
   const { questions } = props;
@@ -39,28 +40,38 @@ const SumaryResult = (props: AnswerSurveyReceive) => {
       </Box>
       <Box>
         <h2 style={{ fontWeight: 'bold' }}>
-          <Result>
-            <HiOutlineCheck color="green" />
-            <span>{`${result.correct} correct`}</span>
+          <Box
+            display="flex"
+            justifyContent="center"
+            alignItems="center"
+            mt={8}
+          >
             <MdClose color="red" />
             <span>{`${result.incorrect} incorrect`}</span>
-          </Result>
+          </Box>
+          <Box
+            display="flex"
+            justifyContent="center"
+            alignItems="center"
+            mt={2}
+            fontSize={18}
+          >
+            <HiOutlineCheck color="green" />
+            <span>{`${result.correct} correct`}</span>
+          </Box>
         </h2>
       </Box>
-      <Box mt={16}>
+      <Grid
+        templateColumns="repeat(auto-fit, minmax(300px, 2fr))"
+        gap={4}
+        mt={10}
+      >
         {questions &&
           questions.length &&
           questions.map((question) => (
-            <Box key={question.id} display="flex" alignItems="center" mt={4}>
-              {question.correct ? (
-                <HiOutlineCheck color="green" />
-              ) : (
-                <MdClose color="red" />
-              )}
-              <ResultText>{question.name}</ResultText>
-            </Box>
+            <AsnweredQuestion key={question.id} {...question} />
           ))}
-      </Box>
+      </Grid>
     </ResultContainer>
   );
 };
