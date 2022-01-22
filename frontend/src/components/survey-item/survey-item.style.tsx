@@ -4,6 +4,8 @@ export const SurveyContainer = styled.div`
   border-radius: 6px;
   cursor: pointer;
   margin: 10px;
+  display: flex;
+  flex-direction: column;
 `;
 
 export const ImageSurvey = styled.div<{ cover: string }>`
@@ -25,6 +27,10 @@ export const DetailsSurvey = styled.div`
   background-color: #fff;
   border-bottom-left-radius: 6px;
   border-bottom-right-radius: 6px;
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
 `;
 
 export const TitleSurvey = styled.div`
