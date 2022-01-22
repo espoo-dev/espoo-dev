@@ -74,9 +74,9 @@ export const SurveyItem = (props: SurveyItemProps) => {
           <span>{description}</span>
         </DescriptionSurvey>
         <QuestionsSurvey>
-          <span>
-            {surveyData?.answers_surveys.length ? 'Click to resume' : ''}
-          </span>
+          {surveyData?.answers_surveys.length > 0 && (
+            <span>Click to resume</span>
+          )}
           <Tag size="sm" colorScheme={StatusTagColors[status]}>
             {status}
           </Tag>

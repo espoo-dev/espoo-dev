@@ -73,7 +73,9 @@ export const SurveysList = (props: SurveyListProps) => {
           onClick={() => registerAnswerSurvey(item.id, item)}
           loading={loading && selectedSurvey === item.id}
           surveyData={item}
-          status={item.current_answers_survey?.status}
+          status={
+            item.current_answers_survey?.status || AnswerSurveyStatus.NotStarted
+          }
         />
       ))}
     </Grid>
