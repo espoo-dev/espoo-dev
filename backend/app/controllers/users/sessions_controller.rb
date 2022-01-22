@@ -11,6 +11,9 @@ class Users::SessionsController < Devise::SessionsController
 
   # POST /resource/sign_in
   def create
+    if request.headers['Authorization'].present?
+      request.headers['Authorization'] = nil
+    end
     self.resource = warden.authenticate!(auth_options)
     set_flash_message!(:notice, :signed_in) unless json_content_type_header?
 
