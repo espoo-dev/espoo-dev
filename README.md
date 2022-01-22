@@ -19,7 +19,7 @@
 
 ## Project definion
 
-Espoo-dev is a learning platform. There are three user types:
+Espoo-dev is a learning platform. There are three roles:
 
 - **Teacher:** Creates `Surveys` with many `Questions`
 - **Student:** Answers the `Questions` that belongs to a `Survey`
@@ -27,16 +27,11 @@ Espoo-dev is a learning platform. There are three user types:
 
 ## Architecture / Modules
 
-- This repository is a Monorepo, it has 2 folders named `backend` and `frontend`
-- backend (Ruby on Rails):
-  - **Backoffice app (admin panel)** : The users (Teacher/Admin) can manage the Surveys, Questions, Options and see the answers/reports
-  - **API**: Used by the **Web Client** to enable `Students` to answer `Questions` that belongs to a `Survey`
-  - **Web Client**: The users (Student) can answer `Questions` that belongs to a `Survey`
-- frontend (Next, React):
-  - **Web Client**: The users (Student) can answer `Questions` that belongs to a `Survey`
-- Mobile (Android, Kotlin):
-  - **Mobile Client**: The users (Student) can answer `Questions` that belongs to a `Survey`
-- **note**: We have 2 versions of Web Client, Next/React and Rails
+- This repository is a Monorepo, it has 3 folders named `android-client`, `backend` and `frontend`
+  - **Client apps** 1 - (Next, React, TS), 2 - (Rails fullstack), 3 - (Android, Kotlin): The `users` (`Student`) can answer `Questions` that belongs to a `Survey`
+  - **API - Ruby on Rails**: Used by client apps to enable `Students` to answer `Questions` that belongs to a `Survey`
+
+- **note**: We have 3 versions of Web Client: React, Android and Rails.
 
 ## :smiley: Contributing
 
@@ -46,7 +41,7 @@ Please check [CONTRIBUTING.md](https://github.com/espoo-dev/espoo-dev/blob/main/
 
 1. [admin-prod](https://espoo.herokuapp.com/)
 1. [admin-staging](https://espoo-staging.herokuapp.com/) - (mobile and web clients should use this for development)
-1. [client](https://espoolingo.herokuapp.com/)
+1. [client](https://espoolingo.herokuapp.com/login)
 1. credentials
    - email: admin@gmail.com, password: 123456
    - email: student@gmail.com, password: 123456
@@ -57,26 +52,10 @@ Please check [CONTRIBUTING.md](https://github.com/espoo-dev/espoo-dev/blob/main/
 
 ## Current features
 
-- **API**:
-  - Login
-  - `create`, `index` users
-  - `create`, `index` surveys
-  - `index` roles
-- **Backoffice app - rails**:
-  - Login, Logout
-  - Teacher can manage `surveys`, `questions`, `options`
-  - Admin manage everything that `Teacher` plus `users`, `roles`, `question types`, `surveys subjects`
-- **Web Client - react**
-  - Login, Logout, Register
-  - List surveys
-- **Web Client - rails**
-  - Login, Logout, Register
-  - List surveys
+|                       | Login              | Register                 | Logout                   | List surveys             | Select survey            | Answer questions         | Show survey summary      |
+| --------------------- | ------------------ | ------------------------ | ------------------------ | ------------------------ | ------------------------ | ------------------------ | ------------------------ |
+| Web (React, TS, Next) | :heavy_check_mark: | :heavy_check_mark:       | :heavy_check_mark:       | :heavy_check_mark:       | :heavy_check_mark:       | :heavy_check_mark:       | :heavy_check_mark:       |
+| Mobile (Kotlin)       | :heavy_check_mark: | :heavy_multiplication_x: | :heavy_multiplication_x: | :heavy_check_mark:       | :heavy_multiplication_x: | :heavy_multiplication_x: | :heavy_multiplication_x: |
+| Fullstack (Rails)     | :heavy_check_mark: | :heavy_check_mark:       | :heavy_multiplication_x: | :heavy_check_mark:       | :heavy_multiplication_x: | :heavy_multiplication_x: | :heavy_multiplication_x: |
+| API (Rails)           | :heavy_check_mark: | :heavy_check_mark:       | :heavy_check_mark:       | :heavy_check_mark:       | :heavy_check_mark:       | :heavy_check_mark:       | :heavy_check_mark:       |
 
-## Next features
-
-- Free text, image, audio, video questions
-- Free text, image, audio, video answers
-- Answers reports
-- Public surveys
-- Surveys protected by password
