@@ -1,7 +1,8 @@
 import { RiQuestionAnswerLine } from 'react-icons/ri';
 import { MouseEventHandler, useEffect, useState } from 'react';
 import { Progress } from '@chakra-ui/progress';
-import { Survey } from '@api/models/survey';
+import { Tag } from '@chakra-ui/tag';
+import { Survey, AnswerSurveyStatus } from '@api/models/survey';
 import {
   DescriptionSurvey,
   DetailsSurvey,
@@ -21,6 +22,7 @@ export interface SurveyItemProps {
   onClick?: MouseEventHandler<HTMLDivElement>;
   loading?: boolean;
   surveyData?: Survey;
+  status?: AnswerSurveyStatus;
 }
 
 export const SurveyItem = (props: SurveyItemProps) => {
@@ -32,6 +34,7 @@ export const SurveyItem = (props: SurveyItemProps) => {
     onClick,
     loading,
     surveyData,
+    status,
   } = props;
   const [coverImage, setCoverImage] = useState<string>('');
 
@@ -48,6 +51,19 @@ export const SurveyItem = (props: SurveyItemProps) => {
         '&cs=tinysrgb&dpr=2&h=650&w=940',
     ];
     return images[Math.floor(Math.random() * images.length)];
+  };
+
+  const getStatusColor = () => {
+    switch (status) {
+      case AnswerSurveyStatus.Completed:
+        return 'green';
+      case AnswerSurveyStatus.Started:
+        return 'yellow';
+      case AnswerSurveyStatus.NotStarted:
+        return 'red';
+      default:
+        return 'gray';
+    }
   };
 
   useEffect(() => {
@@ -68,14 +84,13 @@ export const SurveyItem = (props: SurveyItemProps) => {
           <span>
             {surveyData?.answers_surveys.length ? 'Click to resume' : ''}
           </span>
+          <Tag size="sm" colorScheme={getStatusColor()}>
+            {status}
+          </Tag>
           <QuestionsSection>
             <RiQuestionAnswerLine size={20} />
             {numberQuestions > 0 ? (
-              <NumberQuestions>
-                {numberQuestions}
-                {' '}
-                Questions
-              </NumberQuestions>
+              <NumberQuestions>{numberQuestions} Questions</NumberQuestions>
             ) : (
               <NumberQuestions>No questions</NumberQuestions>
             )}

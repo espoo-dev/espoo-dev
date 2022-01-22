@@ -74,12 +74,24 @@ describe('SurveyItem', () => {
     expect(rendered.getByText('No questions')).toBeTruthy();
   });
 
+  it('should show current status of survey', () => {
+    const rendered = render(
+      <SurveyItem
+        title="Survey name"
+        description="Available your instincts now"
+        numberQuestions={1}
+        status={AnswerSurveyStatus.Completed}
+      />
+    );
+    expect(rendered.getByText('Completed')).toBeTruthy();
+  });
+
   it('should show resume button when started survey', () => {
     const rendered = render(<SurveyItem {...startedSurvey} />);
     expect(rendered.getByText('Click to resume')).toBeTruthy();
   });
 
-  it('not should show resume button when started survey', () => {
+  it('should not show resume button when started survey', () => {
     const notStartedSurvey = startedSurvey;
     notStartedSurvey.surveyData.answers_surveys = [];
 
