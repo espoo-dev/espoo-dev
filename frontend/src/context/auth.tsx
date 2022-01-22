@@ -5,7 +5,7 @@ import { httpClient } from 'api';
 import { AuthService } from 'api/services';
 import { User, UserCreate, UserLogin } from 'api/models/user';
 import { toast } from 'react-toastify';
-import { AUTH_COOKIE } from 'consts';
+import { AUTH_COOKIE, MAIN_PAGE } from 'consts';
 
 export interface AuthContextProps {
   user: User | null;
@@ -54,7 +54,7 @@ export const AuthProvider: React.FC = ({ children }) => {
       // setting authorization token on headers
       httpClient.defaults.headers.Authorization = authorization;
 
-      Router.push('/main');
+      Router.push(MAIN_PAGE);
       setUser(data);
       setToken(authorization);
     }
