@@ -6,18 +6,17 @@ require:
 AllCops:
   NewCops: enable
   Include:
-    - '**/*.rb'
-    - '**/Rakefile'
-    - '**/config.ru'
+    - "**/*.rb"
+    - "**/Rakefile"
+    - "**/config.ru"
   Exclude:
-    - 'db/**/*'
-    - 'config/**/*'
-    - 'script/**/*'
-    - 'bin/**/*'
-    - 'log/**/*'
-    - 'vendor/**/*'
-    - 'node_modules/**/*'
-    - 'spec/support/hash_helper.rb'
+    - "db/**/*"
+    - "config/**/*"
+    - "script/**/*"
+    - "bin/**/*"
+    - "log/**/*"
+    - "vendor/**/*"
+    - "node_modules/**/*"
   TargetRubyVersion: 2.6.2
 
 Layout/LineLength:
@@ -30,15 +29,15 @@ Metrics/AbcSize:
   Max: 80
 
 Metrics/BlockLength:
-  IgnoredMethods: ['describe', 'context', 'it']
+  IgnoredMethods: ["describe", "context", "it"]
   Max: 35
   Exclude:
-    - 'spec/factories/*'
+    - "spec/factories/*"
 
 Metrics/ClassLength:
   Max: 200
   Exclude:
-    - 'app/services/seeds.rb'
+    - "app/services/seeds.rb"
 
 Metrics/CyclomaticComplexity:
   Max: 15
