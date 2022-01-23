@@ -5,6 +5,7 @@ module HashHelper
     end
   end
 
+  # :reek:TooManyStatements
   def answers_survey_sym(answers_survey)
     survey = answers_survey.survey
     survey_questions = survey.questions
@@ -25,10 +26,11 @@ module HashHelper
       unanswered_question_attributes
     ]
 
-    asnwers_survey_returned_params({ answers_survey: answers_survey, question_attributes: question_attributes, answered_question_attributes: answered_question_attributes,
+    answers_survey_returned_params({ answers_survey: answers_survey, question_attributes: question_attributes, answered_question_attributes: answered_question_attributes,
                                      unanswered_question_attributes: unanswered_question_attributes }).transform_keys(&:to_sym)
   end
 
+  # :reek:TooManyStatements
   def answers_survey_hash(answers_survey)
     survey = answers_survey.survey
     survey_questions = survey.questions
@@ -49,7 +51,7 @@ module HashHelper
       unanswered_question_attributes
     ]
 
-    asnwers_survey_returned_params({ answers_survey: answers_survey, question_attributes: question_attributes, answered_question_attributes: answered_question_attributes,
+    answers_survey_returned_params({ answers_survey: answers_survey, question_attributes: question_attributes, answered_question_attributes: answered_question_attributes,
                                      unanswered_question_attributes: unanswered_question_attributes })
   end
 
@@ -57,20 +59,19 @@ module HashHelper
     survey = answers_survey.survey
     survey_question = survey.questions.first
     survey_question_options = survey_question.options
-    option = survey_question_options.first
     option_three = survey_question_options.second
-    question_type = survey_question.question_type
 
     {
       'id' => survey_question.id,
       'name' => survey_question.name,
-      'question_type' => question_type(question_type),
-      'options' => options_hash([option, option_three]),
+      'question_type' => question_type(survey_question.question_type),
+      'options' => options_hash([survey_question_options.first, option_three]),
       'answered_options' => options_hash([option_three]),
       'correct' => false
     }
   end
 
+  # :reek:TooManyStatements
   def answers_survey_with_questions_hash(answers_survey)
     survey = answers_survey.survey
     survey_questions = survey.questions
@@ -95,7 +96,7 @@ module HashHelper
       unanswered_question_attributes
     ]
 
-    asnwers_survey_returned_params({ answers_survey: answers_survey, question_attributes: question_attributes, answered_question_attributes: answered_question_attributes,
+    answers_survey_returned_params({ answers_survey: answers_survey, question_attributes: question_attributes, answered_question_attributes: answered_question_attributes,
                                      unanswered_question_attributes: unanswered_question_attributes })
   end
 

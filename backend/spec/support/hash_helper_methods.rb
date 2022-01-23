@@ -46,7 +46,7 @@ module HashHelperMethods
     }
   end
 
-  def asnwers_survey_returned_params(params = {})
+  def answers_survey_returned_params(params = {})
     answers_survey = params[:answers_survey]
 
     {
