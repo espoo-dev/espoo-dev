@@ -15,20 +15,20 @@ RSpec.describe Seeds do
         expect(Role.count).to eq(3)
       end
 
-      it 'creates 1 question types' do
-        expect(QuestionType.count).to eq(1)
+      it 'creates 2 question types' do
+        expect(QuestionType.count).to eq(2)
       end
 
       it 'creates 3 survey subjects' do
         expect(SurveySubject.count).to eq(3)
       end
 
-      it 'creates 9 questions' do
-        expect(Question.count).to eq(9)
+      it 'creates 12 questions' do
+        expect(Question.count).to eq(12)
       end
 
-      it 'creates 20 options' do
-        expect(Option.count).to eq(20)
+      it 'creates 41 options' do
+        expect(Option.count).to eq(41)
       end
     end
 
