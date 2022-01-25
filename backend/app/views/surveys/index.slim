@@ -9,6 +9,9 @@
             p.card-text
               = survey[:description]
             p.card-text
+              =  question_types(survey).join(", ")
+              |  type of questions.
+            p.card-text
               =  t('surveys.index.question', count: survey[:answered_questions_quantity])
               |  answered.
             = form_with url: answers_surveys_path, method: :post do |form|
