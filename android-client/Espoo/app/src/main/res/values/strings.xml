@@ -14,4 +14,8 @@
 
     <string name="survey_call_to_action">Tap to resume</string>
     <string name="espoo_logo">Espoo logo</string>
+
+    <!-- validations-->
+    <string name="field_does_not_filled">field doesn’t filled</string>
+
 </resources>
