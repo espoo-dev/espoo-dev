@@ -4,10 +4,15 @@ import { AnswerSurveyReceive } from '@api/models/answer_survey';
 import { Question, Survey } from '@api/models/survey';
 import { AnswerSurveyService } from '@api/services/answer_survey';
 import { Box } from '@chakra-ui/layout';
-import { Spinner } from '@chakra-ui/react';
+import {
+  CircularProgress,
+  CircularProgressLabel,
+  Flex,
+  Spinner,
+} from '@chakra-ui/react';
 import SingleChoice from '@components/single-choice/single-choice';
 import SumaryResult from '@components/sumary-result/sumary-result';
-import { useEffect, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 
 interface SurveyPageProps {
   survey: Survey;
@@ -15,7 +20,8 @@ interface SurveyPageProps {
 
 const SurveyPage = (props: SurveyPageProps) => {
   const { survey } = props;
-  const [questionCount, setQuestionCount] = useState(0);
+  const { total_questions_quantity } = survey;
+  const [questionIndex, setQuestionIndex] = useState(0);
   const [result, setResult] = useState<number[]>([]);
   const [question, setQuestion] = useState<Question>(
     (survey && survey.questions[0]) || null
@@ -33,12 +39,12 @@ const SurveyPage = (props: SurveyPageProps) => {
   const hasAnswer = (): boolean => getCurrentIndex() > 0;
 
   const nextQuestion = (index: number) => {
-    setQuestionCount(index + 1);
+    setQuestionIndex(index + 1);
     setQuestion(survey.questions[index]);
   };
 
   useEffect(() => {
-    nextQuestion(questionCount);
+    nextQuestion(questionIndex);
   }, [result]);
 
   useEffect(() => {
@@ -51,7 +57,7 @@ const SurveyPage = (props: SurveyPageProps) => {
     if (!question) {
       loadAnswerSurvey(survey.current_answers_survey.id);
     }
-  }, [questionCount]);
+  }, [questionIndex]);
 
   const loadAnswerSurvey = async (current_survey_id: number) => {
     setIsLoadingResult(true);
@@ -69,11 +75,32 @@ const SurveyPage = (props: SurveyPageProps) => {
     }
   };
 
+  const getCompletePercent = useCallback((): [number, string] => {
+    const percent = (questionIndex * 100) / total_questions_quantity;
+    const formated = percent ? `${percent.toFixed(2)}%` : '0.00%';
+
+    return [percent || 0, formated];
+  }, [questionIndex]);
+
   return (
     <Box style={{ color: '#fff' }}>
       {question ? (
         <Box m={6}>
-          <h2>{`Question ${questionCount}`}</h2>
+          <Flex alignItems="center" justifyContent="space-between">
+            <h2>{`Question ${questionIndex}`}</h2>
+
+            <CircularProgress
+              value={getCompletePercent()[0]}
+              color="teal.300"
+              capIsRound
+              ml="4"
+              data-testid="percent"
+            >
+              <CircularProgressLabel>
+                {questionIndex} / {total_questions_quantity}
+              </CircularProgressLabel>
+            </CircularProgress>
+          </Flex>
           <h1>{question && question.name}</h1>
 
           {survey &&
@@ -87,7 +114,7 @@ const SurveyPage = (props: SurveyPageProps) => {
                 current_answers_survey_id={survey.current_answers_survey.id}
               />
             </Box>
-            ) : null}
+          ) : null}
         </Box>
       ) : (
         <h1>
