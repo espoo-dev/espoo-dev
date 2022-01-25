@@ -53,6 +53,21 @@ const SurveyPage = (props: SurveyPageProps) => {
     }
   }, [questionCount]);
 
+  const renderOptionByType = () => {
+    const questionsTypes = {
+      'Single Choice': (
+        <SingleChoice
+          options={question.options}
+          setResult={setResult}
+          question_id={question.id}
+          current_answers_survey_id={survey.current_answers_survey.id}
+        />
+      ),
+    };
+
+    return questionsTypes[question.question_type.name];
+  };
+
   const loadAnswerSurvey = async (current_survey_id: number) => {
     setIsLoadingResult(true);
     try {
@@ -76,18 +91,7 @@ const SurveyPage = (props: SurveyPageProps) => {
           <h2>{`Question ${questionCount}`}</h2>
           <h1>{question && question.name}</h1>
 
-          {survey &&
-          question &&
-          question.question_type.name === 'Single Choice' ? (
-            <Box mt={4}>
-              <SingleChoice
-                options={question.options}
-                setResult={setResult}
-                question_id={question.id}
-                current_answers_survey_id={survey.current_answers_survey.id}
-              />
-            </Box>
-            ) : null}
+          {survey && question && <Box mt={10}>{renderOptionByType()}</Box>}
         </Box>
       ) : (
         <h1>
