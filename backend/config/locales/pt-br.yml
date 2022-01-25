@@ -69,6 +69,12 @@ pt-br:
     answers:
       submit: Responder
     index:
+      answered: respondida
       question:
         one: "%{count} questão"
         other: "%{count} questões"
+      question_type:
+        free_text: Texto livre
+        multiple_choice: Múltipla escolha
+        single_choice: Escolha única
+      type_of_questions: tipo de perguntas
