@@ -26,11 +26,6 @@ export const SurveysList = (props: SurveyListProps) => {
         survey_id: surveyToInit.id,
       });
       if (response && response.data) {
-        toast('Answer Survey created successfully', {
-          position: 'top-right',
-          type: 'success',
-          pauseOnHover: false,
-        });
         surveyToInit.current_answers_survey = {
           ...response.data,
         };
