@@ -46,6 +46,22 @@ FactoryBot.define do
     end
   end
 
+  factory :ready_survey_single_choise_question, parent: :survey do
+    after(:create) do |survey|
+      survey.questions = create_list(:single_choice_ready_question, 1, user: survey.user, survey: survey)
+      survey.ready = true
+      survey.save!
+    end
+  end
+
+  factory :ready_survey_free_text_choise_question, parent: :survey do
+    after(:create) do |survey|
+      survey.questions = create_list(:free_text_ready_question, 1, user: survey.user, survey: survey)
+      survey.ready = true
+      survey.save!
+    end
+  end
+
   factory :survey_with_answer, parent: :ready_survey do
     after(:create) do |survey|
       answersurvey = create(:answers_survey_with_some_answers, survey: survey, user: survey.user)
