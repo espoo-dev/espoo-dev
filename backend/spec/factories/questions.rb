@@ -21,7 +21,23 @@ FactoryBot.define do
     options { create_list :correct_option, 1 }
   end
 
+  factory :single_choice_ready_question, parent: :single_choice_question do
+    after(:create) do |question|
+      create(:correct_option, question: question)
+      question.ready_to_be_answered = true
+      question.save!
+    end
+  end
+
   factory :multiple_choice_ready_question, parent: :multiple_choice_question do
+    after(:create) do |question|
+      create(:correct_option, question: question)
+      question.ready_to_be_answered = true
+      question.save!
+    end
+  end
+
+  factory :free_text_ready_question, parent: :free_text_question do
     after(:create) do |question|
       create(:correct_option, question: question)
       question.ready_to_be_answered = true
