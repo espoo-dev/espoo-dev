@@ -1,8 +1,7 @@
 {
   "src/**/*.{js,jsx,ts,tsx,json,css,scss}": [
     "npx pretty-quick --staged",
-    "yarn lint",
-    "yarn test"
+    "yarn lint"
   ],
   "src/**/*.test.{js,jsx,ts,tsx}": [
     "yarn test -b --passWithNoTests --silent --findRelatedTests"
