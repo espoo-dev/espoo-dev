@@ -38,13 +38,44 @@ describe('MultipleChoice', () => {
   });
 
   it('should select many options', () => {
+    const mock = jest.fn();
     const rendered = render(
-      <MultipleChoice options={options} setResult={jest.fn()} />
+      <MultipleChoice options={options} setResult={mock} />
     );
     options.map((option) => {
       const buttonItem = rendered.getByText(option.name);
       fireEvent.click(buttonItem);
       expect(screen.getByTestId(option.id + '-selected')).toBeInTheDocument();
     });
+  });
+
+  it('should unselect all options', () => {
+    const mock = jest.fn();
+    const rendered = render(
+      <MultipleChoice options={options} setResult={mock} />
+    );
+    options.map((option) => {
+      const buttonItem = rendered.getByText(option.name);
+      fireEvent.click(buttonItem);
+      expect(screen.getByTestId(option.id + '-selected')).toBeInTheDocument();
+    });
+    options.map((option) => {
+      const buttonItem = rendered.getByText(option.name);
+      fireEvent.click(buttonItem);
+      expect(screen.getByTestId(option.id + '-unselected')).toBeInTheDocument();
+    });
+  });
+
+  it('should call setResult with correct result when all options are selected', () => {
+    const mock = jest.fn();
+    const rendered = render(
+      <MultipleChoice options={options} setResult={mock} />
+    );
+    options.map((option) => {
+      const buttonItem = rendered.getByText(option.name);
+      fireEvent.click(buttonItem);
+      expect(screen.getByTestId(option.id + '-selected')).toBeInTheDocument();
+    });
+    expect(mock).toHaveBeenCalledWith([options[0].id, options[1].id]);
   });
 });
