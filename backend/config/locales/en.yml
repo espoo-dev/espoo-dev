@@ -72,3 +72,7 @@ en:
       question:
         one: "%{count} question"
         other: "%{count} questions"
+      question_type:
+        free_text: Free text
+        multiple_choice: Multiple choice
+        single_choice: Single choice
