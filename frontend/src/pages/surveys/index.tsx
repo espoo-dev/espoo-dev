@@ -115,10 +115,12 @@ const Surveys = () => {
                 <SurveyPage survey={surveySelected} />
               </Box>
             ) : (
-              <SurveysList
-                data={surveys}
-                setSurveySelected={setSurveySelected}
-              />
+              !loading && (
+                <SurveysList
+                  data={surveys}
+                  setSurveySelected={setSurveySelected}
+                />
+              )
             )}
           </Box>
 
