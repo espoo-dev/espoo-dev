@@ -1,6 +1,6 @@
 import { AnswerSurveyStatus, Survey } from '@api/models/survey';
 import SurveyPage from '@pages/survey';
-import { render, screen } from 'test-utils';
+import { render, screen, waitFor, fireEvent } from 'test-utils';
 
 const surveyDefault: Survey = {
   id: 1,
@@ -47,6 +47,7 @@ const surveyDefault: Survey = {
     },
   ],
   survey_subject_id: 12,
+  total_questions_quantity: 2,
 };
 
 describe('SurveyPage', () => {
@@ -116,5 +117,18 @@ describe('SurveyPage', () => {
     ).toBeInTheDocument();
 
     expect(screen.getByText('Question 2')).toBeInTheDocument();
+  });
+
+  describe('Progress bar', () => {
+    it('should render the progress component', async () => {
+      const mockSurvey = { ...surveyDefault };
+      const id = 'percent';
+
+      const { getByTestId } = render(<SurveyPage survey={mockSurvey} />);
+
+      const percent = await waitFor(() => getByTestId(id));
+
+      expect(percent).toBeInTheDocument();
+    });
   });
 });
