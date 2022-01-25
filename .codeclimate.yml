@@ -6,5 +6,8 @@ plugins:
     enabled: true
   nodesecurity:
     enabled: true
+  method-count:
+    enabled: false
 exclude_patterns:
-- backend/
+  - backend/
+  - android-client/
