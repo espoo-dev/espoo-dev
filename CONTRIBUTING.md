@@ -18,4 +18,4 @@ agree to abide by the [CODE_OF_CONDUCT.md](https://github.com/espoo-dev/espoo-de
 
 # 📝 Docs (requests)
 
-1. [Swagger](https://espoo.herokuapp.com/api-docs/index.html)
+1. [Swagger](https://espoo-staging.herokuapp.com/api-docs/index.html)

@@ -1,6 +1,5 @@
 import React, { Dispatch, SetStateAction, useState } from 'react';
 import { Grid } from '@chakra-ui/react';
-import { toast } from 'react-toastify';
 import { AnswerSurveyStatus, Survey } from 'api/models/survey';
 import { httpClient } from 'api';
 import { errorHandler } from 'api/error-handler';
@@ -26,11 +25,6 @@ export const SurveysList = (props: SurveyListProps) => {
         survey_id: surveyToInit.id,
       });
       if (response && response.data) {
-        toast('Answer Survey created successfully', {
-          position: 'top-right',
-          type: 'success',
-          pauseOnHover: false,
-        });
         surveyToInit.current_answers_survey = {
           ...response.data,
         };
@@ -73,6 +67,7 @@ export const SurveysList = (props: SurveyListProps) => {
           onClick={() => registerAnswerSurvey(item.id, item)}
           loading={loading && selectedSurvey === item.id}
           surveyData={item}
+          status={item.current_answers_survey?.status}
         />
       ))}
     </Grid>

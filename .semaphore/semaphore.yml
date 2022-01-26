@@ -21,6 +21,8 @@ blocks:
     run:
       when: "change_in('/frontend', {default_branch: 'main'})"
     task:
+      secrets:
+        - name: codeclimane
       jobs:
         - name: test client
           commands:
@@ -34,7 +36,7 @@ blocks:
             - yarn test:coverage
             - ./cc-test-reporter format-coverage -t lcov -o codeclimate.frontend.json coverage/lcov.info
             - ./cc-test-reporter sum-coverage codeclimate.*.json -o codeclimate.total.json
-            - ./cc-test-reporter upload-coverage -r 901775431df63d8131620226e329cdb757bede481ec12d99b249da870beacb52 -i codeclimate.total.json
+            - ./cc-test-reporter upload-coverage -r $CC_TEST_REPORTER_ID -i codeclimate.total.json
   - name: Lint
     dependencies: ["Install dependencies"]
     # Run this block on changes in frontend folder
@@ -76,5 +78,4 @@ blocks:
             - cd frontend
             - cache restore
             - yarn install
-            - echo $CHROMATIC_PROJECT_TOKEN
             - yarn chromatic -- --project-token=$CHROMATIC_PROJECT_TOKEN

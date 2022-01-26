@@ -59,6 +59,22 @@ pt-br:
       new:
         sign_in: Login
         sign_up: Inscrever-se
+  questions:
+    show:
+      button: Próximo
+      free_text: Questão de texto livre
+      multiple_choice: Questão de múltipla escolha
+      single_choice: Questão de escolha única
   surveys:
     answers:
       submit: Responder
+    index:
+      answered: respondida
+      question:
+        one: "%{count} questão"
+        other: "%{count} questões"
+      question_type:
+        free_text: Texto livre
+        multiple_choice: Múltipla escolha
+        single_choice: Escolha única
+      type_of_questions: tipo de perguntas

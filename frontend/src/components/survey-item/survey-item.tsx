@@ -1,7 +1,8 @@
 import { RiQuestionAnswerLine } from 'react-icons/ri';
 import { MouseEventHandler, useEffect, useState } from 'react';
 import { Progress } from '@chakra-ui/progress';
-import { Survey } from '@api/models/survey';
+import { Tag } from '@chakra-ui/tag';
+import { Survey, AnswerSurveyStatus } from '@api/models/survey';
 import {
   DescriptionSurvey,
   DetailsSurvey,
@@ -21,7 +22,14 @@ export interface SurveyItemProps {
   onClick?: MouseEventHandler<HTMLDivElement>;
   loading?: boolean;
   surveyData?: Survey;
+  status?: AnswerSurveyStatus;
 }
+
+const StatusTagColors = {
+  [AnswerSurveyStatus.NotStarted]: 'red',
+  [AnswerSurveyStatus.Started]: 'yellow',
+  [AnswerSurveyStatus.Completed]: 'green',
+};
 
 export const SurveyItem = (props: SurveyItemProps) => {
   const {
@@ -31,7 +39,7 @@ export const SurveyItem = (props: SurveyItemProps) => {
     cover,
     onClick,
     loading,
-    surveyData,
+    status,
   } = props;
   const [coverImage, setCoverImage] = useState<string>('');
 
@@ -54,6 +62,16 @@ export const SurveyItem = (props: SurveyItemProps) => {
     setCoverImage(cover || randomImage());
   }, []);
 
+  const msgInSurvey = (surveyStatus: AnswerSurveyStatus) => {
+    const msgs = {
+      [AnswerSurveyStatus.NotStarted]: '',
+      [AnswerSurveyStatus.Started]: 'Click to resume',
+      [AnswerSurveyStatus.Completed]: 'Answer again!',
+    };
+
+    return msgs[surveyStatus];
+  };
+
   return (
     <SurveyContainer data-testid={title} onClick={onClick}>
       <ImageSurvey data-testid="random-image" cover={coverImage} />
@@ -65,17 +83,20 @@ export const SurveyItem = (props: SurveyItemProps) => {
           <span>{description}</span>
         </DescriptionSurvey>
         <QuestionsSurvey>
-          <span>
-            {surveyData?.answers_surveys.length ? 'Click to resume' : ''}
-          </span>
+          <span>{msgInSurvey(status)}</span>
+          {status ? (
+            <Tag
+              size="sm"
+              data-testid="status-current-tag"
+              colorScheme={StatusTagColors[status]}
+            >
+              {status}
+            </Tag>
+          ) : null}
           <QuestionsSection>
             <RiQuestionAnswerLine size={20} />
             {numberQuestions > 0 ? (
-              <NumberQuestions>
-                {numberQuestions}
-                {' '}
-                Questions
-              </NumberQuestions>
+              <NumberQuestions>{numberQuestions} Questions</NumberQuestions>
             ) : (
               <NumberQuestions>No questions</NumberQuestions>
             )}
