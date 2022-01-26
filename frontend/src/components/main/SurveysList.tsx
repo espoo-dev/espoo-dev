@@ -1,6 +1,5 @@
 import React, { Dispatch, SetStateAction, useState } from 'react';
 import { Grid } from '@chakra-ui/react';
-import { toast } from 'react-toastify';
 import { AnswerSurveyStatus, Survey } from 'api/models/survey';
 import { httpClient } from 'api';
 import { errorHandler } from 'api/error-handler';
