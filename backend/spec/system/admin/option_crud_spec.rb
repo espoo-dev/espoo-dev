@@ -27,7 +27,7 @@ RSpec.describe 'Option CRUD', type: :system do
           click_button 'Create Option'
         end
 
-        it { expect(page).to have_content 'Option was successfully created.' }
+        it { expect(current_path).to eq(admin_options_path)  }
       end
 
       context 'when data is not valid' do
