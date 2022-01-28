@@ -66,7 +66,6 @@ const Surveys = () => {
           <Box
             background="#292929"
             height="100%"
-            margin="8px 0px"
             borderRadius="3xl"
             mt="30"
             p="16px"
