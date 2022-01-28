@@ -55,8 +55,6 @@ describe('SurveyPage', () => {
     expect(
       screen.getByText('What is your favorite animal?')
     ).toBeInTheDocument();
-
-    expect(screen.getByText('Question 1')).toBeInTheDocument();
   });
 
   it('should render all question options to question', () => {
@@ -114,7 +112,5 @@ describe('SurveyPage', () => {
     expect(
       screen.getByText(surveyIncomplet.questions[1].name)
     ).toBeInTheDocument();
-
-    expect(screen.getByText('Question 2')).toBeInTheDocument();
   });
 });

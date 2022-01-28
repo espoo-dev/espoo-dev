@@ -29,7 +29,7 @@ const SingleChoice = (props: SingleChoiceProps) => {
   };
 
   return (
-    <Grid templateColumns="repeat(auto-fit, minmax(180px, 2fr))" gap={4}>
+    <Grid templateColumns="repeat(auto-fit, minmax(350px, 2fr))" gap={4}>
       {options &&
         options.map((option) => (
           <OptionSingleChoice

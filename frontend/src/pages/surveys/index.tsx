@@ -18,6 +18,7 @@ import { useEffect, useState } from 'react';
 import { SurveysList } from '@components/main/SurveysList';
 import { SurveyService } from 'api/services/survey';
 import { Survey } from 'api/models/survey';
+import { colorPallettes } from '@styles/globals';
 import { HiArrowLeft, HiRefresh } from 'react-icons/hi';
 import SurveyPage from '../survey';
 
@@ -64,18 +65,22 @@ const Surveys = () => {
           </Heading>
 
           <Box
-            background="#292929"
+            background="#f5f7fb"
             height="100%"
             borderRadius="3xl"
             mt="30"
             p="16px"
           >
             {loading ? (
-              <Spinner color="white" />
+              <Spinner color={colorPallettes.primary} />
             ) : (
               !surveySelected && (
-                <Flex alignItems="center">
-                  <Text color="white" textAlign="center" mb="10px">
+                <Flex padding="10px" alignItems="center">
+                  <Text
+                    color={colorPallettes.primary}
+                    textAlign="center"
+                    mb="10px"
+                  >
                     {surveys.length
                       ? 'Discover a new survey!'
                       : 'No surveys =/'}
