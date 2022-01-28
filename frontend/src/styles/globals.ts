@@ -1,5 +1,9 @@
 import { createGlobalStyle } from 'styled-components';
 
+export const breakpoints = {
+  sm: '750px',
+};
+
 export const GlobalStyle = createGlobalStyle`
   html,
   body {
