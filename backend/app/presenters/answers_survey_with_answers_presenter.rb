@@ -1,10 +1,14 @@
 class AnswersSurveyWithAnswersPresenter < AnswersSurveyPresenter
   protected
 
-  def questions
+  def all_questions
     answers_survey.survey.questions.sort_by(&:id).map do |question|
       QuestionWithAnswersPresenter.new(question, answers_survey).payload
     end
+  end
+
+  def questions
+    answered_questions + not_answered_questions
   end
 
   def answered_questions
@@ -14,7 +18,7 @@ class AnswersSurveyWithAnswersPresenter < AnswersSurveyPresenter
   end
 
   def not_answered_questions
-    questions - answered_questions
+    all_questions - answered_questions
   end
 
   def current_question_index
