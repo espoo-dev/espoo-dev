@@ -2,13 +2,13 @@ class AnswersSurveyWithAnswersPresenter < AnswersSurveyPresenter
   protected
 
   def questions
-    answers_survey.survey.questions.map do |question|
+    answers_survey.survey.questions.sort_by(&:id).map do |question|
       QuestionWithAnswersPresenter.new(question, answers_survey).payload
     end
   end
 
   def answered_questions
-    Question.answered_by_answers_survey(answers_survey).map do |question|
+    Question.answered_by_answers_survey(answers_survey).sort_by(&:id).map do |question|
       QuestionWithAnswersPresenter.new(question, answers_survey).payload
     end
   end
