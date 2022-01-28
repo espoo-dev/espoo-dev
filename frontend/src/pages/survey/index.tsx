@@ -8,6 +8,7 @@ import { Spinner } from '@chakra-ui/react';
 import SingleChoice from '@components/single-choice/single-choice';
 import SumaryResult from '@components/sumary-result/sumary-result';
 import { useEffect, useState } from 'react';
+import { colorPallettes } from 'styles/globals';
 
 interface SurveyPageProps {
   survey: Survey;
@@ -87,10 +88,19 @@ const SurveyPage = (props: SurveyPageProps) => {
   return (
     <Box style={{ color: '#fff' }}>
       {question ? (
-        <Box m={6}>
-          <h2>{`Question ${questionCount}`}</h2>
-          <h1>{question && question.name}</h1>
-
+        <Box m={6} textAlign="center">
+          <h1
+            style={{
+              fontSize: '30px',
+              color: colorPallettes.primary,
+              fontWeight: 400,
+            }}
+          >
+            {question && question.name}
+          </h1>
+          <Box mt={3} color={colorPallettes.secondary}>
+            <span>SELECT UP TO 1 OPTION</span>
+          </Box>
           {survey && question && <Box mt={10}>{renderOptionByType()}</Box>}
         </Box>
       ) : (
@@ -100,8 +110,8 @@ const SurveyPage = (props: SurveyPageProps) => {
           ) : (
             <Box textAlign="center">
               {isLoadingResult ? (
-                <Box>
-                  <Spinner color="white" />
+                <Box color={colorPallettes.primary}>
+                  <Spinner mr={4} />
                   <span>Calculating result...</span>
                 </Box>
               ) : (

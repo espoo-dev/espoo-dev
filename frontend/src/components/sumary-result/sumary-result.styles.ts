@@ -1,7 +1,12 @@
 import styled, { css } from 'styled-components';
+import { colorPallettes } from '@styles/globals';
 
 export const ResultContainer = styled.div`
   text-align: center;
+
+  div h1 {
+    color: ${colorPallettes.primary};
+  }
 `;
 
 export const Result = styled.div`
