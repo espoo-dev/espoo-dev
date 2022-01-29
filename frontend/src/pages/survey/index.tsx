@@ -21,8 +21,8 @@ interface SurveyPageProps {
 
 const SurveyPage = (props: SurveyPageProps) => {
   const { survey } = props;
-  const { total_questions_quantity } = survey;
   const [questionIndex, setQuestionIndex] = useState(0);
+  const [totalQuestions, setTotalQuestions] = useState(0);
   const [result, setResult] = useState<number[]>([]);
   const [question, setQuestion] = useState<Question>(
     (survey && survey.questions[0]) || null
@@ -49,6 +49,10 @@ const SurveyPage = (props: SurveyPageProps) => {
   }, [result]);
 
   useEffect(() => {
+    if (survey) {
+      setTotalQuestions(survey.total_questions_quantity);
+    }
+
     if (hasAnswer()) {
       nextQuestion(getCurrentIndex());
     }
@@ -92,7 +96,7 @@ const SurveyPage = (props: SurveyPageProps) => {
   };
 
   const getCompletePercent = useCallback((): [number, string] => {
-    const percent = (questionIndex * 100) / total_questions_quantity;
+    const percent = (questionIndex * 100) / totalQuestions;
     const formated = percent ? `${percent.toFixed(2)}%` : '0.00%';
 
     return [percent || 0, formated];
@@ -113,7 +117,7 @@ const SurveyPage = (props: SurveyPageProps) => {
               data-testid="progress_bar"
             >
               <CircularProgressLabel data-testid="progress_text">
-                {questionIndex} / {total_questions_quantity}
+                {questionIndex} / {totalQuestions}
               </CircularProgressLabel>
             </CircularProgress>
           </Flex>
