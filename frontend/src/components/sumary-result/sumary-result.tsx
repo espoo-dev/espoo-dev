@@ -1,10 +1,8 @@
-import { Box, Grid } from '@chakra-ui/react';
-import { HiOutlineCheck } from 'react-icons/hi';
-import { MdClose } from 'react-icons/md';
-import { useEffect, useState } from 'react';
 import { AnswerSurveyReceive } from '@api/models/answer_survey';
+import { Box, Grid, Tooltip } from '@chakra-ui/react';
 import AsnweredQuestion from '@components/answered-question/answered-question';
-import { ResultContainer } from './sumary-result.styles';
+import { useEffect, useState } from 'react';
+import { BoxResult, ResultContainer } from './sumary-result.styles';
 
 const SumaryResult = (props: AnswerSurveyReceive) => {
   const { questions } = props;
@@ -38,8 +36,22 @@ const SumaryResult = (props: AnswerSurveyReceive) => {
       <Box>
         <h1>Finish!</h1>
       </Box>
-      <Box>
-        <h2 style={{ fontWeight: 'bold' }}>
+      <Box display="flex" justifyContent="end">
+        <Tooltip label="Correct">
+          <BoxResult correct>
+            <div>
+              <span data-testid="correct">{result.correct}</span>
+            </div>
+          </BoxResult>
+        </Tooltip>
+        <Tooltip label="Incorrect">
+          <BoxResult>
+            <div>
+              <span data-testid="incorrect">{result.incorrect}</span>
+            </div>
+          </BoxResult>
+        </Tooltip>
+        {/* <h2 style={{ fontWeight: 'bold' }}>
           <Box
             display="flex"
             justifyContent="center"
@@ -59,7 +71,7 @@ const SumaryResult = (props: AnswerSurveyReceive) => {
             <HiOutlineCheck color="green" />
             <span>{`${result.correct} correct`}</span>
           </Box>
-        </h2>
+        </h2> */}
       </Box>
       <Grid
         templateColumns="repeat(auto-fit, minmax(300px, 2fr))"

@@ -13,6 +13,7 @@ import {
 import SingleChoice from '@components/single-choice/single-choice';
 import SumaryResult from '@components/sumary-result/sumary-result';
 import { useCallback, useEffect, useState } from 'react';
+import { colorPallettes } from 'styles/globals';
 
 interface SurveyPageProps {
   survey: Survey;
@@ -59,6 +60,21 @@ const SurveyPage = (props: SurveyPageProps) => {
     }
   }, [questionIndex]);
 
+  const renderOptionByType = () => {
+    const questionsTypes = {
+      'Single Choice': (
+        <SingleChoice
+          options={question.options}
+          setResult={setResult}
+          question_id={question.id}
+          current_answers_survey_id={survey.current_answers_survey.id}
+        />
+      ),
+    };
+
+    return questionsTypes[question.question_type.name];
+  };
+
   const loadAnswerSurvey = async (current_survey_id: number) => {
     setIsLoadingResult(true);
     try {
@@ -83,7 +99,7 @@ const SurveyPage = (props: SurveyPageProps) => {
   }, [questionIndex]);
 
   return (
-    <Box style={{ color: '#fff' }}>
+    <Box>
       {question ? (
         <Box m={6}>
           <Flex alignItems="center" justifyContent="space-between">
@@ -101,20 +117,22 @@ const SurveyPage = (props: SurveyPageProps) => {
               </CircularProgressLabel>
             </CircularProgress>
           </Flex>
-          <h1>{question && question.name}</h1>
 
-          {survey &&
-          question &&
-          question.question_type.name === 'Single Choice' ? (
-            <Box mt={4}>
-              <SingleChoice
-                options={question.options}
-                setResult={setResult}
-                question_id={question.id}
-                current_answers_survey_id={survey.current_answers_survey.id}
-              />
+          <Box m={6} textAlign="center">
+            <h1
+              style={{
+                fontSize: '30px',
+                color: colorPallettes.primary,
+                fontWeight: 400,
+              }}
+            >
+              {question && question.name}
+            </h1>
+            <Box mt={3} color={colorPallettes.secondary}>
+              <span>SELECT UP TO 1 OPTION</span>
             </Box>
-          ) : null}
+            {survey && question && <Box mt={10}>{renderOptionByType()}</Box>}
+          </Box>
         </Box>
       ) : (
         <h1>
@@ -123,8 +141,8 @@ const SurveyPage = (props: SurveyPageProps) => {
           ) : (
             <Box textAlign="center">
               {isLoadingResult ? (
-                <Box>
-                  <Spinner color="white" />
+                <Box color={colorPallettes.primary}>
+                  <Spinner mr={4} />
                   <span>Calculating result...</span>
                 </Box>
               ) : (

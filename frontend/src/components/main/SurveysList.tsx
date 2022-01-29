@@ -1,11 +1,10 @@
-import React, { Dispatch, SetStateAction, useState } from 'react';
-import { Grid } from '@chakra-ui/react';
-import { toast } from 'react-toastify';
-import { AnswerSurveyStatus, Survey } from 'api/models/survey';
+import { SurveyItem } from '@components/survey-item/survey-item';
 import { httpClient } from 'api';
 import { errorHandler } from 'api/error-handler';
+import { AnswerSurveyStatus, Survey } from 'api/models/survey';
 import { AnswerSurveyService } from 'api/services/answer_survey';
-import { SurveyItem } from '@components/survey-item/survey-item';
+import React, { Dispatch, SetStateAction, useState } from 'react';
+import { SurveysListContainer } from './SurveysList.styles';
 
 interface SurveyListProps {
   data: Survey[];
@@ -26,11 +25,6 @@ export const SurveysList = (props: SurveyListProps) => {
         survey_id: surveyToInit.id,
       });
       if (response && response.data) {
-        toast('Answer Survey created successfully', {
-          position: 'top-right',
-          type: 'success',
-          pauseOnHover: false,
-        });
         surveyToInit.current_answers_survey = {
           ...response.data,
         };
@@ -63,7 +57,7 @@ export const SurveysList = (props: SurveyListProps) => {
   };
 
   return (
-    <Grid templateColumns="repeat(auto-fit, minmax(450px, 1fr))" gap={4}>
+    <SurveysListContainer>
       {data.map((item) => (
         <SurveyItem
           key={item.id}
@@ -76,6 +70,6 @@ export const SurveysList = (props: SurveyListProps) => {
           status={item.current_answers_survey?.status}
         />
       ))}
-    </Grid>
+    </SurveysListContainer>
   );
 };

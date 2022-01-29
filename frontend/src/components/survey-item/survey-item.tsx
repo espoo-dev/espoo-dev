@@ -1,8 +1,8 @@
-import { RiQuestionAnswerLine } from 'react-icons/ri';
-import { MouseEventHandler, useEffect, useState } from 'react';
+import { AnswerSurveyStatus, Survey } from '@api/models/survey';
 import { Progress } from '@chakra-ui/progress';
 import { Tag } from '@chakra-ui/tag';
-import { Survey, AnswerSurveyStatus } from '@api/models/survey';
+import { MouseEventHandler, useEffect, useState } from 'react';
+import { RiQuestionAnswerLine } from 'react-icons/ri';
 import {
   DescriptionSurvey,
   DetailsSurvey,
@@ -45,15 +45,9 @@ export const SurveyItem = (props: SurveyItemProps) => {
 
   const randomImage = () => {
     const images = [
-      'https://images.pexels.com/photos/7103/writing-' +
-        'notes-idea-conference.jpg?cs=srgb&dl=' +
-        'pexels-startup-stock-photos-7103.jpg&fm=jpg',
-      'https://images.pexels.com/photos/1326947/' +
-        'pexels-photo-1326947.jpeg?auto=compress' +
-        's&cs=tinysrgb&dpr=2&h=650&w=940',
-      'https://images.pexels.com/photos/351961/' +
-        'pexels-photo-351961.jpeg?auto=compress' +
-        '&cs=tinysrgb&dpr=2&h=650&w=940',
+      'https://ik.imagekit.io/u7kjueyghmd/question_card_template1_tDW_SAGUh.jpg',
+      'https://ik.imagekit.io/u7kjueyghmd/question_card_template3_otkvluVvys.jpeg',
+      'https://ik.imagekit.io/u7kjueyghmd/question_card_template2_ku8ufHjdpCYW.jpeg',
     ];
     return images[Math.floor(Math.random() * images.length)];
   };
