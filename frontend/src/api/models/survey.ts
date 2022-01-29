@@ -33,6 +33,7 @@ export interface Survey {
   description: string;
   questions: Question[];
   survey_subject_id: number;
+  total_questions_quantity: number;
 }
 
 export enum AnswerSurveyStatus {
