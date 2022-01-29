@@ -1,7 +1,7 @@
-import { Box, Grid, Tooltip } from '@chakra-ui/react';
-import { useEffect, useState } from 'react';
 import { AnswerSurveyReceive } from '@api/models/answer_survey';
+import { Box, Grid, Tooltip } from '@chakra-ui/react';
 import AsnweredQuestion from '@components/answered-question/answered-question';
+import { useEffect, useState } from 'react';
 import { BoxResult, ResultContainer } from './sumary-result.styles';
 
 const SumaryResult = (props: AnswerSurveyReceive) => {

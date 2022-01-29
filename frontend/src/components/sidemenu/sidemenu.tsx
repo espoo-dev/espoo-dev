@@ -1,9 +1,9 @@
-import React, { useContext } from 'react';
-import Link from 'next/link';
 import { Button, Heading, Tooltip } from '@chakra-ui/react';
+import { AuthContext } from 'context/auth';
+import Link from 'next/link';
+import React, { useContext } from 'react';
 import { IconType } from 'react-icons';
 import { HiAcademicCap, HiClipboardCheck } from 'react-icons/hi';
-import { AuthContext } from 'context/auth';
 import { RiLogoutCircleLine } from 'react-icons/ri';
 import {
   ItemMenu,

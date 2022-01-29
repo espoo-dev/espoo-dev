@@ -30,9 +30,6 @@ Espoo-dev is a learning platform. There are three roles:
 - **Student:** Answers the `Questions` that belongs to a `Survey`
 - **Admin:** (only relevant for developers) Can manage everything
 
-
-
-
 ## :smiley: Contributing
 
 1. [Slack](https://join.slack.com/t/espoo-dev/shared_invite/zt-q3od66jm-x7MNmrenB0fra86jop0jsg)
