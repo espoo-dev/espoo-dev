@@ -1,9 +1,9 @@
-import React, { Dispatch, SetStateAction, useState } from 'react';
-import { AnswerSurveyStatus, Survey } from 'api/models/survey';
+import { SurveyItem } from '@components/survey-item/survey-item';
 import { httpClient } from 'api';
 import { errorHandler } from 'api/error-handler';
+import { AnswerSurveyStatus, Survey } from 'api/models/survey';
 import { AnswerSurveyService } from 'api/services/answer_survey';
-import { SurveyItem } from '@components/survey-item/survey-item';
+import React, { Dispatch, SetStateAction, useState } from 'react';
 import { SurveysListContainer } from './SurveysList.styles';
 
 interface SurveyListProps {

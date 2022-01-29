@@ -1,6 +1,6 @@
 import styled from 'styled-components';
-import * as transitions from 'styles/transitions';
 import { breakpoints } from 'styles/globals';
+import * as transitions from 'styles/transitions';
 
 export const MenuLinkOption = styled.a`
   padding: 15px 2em;

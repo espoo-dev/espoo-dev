@@ -1,6 +1,6 @@
 import styled from 'styled-components';
-import * as transitions from 'styles/transitions';
 import { colorPallettes } from 'styles/globals';
+import * as transitions from 'styles/transitions';
 
 export const OptionSingleChoice = styled.div`
   background-color: #e4e8ee;
