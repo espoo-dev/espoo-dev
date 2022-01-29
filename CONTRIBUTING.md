@@ -3,8 +3,8 @@
 We welcome pull requests from everyone. By participating in this project, you
 agree to abide by the [CODE_OF_CONDUCT.md](https://github.com/espoo-dev/espoo-dev/blob/main/CODE_OF_CONDUCT.md)
 
-
 # ✨ Environments
+
 1. [client-prod](https://espoolingo.herokuapp.com/login)
 1. [admin-prod](https://espoo.herokuapp.com/)
 1. [admin-staging](https://espoo-staging.herokuapp.com/) - (mobile and web clients should use this for development)
@@ -20,6 +20,7 @@ agree to abide by the [CODE_OF_CONDUCT.md](https://github.com/espoo-dev/espoo-de
   - **API - Ruby on Rails**: Used by client apps to enable `Students` to answer `Questions` that belongs to a `Survey`
 
 - **note**: There are 3 clients: React, Android and Rails.
+
 ## Getting started / Setup
 
 1. [frontend_readme.md](https://github.com/espoo-dev/espoo-dev/blob/main/frontend/README.md)
@@ -27,6 +28,7 @@ agree to abide by the [CODE_OF_CONDUCT.md](https://github.com/espoo-dev/espoo-de
 1. [backend_readme.md](https://github.com/espoo-dev/espoo-dev/blob/main/backend/README.md)
 
 ## Opening a PR
+
 1. Fork the repo
 2. Clone the forked repo
 3. Check if the tests are working

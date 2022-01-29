@@ -5,6 +5,8 @@ export const CardReponse = styled.div`
   color: #555555;
   display: flex;
   flex-direction: column;
+  border: 1px solid #e1e1e1;
+  border-radius: 8px;
 `;
 
 export const QuestionTitle = styled.div`

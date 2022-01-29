@@ -19,10 +19,8 @@
 
 ## ✨ Demo
 
-1. [espoolingo](https://espoolingo.herokuapp.com/login)
-1. credentials
-   - email: admin@gmail.com, password: 123456
-   - email: student@gmail.com, password: 123456
+1. [espoolingo - login](https://espoolingo.herokuapp.com/login)
+1. [espoolingo - register](https://espoolingo.herokuapp.com/register)
 
 ## Project definion
 
@@ -31,9 +29,6 @@ Espoo-dev is a learning platform. There are three roles:
 - **Teacher:** Creates `Surveys` with many `Questions`
 - **Student:** Answers the `Questions` that belongs to a `Survey`
 - **Admin:** (only relevant for developers) Can manage everything
-
-
-
 
 ## :smiley: Contributing
 
