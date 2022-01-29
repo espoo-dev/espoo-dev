@@ -1,5 +1,5 @@
-import styled, { css } from 'styled-components';
 import { colorPallettes } from '@styles/globals';
+import styled, { css } from 'styled-components';
 
 export const ResultContainer = styled.div`
   text-align: center;
