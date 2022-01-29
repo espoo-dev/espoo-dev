@@ -6,29 +6,33 @@ import mockSurvey from '../../utils/mocks/survey';
 
 jest.mock('../../api/services/answers');
 
+const doServiceMock = () => {
+  (
+    service.AnswerService.prototype.create as jest.MockedFunction<
+      typeof service.AnswerService.prototype.create
+    >
+  ).mockImplementationOnce(() =>
+    Promise.resolve({
+      data: {
+        id: 1,
+        name: '',
+        question_type: {
+          id: 1,
+          name: '',
+        },
+        options: [],
+      },
+    } as any)
+  );
+};
+
 describe('SurveyPage', () => {
   describe('Questions', () => {
     const mockCreate = service.AnswerService.prototype.create;
     const surveyDefault: Survey = JSON.parse(JSON.stringify(mockSurvey));
 
     beforeEach(() => {
-      (
-        service.AnswerService.prototype.create as jest.MockedFunction<
-          typeof service.AnswerService.prototype.create
-        >
-      ).mockImplementationOnce(() =>
-        Promise.resolve({
-          data: {
-            id: 1,
-            name: '',
-            question_type: {
-              id: 1,
-              name: '',
-            },
-            options: [],
-          },
-        } as any)
-      );
+      doServiceMock();
     });
 
     afterEach(() => {
@@ -119,23 +123,7 @@ describe('SurveyPage', () => {
     const surveyDefault: Survey = JSON.parse(JSON.stringify(mockSurvey));
 
     beforeEach(() => {
-      (
-        service.AnswerService.prototype.create as jest.MockedFunction<
-          typeof service.AnswerService.prototype.create
-        >
-      ).mockImplementationOnce(() =>
-        Promise.resolve({
-          data: {
-            id: 1,
-            name: '',
-            question_type: {
-              id: 1,
-              name: '',
-            },
-            options: [],
-          },
-        } as any)
-      );
+      doServiceMock();
     });
 
     afterEach(() => {
