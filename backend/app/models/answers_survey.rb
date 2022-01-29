@@ -6,6 +6,8 @@ class AnswersSurvey < ApplicationRecord
 
   validate :unique_not_completed_by_survey
 
+  delegate :questions, to: :survey, allow_nil: true
+
   scope :by_user_and_survey, lambda { |user, survey|
     return where(user: user, survey: survey)
   }

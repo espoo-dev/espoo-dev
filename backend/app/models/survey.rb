@@ -18,12 +18,12 @@ class Survey < ApplicationRecord
 
   scope :ready_surveys_eager, -> { ready_surveys.includes([:questions]) }
 
-  def last_answers_survey
-    answers_surveys.last
+  def last_answers_survey(user)
+    answers_surveys.where(user: user).last
   end
 
-  def last_answers_quantity
-    last_answers_survey&.answers&.count || 0
+  def last_answers_quantity(user)
+    last_answers_survey(user)&.answers&.count || 0
   end
 
   def validates_ready
