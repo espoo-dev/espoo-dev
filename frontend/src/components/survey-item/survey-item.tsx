@@ -1,8 +1,8 @@
-import { RiQuestionAnswerLine } from 'react-icons/ri';
-import { MouseEventHandler, useEffect, useState } from 'react';
+import { AnswerSurveyStatus, Survey } from '@api/models/survey';
 import { Progress } from '@chakra-ui/progress';
 import { Tag } from '@chakra-ui/tag';
-import { Survey, AnswerSurveyStatus } from '@api/models/survey';
+import { MouseEventHandler, useEffect, useState } from 'react';
+import { RiQuestionAnswerLine } from 'react-icons/ri';
 import {
   DescriptionSurvey,
   DetailsSurvey,
