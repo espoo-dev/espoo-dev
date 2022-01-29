@@ -19,7 +19,7 @@
 
 ## ✨ Demo
 
-1. [espoolingo -  login](https://espoolingo.herokuapp.com/login)
+1. [espoolingo - login](https://espoolingo.herokuapp.com/login)
 1. [espoolingo - register](https://espoolingo.herokuapp.com/register)
 
 ## Project definion
