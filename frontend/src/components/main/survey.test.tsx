@@ -1,8 +1,8 @@
 import { Survey } from '@api/models/survey';
 import SurveyPage from '@pages/survey';
 import { act, fireEvent, render, screen, waitFor } from 'test-utils';
+import mockSurvey from 'utils/mocks/survey';
 import * as service from '../../api/services/answers';
-import mockSurvey from '../../utils/mocks/survey';
 
 jest.mock('../../api/services/answers');
 
