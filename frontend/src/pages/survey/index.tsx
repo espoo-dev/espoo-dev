@@ -94,9 +94,9 @@ const SurveyPage = (props: SurveyPageProps) => {
               color="teal.300"
               capIsRound
               ml="4"
-              data-testid="percent"
+              data-testid="progress_bar"
             >
-              <CircularProgressLabel>
+              <CircularProgressLabel data-testid="progress_text">
                 {questionIndex} / {total_questions_quantity}
               </CircularProgressLabel>
             </CircularProgress>
