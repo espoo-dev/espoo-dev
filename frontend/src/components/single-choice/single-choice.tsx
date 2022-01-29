@@ -1,9 +1,8 @@
 import { httpClient } from '@api/client';
 import { OptionQuestion } from '@api/models/survey';
 import { AnswerService } from '@api/services/answers';
-import { Grid } from '@chakra-ui/layout';
 import { Dispatch, SetStateAction } from 'react';
-import { OptionSingleChoice } from './single-choice.styles';
+import { GridSingleChoice, OptionSingleChoice } from './single-choice.styles';
 
 export interface SingleChoiceProps {
   options: OptionQuestion[];
@@ -29,7 +28,7 @@ const SingleChoice = (props: SingleChoiceProps) => {
   };
 
   return (
-    <Grid templateColumns="repeat(auto-fit, minmax(350px, 2fr))" gap={4}>
+    <GridSingleChoice>
       {options &&
         options.map((option) => (
           <OptionSingleChoice
@@ -39,7 +38,7 @@ const SingleChoice = (props: SingleChoiceProps) => {
             <span>{option.name}</span>
           </OptionSingleChoice>
         ))}
-    </Grid>
+    </GridSingleChoice>
   );
 };
 

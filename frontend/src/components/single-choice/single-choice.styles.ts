@@ -17,3 +17,13 @@ export const OptionSingleChoice = styled.div`
     color: ${colorPallettes.success};
   }
 `;
+
+export const GridSingleChoice = styled.div`
+  display: grid;
+  gap: 16px;
+  grid-template-columns: repeat(auto-fit, minmax(350px, 2fr));
+
+  @media (max-width: 480px) {
+    grid-template-columns: repeat(auto-fit, minmax(200px, 2fr));
+  }
+`;
