@@ -19,10 +19,8 @@
 
 ## ✨ Demo
 
-1. [espoolingo](https://espoolingo.herokuapp.com/login)
-1. credentials
-   - email: admin@gmail.com, password: 123456
-   - email: student@gmail.com, password: 123456
+1. [espoolingo - login](https://espoolingo.herokuapp.com/login)
+1. [espoolingo - register](https://espoolingo.herokuapp.com/register)
 
 ## Project definion
 
