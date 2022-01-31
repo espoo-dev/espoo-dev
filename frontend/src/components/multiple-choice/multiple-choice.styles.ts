@@ -1,29 +1,33 @@
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 import { colorPallettes } from 'styles/globals';
 import * as transitions from 'styles/transitions';
 
-export const OptionSingleChoice = styled.div`
-  background-color: #e4e8ee;
+export const OptionMultipleChoice = styled.div<{ selected: boolean }>`
+  background-color: ${(props) =>
+    (props.selected && colorPallettes.bgSuccess) || '#e4e8ee'};
   border-radius: 6px;
   cursor: pointer;
   padding: 12px;
   transition: ${transitions.defaultTransition};
   color: ${colorPallettes.primary};
   font-weight: 500;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+
+  p {
+    padding-left: 10px;
+  }
+
+  ${(props) =>
+    props.selected &&
+    css`
+      color: ${colorPallettes.success};
+    `}
 
   &:hover {
     background-color: ${colorPallettes.bgSuccess};
     transition: ${transitions.defaultTransition};
     color: ${colorPallettes.success};
-  }
-`;
-
-export const GridSingleChoice = styled.div`
-  display: grid;
-  gap: 16px;
-  grid-template-columns: repeat(auto-fit, minmax(350px, 2fr));
-
-  @media (max-width: 480px) {
-    grid-template-columns: repeat(auto-fit, minmax(200px, 2fr));
   }
 `;

@@ -8,6 +8,7 @@ export const colorPallettes = {
   primary: '#2b3564',
   secondary: '#7a7d97',
   success: '#387b4a',
+  bgSuccess: '#95d6a2',
 };
 
 export const GlobalStyle = createGlobalStyle`

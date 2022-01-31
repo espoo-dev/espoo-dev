@@ -1,7 +1,8 @@
 import { OptionQuestion } from '@api/models/survey';
-import { Button, Grid, Text } from '@chakra-ui/react';
+import { Grid, Text } from '@chakra-ui/react';
 import { Dispatch, SetStateAction, useState } from 'react';
 import { ImCheckboxChecked, ImCheckboxUnchecked } from 'react-icons/im';
+import { OptionMultipleChoice } from './multiple-choice.styles';
 
 export interface Option extends OptionQuestion {
   selected?: boolean;
@@ -26,28 +27,23 @@ const MultipleChoise = (props: MultipleChoiseProps) => {
 
   const getIdOptionsSelecteds = (): number[] =>
     optionsState.filter((option) => option.selected).map((option) => option.id);
+
   return (
     <Grid templateColumns="repeat(auto-fit, minmax(180px, 2fr))" gap={4}>
       {optionsState &&
         optionsState.map((option: Option) => (
-          <Button
-            color={option.selected ? 'green.500' : 'gray.500'}
-            bg={option.selected ? 'green.100' : 'gray.100'}
+          <OptionMultipleChoice
             key={option.id}
             onClick={() => toggle(option)}
-            display="flex"
-            justifyContent="space-between"
-            style={{
-              boxShadow: 'none',
-            }}
+            selected={option.selected}
           >
-            <Text>{option.name}</Text>
             {option.selected ? (
               <ImCheckboxChecked data-testid={`${option.id}-selected`} />
             ) : (
               <ImCheckboxUnchecked data-testid={`${option.id}-unselected`} />
             )}
-          </Button>
+            <Text>{option.name}</Text>
+          </OptionMultipleChoice>
         ))}
     </Grid>
   );

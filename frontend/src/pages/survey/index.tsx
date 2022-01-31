@@ -10,6 +10,7 @@ import {
   Flex,
   Spinner,
 } from '@chakra-ui/react';
+import MultipleChoise from '@components/multiple-choice/multiple-choice';
 import SingleChoice from '@components/single-choice/single-choice';
 import SumaryResult from '@components/sumary-result/sumary-result';
 import { useCallback, useEffect, useState } from 'react';
@@ -25,7 +26,7 @@ const SurveyPage = (props: SurveyPageProps) => {
   const [totalQuestions, setTotalQuestions] = useState(0);
   const [result, setResult] = useState<number[]>([]);
   const [question, setQuestion] = useState<Question>(
-    (survey && survey.questions[0]) || null
+    (survey && survey.current_answers_survey.questions[0]) || null
   );
   const answerSurveyService = new AnswerSurveyService(httpClient);
   const [answerSurvey, setAnswerSurvey] =
@@ -41,7 +42,7 @@ const SurveyPage = (props: SurveyPageProps) => {
 
   const nextQuestion = (index: number) => {
     setQuestionIndex(index + 1);
-    setQuestion(survey.questions[index]);
+    setQuestion(survey.current_answers_survey.questions[index]);
   };
 
   useEffect(() => {
@@ -73,6 +74,9 @@ const SurveyPage = (props: SurveyPageProps) => {
           question_id={question.id}
           current_answers_survey_id={survey.current_answers_survey.id}
         />
+      ),
+      'Multiple Choice': (
+        <MultipleChoise options={question.options} setResult={setResult} />
       ),
     };
 
@@ -111,7 +115,7 @@ const SurveyPage = (props: SurveyPageProps) => {
 
             <CircularProgress
               value={getCompletePercent()[0]}
-              color="teal.300"
+              color={colorPallettes.bgSuccess}
               capIsRound
               ml="4"
               data-testid="progress_bar"
@@ -140,7 +144,9 @@ const SurveyPage = (props: SurveyPageProps) => {
         </Box>
       ) : (
         <h1>
-          {survey && survey.questions.length && answerSurvey ? (
+          {survey &&
+          survey.current_answers_survey.questions.length &&
+          answerSurvey ? (
             <SumaryResult {...answerSurvey} />
           ) : (
             <Box textAlign="center">

@@ -50,16 +50,18 @@ describe('SurveyPage', () => {
 
     it('should render all question options to question', () => {
       render(<SurveyPage survey={surveyDefault} />);
-      surveyDefault.questions[0].options.map((option) => {
-        expect(screen.getByText(option.name)).toBeInTheDocument();
-      });
+      surveyDefault.current_answers_survey.questions[0].options.map(
+        (option) => {
+          expect(screen.getByText(option.name)).toBeInTheDocument();
+        }
+      );
     });
 
     it('should select an option', () => {
       const mockSurvey = JSON.parse(JSON.stringify(surveyDefault));
 
       render(<SurveyPage survey={mockSurvey} />);
-      const option = mockSurvey.questions[0].options[0];
+      const option = mockSurvey.current_answers_survey.questions[0].options[0];
       const optionElement = screen.getByText(option.name);
       expect(optionElement).toBeInTheDocument();
 
@@ -111,7 +113,9 @@ describe('SurveyPage', () => {
 
       render(<SurveyPage survey={surveyIncomplete} />);
       expect(
-        screen.getByText(surveyIncomplete.questions[1].name)
+        screen.getByText(
+          surveyIncomplete.current_answers_survey.questions[1].name
+        )
       ).toBeInTheDocument();
 
       expect(screen.getByText('Question 2')).toBeInTheDocument();
@@ -159,7 +163,8 @@ describe('SurveyPage', () => {
       const progress_text = await waitFor(() =>
         screen.getByTestId('progress_text')
       );
-      const option = surveyDefault.questions[0].options[0];
+      const option =
+        surveyDefault.current_answers_survey.questions[0].options[0];
       const optionElement = await waitFor(() => screen.getByText(option.name));
 
       act(() => {
