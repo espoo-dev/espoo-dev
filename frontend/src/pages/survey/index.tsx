@@ -25,7 +25,7 @@ const SurveyPage = (props: SurveyPageProps) => {
   const [totalQuestions, setTotalQuestions] = useState(0);
   const [result, setResult] = useState<number[]>([]);
   const [question, setQuestion] = useState<Question>(
-    (survey && survey.questions[0]) || null
+    (survey && survey.current_answers_survey.questions[0]) || null
   );
   const answerSurveyService = new AnswerSurveyService(httpClient);
   const [answerSurvey, setAnswerSurvey] =
@@ -41,7 +41,7 @@ const SurveyPage = (props: SurveyPageProps) => {
 
   const nextQuestion = (index: number) => {
     setQuestionIndex(index + 1);
-    setQuestion(survey.questions[index]);
+    setQuestion(survey.current_answers_survey.questions[index]);
   };
 
   useEffect(() => {
@@ -140,7 +140,9 @@ const SurveyPage = (props: SurveyPageProps) => {
         </Box>
       ) : (
         <h1>
-          {survey && survey.questions.length && answerSurvey ? (
+          {survey &&
+          survey.current_answers_survey.questions.length &&
+          answerSurvey ? (
             <SumaryResult {...answerSurvey} />
           ) : (
             <Box textAlign="center">
