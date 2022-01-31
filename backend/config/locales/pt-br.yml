@@ -53,6 +53,10 @@ pt-br:
     application:
       navigation:
         sign_out: Sair
+  administrate:
+    option:
+      created:
+        success: Option was successfully created.
   app_name: Rails espoo pt-br
   devise:
     sessions:

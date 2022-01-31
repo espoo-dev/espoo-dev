@@ -1,25 +1,24 @@
+import Head from 'next/head';
+import { withAuth } from 'hoc/withAuth';
+import { Container, Content, Layout } from 'styles/main.styles';
+import { Sidemenu } from '@components/sidemenu';
 import {
   Box,
-  Button,
-  Flex,
   Heading,
-  Spacer,
   Spinner,
   Text,
+  Flex,
+  Button,
   Tooltip,
+  Spacer,
 } from '@chakra-ui/react';
-import { SurveysList } from '@components/main/SurveysList';
-import { Sidemenu } from '@components/sidemenu';
-import { colorPallettes } from '@styles/globals';
 import { httpClient } from 'api';
 import { errorHandler } from 'api/error-handler';
-import { Survey } from 'api/models/survey';
-import { SurveyService } from 'api/services/survey';
-import { withAuth } from 'hoc/withAuth';
-import Head from 'next/head';
 import { useEffect, useState } from 'react';
+import { SurveysList } from '@components/main/SurveysList';
+import { SurveyService } from 'api/services/survey';
+import { Survey } from 'api/models/survey';
 import { HiArrowLeft, HiRefresh } from 'react-icons/hi';
-import { Container, Content, Layout } from 'styles/main.styles';
 import SurveyPage from '../survey';
 
 const Surveys = () => {
@@ -65,22 +64,19 @@ const Surveys = () => {
           </Heading>
 
           <Box
-            background="#f5f7fb"
+            background="#292929"
             height="100%"
+            margin="8px 0px"
             borderRadius="3xl"
             mt="30"
             p="16px"
           >
             {loading ? (
-              <Spinner color={colorPallettes.primary} />
+              <Spinner color="white" />
             ) : (
               !surveySelected && (
-                <Flex padding="10px" alignItems="center">
-                  <Text
-                    color={colorPallettes.primary}
-                    textAlign="center"
-                    mb="10px"
-                  >
+                <Flex alignItems="center">
+                  <Text color="white" textAlign="center" mb="10px">
                     {surveys.length
                       ? 'Discover a new survey!'
                       : 'No surveys =/'}

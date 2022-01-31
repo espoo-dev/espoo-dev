@@ -6,7 +6,6 @@ export const SurveyContainer = styled.div`
   margin: 10px;
   display: flex;
   flex-direction: column;
-  border: 1px solid #e1e1e1;
 `;
 
 export const ImageSurvey = styled.div<{ cover: string }>`

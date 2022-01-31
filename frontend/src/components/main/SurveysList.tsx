@@ -1,10 +1,10 @@
-import { SurveyItem } from '@components/survey-item/survey-item';
+import React, { Dispatch, SetStateAction, useState } from 'react';
+import { Grid } from '@chakra-ui/react';
+import { AnswerSurveyStatus, Survey } from 'api/models/survey';
 import { httpClient } from 'api';
 import { errorHandler } from 'api/error-handler';
-import { AnswerSurveyStatus, Survey } from 'api/models/survey';
 import { AnswerSurveyService } from 'api/services/answer_survey';
-import React, { Dispatch, SetStateAction, useState } from 'react';
-import { SurveysListContainer } from './SurveysList.styles';
+import { SurveyItem } from '@components/survey-item/survey-item';
 
 interface SurveyListProps {
   data: Survey[];
@@ -57,7 +57,7 @@ export const SurveysList = (props: SurveyListProps) => {
   };
 
   return (
-    <SurveysListContainer>
+    <Grid templateColumns="repeat(auto-fit, minmax(450px, 1fr))" gap={4}>
       {data.map((item) => (
         <SurveyItem
           key={item.id}
@@ -70,6 +70,6 @@ export const SurveysList = (props: SurveyListProps) => {
           status={item.current_answers_survey?.status}
         />
       ))}
-    </SurveysListContainer>
+    </Grid>
   );
 };

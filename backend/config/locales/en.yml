@@ -53,6 +53,10 @@ en:
     application:
       navigation:
         sign_out: Logout
+  administrate:
+    option:
+      created:
+        success: Option was successfully created.
   app_name: Rails espoo
   devise:
     sessions:

@@ -69,8 +69,7 @@ module.exports = {
     'object-curly-spacing': 'off',
     'import/no-extraneous-dependencies': 'off',
     'implicit-arrow-linebreak': 'off',
-    'react/jsx-one-expression-per-line': 'off',
-    'indent': 'off'
+    'react/jsx-one-expression-per-line': 'off'
   },
   settings: {
     'import/resolver': {
