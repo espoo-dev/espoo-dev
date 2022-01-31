@@ -10,6 +10,7 @@ import {
   Flex,
   Spinner,
 } from '@chakra-ui/react';
+import MultipleChoise from '@components/multiple-choice/multiple-choice';
 import SingleChoice from '@components/single-choice/single-choice';
 import SumaryResult from '@components/sumary-result/sumary-result';
 import { useCallback, useEffect, useState } from 'react';
@@ -74,6 +75,9 @@ const SurveyPage = (props: SurveyPageProps) => {
           current_answers_survey_id={survey.current_answers_survey.id}
         />
       ),
+      'Multiple Choice': (
+        <MultipleChoise options={question.options} setResult={setResult} />
+      ),
     };
 
     return questionsTypes[question.question_type.name];
@@ -111,7 +115,7 @@ const SurveyPage = (props: SurveyPageProps) => {
 
             <CircularProgress
               value={getCompletePercent()[0]}
-              color="teal.300"
+              color={colorPallettes.bgSuccess}
               capIsRound
               ml="4"
               data-testid="progress_bar"
