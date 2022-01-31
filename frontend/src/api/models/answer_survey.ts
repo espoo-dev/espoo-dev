@@ -1,4 +1,4 @@
-import { AnswerSurveyStatus, OptionQuestion } from './survey';
+import { AnswerSurveyStatus, OptionQuestion, Question } from './survey';
 
 export interface AnswerSurveyCreate {
   survey_id: number;
@@ -28,6 +28,7 @@ export interface AnswerSurvey {
   id: number;
   status: AnswerSurveyStatus;
   user_id: number;
+  questions: Question[];
 }
 
 export interface AnswerSurveyReceive {
