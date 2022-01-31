@@ -9,7 +9,7 @@ export interface AnswersSurvey {
   user_id: number;
   answered_questions?: Question[];
   current_question_index?: number;
-  questions?: Question[];
+  questions: Question[];
   not_answered_questions?: Question[];
 }
 
