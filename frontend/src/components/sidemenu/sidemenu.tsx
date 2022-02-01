@@ -1,11 +1,16 @@
-import React, { useContext } from 'react';
+import { Button, Heading, Tooltip } from '@chakra-ui/react';
+import { AuthContext } from 'context/auth';
 import Link from 'next/link';
-import { Button, Flex, Heading, List, Tooltip } from '@chakra-ui/react';
+import React, { useContext } from 'react';
 import { IconType } from 'react-icons';
 import { HiAcademicCap, HiClipboardCheck } from 'react-icons/hi';
-import { AuthContext } from 'context/auth';
 import { RiLogoutCircleLine } from 'react-icons/ri';
-import { MenuLinkOption } from './sidemenu.styles';
+import {
+  ItemMenu,
+  MenuLinkOption,
+  MenuList,
+  SideMenuContainer,
+} from './sidemenu.styles';
 
 interface MenuLink {
   url: string;
@@ -31,19 +36,13 @@ export const Sidemenu = () => {
   ];
 
   return (
-    <Flex
-      flexDirection="column"
-      h="100vh"
-      w="250px"
-      p="2em"
-      borderRight="1px solid"
-    >
+    <SideMenuContainer>
       <Heading as="h1" color="white" fontSize="26" m="0">
         Espoolingo
       </Heading>
 
-      <Flex h="full" flexDirection="column" justifyContent="space-between">
-        <List marginY="20">
+      <MenuList>
+        <ItemMenu>
           {menuLinks.map((item) => {
             const { icon: Icon, name, url } = item;
 
@@ -51,12 +50,12 @@ export const Sidemenu = () => {
               <Link href={url} passHref key={url}>
                 <MenuLinkOption>
                   <Icon size={20} />
-                  {name}
+                  <span>{name}</span>
                 </MenuLinkOption>
               </Link>
             );
           })}
-        </List>
+        </ItemMenu>
 
         <Tooltip label="Logout">
           <Button
@@ -72,7 +71,7 @@ export const Sidemenu = () => {
             <RiLogoutCircleLine color="white" />
           </Button>
         </Tooltip>
-      </Flex>
-    </Flex>
+      </MenuList>
+    </SideMenuContainer>
   );
 };

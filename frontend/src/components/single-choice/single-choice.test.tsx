@@ -1,8 +1,8 @@
 import { httpClient } from '@api/client';
 import { AnswerCreate } from '@api/models/answer';
-import { AnswerSurveyStatus, Survey } from '@api/models/survey';
 import { AxiosInstance } from 'axios';
 import { fireEvent, render, screen, waitFor } from 'test-utils';
+import mockSurvey from 'utils/mocks/survey';
 import SingleChoice from './single-choice';
 
 const options = [
@@ -20,41 +20,6 @@ const options = [
   },
 ];
 
-const survey: Survey = {
-  id: 636,
-  name: 'Animals survey - Teacher',
-  description: 'Nice animals',
-  survey_subject_id: 365,
-  answers_surveys: [
-    { id: 129, user_id: 692, status: AnswerSurveyStatus.Completed },
-    { id: 130, user_id: 692, status: AnswerSurveyStatus.Completed },
-  ],
-  current_answers_survey: {
-    id: 130,
-    user_id: 692,
-    status: AnswerSurveyStatus.Completed,
-  },
-  questions: [
-    {
-      id: 877,
-      name: 'What is your favorite animal?',
-      question_type: { id: 286, name: 'Single Choice' },
-      options: [
-        { id: 1157, name: 'Eagle' },
-        { id: 1158, name: 'Dog' },
-      ],
-    },
-    {
-      id: 878,
-      name: 'What is the bigger animal?',
-      question_type: { id: 286, name: 'Single Choice' },
-      options: [
-        { id: 1159, name: 'Cat' },
-        { id: 1160, name: 'Horse' },
-      ],
-    },
-  ],
-};
 
 jest.mock('../../api/client', () => ({
   httpClient: {
@@ -105,20 +70,20 @@ describe('SingleChoice', () => {
 
     const { getByText } = render(
       <SingleChoice
-        options={survey.questions[0].options}
+        options={mockSurvey.questions[0].options}
         setResult={jest.fn()}
-        current_answers_survey_id={survey.current_answers_survey.id}
-        question_id={survey.questions[0].id}
+        current_answers_survey_id={mockSurvey.current_answers_survey.id}
+        question_id={mockSurvey.questions[0].id}
       />
     );
-    const optionSelected = survey.questions[0].options[0];
+    const optionSelected = mockSurvey.questions[0].options[0];
     const buttonItem = getByText(optionSelected.name);
     fireEvent.click(buttonItem);
 
     await waitFor(() =>
       expect(httpClient.post).toHaveBeenCalledWith('api/v1/answers', {
-        question_id: survey.questions[0].id,
-        answers_survey_id: survey.current_answers_survey.id,
+        question_id: mockSurvey.questions[0].id,
+        answers_survey_id: mockSurvey.current_answers_survey.id,
         option_ids: [optionSelected.id],
       })
     );

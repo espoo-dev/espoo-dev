@@ -1,9 +1,8 @@
-import { Box } from '@chakra-ui/react';
-import { HiOutlineCheck } from 'react-icons/hi';
-import { MdClose } from 'react-icons/md';
-import { useEffect, useState } from 'react';
 import { AnswerSurveyReceive } from '@api/models/answer_survey';
-import { Result, ResultContainer, ResultText } from './sumary-result.styles';
+import { Box, Grid, Tooltip } from '@chakra-ui/react';
+import AsnweredQuestion from '@components/answered-question/answered-question';
+import { useEffect, useState } from 'react';
+import { BoxResult, ResultContainer } from './sumary-result.styles';
 
 const SumaryResult = (props: AnswerSurveyReceive) => {
   const { questions } = props;
@@ -37,30 +36,54 @@ const SumaryResult = (props: AnswerSurveyReceive) => {
       <Box>
         <h1>Finish!</h1>
       </Box>
-      <Box>
-        <h2 style={{ fontWeight: 'bold' }}>
-          <Result>
-            <HiOutlineCheck color="green" />
-            <span>{`${result.correct} correct`}</span>
+      <Box display="flex" justifyContent="end">
+        <Tooltip label="Correct">
+          <BoxResult correct>
+            <div>
+              <span data-testid="correct">{result.correct}</span>
+            </div>
+          </BoxResult>
+        </Tooltip>
+        <Tooltip label="Incorrect">
+          <BoxResult>
+            <div>
+              <span data-testid="incorrect">{result.incorrect}</span>
+            </div>
+          </BoxResult>
+        </Tooltip>
+        {/* <h2 style={{ fontWeight: 'bold' }}>
+          <Box
+            display="flex"
+            justifyContent="center"
+            alignItems="center"
+            mt={8}
+          >
             <MdClose color="red" />
             <span>{`${result.incorrect} incorrect`}</span>
-          </Result>
-        </h2>
+          </Box>
+          <Box
+            display="flex"
+            justifyContent="center"
+            alignItems="center"
+            mt={2}
+            fontSize={18}
+          >
+            <HiOutlineCheck color="green" />
+            <span>{`${result.correct} correct`}</span>
+          </Box>
+        </h2> */}
       </Box>
-      <Box mt={16}>
+      <Grid
+        templateColumns="repeat(auto-fit, minmax(300px, 2fr))"
+        gap={4}
+        mt={10}
+      >
         {questions &&
           questions.length &&
           questions.map((question) => (
-            <Box key={question.id} display="flex" alignItems="center" mt={4}>
-              {question.correct ? (
-                <HiOutlineCheck color="green" />
-              ) : (
-                <MdClose color="red" />
-              )}
-              <ResultText>{question.name}</ResultText>
-            </Box>
+            <AsnweredQuestion key={question.id} {...question} />
           ))}
-      </Box>
+      </Grid>
     </ResultContainer>
   );
 };

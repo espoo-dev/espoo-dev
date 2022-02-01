@@ -23,20 +23,24 @@ class AnswersSurveyPresenter < BasePresenter
 
   protected
 
-  def questions
-    @answers_survey.survey.questions.includes([:question_type]).map do |question|
+  def all_questions
+    @answers_survey.survey.questions.includes([:question_type]).sort_by(&:id).map do |question|
       QuestionPresenter.new(question).payload
     end
   end
 
+  def questions
+    answered_questions + not_answered_questions
+  end
+
   def answered_questions
-    Question.answered_by_answers_survey(@answers_survey).includes(%i[question_type options]).map do |question|
+    Question.answered_by_answers_survey(@answers_survey).includes(%i[question_type options]).sort_by(&:id).map do |question|
       QuestionPresenter.new(question).payload
     end
   end
 
   def not_answered_questions
-    questions - answered_questions
+    all_questions - answered_questions
   end
 
   def current_question_index

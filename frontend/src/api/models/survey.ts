@@ -9,7 +9,7 @@ export interface AnswersSurvey {
   user_id: number;
   answered_questions?: Question[];
   current_question_index?: number;
-  questions?: Question[];
+  questions: Question[];
   not_answered_questions?: Question[];
 }
 
@@ -33,6 +33,7 @@ export interface Survey {
   description: string;
   questions: Question[];
   survey_subject_id: number;
+  total_questions_quantity: number;
 }
 
 export enum AnswerSurveyStatus {

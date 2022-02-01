@@ -71,8 +71,11 @@ describe('SumaryResult', () => {
 
   it('should show the result of survey', () => {
     render(<SumaryResult {...answerSurvey} />);
-    expect(screen.getByText('1 correct')).toBeInTheDocument();
-    expect(screen.getByText('1 incorrect')).toBeInTheDocument();
+    const correct = screen.getByTestId('correct');
+    expect(correct).toHaveTextContent('1');
+
+    const incorrect = screen.getByTestId('incorrect');
+    expect(incorrect).toHaveTextContent('1');
   });
 
   it('should show correct and incorrect questions', () => {
