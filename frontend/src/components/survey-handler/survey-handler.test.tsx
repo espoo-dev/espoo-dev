@@ -1,5 +1,5 @@
 import { Survey } from '@api/models/survey';
-import SurveyPage from '@pages/survey';
+import { SurveyHandler } from './survey-handler';
 import { act, fireEvent, render, screen, waitFor } from 'test-utils';
 import mockSurvey from 'utils/mocks/survey';
 import * as service from '../../api/services/answers';
@@ -26,7 +26,7 @@ const doServiceMock = () => {
   );
 };
 
-describe('SurveyPage', () => {
+describe('SurveyHandler', () => {
   describe('Questions', () => {
     const mockCreate = service.AnswerService.prototype.create;
     const surveyDefault: Survey = JSON.parse(JSON.stringify(mockSurvey));
@@ -40,7 +40,7 @@ describe('SurveyPage', () => {
     });
 
     it('should render first question', () => {
-      render(<SurveyPage survey={surveyDefault} />);
+      render(<SurveyHandler survey={surveyDefault} />);
       expect(
         screen.getByText('What is your favorite animal?')
       ).toBeInTheDocument();
@@ -49,7 +49,7 @@ describe('SurveyPage', () => {
     });
 
     it('should render all question options to question', () => {
-      render(<SurveyPage survey={surveyDefault} />);
+      render(<SurveyHandler survey={surveyDefault} />);
       surveyDefault.current_answers_survey.questions[0].options.map(
         (option) => {
           expect(screen.getByText(option.name)).toBeInTheDocument();
@@ -59,10 +59,10 @@ describe('SurveyPage', () => {
 
     it('should render the Next question button disabled', () => {
       const mockSurvey = JSON.parse(JSON.stringify(surveyDefault));
-      const testId = 'next_question_btn';
+      const nextBtnId = 'next_question_btn';
 
-      const { getByTestId } = render(<SurveyPage survey={mockSurvey} />);
-      const nextBtn = getByTestId(testId);
+      const { getByTestId } = render(<SurveyHandler survey={mockSurvey} />);
+      const nextBtn = getByTestId(nextBtnId);
 
       expect(nextBtn).toBeInTheDocument();
       expect(nextBtn).toBeDisabled();
@@ -74,7 +74,7 @@ describe('SurveyPage', () => {
       const [question] = questions;
 
       const { getByTestId, getByText } = render(
-        <SurveyPage survey={mockSurvey} />
+        <SurveyHandler survey={mockSurvey} />
       );
       const option = question.options[0];
       const optionElement = getByText(option.name);
@@ -84,9 +84,9 @@ describe('SurveyPage', () => {
         fireEvent.click(optionElement);
       });
 
-      const testId = 'next_question_btn';
+      const nextBtnId = 'next_question_btn';
 
-      const nextBtn = getByTestId(testId);
+      const nextBtn = getByTestId(nextBtnId);
 
       expect(nextBtn).toBeInTheDocument();
       expect(nextBtn).toBeEnabled();
@@ -98,7 +98,7 @@ describe('SurveyPage', () => {
       const [question] = questions;
 
       act(() => {
-        render(<SurveyPage survey={mockSurvey} />);
+        render(<SurveyHandler survey={mockSurvey} />);
       });
 
       const { getByTestId, getByText } = screen;
@@ -110,9 +110,9 @@ describe('SurveyPage', () => {
         fireEvent.click(optionElement);
       });
 
-      const testId = 'next_question_btn';
+      const nextBtnId = 'next_question_btn';
 
-      const nextBtn = await waitFor(() => getByTestId(testId));
+      const nextBtn = await waitFor(() => getByTestId(nextBtnId));
 
       act(() => {
         fireEvent.click(nextBtn);
@@ -162,7 +162,7 @@ describe('SurveyPage', () => {
         },
       ];
 
-      render(<SurveyPage survey={surveyIncomplete} />);
+      render(<SurveyHandler survey={surveyIncomplete} />);
       expect(
         screen.getByText(
           surveyIncomplete.current_answers_survey.questions[1].name
@@ -187,7 +187,7 @@ describe('SurveyPage', () => {
 
     it('should render the progress component', async () => {
       act(() => {
-        render(<SurveyPage survey={surveyDefault} />);
+        render(<SurveyHandler survey={surveyDefault} />);
       });
 
       const progress_bar = await waitFor(() =>
@@ -205,7 +205,7 @@ describe('SurveyPage', () => {
 
     it('should update progress bar when answering a question', async () => {
       await act(async () => {
-        render(<SurveyPage survey={surveyDefault} />);
+        render(<SurveyHandler survey={surveyDefault} />);
       });
 
       const { getByTestId, getByText } = screen;
@@ -225,8 +225,8 @@ describe('SurveyPage', () => {
         fireEvent.click(optionElement);
       });
 
-      const testId = 'next_question_btn';
-      const nextBtn = await waitFor(() => getByTestId(testId));
+      const nextBtnId = 'next_question_btn';
+      const nextBtn = await waitFor(() => getByTestId(nextBtnId));
 
       act(() => {
         fireEvent.click(nextBtn);

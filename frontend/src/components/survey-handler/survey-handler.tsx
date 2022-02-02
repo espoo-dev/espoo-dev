@@ -31,7 +31,7 @@ const questionTypes = {
   'Multiple Choice': MultipleChoise,
 };
 
-const SurveyPage = (props: SurveyPageProps) => {
+export const SurveyHandler = (props: SurveyPageProps) => {
   const { survey } = props;
   const totalQuestions = survey.total_questions_quantity;
 
@@ -214,5 +214,3 @@ const SurveyPage = (props: SurveyPageProps) => {
     </Box>
   );
 };
-
-export default SurveyPage;

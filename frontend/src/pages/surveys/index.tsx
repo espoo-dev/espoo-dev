@@ -10,6 +10,7 @@ import {
 } from '@chakra-ui/react';
 import { SurveysList } from '@components/main/SurveysList';
 import { Sidemenu } from '@components/sidemenu';
+import { SurveyHandler } from '@components/survey-handler';
 import { colorPallettes } from '@styles/globals';
 import { httpClient } from 'api';
 import { errorHandler } from 'api/error-handler';
@@ -20,7 +21,6 @@ import Head from 'next/head';
 import { useEffect, useState } from 'react';
 import { HiArrowLeft, HiRefresh } from 'react-icons/hi';
 import { Container, Content, Layout } from 'styles/main.styles';
-import SurveyPage from '../survey';
 
 const Surveys = () => {
   const surveyService = new SurveyService(httpClient);
@@ -116,7 +116,7 @@ const Surveys = () => {
                     <HiArrowLeft color="white" />
                   </Button>
                 </Tooltip>
-                <SurveyPage survey={surveySelected} />
+                <SurveyHandler survey={surveySelected} />
               </Box>
             ) : (
               !loading && (
