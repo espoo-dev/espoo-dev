@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_09_26_072050) do
+ActiveRecord::Schema.define(version: 2022_02_02_171646) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -42,6 +42,24 @@ ActiveRecord::Schema.define(version: 2021_09_26_072050) do
     t.datetime "updated_at", precision: 6, null: false
     t.index ["survey_id"], name: "index_answers_surveys_on_survey_id"
     t.index ["user_id"], name: "index_answers_surveys_on_user_id"
+  end
+
+  create_table "group_dependencies", force: :cascade do |t|
+    t.bigint "group_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["group_id"], name: "index_group_dependencies_on_group_id"
+  end
+
+  create_table "groups", force: :cascade do |t|
+    t.string "name", null: false
+    t.string "description"
+    t.bigint "user_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.integer "group_dependency_id"
+    t.index ["name", "user_id"], name: "index_groups_on_name_and_user_id", unique: true
+    t.index ["user_id"], name: "index_groups_on_user_id"
   end
 
   create_table "options", force: :cascade do |t|
@@ -99,6 +117,8 @@ ActiveRecord::Schema.define(version: 2021_09_26_072050) do
     t.datetime "updated_at", precision: 6, null: false
     t.boolean "ready", default: false
     t.bigint "survey_subject_id", null: false
+    t.integer "group_id"
+    t.index ["group_id"], name: "index_surveys_on_group_id"
     t.index ["survey_subject_id"], name: "index_surveys_on_survey_subject_id"
     t.index ["user_id"], name: "index_surveys_on_user_id"
   end
@@ -120,6 +140,8 @@ ActiveRecord::Schema.define(version: 2021_09_26_072050) do
 
   add_foreign_key "answers_options", "answers"
   add_foreign_key "answers_options", "options"
+  add_foreign_key "group_dependencies", "groups"
+  add_foreign_key "groups", "users"
   add_foreign_key "options", "questions"
   add_foreign_key "options", "users"
   add_foreign_key "surveys", "survey_subjects"
