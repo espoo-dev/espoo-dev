@@ -8,18 +8,21 @@ interface OptionSingleChoiceProps {
 
 export const OptionSingleChoice = styled.div<OptionSingleChoiceProps>`
   background-color: ${(props) =>
-    (props.selected ? colorPallettes.success : '#e4e8ee')};
+    props.selected ? colorPallettes.bgSuccess : '#e4e8ee'};
   border-radius: 6px;
   cursor: pointer;
   padding: 12px;
+  border: ${(props) =>
+    props.selected ? `1px solid ${colorPallettes.success}` : '1px solid transparent'};
   transition: ${transitions.defaultTransition};
-  color: ${(props) => (props.selected ? '#fff' : colorPallettes.primary)};
+  color: ${(props) => (props.selected ? colorPallettes.success : colorPallettes.primary)};
   font-weight: 500;
 
   &:hover {
     background-color: ${colorPallettes.bgSuccess};
     transition: ${transitions.defaultTransition};
-    color: ${colorPallettes.primary};
+    border: 1px solid ${colorPallettes.success};
+    color: ${colorPallettes.success};
     box-shadow: 0 3px 6px rgba(0, 0, 0, 0.2);
   }
 `;

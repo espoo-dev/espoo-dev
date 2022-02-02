@@ -14,7 +14,7 @@ import {
   Spinner,
 } from '@chakra-ui/react';
 import { AppButton } from '@components/app-button';
-import MultipleChoise from '@components/multiple-choice/multiple-choice';
+import MultipleChoice from '@components/multiple-choice/multiple-choice';
 import SingleChoice from '@components/single-choice/single-choice';
 import SumaryResult from '@components/sumary-result/sumary-result';
 import { usePrevious } from '@hooks/usePrevious';
@@ -28,7 +28,7 @@ interface SurveyPageProps {
 
 const questionTypes = {
   'Single Choice': SingleChoice,
-  'Multiple Choice': MultipleChoise,
+  'Multiple Choice': MultipleChoice,
 };
 
 export const SurveyHandler = (props: SurveyPageProps) => {
