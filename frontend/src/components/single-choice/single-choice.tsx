@@ -21,8 +21,7 @@ const SingleChoice = (props: SingleChoiceProps) => {
       prev.map((option) => ({
         ...option,
         selected: option.selected ? false : option.id === id,
-      }))
-    );
+      })));
   };
 
   useEffect(() => {

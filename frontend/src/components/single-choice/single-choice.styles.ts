@@ -8,7 +8,7 @@ interface OptionSingleChoiceProps {
 
 export const OptionSingleChoice = styled.div<OptionSingleChoiceProps>`
   background-color: ${(props) =>
-    props.selected ? colorPallettes.success : '#e4e8ee'};
+    (props.selected ? colorPallettes.success : '#e4e8ee')};
   border-radius: 6px;
   cursor: pointer;
   padding: 12px;
