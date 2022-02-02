@@ -13,6 +13,7 @@ RSpec.describe User, type: :model do
     it { is_expected.to have_many(:questions).dependent(:destroy) }
     it { is_expected.to have_many(:options).dependent(:destroy) }
     it { is_expected.to have_many(:answers_surveys).dependent(:destroy) }
+    it { is_expected.to have_many(:groups).dependent(:destroy) }
     it { is_expected.to belong_to(:role) }
   end
 end
