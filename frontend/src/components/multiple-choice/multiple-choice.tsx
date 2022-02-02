@@ -1,5 +1,6 @@
 import { OptionQuestion } from '@api/models/survey';
 import { Grid, Text } from '@chakra-ui/react';
+import { useUpdateEffect } from '@hooks/useUpdateEffect';
 import { Dispatch, SetStateAction, useState } from 'react';
 import { ImCheckboxChecked, ImCheckboxUnchecked } from 'react-icons/im';
 import { OptionMultipleChoice } from './multiple-choice.styles';
@@ -8,12 +9,12 @@ export interface Option extends OptionQuestion {
   selected?: boolean;
 }
 
-export interface MultipleChoiseProps {
+export interface MultipleChoiceProps {
   options: Option[];
   setResult: Dispatch<SetStateAction<number[]>>;
 }
 
-const MultipleChoise = (props: MultipleChoiseProps) => {
+const MultipleChoice = (props: MultipleChoiceProps) => {
   const { options, setResult } = props;
   const [optionsState, setOptionsState] = useState<Option[]>(options);
 
@@ -27,6 +28,10 @@ const MultipleChoise = (props: MultipleChoiseProps) => {
 
   const getIdOptionsSelecteds = (): number[] =>
     optionsState.filter((option) => option.selected).map((option) => option.id);
+
+  useUpdateEffect(() => {
+    setOptionsState(options);
+  }, [options]);
 
   return (
     <Grid templateColumns="repeat(auto-fit, minmax(180px, 2fr))" gap={4}>
@@ -49,4 +54,4 @@ const MultipleChoise = (props: MultipleChoiseProps) => {
   );
 };
 
-export default MultipleChoise;
+export default MultipleChoice;
