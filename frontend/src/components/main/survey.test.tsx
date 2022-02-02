@@ -57,17 +57,68 @@ describe('SurveyPage', () => {
       );
     });
 
-    it('should select an option', () => {
+    it('should render the Next question button disabled', () => {
       const mockSurvey = JSON.parse(JSON.stringify(surveyDefault));
+      const testId = 'next_question_btn';
 
-      render(<SurveyPage survey={mockSurvey} />);
-      const option = mockSurvey.current_answers_survey.questions[0].options[0];
-      const optionElement = screen.getByText(option.name);
+      const { getByTestId } = render(<SurveyPage survey={mockSurvey} />);
+      const nextBtn = getByTestId(testId);
+
+      expect(nextBtn).toBeInTheDocument();
+      expect(nextBtn).toBeDisabled();
+    });
+
+    it('should enable next button when selecting a question', () => {
+      const mockSurvey = JSON.parse(JSON.stringify(surveyDefault));
+      const { questions } = mockSurvey;
+      const [question] = questions;
+
+      const { getByTestId, getByText } = render(
+        <SurveyPage survey={mockSurvey} />
+      );
+      const option = question.options[0];
+      const optionElement = getByText(option.name);
       expect(optionElement).toBeInTheDocument();
 
       act(() => {
         fireEvent.click(optionElement);
       });
+
+      const testId = 'next_question_btn';
+
+      const nextBtn = getByTestId(testId);
+
+      expect(nextBtn).toBeInTheDocument();
+      expect(nextBtn).toBeEnabled();
+    });
+
+    it('should call answerService.create when clicking next button', async () => {
+      const mockSurvey = JSON.parse(JSON.stringify(surveyDefault));
+      const { questions } = mockSurvey;
+      const [question] = questions;
+
+      act(() => {
+        render(<SurveyPage survey={mockSurvey} />);
+      });
+
+      const { getByTestId, getByText } = screen;
+
+      const option = question.options[0];
+      const optionElement = await waitFor(() => getByText(option.name));
+
+      await act(async () => {
+        fireEvent.click(optionElement);
+      });
+
+      const testId = 'next_question_btn';
+
+      const nextBtn = await waitFor(() => getByTestId(testId));
+
+      act(() => {
+        fireEvent.click(nextBtn);
+      });
+
+      expect(getByTestId('loading_icon')).toBeInTheDocument();
 
       expect(mockCreate).toHaveBeenCalledTimes(1);
     });
@@ -157,18 +208,28 @@ describe('SurveyPage', () => {
         render(<SurveyPage survey={surveyDefault} />);
       });
 
+      const { getByTestId, getByText } = screen;
+
       const progress_bar = await waitFor(() =>
-        screen.getByTestId('progress_bar')
+        getByTestId('progress_bar')
       );
       const progress_text = await waitFor(() =>
-        screen.getByTestId('progress_text')
+        getByTestId('progress_text')
       );
-      const option =
-        surveyDefault.current_answers_survey.questions[0].options[0];
-      const optionElement = await waitFor(() => screen.getByText(option.name));
+      const { questions } = mockSurvey;
+      const [question] = questions;
+      const option = question.options[0];
+      const optionElement = await waitFor(() => getByText(option.name));
 
       act(() => {
         fireEvent.click(optionElement);
+      });
+
+      const testId = 'next_question_btn';
+      const nextBtn = await waitFor(() => getByTestId(testId));
+
+      act(() => {
+        fireEvent.click(nextBtn);
       });
 
       await waitFor(() => {
