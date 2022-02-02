@@ -5,6 +5,7 @@ RSpec.describe Group, type: :model do
 
   describe 'relationships' do
     it { is_expected.to belong_to(:user).required }
+    it { is_expected.to have_many(:surveys).dependent(:nullify) }
   end
 
   it { is_expected.to validate_uniqueness_of(:name).scoped_to(:user_id) }
