@@ -1,8 +1,4 @@
-import { httpClient } from '@api/client';
-import { AnswerCreate } from '@api/models/answer';
-import { AxiosInstance } from 'axios';
-import { fireEvent, render, screen, waitFor } from 'test-utils';
-import mockSurvey from 'utils/mocks/survey';
+import { act, fireEvent, render, screen, waitFor } from 'test-utils';
 import SingleChoice from './single-choice';
 
 const options = [
@@ -20,7 +16,6 @@ const options = [
   },
 ];
 
-
 jest.mock('../../api/client', () => ({
   httpClient: {
     post: jest.fn(),
@@ -35,57 +30,33 @@ describe('SingleChoice', () => {
     });
   });
 
-  it('should not call api when click in option without question and current survey', async () => {
-    const mockResponse = {
-      mock: true,
-    };
+  it('should select an option', async () => {
+    const [option] = options;
+    const testId = `single_choice_option_${option.id}`;
 
-    (httpClient as jest.Mocked<AxiosInstance>).post.mockImplementationOnce(
-      jest.fn((url: string, body: AnswerCreate) => {
-        return Promise.resolve({ data: mockResponse });
-      })
-    );
-
-    const { getByText } = render(
+    const { getByTestId } = render(
       <SingleChoice options={options} setResult={jest.fn()} />
     );
-    const buttonItem = getByText('Cat');
-    fireEvent.click(buttonItem);
 
-    await waitFor(() =>
-      expect(httpClient.post).not.toHaveBeenCalledWith('api/v1/answers')
-    );
-  });
+    const buttonItem = getByTestId(testId);
+    expect(buttonItem).toBeInTheDocument();
 
-  it('should call api when click in option with question and current survey', async () => {
-    const mockResponse = {
-      mock: true,
-    };
+    act(() => {
+      fireEvent.click(buttonItem);
+    });
 
-    (httpClient as jest.Mocked<AxiosInstance>).post.mockImplementationOnce(
-      jest.fn((url: string, body: AnswerCreate) => {
-        return Promise.resolve({ data: mockResponse });
-      })
-    );
+    await waitFor(() => {
+      expect(buttonItem.getAttribute('aria-selected')).toEqual('true');
 
-    const { getByText } = render(
-      <SingleChoice
-        options={mockSurvey.questions[0].options}
-        setResult={jest.fn()}
-        current_answers_survey_id={mockSurvey.current_answers_survey.id}
-        question_id={mockSurvey.questions[0].id}
-      />
-    );
-    const optionSelected = mockSurvey.questions[0].options[0];
-    const buttonItem = getByText(optionSelected.name);
-    fireEvent.click(buttonItem);
+      const [_, ...rest] = options;
 
-    await waitFor(() =>
-      expect(httpClient.post).toHaveBeenCalledWith('api/v1/answers', {
-        question_id: mockSurvey.questions[0].id,
-        answers_survey_id: mockSurvey.current_answers_survey.id,
-        option_ids: [optionSelected.id],
-      })
-    );
+      rest.forEach((opt) => {
+        expect(
+          getByTestId(`single_choice_option_${opt.id}`).getAttribute(
+            'aria-selected'
+          )
+        ).toEqual('false');
+      });
+    });
   });
 });
