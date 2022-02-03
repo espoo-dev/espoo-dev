@@ -5,4 +5,10 @@ class Group < ApplicationRecord
   has_one :required_group_dependency, dependent: :destroy, class_name: 'GroupDependency'
 
   validates :name, presence: true, uniqueness: { scope: :user_id }
+
+  delegate :groups, to: :required_group_dependency, prefix: :required, allow_nil: true
+
+  def required_groups_ids
+    required_groups&.pluck(:id)
+  end
 end

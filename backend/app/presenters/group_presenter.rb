@@ -13,6 +13,7 @@ class GroupPresenter < BasePresenter
       id: group.id,
       name: group.name,
       surveys: surveys_payload,
+      required_groups_ids: group.required_groups_ids
     }
   end
 
