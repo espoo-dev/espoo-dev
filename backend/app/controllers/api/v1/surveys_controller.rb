@@ -2,7 +2,7 @@ class Api::V1::SurveysController < Api::V1::ApiController
   def show
     survey = Survey.where(params.permit(:id)).includes(questions: %i[question_type options]).take!
     authorize survey
-    render json: survey_json(survey)
+    render json: parsed_surveys([survey]).first
   end
 
   def index

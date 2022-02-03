@@ -19,11 +19,12 @@ Rails.application.routes.draw do
 
   namespace :api do
     namespace :v1 do
-      resources :users, only: %i[index create]
-      resources :surveys, only: %i[index show]
-      resources :roles, only: %i[index]
-      resources :answers_surveys, only: %i[create show]
       resources :answers, only: %i[create]
+      resources :answers_surveys, only: %i[create show]
+      resources :groups, only: %i[index]
+      resources :users, only: %i[index create]
+      resources :roles, only: %i[index]
+      resources :surveys, only: %i[index show]
     end
   end
 
