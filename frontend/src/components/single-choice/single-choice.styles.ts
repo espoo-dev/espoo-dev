@@ -13,9 +13,12 @@ export const OptionSingleChoice = styled.div<OptionSingleChoiceProps>`
   cursor: pointer;
   padding: 12px;
   border: ${(props) =>
-    props.selected ? `1px solid ${colorPallettes.success}` : '1px solid transparent'};
+    props.selected
+      ? `1px solid ${colorPallettes.success}`
+      : '1px solid transparent'};
   transition: ${transitions.defaultTransition};
-  color: ${(props) => (props.selected ? colorPallettes.success : colorPallettes.primary)};
+  color: ${(props) =>
+    props.selected ? colorPallettes.success : colorPallettes.primary};
   font-weight: 500;
 
   &:hover {

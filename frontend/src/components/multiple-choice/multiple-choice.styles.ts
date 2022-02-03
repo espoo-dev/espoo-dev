@@ -13,7 +13,8 @@ export const OptionMultipleChoice = styled.div<{ selected: boolean }>`
   cursor: pointer;
   padding: 12px;
   transition: ${transitions.defaultTransition};
-  color: ${(props) => (props.selected ? colorPallettes.success : colorPallettes.primary)};
+  color: ${(props) =>
+    props.selected ? colorPallettes.success : colorPallettes.primary};
   font-weight: 500;
   display: flex;
   align-items: center;
