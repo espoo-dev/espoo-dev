@@ -13,16 +13,7 @@ class Api::V1::SurveysController < Api::V1::ApiController
 
   private
 
-  def answers_surveys(user, survey)
-    AnswersSurvey.where(user: user, survey: survey)
-  end
-
   def parsed_surveys(surveys)
-    surveys.map { |survey| survey_json(survey) }
-  end
-
-  def survey_json(survey)
-    survey.answers_surveys_by_user = answers_surveys(current_user, survey)
-    SurveyPresenter.new(survey, current_user).payload
+    surveys.map { |survey| SurveyPresenter.new(survey, current_user).payload }
   end
 end
