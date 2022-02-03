@@ -5,7 +5,7 @@ RSpec.describe Group, type: :model do
 
   describe 'relationships' do
     it { is_expected.to belong_to(:user).required }
-    it { is_expected.to belong_to(:group_dependency).required }
+    it { is_expected.to belong_to(:group_dependency).optional }
     it { is_expected.to have_many(:surveys).dependent(:nullify) }
     it { is_expected.to have_one(:required_group_dependency).dependent(:destroy) }
   end
