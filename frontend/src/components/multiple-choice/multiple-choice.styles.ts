@@ -4,17 +4,17 @@ import * as transitions from 'styles/transitions';
 
 export const OptionMultipleChoice = styled.div<{ selected: boolean }>`
   background-color: ${(props) =>
-    props.selected ? colorPallettes.bgSuccess : '#e4e8ee'};
+    (props.selected ? colorPallettes.bgSuccess : '#e4e8ee')};
   border-radius: 6px;
   border: ${(props) =>
-    props.selected
+    (props.selected
       ? `1px solid ${colorPallettes.success}`
-      : '1px solid transparent'};
+      : '1px solid transparent')};
   cursor: pointer;
   padding: 12px;
   transition: ${transitions.defaultTransition};
   color: ${(props) =>
-    props.selected ? colorPallettes.success : colorPallettes.primary};
+    (props.selected ? colorPallettes.success : colorPallettes.primary)};
   font-weight: 500;
   display: flex;
   align-items: center;
