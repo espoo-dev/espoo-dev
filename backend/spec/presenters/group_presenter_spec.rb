@@ -13,10 +13,11 @@ RSpec.describe GroupPresenter do
     it 'matches expected attributes' do
       survey_payload = SurveyPresenter.new(survey, user).payload
       expected_payload = {
-        "id" => group.id,
-        "name" => group.name,
-        "surveys" => [survey_payload],
-        "required_groups_ids" => group.required_groups_ids
+        'id' => group.id,
+        'name' => group.name,
+        'surveys' => [survey_payload],
+        'required_groups_ids' => group.required_groups_ids,
+        'position' => group.position
       }.with_indifferent_access
 
       expect(presenter.payload.with_indifferent_access).to eq expected_payload

@@ -19,4 +19,17 @@ FactoryBot.define do
       group.update!(required_group_dependency: group_dependency)
     end
   end
+
+  factory :group_with_2_group_dependencies_levels, parent: :group_with_1_survey do
+    after(:create) do |group|
+      # TODO: extract this to a method named addDependency
+      dependent_group = create(:group_with_1_survey, user: group.user)
+      group_dependency = create(:group_dependency, groups: [dependent_group], group: group)
+      group.update!(required_group_dependency: group_dependency)
+
+      dependent_group2 = create(:group_with_1_survey, user: group.user)
+      group_dependency2 = create(:group_dependency, groups: [dependent_group2], group: dependent_group)
+      dependent_group.update!(required_group_dependency: group_dependency2)
+    end
+  end
 end
