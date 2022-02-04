@@ -8,12 +8,42 @@ class Group < ApplicationRecord
 
   delegate :groups, to: :required_group_dependency, prefix: :required, allow_nil: true
 
+  STATUS_AVAILABLE = 'Available'.freeze
+  STATUS_COMPLETED = 'Completed'.freeze
+  STATUS_DOING = 'Doing'.freeze
+  STATUS_BLOCKED = 'Blocked'.freeze
+
   def required_groups_ids
-    required_groups&.pluck(:id)
+    required_groups&.pluck(:id) || []
   end
 
   def position
     recursive_position(self, 0)
+  end
+
+  def status
+    all_required_groups_completed = all_required_groups_completed?
+    if required_groups_ids.empty?
+      STATUS_AVAILABLE
+    elsif all_required_groups_completed && all_surveys_completed?
+      STATUS_COMPLETED
+    elsif all_required_groups_completed && !all_surveys_completed?
+      STATUS_DOING
+    else
+      STATUS_BLOCKED
+    end
+  end
+
+  def all_required_groups_completed?
+    required_groups&.all? do |group|
+      group.all_surveys_completed?
+    end
+  end
+
+  def all_surveys_completed?
+    surveys.all? do |survey|
+      AnswersSurvey.current_by_user_and_survey(user, survey).completed?
+    end
   end
 
   private

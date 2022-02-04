@@ -17,7 +17,8 @@ RSpec.describe GroupPresenter do
         'name' => group.name,
         'surveys' => [survey_payload],
         'required_groups_ids' => group.required_groups_ids,
-        'position' => group.position
+        'position' => group.position,
+        'status' => group.status
       }.with_indifferent_access
 
       expect(presenter.payload.with_indifferent_access).to eq expected_payload

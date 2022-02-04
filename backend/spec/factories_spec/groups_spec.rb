@@ -20,4 +20,14 @@ RSpec.describe 'Groups' do
 
     it { expect(group.required_groups.count).to eq(1) }
   end
+
+  describe 'group_with_1_survey' do
+    let!(:group) { create(:group_with_1_survey) }
+
+    it { expect(Group.count).to eq(1) }
+
+    it { expect(GroupDependency.count).to eq(0) }
+
+    it { expect(group.status).to eq(Group::STATUS_AVAILABLE) }
+  end
 end
