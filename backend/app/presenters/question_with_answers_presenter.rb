@@ -35,7 +35,7 @@ class QuestionWithAnswersPresenter < QuestionPresenter
 
     options.flatten.map do |option|
       OptionPresenter.payload(option)
-    end
+    end.sort(&:id)
   end
 
   def answers_options(answers)

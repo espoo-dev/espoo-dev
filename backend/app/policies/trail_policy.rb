@@ -1,0 +1,2 @@
+class TrailPolicy < ApplicationPolicy
+end
