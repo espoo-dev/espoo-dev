@@ -9,6 +9,7 @@ class Seeds < Base
     create_questions_and_options
     create_answers
     set_survey_ready
+    create_groups
   end
 
   private
@@ -308,5 +309,13 @@ class Seeds < Base
     Answer.create!(answers_survey: answers_survey_colors, question: question_one_color_survey, options: [correct_option_question_1_colors_survey])
     Answer.create!(answers_survey: answers_survey_teacher, question: question_one_teacher, options: [option_correct_question_1_survey_teacher])
     Answer.create!(answers_survey: answers_survey_teacher, question: question_two_teacher_ready, options: [@option_incorrect_question_2_survey_teacher])
+  end
+
+  def create_groups
+    first_group = Group.create!(name: 'Animals and colors', surveys: [@teacher_ready_survey, @colors_survey_ready], user: @user_teacher)
+    second_group = Group.create!(name: 'To be', surveys: [@to_be_ready_survey], user: @user_teacher)
+    third_group = Group.create!(name: 'Choose subject', surveys: [@choose_subject_ready_survey], user: @user_teacher)
+    third_group.add_required_group!(second_group)
+    second_group.add_required_group!(first_group)
   end
 end
