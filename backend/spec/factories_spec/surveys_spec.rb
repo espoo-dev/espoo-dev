@@ -11,6 +11,18 @@ RSpec.describe 'Surveys' do
     it { expect(Question.count).to eq(2) }
   end
 
+  describe 'survey_with_1_question' do
+    before do
+      create(:survey_with_1_question)
+    end
+
+    it { expect(Survey.count).to eq(1) }
+
+    it { expect(Question.count).to eq(1) }
+
+    it { expect(SurveySubject.count).to eq(1) }
+  end
+
   describe 'survey_with_two_questions_two_answers' do
     before do
       create(:survey_with_two_questions_two_answers)
