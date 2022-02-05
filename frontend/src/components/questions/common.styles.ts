@@ -6,10 +6,6 @@ export type BaseOptionProps<T = unknown> = Partial<T> & {
   selected: boolean;
 };
 
-type Partial<T> = {
-  [P in keyof T]?: T[P];
-};
-
 export const BaseOption = styled.div<BaseOptionProps>`
   border-radius: 6px;
   cursor: pointer;
