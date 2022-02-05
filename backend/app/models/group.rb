@@ -1,3 +1,4 @@
+# :reek:MissingSafeMethod { exclude: [ add_required_group! ] }
 class Group < ApplicationRecord
   belongs_to :user
   belongs_to :group_dependency, optional: true
@@ -12,6 +13,12 @@ class Group < ApplicationRecord
   STATUS_COMPLETED = 'Completed'.freeze
   STATUS_DOING = 'Doing'.freeze
   STATUS_BLOCKED = 'Blocked'.freeze
+
+  def add_required_group!(required_group)
+    required_group_dependency ||= GroupDependency.create(group: self, groups: [required_group])
+    required_group_dependency.groups.push(required_group)
+    save!
+  end
 
   def required_groups_ids
     required_groups&.pluck(:id) || []
