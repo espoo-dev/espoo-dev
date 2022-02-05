@@ -2,21 +2,31 @@ import styled from 'styled-components';
 import { colorPallettes } from 'styles/globals';
 import * as transitions from 'styles/transitions';
 
-interface OptionSingleChoiceProps {
+export type BaseOptionProps<T = unknown> = Partial<T> & {
   selected: boolean;
-}
+};
 
-export const OptionSingleChoice = styled.div<OptionSingleChoiceProps>`
-  background-color: ${(props) =>
-    props.selected ? colorPallettes.bgSuccess : '#e4e8ee'};
+type Partial<T> = {
+  [P in keyof T]?: T[P];
+};
+
+export const BaseOption = styled.div<BaseOptionProps>`
   border-radius: 6px;
   cursor: pointer;
-  padding: 12px;
-  border: ${(props) =>
-    props.selected ? `1px solid ${colorPallettes.success}` : '1px solid transparent'};
-  transition: ${transitions.defaultTransition};
-  color: ${(props) => (props.selected ? colorPallettes.success : colorPallettes.primary)};
   font-weight: 500;
+  padding: 12px;
+  transition: ${transitions.defaultTransition};
+
+  background-color: ${(props) =>
+    props.selected ? colorPallettes.bgSuccess : '#e4e8ee'};
+
+  border: ${(props) =>
+    props.selected
+      ? `1px solid ${colorPallettes.success}`
+      : '1px solid transparent'};
+
+  color: ${(props) =>
+    props.selected ? colorPallettes.success : colorPallettes.primary};
 
   &:hover {
     background-color: ${colorPallettes.bgSuccess};
@@ -27,7 +37,7 @@ export const OptionSingleChoice = styled.div<OptionSingleChoiceProps>`
   }
 `;
 
-export const GridSingleChoice = styled.div`
+export const BaseOptionsGrid = styled.div`
   display: grid;
   gap: 16px;
   grid-template-columns: repeat(auto-fit, minmax(350px, 2fr));

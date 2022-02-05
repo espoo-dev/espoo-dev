@@ -12,7 +12,7 @@ export interface SingleChoiceProps {
   setResult(value: number[]): void;
 }
 
-const SingleChoice = (props: SingleChoiceProps) => {
+export const SingleChoice = (props: SingleChoiceProps) => {
   const { options: originalOptions, setResult } = props;
   const [options, setOptions] = useState<ExtendedOption[]>(originalOptions);
 
@@ -21,7 +21,8 @@ const SingleChoice = (props: SingleChoiceProps) => {
       prev.map((option) => ({
         ...option,
         selected: option.selected ? false : option.id === id,
-      })));
+      }))
+    );
   };
 
   useEffect(() => {
@@ -56,5 +57,3 @@ const SingleChoice = (props: SingleChoiceProps) => {
     </GridSingleChoice>
   );
 };
-
-export default SingleChoice;

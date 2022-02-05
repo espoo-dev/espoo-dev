@@ -1,8 +1,9 @@
-import { Survey } from '@api/models/survey';
-import { SurveyHandler } from './survey-handler';
+import { Question, Survey } from '@api/models/survey';
+import { AxiosResponse } from 'axios';
 import { act, fireEvent, render, screen, waitFor } from 'test-utils';
-import mockSurvey from 'utils/mocks/survey';
+import surveyMock from 'utils/mocks/survey';
 import * as service from '../../api/services/answers';
+import { SurveyHandler } from './survey-handler';
 
 jest.mock('../../api/services/answers');
 
@@ -22,14 +23,14 @@ const doServiceMock = () => {
         },
         options: [],
       },
-    } as any)
+    } as unknown as AxiosResponse<Question>)
   );
 };
 
 describe('SurveyHandler', () => {
   describe('Questions', () => {
     const mockCreate = service.AnswerService.prototype.create;
-    const surveyDefault: Survey = JSON.parse(JSON.stringify(mockSurvey));
+    const surveyDefault: Survey = JSON.parse(JSON.stringify(surveyMock));
 
     beforeEach(() => {
       doServiceMock();
@@ -50,7 +51,7 @@ describe('SurveyHandler', () => {
 
     it('should render all question options to question', () => {
       render(<SurveyHandler survey={surveyDefault} />);
-      surveyDefault.current_answers_survey.questions[0].options.map(
+      surveyDefault.current_answers_survey.questions[0].options.forEach(
         (option) => {
           expect(screen.getByText(option.name)).toBeInTheDocument();
         }
@@ -175,7 +176,7 @@ describe('SurveyHandler', () => {
 
   describe('Progress bar', () => {
     const mockCreate = service.AnswerService.prototype.create;
-    const surveyDefault: Survey = JSON.parse(JSON.stringify(mockSurvey));
+    const surveyDefault: Survey = JSON.parse(JSON.stringify(surveyMock));
 
     beforeEach(() => {
       doServiceMock();
@@ -210,13 +211,9 @@ describe('SurveyHandler', () => {
 
       const { getByTestId, getByText } = screen;
 
-      const progress_bar = await waitFor(() =>
-        getByTestId('progress_bar')
-      );
-      const progress_text = await waitFor(() =>
-        getByTestId('progress_text')
-      );
-      const { questions } = mockSurvey;
+      const progress_bar = await waitFor(() => getByTestId('progress_bar'));
+      const progress_text = await waitFor(() => getByTestId('progress_text'));
+      const { questions } = surveyMock;
       const [question] = questions;
       const option = question.options[0];
       const optionElement = await waitFor(() => getByText(option.name));

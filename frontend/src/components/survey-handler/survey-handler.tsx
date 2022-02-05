@@ -14,8 +14,7 @@ import {
   Spinner,
 } from '@chakra-ui/react';
 import { AppButton } from '@components/app-button';
-import MultipleChoice from '@components/multiple-choice/multiple-choice';
-import SingleChoice from '@components/single-choice/single-choice';
+import { MultipleChoice, SingleChoice } from '@components/questions';
 import SumaryResult from '@components/sumary-result/sumary-result';
 import { usePrevious } from '@hooks/usePrevious';
 import { useUpdateEffect } from '@hooks/useUpdateEffect';

@@ -1,5 +1,5 @@
 import { act, fireEvent, render, screen, waitFor } from 'test-utils';
-import SingleChoice from './single-choice';
+import { SingleChoice } from './single-choice';
 
 const options = [
   {
@@ -16,16 +16,10 @@ const options = [
   },
 ];
 
-jest.mock('../../api/client', () => ({
-  httpClient: {
-    post: jest.fn(),
-  },
-}));
-
 describe('SingleChoice', () => {
   it('should render all options', () => {
     render(<SingleChoice options={options} setResult={jest.fn()} />);
-    options.map((option) => {
+    options.forEach((option) => {
       expect(screen.getByText(option.name)).toBeInTheDocument();
     });
   });
@@ -48,7 +42,7 @@ describe('SingleChoice', () => {
     await waitFor(() => {
       expect(buttonItem.getAttribute('aria-selected')).toEqual('true');
 
-      const [_, ...rest] = options;
+      const [, ...rest] = options;
 
       rest.forEach((opt) => {
         expect(
