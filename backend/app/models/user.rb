@@ -10,6 +10,7 @@ class User < ApplicationRecord
   has_many :questions, dependent: :destroy
   has_many :surveys, dependent: :destroy
   has_many :groups, dependent: :destroy
+  has_many :trails, dependent: :destroy
 
   belongs_to :role
 

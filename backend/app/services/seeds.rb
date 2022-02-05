@@ -9,7 +9,7 @@ class Seeds < Base
     create_questions_and_options
     create_answers
     set_survey_ready
-    create_groups
+    create_trails
   end
 
   private
@@ -311,11 +311,12 @@ class Seeds < Base
     Answer.create!(answers_survey: answers_survey_teacher, question: question_two_teacher_ready, options: [@option_incorrect_question_2_survey_teacher])
   end
 
-  def create_groups
+  def create_trails
     first_group = Group.create!(name: 'Animals and colors', surveys: [@teacher_ready_survey, @colors_survey_ready], user: @user_teacher)
     second_group = Group.create!(name: 'To be', surveys: [@to_be_ready_survey], user: @user_teacher)
     third_group = Group.create!(name: 'Choose subject', surveys: [@choose_subject_ready_survey], user: @user_teacher)
     third_group.add_required_group!(second_group)
     second_group.add_required_group!(first_group)
+    Trail.create!(name: 'English', groups: [first_group, second_group, third_group], user: @user_teacher)
   end
 end
