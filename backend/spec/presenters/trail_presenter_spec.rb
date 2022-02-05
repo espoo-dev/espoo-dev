@@ -13,7 +13,7 @@ RSpec.describe TrailPresenter do
       expected_payload = {
         'id' => trail.id,
         'name' => trail.name,
-        'groups' => [],
+        'groups' => []
       }.with_indifferent_access
 
       expect(presenter.payload.with_indifferent_access).to eq expected_payload

@@ -317,6 +317,6 @@ class Seeds < Base
     third_group = Group.create!(name: 'Choose subject', surveys: [@choose_subject_ready_survey], user: @user_teacher)
     third_group.add_required_group!(second_group)
     second_group.add_required_group!(first_group)
-    Trail.create!(name: "English", groups:[first_group, second_group, third_group], user: @user_teacher)
+    Trail.create!(name: 'English', groups: [first_group, second_group, third_group], user: @user_teacher)
   end
 end

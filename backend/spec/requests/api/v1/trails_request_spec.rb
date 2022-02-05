@@ -3,7 +3,7 @@ require 'rails_helper'
 RSpec.describe 'TrailsController', type: :request do
   describe '#index' do
     context 'when it has a trail' do
-      let!(:trail) { create(:trail, groups:[create(:group_with_1_survey)]) }
+      let!(:trail) { create(:trail, groups: [create(:group_with_1_survey)]) }
       let!(:user) { trail.user }
 
       before { get api_v1_trails_path, headers: auth_headers(user: user) }
