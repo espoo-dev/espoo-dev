@@ -1,5 +1,5 @@
-import { render, fireEvent, screen, waitFor } from 'test-utils';
-import MultipleChoice from './multiple-choice';
+import { fireEvent, render, screen } from 'test-utils';
+import { MultipleChoice } from './multiple-choice';
 
 let options = [];
 
@@ -20,7 +20,7 @@ describe('MultipleChoice', () => {
     const rendered = render(
       <MultipleChoice options={options} setResult={jest.fn()} />
     );
-    options.map((option) => {
+    options.forEach((option) => {
       expect(rendered.getAllByText(option.name)).toHaveLength(1);
     });
   });
@@ -31,9 +31,9 @@ describe('MultipleChoice', () => {
     );
     const buttonItem = rendered.getByText(options[0].name);
     fireEvent.click(buttonItem);
-    expect(screen.getByTestId(options[0].id + '-selected')).toBeInTheDocument();
+    expect(screen.getByTestId(`${options[0].id}-selected`)).toBeInTheDocument();
     expect(
-      screen.getByTestId(options[1].id + '-unselected')
+      screen.getByTestId(`${options[1].id}-unselected`)
     ).toBeInTheDocument();
   });
 
@@ -42,10 +42,10 @@ describe('MultipleChoice', () => {
     const rendered = render(
       <MultipleChoice options={options} setResult={mock} />
     );
-    options.map((option) => {
+    options.forEach((option) => {
       const buttonItem = rendered.getByText(option.name);
       fireEvent.click(buttonItem);
-      expect(screen.getByTestId(option.id + '-selected')).toBeInTheDocument();
+      expect(screen.getByTestId(`${option.id}-selected`)).toBeInTheDocument();
     });
   });
 
@@ -54,15 +54,15 @@ describe('MultipleChoice', () => {
     const rendered = render(
       <MultipleChoice options={options} setResult={mock} />
     );
-    options.map((option) => {
+    options.forEach((option) => {
       const buttonItem = rendered.getByText(option.name);
       fireEvent.click(buttonItem);
-      expect(screen.getByTestId(option.id + '-selected')).toBeInTheDocument();
+      expect(screen.getByTestId(`${option.id}-selected`)).toBeInTheDocument();
     });
-    options.map((option) => {
+    options.forEach((option) => {
       const buttonItem = rendered.getByText(option.name);
       fireEvent.click(buttonItem);
-      expect(screen.getByTestId(option.id + '-unselected')).toBeInTheDocument();
+      expect(screen.getByTestId(`${option.id}-unselected`)).toBeInTheDocument();
     });
   });
 
@@ -71,10 +71,10 @@ describe('MultipleChoice', () => {
     const rendered = render(
       <MultipleChoice options={options} setResult={mock} />
     );
-    options.map((option) => {
+    options.forEach((option) => {
       const buttonItem = rendered.getByText(option.name);
       fireEvent.click(buttonItem);
-      expect(screen.getByTestId(option.id + '-selected')).toBeInTheDocument();
+      expect(screen.getByTestId(`${option.id}-selected`)).toBeInTheDocument();
     });
     expect(mock).toHaveBeenCalledWith([options[0].id, options[1].id]);
   });
