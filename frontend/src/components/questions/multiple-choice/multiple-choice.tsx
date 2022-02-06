@@ -1,19 +1,23 @@
 import { OptionQuestion } from '@api/models/survey';
-import { Grid, Text } from '@chakra-ui/react';
+import { Text } from '@chakra-ui/react';
+import { useUpdateEffect } from '@hooks/useUpdateEffect';
 import { Dispatch, SetStateAction, useState } from 'react';
 import { ImCheckboxChecked, ImCheckboxUnchecked } from 'react-icons/im';
-import { OptionMultipleChoice } from './multiple-choice.styles';
+import {
+  MultipleChoiceGrid,
+  MultipleChoiceOption,
+} from './multiple-choice.styles';
 
 export interface Option extends OptionQuestion {
   selected?: boolean;
 }
 
-export interface MultipleChoiseProps {
+export interface MultipleChoiceProps {
   options: Option[];
   setResult: Dispatch<SetStateAction<number[]>>;
 }
 
-const MultipleChoise = (props: MultipleChoiseProps) => {
+export const MultipleChoice = (props: MultipleChoiceProps) => {
   const { options, setResult } = props;
   const [optionsState, setOptionsState] = useState<Option[]>(options);
 
@@ -28,11 +32,15 @@ const MultipleChoise = (props: MultipleChoiseProps) => {
   const getIdOptionsSelecteds = (): number[] =>
     optionsState.filter((option) => option.selected).map((option) => option.id);
 
+  useUpdateEffect(() => {
+    setOptionsState(options);
+  }, [options]);
+
   return (
-    <Grid templateColumns="repeat(auto-fit, minmax(180px, 2fr))" gap={4}>
+    <MultipleChoiceGrid>
       {optionsState &&
         optionsState.map((option: Option) => (
-          <OptionMultipleChoice
+          <MultipleChoiceOption
             key={option.id}
             onClick={() => toggle(option)}
             selected={option.selected}
@@ -43,10 +51,8 @@ const MultipleChoise = (props: MultipleChoiseProps) => {
               <ImCheckboxUnchecked data-testid={`${option.id}-unselected`} />
             )}
             <Text>{option.name}</Text>
-          </OptionMultipleChoice>
+          </MultipleChoiceOption>
         ))}
-    </Grid>
+    </MultipleChoiceGrid>
   );
 };
-
-export default MultipleChoise;

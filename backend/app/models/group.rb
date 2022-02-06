@@ -1,6 +1,7 @@
 # :reek:MissingSafeMethod { exclude: [ add_required_group! ] }
 class Group < ApplicationRecord
   belongs_to :user
+  belongs_to :trail, optional: true
   belongs_to :group_dependency, optional: true
   has_many :surveys, dependent: :nullify
   has_one :required_group_dependency, dependent: :destroy, class_name: 'GroupDependency'

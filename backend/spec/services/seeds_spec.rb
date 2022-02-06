@@ -39,12 +39,20 @@ RSpec.describe Seeds do
         expect(Option.count).to eq(41)
       end
 
-      it 'creates 3 group' do
+      it 'creates 3 groups' do
         expect(Group.count).to eq(3)
       end
 
       it 'Groups have position 0,1,2' do
         expect(Group.all.map(&:position).sort).to eq([0, 1, 2])
+      end
+
+      it 'creates 1 trail' do
+        expect(Trail.count).to eq(1)
+      end
+
+      it 'creates 1 trail with 3 groups' do
+        expect(Trail.first.groups.count).to eq(3)
       end
     end
 

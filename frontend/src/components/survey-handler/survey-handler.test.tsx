@@ -1,8 +1,9 @@
-import { Survey } from '@api/models/survey';
-import SurveyPage from '@pages/survey';
+import { Question, Survey } from '@api/models/survey';
+import { AxiosResponse } from 'axios';
 import { act, fireEvent, render, screen, waitFor } from 'test-utils';
-import mockSurvey from 'utils/mocks/survey';
+import surveyMock from 'utils/mocks/survey';
 import * as service from '../../api/services/answers';
+import { SurveyHandler } from './survey-handler';
 
 jest.mock('../../api/services/answers');
 
@@ -22,14 +23,14 @@ const doServiceMock = () => {
         },
         options: [],
       },
-    } as any)
+    } as unknown as AxiosResponse<Question>)
   );
 };
 
-describe('SurveyPage', () => {
+describe('SurveyHandler', () => {
   describe('Questions', () => {
     const mockCreate = service.AnswerService.prototype.create;
-    const surveyDefault: Survey = JSON.parse(JSON.stringify(mockSurvey));
+    const surveyDefault: Survey = JSON.parse(JSON.stringify(surveyMock));
 
     beforeEach(() => {
       doServiceMock();
@@ -40,7 +41,7 @@ describe('SurveyPage', () => {
     });
 
     it('should render first question', () => {
-      render(<SurveyPage survey={surveyDefault} />);
+      render(<SurveyHandler survey={surveyDefault} />);
       expect(
         screen.getByText('What is your favorite animal?')
       ).toBeInTheDocument();
@@ -49,25 +50,76 @@ describe('SurveyPage', () => {
     });
 
     it('should render all question options to question', () => {
-      render(<SurveyPage survey={surveyDefault} />);
-      surveyDefault.current_answers_survey.questions[0].options.map(
+      render(<SurveyHandler survey={surveyDefault} />);
+      surveyDefault.current_answers_survey.questions[0].options.forEach(
         (option) => {
           expect(screen.getByText(option.name)).toBeInTheDocument();
         }
       );
     });
 
-    it('should select an option', () => {
+    it('should render the Next question button disabled', () => {
       const mockSurvey = JSON.parse(JSON.stringify(surveyDefault));
+      const nextBtnId = 'next_question_btn';
 
-      render(<SurveyPage survey={mockSurvey} />);
-      const option = mockSurvey.current_answers_survey.questions[0].options[0];
-      const optionElement = screen.getByText(option.name);
+      const { getByTestId } = render(<SurveyHandler survey={mockSurvey} />);
+      const nextBtn = getByTestId(nextBtnId);
+
+      expect(nextBtn).toBeInTheDocument();
+      expect(nextBtn).toBeDisabled();
+    });
+
+    it('should enable next button when selecting a question', () => {
+      const mockSurvey = JSON.parse(JSON.stringify(surveyDefault));
+      const { questions } = mockSurvey;
+      const [question] = questions;
+
+      const { getByTestId, getByText } = render(
+        <SurveyHandler survey={mockSurvey} />
+      );
+      const option = question.options[0];
+      const optionElement = getByText(option.name);
       expect(optionElement).toBeInTheDocument();
 
       act(() => {
         fireEvent.click(optionElement);
       });
+
+      const nextBtnId = 'next_question_btn';
+
+      const nextBtn = getByTestId(nextBtnId);
+
+      expect(nextBtn).toBeInTheDocument();
+      expect(nextBtn).toBeEnabled();
+    });
+
+    it('should call answerService.create when clicking next button', async () => {
+      const mockSurvey = JSON.parse(JSON.stringify(surveyDefault));
+      const { questions } = mockSurvey;
+      const [question] = questions;
+
+      act(() => {
+        render(<SurveyHandler survey={mockSurvey} />);
+      });
+
+      const { getByTestId, getByText } = screen;
+
+      const option = question.options[0];
+      const optionElement = await waitFor(() => getByText(option.name));
+
+      await act(async () => {
+        fireEvent.click(optionElement);
+      });
+
+      const nextBtnId = 'next_question_btn';
+
+      const nextBtn = await waitFor(() => getByTestId(nextBtnId));
+
+      act(() => {
+        fireEvent.click(nextBtn);
+      });
+
+      expect(getByTestId('loading_icon')).toBeInTheDocument();
 
       expect(mockCreate).toHaveBeenCalledTimes(1);
     });
@@ -111,7 +163,7 @@ describe('SurveyPage', () => {
         },
       ];
 
-      render(<SurveyPage survey={surveyIncomplete} />);
+      render(<SurveyHandler survey={surveyIncomplete} />);
       expect(
         screen.getByText(
           surveyIncomplete.current_answers_survey.questions[1].name
@@ -124,7 +176,7 @@ describe('SurveyPage', () => {
 
   describe('Progress bar', () => {
     const mockCreate = service.AnswerService.prototype.create;
-    const surveyDefault: Survey = JSON.parse(JSON.stringify(mockSurvey));
+    const surveyDefault: Survey = JSON.parse(JSON.stringify(surveyMock));
 
     beforeEach(() => {
       doServiceMock();
@@ -136,7 +188,7 @@ describe('SurveyPage', () => {
 
     it('should render the progress component', async () => {
       act(() => {
-        render(<SurveyPage survey={surveyDefault} />);
+        render(<SurveyHandler survey={surveyDefault} />);
       });
 
       const progress_bar = await waitFor(() =>
@@ -154,21 +206,27 @@ describe('SurveyPage', () => {
 
     it('should update progress bar when answering a question', async () => {
       await act(async () => {
-        render(<SurveyPage survey={surveyDefault} />);
+        render(<SurveyHandler survey={surveyDefault} />);
       });
 
-      const progress_bar = await waitFor(() =>
-        screen.getByTestId('progress_bar')
-      );
-      const progress_text = await waitFor(() =>
-        screen.getByTestId('progress_text')
-      );
-      const option =
-        surveyDefault.current_answers_survey.questions[0].options[0];
-      const optionElement = await waitFor(() => screen.getByText(option.name));
+      const { getByTestId, getByText } = screen;
+
+      const progress_bar = await waitFor(() => getByTestId('progress_bar'));
+      const progress_text = await waitFor(() => getByTestId('progress_text'));
+      const { questions } = surveyMock;
+      const [question] = questions;
+      const option = question.options[0];
+      const optionElement = await waitFor(() => getByText(option.name));
 
       act(() => {
         fireEvent.click(optionElement);
+      });
+
+      const nextBtnId = 'next_question_btn';
+      const nextBtn = await waitFor(() => getByTestId(nextBtnId));
+
+      act(() => {
+        fireEvent.click(nextBtn);
       });
 
       await waitFor(() => {
