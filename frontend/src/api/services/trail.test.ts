@@ -1,8 +1,8 @@
-import { Group } from '@api/models/group';
+import { Trail } from '@api/models/trail';
 import { AxiosInstance, AxiosResponse } from 'axios';
 import mockManyGroups from 'utils/mocks/groups';
 import { httpClient } from '../client';
-import { GroupService } from './group';
+import { TrailService } from './trail';
 
 // Mocking httpClient
 jest.mock('../client', () => ({
@@ -11,9 +11,9 @@ jest.mock('../client', () => ({
   },
 }));
 
-describe('GroupService', () => {
-  let instance: GroupService;
-  let res: AxiosResponse<Group[]>;
+describe('TrailService', () => {
+  let instance: TrailService;
+  let res: AxiosResponse<Trail[]>;
 
   describe('list method', () => {
     describe('when returns expected data', () => {
@@ -23,7 +23,7 @@ describe('GroupService', () => {
           jest.fn((url: string) => Promise.resolve({ data: mockManyGroups }))
         );
 
-        instance = new GroupService(httpClient);
+        instance = new TrailService(httpClient);
 
         res = await instance.list();
       });
@@ -44,7 +44,7 @@ describe('GroupService', () => {
           jest.fn((url: string) => Promise.reject(new Error('test error')))
         );
 
-        instance = new GroupService(httpClient);
+        instance = new TrailService(httpClient);
 
         res = await instance.list();
       });
