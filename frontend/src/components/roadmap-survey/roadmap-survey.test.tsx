@@ -12,18 +12,18 @@ describe('RoadmapSurvey', () => {
 
   it('should render component with all groups', () => {
     const rendered = render(<RoadmapSurvey groups={groups} />);
-    groups.map((group) => {
-      expect(rendered.getByTestId(`group-${group.id}`)).toBeInTheDocument();
-    });
+    groups.map((group) =>
+      expect(rendered.getByTestId(`group-${group.id}`)).toBeInTheDocument()
+    );
   });
 
   it('should show all survey names', () => {
     const rendered = render(<RoadmapSurvey groups={groups} />);
-    groups.map((group) => {
-      group.surveys.map((survey) => {
-        expect(rendered.getByText(survey.name)).toBeInTheDocument();
-      });
-    });
+    groups.map((group) =>
+      group.surveys.map((survey) =>
+        expect(rendered.getByText(survey.name)).toBeInTheDocument()
+      )
+    );
   });
 
   it('should render available and doing surveys in green scale', () => {
