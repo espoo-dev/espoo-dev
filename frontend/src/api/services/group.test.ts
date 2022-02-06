@@ -25,7 +25,7 @@ describe('GroupService', () => {
           jest.fn((url: string) => Promise.resolve({ data: mockManyGroups }))
         );
 
-        instance = new GroupService(httpClient as unknown);
+        instance = new GroupService(httpClient);
 
         res = await instance.list();
       });
@@ -46,7 +46,7 @@ describe('GroupService', () => {
           jest.fn((url: string) => Promise.reject(new Error('test error')))
         );
 
-        instance = new GroupService(httpClient as unknown);
+        instance = new GroupService(httpClient);
 
         res = await instance.list();
       });
