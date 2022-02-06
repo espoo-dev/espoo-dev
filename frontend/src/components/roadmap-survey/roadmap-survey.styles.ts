@@ -1,5 +1,5 @@
+import { StatusGroup } from '@api/models/group';
 import styled from 'styled-components';
-import { StatusGroup } from './roadmap-survey';
 
 const getAvailableColor = (status: StatusGroup): string => {
   const color = (status === StatusGroup.Blocked && 'gray') || 'green';

@@ -1,3 +1,4 @@
+import { Group } from '@api/models/group';
 import { Flex } from '@chakra-ui/react';
 import {
   IconItem,
@@ -5,24 +6,6 @@ import {
   RoadmapRow,
   SurveyItemMap,
 } from './roadmap-survey.styles';
-
-export enum StatusGroup {
-  Available = 'Available',
-  Doing = 'Doing',
-  Blocked = 'Blocked',
-}
-
-export interface Group {
-  id: number;
-  name: string;
-  group_dependencies_ids: number[];
-  surveys: {
-    name: string;
-    icon: string;
-  }[];
-  position: number;
-  status: StatusGroup;
-}
 
 interface RoadmapSurveyProps {
   groups: Group[];
