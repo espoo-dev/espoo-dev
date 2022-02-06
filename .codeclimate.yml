@@ -1,4 +1,8 @@
 version: "2"
+checks:
+  method-lines:
+      config:
+        threshold: 40
 plugins:
   duplication:
     enabled: true
@@ -11,3 +15,13 @@ plugins:
 exclude_patterns:
   - backend/
   - android-client/
+  - "**/coverage"
+  - "**/.husky"
+  - "**/.next"
+  - "**/cypress"
+  - "**/node_modules/"
+  - "**/*.d.ts"
+  - "**/*.spec.ts"
+  - "**/*.spec.tsx"
+  - "**/*.test.ts"
+  - "**/*.test.tsx"
