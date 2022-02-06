@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_02_02_171646) do
+ActiveRecord::Schema.define(version: 2022_02_05_120657) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -58,6 +58,7 @@ ActiveRecord::Schema.define(version: 2022_02_02_171646) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.integer "group_dependency_id"
+    t.integer "trail_id"
     t.index ["name", "user_id"], name: "index_groups_on_name_and_user_id", unique: true
     t.index ["user_id"], name: "index_groups_on_user_id"
   end
@@ -123,6 +124,16 @@ ActiveRecord::Schema.define(version: 2022_02_02_171646) do
     t.index ["user_id"], name: "index_surveys_on_user_id"
   end
 
+  create_table "trails", force: :cascade do |t|
+    t.string "name", null: false
+    t.string "description"
+    t.bigint "user_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["name", "user_id"], name: "index_trails_on_name_and_user_id", unique: true
+    t.index ["user_id"], name: "index_trails_on_user_id"
+  end
+
   create_table "users", force: :cascade do |t|
     t.string "email", default: "", null: false
     t.string "encrypted_password", default: "", null: false
@@ -145,5 +156,6 @@ ActiveRecord::Schema.define(version: 2022_02_02_171646) do
   add_foreign_key "options", "questions"
   add_foreign_key "options", "users"
   add_foreign_key "surveys", "survey_subjects"
+  add_foreign_key "trails", "users"
   add_foreign_key "users", "roles"
 end
