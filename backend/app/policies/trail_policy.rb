@@ -1,2 +1,2 @@
-class TrailPolicy < ApplicationPolicy
+class TrailPolicy < GenericPolicy
 end
