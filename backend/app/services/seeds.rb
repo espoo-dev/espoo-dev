@@ -12,18 +12,20 @@ class Seeds < Base
     create_trails
   end
 
-  private
-
   def clean_database
     User.destroy_all
-    Role.destroy_all
-    QuestionType.destroy_all
     Question.destroy_all
     Survey.destroy_all
     Option.destroy_all
     SurveySubject.destroy_all
     Answer.destroy_all
+    Group.destroy_all
+    Trail.destroy_all
+    Role.destroy_all
+    QuestionType.destroy_all
   end
+
+  private
 
   # Users and Roles
 
