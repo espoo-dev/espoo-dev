@@ -13,6 +13,15 @@ FactoryBot.define do
     end
   end
 
+  factory :answers_survey_with_multiple_options_answers, parent: :answers_survey do
+    survey { create(:survey_with_2_questions) }
+
+    after(:create) do |answers_survey|
+      answers_survey.answers = create_list(:answer_with_multiplt_options, 1, question: answers_survey.survey.questions[0], answers_survey: answers_survey)
+      answers_survey.save!
+    end
+  end
+
   factory :answers_survey_with_all_answers, parent: :answers_survey do
     survey { create(:survey_with_2_questions) }
 

@@ -31,11 +31,11 @@ class QuestionWithAnswersPresenter < QuestionPresenter
   def answered_options
     answers = answers_survey.answers.where(question: question)
 
-    options = answers_options(answers)
-
-    options.flatten.map do |option|
+    options_hash = answers_options(answers).flatten.map do |option|
       OptionPresenter.payload(option)
-    end.sort(&:id)
+    end
+
+    options_hash.sort_by { |key, _v| key[:id] }
   end
 
   def answers_options(answers)
