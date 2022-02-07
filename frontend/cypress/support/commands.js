@@ -24,8 +24,8 @@
 // -- This will overwrite an existing command --
 // Cypress.Commands.overwrite("visit", (originalFn, url, options) => { ... })
 
-Cypress.Commands.add("globalLogin", login => {
-  cy.get('#email').type(login.email);
-  cy.get('#password').type(login.password);
-  cy.get('#btn-login').click();
-})
+Cypress.Commands.add('globalLogin', (login) => {
+  cy.get('[data-testid="email"]').type(login.email);
+  cy.get('[data-testid="password"]').type(login.password);
+  cy.get('[data-testid="btn-login"]').click();
+});
