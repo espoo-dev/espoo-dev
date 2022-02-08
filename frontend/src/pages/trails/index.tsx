@@ -10,8 +10,11 @@ import {
   Text,
   Tooltip,
 } from '@chakra-ui/react';
+import { SurveysList } from '@components/main/SurveysList';
+import RoadmapSurvey from '@components/roadmap-survey/roadmap-survey';
 import { Sidemenu } from '@components/sidemenu';
 import { SurveyHandler } from '@components/survey-handler';
+import TrailList from '@components/trail-list/trails-list';
 import { colorPallettes } from '@styles/globals';
 import { httpClient } from 'api';
 import { errorHandler } from 'api/error-handler';
@@ -81,7 +84,7 @@ const Trails = () => {
                     textAlign="center"
                     mb="10px"
                   >
-                    {trails.length ? 'Discover a new trail!' : 'No trails =/'}
+                    {trails.length ? 'Discover a trail!' : 'No trails =/'}
                   </Text>
                   <Spacer />
                   <Tooltip label="Refresh" placement="top">
@@ -117,12 +120,10 @@ const Trails = () => {
                 <SurveyHandler survey={surveySelected} />
               </Box>
             ) : (
-              !loading && (
-                <span>RENDER TRAILS!</span>
-                // <SurveysList
-                //   data={surveys}
-                //   setSurveySelected={setSurveySelected}
-                // />
+              !loading &&
+              trails.length && (
+                // <TrailList data={trails} />
+                <RoadmapSurvey groups={trails[0].groups} />
               )
             )}
           </Box>
