@@ -67,4 +67,17 @@ RSpec.describe Seeds do
       end
     end
   end
+
+  describe '#clean_database' do
+    before do
+      described_class.call
+      described_class.new.clean_database
+    end
+
+    it 'deletes all models from database' do
+      Rails.application.eager_load!
+      no_stored_records = ApplicationRecord.descendants.all? { |klass| klass.count.zero? }
+      expect(no_stored_records).to be(true)
+    end
+  end
 end

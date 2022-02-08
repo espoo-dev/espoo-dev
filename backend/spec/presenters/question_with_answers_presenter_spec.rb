@@ -20,4 +20,14 @@ RSpec.describe QuestionWithAnswersPresenter do
       expect(presenter.payload[:correct]).to eq true
     end
   end
+
+  describe '#answered_options' do
+    describe 'when it has multiple answered options' do
+      let(:answers_survey) { create(:answers_survey_with_multiple_options_answers) }
+
+      it 'renders all answered options' do
+        expect(presenter.payload[:answered_options].count).to eq 2
+      end
+    end
+  end
 end

@@ -15,7 +15,7 @@ class GroupPresenter < BasePresenter
       surveys: surveys_payload,
       required_groups_ids: group.required_groups_ids,
       position: group.position,
-      status: group.status
+      status: group.status(user)
     }
   end
 

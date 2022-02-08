@@ -3,7 +3,7 @@ require 'rails_helper'
 RSpec.describe 'TrailsController', type: :request do
   describe '#index' do
     context 'when it has a trail' do
-      let!(:trail) { create(:trail, groups: [create(:group_with_1_survey)]) }
+      let!(:trail) { create(:trail, groups: [create(:group_with_1_survey)], user: create(:user_student)) }
       let!(:user) { trail.user }
 
       before { get api_v1_trails_path, headers: auth_headers(user: user) }
@@ -14,9 +14,19 @@ RSpec.describe 'TrailsController', type: :request do
 
       it 'matches trail attributes' do
         trail_payload = TrailPresenter.new(trail, user).payload.with_indifferent_access
-
         expect(response_body).to match([trail_payload])
       end
+    end
+
+    context 'when run seed' do
+      let(:user) { User.find_by(email: 'student@gmail.com') }
+
+      before do
+        Seeds.call
+        get api_v1_trails_path, headers: auth_headers(user: user)
+      end
+
+      it { expect(response).to have_http_status :ok }
     end
   end
 end
