@@ -28,6 +28,6 @@ RSpec.describe 'Groups' do
 
     it { expect(GroupDependency.count).to eq(0) }
 
-    it { expect(group.status).to eq(Group::STATUS_AVAILABLE) }
+    it { expect(group.status(group.user)).to eq(Group::STATUS_AVAILABLE) }
   end
 end

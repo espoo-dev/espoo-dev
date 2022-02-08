@@ -5,7 +5,7 @@ require 'rails_helper'
 RSpec.describe GroupPresenter do
   subject(:presenter) { described_class.new(group, user) }
 
-  let!(:group) { create(:group_with_1_group_dependency) }
+  let!(:group) { create(:group_with_1_group_dependency_not_answered) }
   let!(:user) { group.surveys.first.answers_surveys.first.user }
   let!(:survey) { group.surveys.first }
 
@@ -18,7 +18,7 @@ RSpec.describe GroupPresenter do
         'surveys' => [survey_payload],
         'required_groups_ids' => group.required_groups_ids,
         'position' => group.position,
-        'status' => group.status
+        'status' => group.status(user)
       }.with_indifferent_access
 
       expect(presenter.payload.with_indifferent_access).to eq expected_payload
