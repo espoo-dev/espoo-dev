@@ -51,7 +51,7 @@ class Group < ApplicationRecord
 
   def all_surveys_completed?(answering_user)
     surveys.all? do |survey|
-      AnswersSurvey.current_by_user_and_survey(answering_user, survey).completed?
+      AnswersSurvey.by_user_and_survey(answering_user, survey).last&.completed?
     end
   end
 
