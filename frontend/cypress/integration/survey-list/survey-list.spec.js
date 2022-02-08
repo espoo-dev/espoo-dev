@@ -4,18 +4,13 @@ context('survey list', () => {
     password: '123456',
   };
 
-  before(() => {
-    cy.visit(`/login`);
-  });
-
-  it('Should open survey page', () => {
+  it('Should open survey page when click on Surveys Item', () => {
     cy.globalLogin(login);
     cy.contains('Surveys').click();
     cy.url().should('be.equal', `${Cypress.config('baseUrl')}/surveys`);
   });
 
-  it('Should click refresh button and check call api', () => {
-    cy.visit(`/login`);
+  it('Should has status code 200 when click on refresh button', () => {
     cy.globalLogin(login);
     cy.contains('Surveys').click();
     cy.wait(1000);
@@ -24,7 +19,7 @@ context('survey list', () => {
     cy.wait('@getSurvey').its('response.statusCode').should('be.equal', 200);
   });
 
-  it('Must log out', () => {
+  it('Must log out when click on log out button', () => {
     cy.get('[data-testid="logout-button"]').click();
     cy.url().should('be.equal', `${Cypress.config('baseUrl')}/login`);
   });
