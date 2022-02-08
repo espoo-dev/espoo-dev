@@ -17,5 +17,16 @@ RSpec.describe 'TrailsController', type: :request do
         expect(response_body).to match([trail_payload])
       end
     end
+
+    context 'when run seed' do
+      let(:user) { User.find_by(email: 'student@gmail.com') }
+
+      before do
+        Seeds.call
+        get api_v1_trails_path, headers: auth_headers(user: user)
+      end
+
+      it { expect(response).to have_http_status :ok }
+    end
   end
 end

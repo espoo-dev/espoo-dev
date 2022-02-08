@@ -35,22 +35,22 @@ RSpec.describe Group, type: :model do
   describe '#status' do
     it 'returns STATUS_AVAILABLE when has no dependencies' do
       group = create(:group)
-      expect(group.status).to eq(Group::STATUS_AVAILABLE)
+      expect(group.status(group.user)).to eq(Group::STATUS_AVAILABLE)
     end
 
     it 'returns STATUS_COMPLETED when all required_groups and all surveys are completed' do
       group = create(:group_answered_with_1_group_dependency_answered)
-      expect(group.status).to eq(Group::STATUS_COMPLETED)
+      expect(group.status(group.user)).to eq(Group::STATUS_COMPLETED)
     end
 
     it 'returns STATUS_DOING when all required_groups are completed but surveys are imcompleted' do
       group = create(:group_with_1_group_dependency_answered)
-      expect(group.status).to eq(Group::STATUS_DOING)
+      expect(group.status(group.user)).to eq(Group::STATUS_DOING)
     end
 
     it 'returns STATUS_BLOCKED when all required_groups are not completed' do
       group = create(:group_with_1_group_dependency_not_answered)
-      expect(group.status).to eq(Group::STATUS_BLOCKED)
+      expect(group.status(group.user)).to eq(Group::STATUS_BLOCKED)
     end
   end
 end

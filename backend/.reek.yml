@@ -17,6 +17,7 @@ detectors:
     exclude:
       - "Users::SessionsController#create"
       - "Seeds"
+    max_statements: 6
   TooManyMethods:
     exclude:
       - "Seeds"
