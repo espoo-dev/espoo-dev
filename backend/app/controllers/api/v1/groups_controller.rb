@@ -1,6 +1,6 @@
 class Api::V1::GroupsController < Api::V1::ApiController
   def index
-    groups = Group.all.includes(surveys: [questions: %i[question_type options]])
+    groups = Group.all.includes(surveys: [questions: %i[question_type options]]).includes(:required_group_dependency)
 
     authorize groups
 
