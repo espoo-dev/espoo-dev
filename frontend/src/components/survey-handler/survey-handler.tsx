@@ -109,7 +109,7 @@ export const SurveyHandler = (props: SurveyPageProps) => {
   }, [questionIndex, totalQuestions]);
 
   useEffect(() => {
-    const { questions, current_answers_survey } = survey;
+    const { current_answers_survey } = survey;
 
     if (
       current_answers_survey &&
@@ -117,12 +117,12 @@ export const SurveyHandler = (props: SurveyPageProps) => {
     ) {
       const { current_question_index } = current_answers_survey;
       setQuestionIndex(current_question_index);
-      setQuestion(questions[current_question_index]);
+      setQuestion(current_answers_survey.questions[current_question_index]);
       return;
     }
 
     setQuestionIndex(0);
-    setQuestion(questions[0]);
+    setQuestion(current_answers_survey.questions[0]);
   }, []);
 
   useUpdateEffect(() => {
@@ -132,10 +132,10 @@ export const SurveyHandler = (props: SurveyPageProps) => {
   }, [question]);
 
   useUpdateEffect(() => {
-    const { questions } = survey;
+    const { current_answers_survey } = survey;
 
     if (questionIndex !== previousIndex) {
-      setQuestion(questions[questionIndex]);
+      setQuestion(current_answers_survey.questions[questionIndex]);
     }
   }, [questionIndex, previousIndex]);
 
