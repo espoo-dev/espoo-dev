@@ -1,0 +1,2 @@
+class TrailPolicy < GenericPolicy
+end

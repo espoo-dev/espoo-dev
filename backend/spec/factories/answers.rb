@@ -17,4 +17,15 @@ FactoryBot.define do
       answer.reload
     end
   end
+
+  factory :answer_with_multiplt_options, parent: :answer do
+    question { create(:multiple_choice_question) }
+
+    before(:create) do |answer|
+      answer.options.push(create(:option, question: answer.question, user: answer.answers_survey.user))
+      answer.options.push(create(:option, question: answer.question, user: answer.answers_survey.user))
+      answer.save!
+      answer.reload
+    end
+  end
 end

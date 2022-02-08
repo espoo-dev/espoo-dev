@@ -12,6 +12,10 @@ class AnswersSurvey < ApplicationRecord
     return where(user: user, survey: survey)
   }
 
+  scope :current_by_user_and_survey, lambda { |user, survey|
+    by_user_and_survey(user, survey).last
+  }
+
   NOT_STARTED = 'Not started'.freeze
   STARTED = 'Started'.freeze
   COMPLETED = 'Completed'.freeze

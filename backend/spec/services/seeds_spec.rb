@@ -27,8 +27,32 @@ RSpec.describe Seeds do
         expect(Question.count).to eq(12)
       end
 
+      it 'creates 7 surveys' do
+        expect(Survey.count).to eq(7)
+      end
+
+      it 'creates 4 ready surveys' do
+        expect(Survey.ready_surveys.count).to eq(4)
+      end
+
       it 'creates 41 options' do
         expect(Option.count).to eq(41)
+      end
+
+      it 'creates 3 groups' do
+        expect(Group.count).to eq(3)
+      end
+
+      it 'Groups have position 0,1,2' do
+        expect(Group.all.map(&:position).sort).to eq([0, 1, 2])
+      end
+
+      it 'creates 1 trail' do
+        expect(Trail.count).to eq(1)
+      end
+
+      it 'creates 1 trail with 3 groups' do
+        expect(Trail.first.groups.count).to eq(3)
       end
     end
 
@@ -41,6 +65,19 @@ RSpec.describe Seeds do
       it 'do not create entities' do
         expect(User.count).to be_zero
       end
+    end
+  end
+
+  describe '#clean_database' do
+    before do
+      described_class.call
+      described_class.new.clean_database
+    end
+
+    it 'deletes all models from database' do
+      Rails.application.eager_load!
+      no_stored_records = ApplicationRecord.descendants.all? { |klass| klass.count.zero? }
+      expect(no_stored_records).to be(true)
     end
   end
 end
