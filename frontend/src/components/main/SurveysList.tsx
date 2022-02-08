@@ -1,3 +1,4 @@
+import { Trail } from '@api/models/trail';
 import { SurveyItem } from '@components/survey-item/survey-item';
 import { httpClient } from 'api';
 import { errorHandler } from 'api/error-handler';
@@ -7,7 +8,7 @@ import React, { Dispatch, SetStateAction, useState } from 'react';
 import { SurveysListContainer } from './SurveysList.styles';
 
 interface SurveyListProps {
-  data: Survey[];
+  data: Survey[] | Trail[];
   setSurveySelected: Dispatch<SetStateAction<Survey>>;
 }
 
