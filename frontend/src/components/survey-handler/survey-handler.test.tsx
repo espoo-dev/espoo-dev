@@ -49,7 +49,7 @@ describe('SurveyHandler', () => {
       expect(screen.getByText('Question 1')).toBeInTheDocument();
     });
 
-    it('should not render next button when not have a question', async () => {
+    it('should not render next button when not have a question', () => {
       const mockSurvey = JSON.parse(JSON.stringify(surveyDefault)) as Survey;
       mockSurvey.current_answers_survey.questions = [];
       render(<SurveyHandler survey={mockSurvey} />);
