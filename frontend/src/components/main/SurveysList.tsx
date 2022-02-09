@@ -1,3 +1,4 @@
+import { Trail } from '@api/models/trail';
 import { SurveyItem } from '@components/survey-item/survey-item';
 import { httpClient } from 'api';
 import { errorHandler } from 'api/error-handler';
