@@ -121,10 +121,7 @@ const Trails = () => {
               </Box>
             ) : (
               !loading &&
-              trails.length && (
-                // <TrailList data={trails} />
-                <RoadmapSurvey groups={trails[0].groups} />
-              )
+              trails.length && <RoadmapSurvey groups={trails[0].groups} />
             )}
           </Box>
         </Content>

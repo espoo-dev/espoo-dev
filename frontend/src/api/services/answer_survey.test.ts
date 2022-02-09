@@ -1,13 +1,12 @@
 import { AxiosInstance, AxiosResponse } from 'axios';
-import { httpClient } from '../client';
 import {
   AnswerSurvey,
   AnswerSurveyCreate,
   AnswerSurveyGet,
 } from '@api/models/answer_survey';
+import { httpClient } from '../client';
 import { AnswerSurveyService } from './answer_survey';
 
-// Mocking httpClient
 jest.mock('../client', () => ({
   httpClient: {
     post: jest.fn(),
@@ -38,12 +37,12 @@ describe('AnswerSurveyService', () => {
       beforeEach(async () => {
         // mocking post implementation to return the expected value
         (httpClient as jest.Mocked<AxiosInstance>).post.mockImplementationOnce(
-          jest.fn((url: string, body: AnswerSurveyCreate) => {
-            return Promise.resolve({ data: mockResponse });
-          })
+          jest.fn((url: string, body: AnswerSurveyCreate) =>
+            Promise.resolve({ data: mockResponse })
+          )
         );
 
-        instance = new AnswerSurveyService(httpClient as any);
+        instance = new AnswerSurveyService(httpClient as unknown);
 
         res = await instance.register(mockAnswerSurveyCreate);
       });
@@ -61,12 +60,12 @@ describe('AnswerSurveyService', () => {
       beforeEach(async () => {
         // mocking post implementation to throw error
         (httpClient as jest.Mocked<AxiosInstance>).post.mockImplementationOnce(
-          jest.fn((url: string, body: AnswerSurveyCreate) => {
-            return Promise.reject({ data: mockResponse });
-          })
+          jest.fn((url: string, body: AnswerSurveyCreate) =>
+            Promise.reject({ data: mockResponse })
+          )
         );
 
-        instance = new AnswerSurveyService(httpClient as any);
+        instance = new AnswerSurveyService(httpClient as unknown);
 
         res = await instance.register(mockAnswerSurveyCreate);
       });
@@ -86,12 +85,12 @@ describe('AnswerSurveyService', () => {
       beforeEach(async () => {
         // mocking post implementation to return the expected value
         (httpClient as jest.Mocked<AxiosInstance>).post.mockImplementationOnce(
-          jest.fn((url: string, body: AnswerSurveyGet) => {
-            return Promise.resolve({ data: mockResponse });
-          })
+          jest.fn((url: string, body: AnswerSurveyGet) =>
+            Promise.resolve({ data: mockResponse })
+          )
         );
 
-        instance = new AnswerSurveyService(httpClient as any);
+        instance = new AnswerSurveyService(httpClient as unknown);
 
         res = await instance.get(mockAnswerSurveyGet);
       });
@@ -109,12 +108,12 @@ describe('AnswerSurveyService', () => {
       beforeEach(async () => {
         // mocking post implementation to throw error
         (httpClient as jest.Mocked<AxiosInstance>).post.mockImplementationOnce(
-          jest.fn((url: string, body: AnswerSurveyGet) => {
-            return Promise.reject({ data: mockResponse });
-          })
+          jest.fn((url: string, body: AnswerSurveyGet) =>
+            Promise.reject({ data: mockResponse })
+          )
         );
 
-        instance = new AnswerSurveyService(httpClient as any);
+        instance = new AnswerSurveyService(httpClient as unknown);
 
         res = await instance.get(mockAnswerSurveyGet);
       });

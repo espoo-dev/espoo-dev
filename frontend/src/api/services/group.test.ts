@@ -4,7 +4,6 @@ import mockManyGroups from 'utils/mocks/groups';
 import { httpClient } from '../client';
 import { GroupService } from './group';
 
-// Mocking httpClient
 jest.mock('../client', () => ({
   httpClient: {
     get: jest.fn(),
@@ -18,7 +17,6 @@ describe('GroupService', () => {
   describe('list method', () => {
     describe('when returns expected data', () => {
       beforeEach(async () => {
-        // mocking get implementation to return the expected value
         (httpClient as jest.Mocked<AxiosInstance>).get.mockImplementationOnce(
           jest.fn((url: string) => Promise.resolve({ data: mockManyGroups }))
         );
@@ -39,7 +37,6 @@ describe('GroupService', () => {
 
     describe('when returns an error', () => {
       beforeEach(async () => {
-        // mocking get implementation to return the expected value
         (httpClient as jest.Mocked<AxiosInstance>).get.mockImplementationOnce(
           jest.fn((url: string) => Promise.reject(new Error('test error')))
         );
