@@ -8,7 +8,7 @@ import React, { Dispatch, SetStateAction, useState } from 'react';
 import { SurveysListContainer } from './SurveysList.styles';
 
 interface SurveyListProps {
-  data: Survey[] | Trail[];
+  data: Survey[];
   setSurveySelected: Dispatch<SetStateAction<Survey>>;
 }
 
