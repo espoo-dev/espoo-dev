@@ -1,6 +1,6 @@
 class Api::V1::TrailsController < Api::V1::ApiController
   def index
-    trails = Trail.all.includes(groups: [surveys: [questions: %i[question_type options]], required_group_dependency: [groups: []]])
+    trails = Trail.all.includes(groups: [])
 
     authorize trails
 
@@ -19,7 +19,7 @@ class Api::V1::TrailsController < Api::V1::ApiController
   private
 
   def parsed_trails(trails)
-    trails.map { |trail| parsed_trail(trail) }
+    trails.map { |trail| SimpleTrailPresenter.new(trail, current_user).payload }
   end
 
   def parsed_trail(trail)
