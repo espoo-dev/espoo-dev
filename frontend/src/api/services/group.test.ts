@@ -1,7 +1,8 @@
-import { Role } from '@api/models/role';
+import { Group } from '@api/models/group';
 import { AxiosInstance, AxiosResponse } from 'axios';
-import { RoleService } from './role';
+import mockManyGroups from 'utils/mocks/groups';
 import { httpClient } from '../client';
+import { GroupService } from './group';
 
 jest.mock('../client', () => ({
   httpClient: {
@@ -9,23 +10,18 @@ jest.mock('../client', () => ({
   },
 }));
 
-// expected result to tests
-const mockResponse = {
-  mock: true,
-};
-
-describe('RoleService', () => {
-  let instance: RoleService;
-  let res: AxiosResponse<Role[]>;
+describe('GroupService', () => {
+  let instance: GroupService;
+  let res: AxiosResponse<Group[]>;
 
   describe('list method', () => {
     describe('when returns expected data', () => {
       beforeEach(async () => {
         (httpClient as jest.Mocked<AxiosInstance>).get.mockImplementationOnce(
-          jest.fn((url: string) => Promise.resolve({ data: mockResponse }))
+          jest.fn((url: string) => Promise.resolve({ data: mockManyGroups }))
         );
 
-        instance = new RoleService(httpClient as unknown);
+        instance = new GroupService(httpClient);
 
         res = await instance.list();
       });
@@ -35,7 +31,7 @@ describe('RoleService', () => {
       });
 
       it('should return the expected data', () => {
-        expect(res.data).toEqual(mockResponse);
+        expect(res.data).toEqual(mockManyGroups);
       });
     });
 
@@ -45,7 +41,7 @@ describe('RoleService', () => {
           jest.fn((url: string) => Promise.reject(new Error('test error')))
         );
 
-        instance = new RoleService(httpClient as unknown);
+        instance = new GroupService(httpClient);
 
         res = await instance.list();
       });
