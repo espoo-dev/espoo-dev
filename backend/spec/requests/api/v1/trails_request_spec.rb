@@ -13,7 +13,7 @@ RSpec.describe 'TrailsController', type: :request do
       it { expect(response_body.count).to eq(1) }
 
       it 'matches trail attributes' do
-        trail_payload = TrailPresenter.new(trail, user).payload.with_indifferent_access
+        trail_payload = SimpleTrailPresenter.new(trail, user).payload.with_indifferent_access
         expect(response_body).to match([trail_payload])
       end
     end
