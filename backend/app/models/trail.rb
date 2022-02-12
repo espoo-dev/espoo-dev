@@ -7,4 +7,8 @@ class Trail < ApplicationRecord
       sum + group.surveys.count
     end
   end
+
+  def ordered_groups
+    groups.sort_by(&:position)
+  end
 end

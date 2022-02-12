@@ -19,6 +19,6 @@ class TrailPresenter < BasePresenter
   private
 
   def groups_payload
-    trail.groups.map { |group| GroupPresenter.new(group, user).payload }
+    trail.ordered_groups.map { |group| GroupPresenter.new(group, user).payload }
   end
 end
