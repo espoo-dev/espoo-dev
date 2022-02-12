@@ -102,6 +102,7 @@ const Login = () => {
               ) : (
                 <AppRadioButton
                   name="role_id"
+                  data-testid="roles"
                   keyAttrs="id"
                   label="Roles"
                   options={roles}
@@ -112,6 +113,7 @@ const Login = () => {
 
               <AppButton
                 styling="primary"
+                data-testid="register-btn"
                 text="Register"
                 type="submit"
                 id="btn-login"
