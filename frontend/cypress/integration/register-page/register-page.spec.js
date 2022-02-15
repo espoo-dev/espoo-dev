@@ -15,14 +15,14 @@ context('register page', () => {
 
     it('Should must successfully register as a student', ()=> {
       let register = RegisterFactory.registerData();
-      register.roles = 'student';
+      register.roles = '202';
       RegisterPage.register(register);
     });
 
     it('Should must alert register email has already been taken as a student', ()=> {
       let register = RegisterFactory.registerData();
       register.email = 'testedoteste23456@gmail.com';
-      register.roles = 'student';
+      register.roles = '202';
       register.alert_msg = 'Validation failed: Email has already been taken';
       RegisterPage.register(register);
       });
@@ -30,7 +30,7 @@ context('register page', () => {
       it('Should must alert register email has already been taken as a teacher', ()=> {
         let register = RegisterFactory.registerData();
         register.email = 'testedoteste23455@gmail.com';
-        register.roles = 'teacher';
+        register.roles = '201';
         register.alert_msg = 'Validation failed: Email has already been taken';
         RegisterPage.register(register);
         });

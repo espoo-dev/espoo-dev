@@ -6,7 +6,7 @@ export default {
         let data = {
             email: faker.internet.email(),
             password: "123456",
-            roles: "teacher",
+            roles: "201",
             alert_msg : "Successfully registered, now you can log in"
         }
         return data

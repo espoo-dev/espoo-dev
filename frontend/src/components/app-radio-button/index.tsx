@@ -56,6 +56,7 @@ export const AppRadioButton = ({
               key={option[keyAttrs]}
               ref={(elRef) => setRef(elRef, index)}
               value={`${option[value]}`}
+              data-testid={option[keyAttrs]}
             >
               {option[text]}
             </Radio>
