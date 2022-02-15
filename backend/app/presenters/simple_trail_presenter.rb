@@ -1,4 +1,4 @@
-class TrailPresenter < BasePresenter
+class SimpleTrailPresenter < BasePresenter
   attr_reader :trail, :user
 
   def initialize(trail, user)
@@ -12,13 +12,7 @@ class TrailPresenter < BasePresenter
     {
       id: trail.id,
       name: trail.name,
-      groups: groups_payload
+      surveys_quantity: trail.surveys_quantity
     }
-  end
-
-  private
-
-  def groups_payload
-    trail.ordered_groups.map { |group| GroupPresenter.new(group, user).payload }
   end
 end

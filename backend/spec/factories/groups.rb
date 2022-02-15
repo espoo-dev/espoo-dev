@@ -2,6 +2,7 @@ FactoryBot.define do
   factory :group do
     sequence(:name) { |n| "Group #{n}" }
     association :user
+    association :trail
   end
 
   factory :group_with_1_survey, parent: :group do

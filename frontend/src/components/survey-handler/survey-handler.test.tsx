@@ -49,6 +49,13 @@ describe('SurveyHandler', () => {
       expect(screen.getByText('Question 1')).toBeInTheDocument();
     });
 
+    it('should not render next button when does not has a question', () => {
+      const mockSurvey = JSON.parse(JSON.stringify(surveyDefault)) as Survey;
+      mockSurvey.current_answers_survey.questions = [];
+      render(<SurveyHandler survey={mockSurvey} />);
+      expect(screen.queryByTestId('next_question_btn')).not.toBeInTheDocument();
+    });
+
     it('should render all question options to question', () => {
       render(<SurveyHandler survey={surveyDefault} />);
       surveyDefault.current_answers_survey.questions[0].options.forEach(
@@ -71,8 +78,8 @@ describe('SurveyHandler', () => {
 
     it('should enable next button when selecting a question', () => {
       const mockSurvey = JSON.parse(JSON.stringify(surveyDefault));
-      const { questions } = mockSurvey;
-      const [question] = questions;
+      const { current_answers_survey } = mockSurvey;
+      const [question] = current_answers_survey.questions;
 
       const { getByTestId, getByText } = render(
         <SurveyHandler survey={mockSurvey} />
@@ -95,8 +102,8 @@ describe('SurveyHandler', () => {
 
     it('should call answerService.create when clicking next button', async () => {
       const mockSurvey = JSON.parse(JSON.stringify(surveyDefault));
-      const { questions } = mockSurvey;
-      const [question] = questions;
+      const { current_answers_survey } = mockSurvey;
+      const [question] = current_answers_survey.questions;
 
       act(() => {
         render(<SurveyHandler survey={mockSurvey} />);
@@ -213,8 +220,8 @@ describe('SurveyHandler', () => {
 
       const progress_bar = await waitFor(() => getByTestId('progress_bar'));
       const progress_text = await waitFor(() => getByTestId('progress_text'));
-      const { questions } = surveyMock;
-      const [question] = questions;
+      const { current_answers_survey } = surveyMock;
+      const [question] = current_answers_survey.questions;
       const option = question.options[0];
       const optionElement = await waitFor(() => getByText(option.name));
 

@@ -29,28 +29,29 @@ class Group < ApplicationRecord
     recursive_position(self, 0)
   end
 
-  def status
-    all_required_groups_completed = all_required_groups_completed?
+  def status(answering_user)
+    all_required_groups_completed = all_required_groups_completed?(answering_user)
+    all_surveys_completed = all_surveys_completed?(answering_user)
     if required_groups_ids.empty?
       STATUS_AVAILABLE
-    elsif all_required_groups_completed && all_surveys_completed?
+    elsif all_required_groups_completed && all_surveys_completed
       STATUS_COMPLETED
-    elsif all_required_groups_completed && !all_surveys_completed?
+    elsif all_required_groups_completed && !all_surveys_completed
       STATUS_DOING
     else
       STATUS_BLOCKED
     end
   end
 
-  def all_required_groups_completed?
+  def all_required_groups_completed?(answering_user)
     required_groups&.all? do |group|
-      group.all_surveys_completed?
+      group.all_surveys_completed?(answering_user)
     end
   end
 
-  def all_surveys_completed?
+  def all_surveys_completed?(answering_user)
     surveys.all? do |survey|
-      AnswersSurvey.current_by_user_and_survey(user, survey).completed?
+      AnswersSurvey.by_user_and_survey(answering_user, survey).last&.completed?
     end
   end
 

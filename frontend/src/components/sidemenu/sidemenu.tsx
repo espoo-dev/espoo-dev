@@ -33,6 +33,11 @@ export const Sidemenu = () => {
       name: 'Surveys',
       url: '/surveys',
     },
+    {
+      icon: HiClipboardCheck,
+      name: 'Trails',
+      url: '/trails',
+    },
   ];
 
   return (
