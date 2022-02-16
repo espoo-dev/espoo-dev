@@ -14,22 +14,30 @@ interface RoadmapSurveyProps {
 const RoadmapSurvey = (props: RoadmapSurveyProps) => {
   const { groups } = props;
 
+  if (!groups) {
+    return null;
+  }
+
   return (
     <RoadmapContainer>
       <RoadmapRow>
-        {groups.map((group) => (
-          <Flex key={group.id} data-testid={`group-${group.id}`}>
-            {group.surveys.map((survey) => (
-              <SurveyItemMap status={group.status} key={survey.name}>
-                <IconItem
-                  data-testid={`icon-${survey.name}`}
-                  status={group.status}
-                />
-                <span>{survey.name}</span>
-              </SurveyItemMap>
-            ))}
-          </Flex>
-        ))}
+        {groups.length ? (
+          groups.map((group) => (
+            <Flex key={group.id} data-testid={`group-${group.id}`}>
+              {group.surveys.map((survey) => (
+                <SurveyItemMap status={group.status} key={survey.name}>
+                  <IconItem
+                    data-testid={`icon-${survey.name}`}
+                    status={group.status}
+                  />
+                  <span>{survey.name}</span>
+                </SurveyItemMap>
+              ))}
+            </Flex>
+          ))
+        ) : (
+          <div>No surveys to show =/</div>
+        )}
       </RoadmapRow>
     </RoadmapContainer>
   );
