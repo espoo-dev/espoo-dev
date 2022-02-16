@@ -93,7 +93,7 @@ export const SurveyItem = (props: SurveyItemProps) => {
         </DescriptionSurvey>
 
         <QuestionsSurvey>
-          {msgInSurvey(status)}
+          <div>{msgInSurvey(status)}</div>
           <QuestionsSection>
             <RiQuestionAnswerLine size={20} />
             {numberQuestions > 0 ? (

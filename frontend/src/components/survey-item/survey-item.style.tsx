@@ -58,6 +58,7 @@ export const QuestionsSurvey = styled.div`
   font-size: 12px;
   padding-top: 12px;
   justify-content: space-between;
+  color: #fff;
 `;
 
 export const NumberQuestions = styled.div`
