@@ -1,14 +1,13 @@
 let faker = require('faker');
+
 export default {
-
-    registerData: function (){
-
-        let data = {
-            email: faker.internet.email(),
-            password: "123456",
-            roles: "201",
-            alert_msg : "Successfully registered, now you can log in"
-        }
-        return data
+  registerData: function () {
+    let data = {
+      email: faker.internet.email(),
+      password: "123456",
+      roles: "teacher",
+      alert_msg: "Successfully registered, now you can log in"
     }
+    return data
+  }
 }
