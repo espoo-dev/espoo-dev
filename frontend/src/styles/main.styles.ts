@@ -1,5 +1,7 @@
+import { theme } from '@chakra-ui/react';
 import styled from 'styled-components';
-import { breakpoints } from './globals';
+
+const { breakpoints } = theme;
 
 export const Container = styled.div`
   background: #171717;
@@ -11,7 +13,7 @@ export const Layout = styled.div`
   background: #181818;
   height: 100%;
 
-  @media (max-width: ${breakpoints.sm}) {
+  @media (max-width: ${breakpoints.md}) {
     flex-direction: column;
   }
 `;
@@ -23,14 +25,15 @@ export const Content = styled.main`
   width: 100%;
   height: 100%;
 
-  @media (max-width: ${breakpoints.sm}) {
-    padding: 0;
+  @media (max-width: ${breakpoints.md}) {
+    padding: 1em 2em;
   }
+`;
 
-  h1 {
-    color: #fff;
-    font-size: 26px;
-    margin: 0;
-    padding: 0 1em;
-  }
+export const SurveyListWrapper = styled.div`
+  position: relative;
+  height: calc(100% - 80px);
+  width: 100%;
+  overflow: hidden;
+  display: block;
 `;

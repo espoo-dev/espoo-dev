@@ -1,11 +1,10 @@
-import { Trail } from '@api/models/trail';
 import { SurveyItem } from '@components/survey-item/survey-item';
 import { httpClient } from 'api';
 import { errorHandler } from 'api/error-handler';
 import { AnswerSurveyStatus, Survey } from 'api/models/survey';
 import { AnswerSurveyService } from 'api/services/answer_survey';
 import React, { Dispatch, SetStateAction, useState } from 'react';
-import { SurveysListContainer } from './SurveysList.styles';
+import { SurveyGrid, SurveysListContainer } from './SurveysList.styles';
 
 interface SurveyListProps {
   data: Survey[];
@@ -59,18 +58,20 @@ export const SurveysList = (props: SurveyListProps) => {
 
   return (
     <SurveysListContainer>
-      {data.map((item) => (
-        <SurveyItem
-          key={item.id}
-          title={item.name}
-          description={item.description}
-          numberQuestions={item.questions.length}
-          onClick={() => registerAnswerSurvey(item.id, item)}
-          loading={loading && selectedSurvey === item.id}
-          surveyData={item}
-          status={item.current_answers_survey?.status}
-        />
-      ))}
+      <SurveyGrid>
+        {data.map((item) => (
+          <SurveyItem
+            key={item.id}
+            title={item.name}
+            description={item.description}
+            numberQuestions={item.questions.length}
+            onClick={() => registerAnswerSurvey(item.id, item)}
+            loading={loading && selectedSurvey === item.id}
+            surveyData={item}
+            status={item.current_answers_survey?.status}
+          />
+        ))}
+      </SurveyGrid>
     </SurveysListContainer>
   );
 };
