@@ -8,6 +8,15 @@ components:
       name: Authorization
 
   schemas:
+    SimpleTrail:
+      type: object
+      properties:
+        id:
+          type: number
+        name:
+          type: string
+        surveys_quantity:
+          type: number
     SimpleAnswersSurvey:
       type: object
       properties:
@@ -390,6 +399,21 @@ paths:
           application/json:
             schema:
               $ref: '#/components/schemas/CreateAnswerRequestBody'
+  '/api/v1/trails':
+    get:
+      summary: List all Trails
+      description: "Returns an array with all Trails"
+      tags:
+        - Trails
+      responses:
+        '200':
+          description: Successful operation - Trails returned.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/SimpleTrail'
   '/api/v1/seed_database':
       get:
         summary: Refreshing the database - This can only be produced in development mode
