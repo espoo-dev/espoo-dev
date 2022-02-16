@@ -8,6 +8,26 @@ components:
       name: Authorization
 
   schemas:
+    Group:
+      type: object
+      properties:
+        id:
+          type: number
+        name:
+          type: string
+        surveys:
+          type: array
+          items:
+            $ref: '#/components/schemas/Survey'
+        required_groups_ids:
+          type: array
+          items:
+            type: integer
+        position:
+          type: number
+        status:
+          type: string
+          example: Available, Completed, Doing, Blocked
     SimpleTrail:
       type: object
       properties:
@@ -17,6 +37,17 @@ components:
           type: string
         surveys_quantity:
           type: number
+    Trail:
+      type: object
+      properties:
+        id:
+          type: number
+        name:
+          type: string
+        groups:
+          type: array
+          items:
+            $ref: '#/components/schemas/Group'
     SimpleAnswersSurvey:
       type: object
       properties:
@@ -273,7 +304,6 @@ paths:
           application/json:
             schema:
               $ref: '#/components/schemas/CreateUserRequestBody'
-  '/api/v1/users':
     get:
       summary: List user
       description: List users according to token
@@ -414,6 +444,25 @@ paths:
                 type: array
                 items:
                   $ref: '#/components/schemas/SimpleTrail'
+  '/api/v1/trails/{id}':
+    get:
+      summary: Get a single Trail by ID
+      description: "Returns a single Trail found by ID"
+      tags:
+        - Trails
+      parameters:
+        - in: path
+          name: id
+          schema:
+            type: integer
+          required: true
+      responses:
+        '200':
+          description: Successful operation - Trail with a given ID returned.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Trail'
   '/api/v1/seed_database':
       get:
         summary: Refreshing the database - This can only be produced in development mode
