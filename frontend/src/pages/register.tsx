@@ -77,6 +77,7 @@ const Login = () => {
             <ContainerForm ref={formRef} onSubmit={handleFormSubmit}>
               <AppInput
                 id="email"
+                data-testid="email-register"
                 name="email"
                 label="Email"
                 placeholder="Your email..."
@@ -86,6 +87,7 @@ const Login = () => {
 
               <AppInput
                 id="password"
+                data-testid="password-register"
                 name="password"
                 label="Create a password"
                 placeholder="******"
@@ -110,6 +112,7 @@ const Login = () => {
 
               <AppButton
                 styling="primary"
+                data-testid="register-btn"
                 text="Register"
                 type="submit"
                 id="btn-login"
