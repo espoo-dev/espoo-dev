@@ -1,4 +1,3 @@
----
 openapi: 3.0.1
 components:
   securitySchemes:
@@ -6,8 +5,47 @@ components:
       type: apiKey
       in: header
       name: Authorization
-
   schemas:
+    Group:
+      type: object
+      properties:
+        id:
+          type: number
+        name:
+          type: string
+        surveys:
+          type: array
+          items:
+            $ref: '#/components/schemas/Survey'
+        required_groups_ids:
+          type: array
+          items:
+            type: integer
+        position:
+          type: number
+        status:
+          type: string
+          example: 'Available, Completed, Doing, Blocked'
+    SimpleTrail:
+      type: object
+      properties:
+        id:
+          type: number
+        name:
+          type: string
+        surveys_quantity:
+          type: number
+    Trail:
+      type: object
+      properties:
+        id:
+          type: number
+        name:
+          type: string
+        groups:
+          type: array
+          items:
+            $ref: '#/components/schemas/Group'
     SimpleAnswersSurvey:
       type: object
       properties:
@@ -34,7 +72,6 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/Question'
-
     AnsweredQuestion:
       type: object
       properties:
@@ -52,7 +89,6 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/Option'
-
     AnswersSurveyWithAnswers:
       type: object
       properties:
@@ -76,7 +112,6 @@ components:
             $ref: '#/components/schemas/Question'
         current_question_index:
           type: number
-
     Role:
       type: object
       properties:
@@ -100,7 +135,6 @@ components:
           type: integer
         name:
           type: string
-
     Question:
       type: object
       properties:
@@ -109,7 +143,7 @@ components:
         name:
           type: string
         question_type:
-            $ref: '#/components/schemas/QuestionType'
+          $ref: '#/components/schemas/QuestionType'
         options:
           type: array
           items:
@@ -221,15 +255,14 @@ components:
           type: string
 security:
   - ApiKeyAuth: []
-
 info:
   title: Espoo dev
   version: v1
 paths:
-  '/users/sign_in':
+  /users/sign_in:
     post:
       summary: Authorization
-      description: "example data: email: admin@gmail.com, password:123456"
+      description: 'example data: email: admin@gmail.com, password:123456'
       tags:
         - Login
       responses:
@@ -239,16 +272,15 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/User'
-
       requestBody:
         content:
           application/json:
             schema:
               $ref: '#/components/schemas/SignInRequestBody'
-  '/api/v1/users':
+  /api/v1/users:
     post:
       summary: Create user
-      description: "Creates users that will be able to login"
+      description: Creates users that will be able to login
       tags:
         - Users
       responses:
@@ -258,13 +290,11 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/User'
-
       requestBody:
         content:
           application/json:
             schema:
               $ref: '#/components/schemas/CreateUserRequestBody'
-  '/api/v1/users':
     get:
       summary: List user
       description: List users according to token
@@ -285,10 +315,10 @@ paths:
                 type: array
                 items:
                   $ref: '#/components/schemas/User'
-  '/api/v1/roles':
+  /api/v1/roles:
     get:
       summary: List all roles
-      description: "Get available roles"
+      description: Get available roles
       tags:
         - Roles
       responses:
@@ -300,10 +330,10 @@ paths:
                 type: array
                 items:
                   $ref: '#/components/schemas/Role'
-  '/api/v1/surveys':
+  /api/v1/surveys:
     get:
       summary: List all Surveys
-      description: "Returns an array with all Surveys"
+      description: Returns an array with all Surveys
       tags:
         - Surveys
       responses:
@@ -318,7 +348,7 @@ paths:
   '/api/v1/surveys/{id}':
     get:
       summary: List a single Survey by ID
-      description: "Returns a single Survey found by ID"
+      description: Returns a single Survey found by ID
       tags:
         - Surveys
       parameters:
@@ -334,7 +364,7 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Survey'
-  '/api/v1/answers_surveys':
+  /api/v1/answers_surveys:
     post:
       summary: Create Answers Survey
       description: Successful operation - Create Answers Survey
@@ -355,7 +385,7 @@ paths:
   '/api/v1/answers_surveys/{id}':
     get:
       summary: Get Answers Survey by ID
-      description: With answered questions, unanswered questions and current_question_index
+      description: 'With answered questions, unanswered questions and current_question_index'
       tags:
         - AnswerSurvey
       parameters:
@@ -371,8 +401,7 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/AnswersSurveyWithAnswers'
-
-  '/api/v1/answers':
+  /api/v1/answers:
     post:
       summary: Create Answers
       description: Create Answers
@@ -390,22 +419,58 @@ paths:
           application/json:
             schema:
               $ref: '#/components/schemas/CreateAnswerRequestBody'
-  '/api/v1/seed_database':
-      get:
-        summary: Refreshing the database - This can only be produced in development mode
-        description: "It will delete the existing database and create a simple new one for easier testing of the api requests ."
-        tags:
-          - Seeds
-        responses:
-          '200':
-            description: Successful operation in development mode.
-            content:
-              application/json:
-                schema:
-                  type: object
-                  properties:
-                    message:
-                      type: string
+  /api/v1/trails:
+    get:
+      summary: List all Trails
+      description: Returns an array with all Trails
+      tags:
+        - Trails
+      responses:
+        '200':
+          description: Successful operation - Trails returned.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/SimpleTrail'
+  '/api/v1/trails/{id}':
+    get:
+      summary: Get a single Trail by ID
+      description: Returns a single Trail found by ID
+      tags:
+        - Trails
+      parameters:
+        - in: path
+          name: id
+          schema:
+            type: integer
+          required: true
+      responses:
+        '200':
+          description: Successful operation - Trail with a given ID returned.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Trail'
+  /api/v1/seed_database:
+    get:
+      summary: Refreshing the database - This can only be produced in development mode
+      description: >-
+        It will delete the existing database and create a simple new one for
+        easier testing of the api requests .
+      tags:
+        - Seeds
+      responses:
+        '200':
+          description: Successful operation in development mode.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
 servers:
-  - url: https://espoo-staging.herokuapp.com
-  - url: http://localhost:3000
+  - url: 'https://espoo-staging.herokuapp.com'
+  - url: 'http://localhost:3000'
