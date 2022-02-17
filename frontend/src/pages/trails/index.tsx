@@ -10,11 +10,9 @@ import {
   Text,
   Tooltip,
 } from '@chakra-ui/react';
-import { SurveysList } from '@components/main/SurveysList';
 import RoadmapSurvey from '@components/roadmap-survey/roadmap-survey';
 import { Sidemenu } from '@components/sidemenu';
 import { SurveyHandler } from '@components/survey-handler';
-import TrailList from '@components/trail-list/trails-list';
 import { colorPallettes } from '@styles/globals';
 import { httpClient } from 'api';
 import { errorHandler } from 'api/error-handler';
