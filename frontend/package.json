@@ -27,6 +27,7 @@
     "@unform/web": "^2.1.6",
     "axios": "^0.21.1",
     "cypress": "^9.4.1",
+    "faker": "5.5.3",
     "framer-motion": "^3.3.0",
     "next": "10.0.7",
     "node-sass": "^6.0.1",
