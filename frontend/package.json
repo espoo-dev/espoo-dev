@@ -12,6 +12,7 @@
     "test:coverage": "jest --env=jsdom --collect-coverage",
     "test:watch": "jest --env=jsdom --watch",
     "e2e": "yarn run cypress open",
+    "cy:run": "cypress run",
     "storybook": "start-storybook -p 6006",
     "build-storybook": "build-storybook",
     "chromatic": "npx chromatic --exit-zero-on-changes",
