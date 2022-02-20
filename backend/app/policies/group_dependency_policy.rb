@@ -1,0 +1,2 @@
+class GroupDependencyPolicy < ApplicationPolicy
+end
