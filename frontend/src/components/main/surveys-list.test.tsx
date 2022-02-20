@@ -2,8 +2,8 @@ import React from 'react';
 import { AnswerSurveyStatus, Survey } from 'api/models/survey';
 import { AnswerSurveyCreate } from 'api/models/answer_survey';
 import { fireEvent, render, screen, waitFor } from 'test-utils';
-import { SurveysList } from './SurveysList';
 import { AxiosInstance } from 'axios';
+import { SurveysList } from './SurveysList';
 import { httpClient } from '../../api/client';
 
 jest.mock('../../api/client', () => ({
@@ -23,10 +23,21 @@ const surveyDefault: Survey = {
   name: 'Animals survey',
   description: 'Nice animals',
   answers_surveys: [],
+  total_questions_quantity: 0,
   current_answers_survey: {
     id: 1,
     status: AnswerSurveyStatus.NotStarted,
     user_id: 439,
+    questions: [
+      {
+        id: 1,
+        name: 'What is your favorite animal?',
+        question_type: {
+          id: 1,
+          name: 'Single Choice',
+        },
+      },
+    ],
   },
   questions: [
     {
@@ -60,9 +71,9 @@ describe('Surveys list', () => {
       AnswerSurveyStatus.Completed;
 
     (httpClient as jest.Mocked<AxiosInstance>).post.mockImplementationOnce(
-      jest.fn((url: string, body: AnswerSurveyCreate) => {
-        return Promise.resolve({ data: mockResponse });
-      })
+      jest.fn((url: string, body: AnswerSurveyCreate) =>
+        Promise.resolve({ data: mockResponse })
+      )
     );
 
     const { getByTestId } = render(
@@ -82,9 +93,12 @@ describe('Surveys list', () => {
 
   it('should not call api when select survey not started', async () => {
     (httpClient as jest.Mocked<AxiosInstance>).post.mockImplementationOnce(
-      jest.fn((url: string, body: AnswerSurveyCreate) => {
-        return Promise.reject({ response: { data: mockResponse } });
-      })
+      jest.fn(
+        (url: string, body: AnswerSurveyCreate) =>
+          new Promise((reject) => {
+            reject({ response: { data: mockResponse } });
+          })
+      )
     );
 
     await waitFor(() =>
@@ -102,9 +116,12 @@ describe('Surveys list', () => {
 
     fireEvent.click(buttonItem);
     (httpClient as jest.Mocked<AxiosInstance>).post.mockImplementationOnce(
-      jest.fn((url: string, body: AnswerSurveyCreate) => {
-        return Promise.reject({ response: { data: mockResponse } });
-      })
+      jest.fn(
+        (url: string, body: AnswerSurveyCreate) =>
+          new Promise((reject) => {
+            reject({ response: { data: mockResponse } });
+          })
+      )
     );
 
     await waitFor(() =>
@@ -119,9 +136,9 @@ describe('Surveys list', () => {
       surveyWithoutCurrent.id = 2;
 
       (httpClient as jest.Mocked<AxiosInstance>).post.mockImplementationOnce(
-        jest.fn((url: string, body: AnswerSurveyCreate) => {
-          return Promise.resolve({ data: mockResponse });
-        })
+        jest.fn((url: string, body: AnswerSurveyCreate) =>
+          Promise.resolve({ data: mockResponse })
+        )
       );
 
       const { getByTestId } = render(
@@ -149,9 +166,9 @@ describe('Surveys list', () => {
       surveyCompleted.id = 3;
 
       (httpClient as jest.Mocked<AxiosInstance>).post.mockImplementationOnce(
-        jest.fn((url: string, body: AnswerSurveyCreate) => {
-          return Promise.resolve({ data: mockResponse });
-        })
+        jest.fn((url: string, body: AnswerSurveyCreate) =>
+          Promise.resolve({ data: mockResponse })
+        )
       );
 
       const { getByTestId } = render(
@@ -176,9 +193,9 @@ describe('Surveys list', () => {
       surveyNotStarted.id = 4;
 
       (httpClient as jest.Mocked<AxiosInstance>).post.mockImplementationOnce(
-        jest.fn((url: string, body: AnswerSurveyCreate) => {
-          return Promise.resolve({ data: mockResponse });
-        })
+        jest.fn((url: string, body: AnswerSurveyCreate) =>
+          Promise.resolve({ data: mockResponse })
+        )
       );
 
       const { getByTestId } = render(
@@ -205,9 +222,9 @@ describe('Surveys list', () => {
       surveyStarted.id = 5;
 
       (httpClient as jest.Mocked<AxiosInstance>).post.mockImplementationOnce(
-        jest.fn((url: string, body: AnswerSurveyCreate) => {
-          return Promise.resolve({ data: mockResponse });
-        })
+        jest.fn((url: string, body: AnswerSurveyCreate) =>
+          Promise.resolve({ data: mockResponse })
+        )
       );
 
       const { getByTestId } = render(

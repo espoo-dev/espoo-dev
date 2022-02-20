@@ -1,9 +1,9 @@
-import { Trail } from '@api/models/trail';
 import { SurveyItem } from '@components/survey-item/survey-item';
 import { httpClient } from 'api';
 import { errorHandler } from 'api/error-handler';
 import { AnswerSurveyStatus, Survey } from 'api/models/survey';
 import { AnswerSurveyService } from 'api/services/answer_survey';
+import { useRouter } from 'next/router';
 import React, { Dispatch, SetStateAction, useState } from 'react';
 import { SurveysListContainer } from './SurveysList.styles';
 
@@ -13,11 +13,12 @@ interface SurveyListProps {
 }
 
 export const SurveysList = (props: SurveyListProps) => {
-  const { data, setSurveySelected } = props;
+  const { data } = props;
 
   const answerSurveyService = new AnswerSurveyService(httpClient);
   const [loading, setLoading] = useState(false);
   const [selectedSurvey, setSelectedSurvey] = useState(null);
+  const router = useRouter();
 
   const initSurveySelect = async (survey: Survey) => {
     const surveyToInit = survey;
@@ -29,7 +30,7 @@ export const SurveysList = (props: SurveyListProps) => {
         surveyToInit.current_answers_survey = {
           ...response.data,
         };
-        setSurveySelected(surveyToInit);
+        redirectToSurveyPage(surveyToInit);
       }
     } catch (error) {
       errorHandler(error);
@@ -52,9 +53,15 @@ export const SurveysList = (props: SurveyListProps) => {
     if (canCreateAnswerSurvey(survey)) {
       initSurveySelect(survey);
     } else {
-      setSurveySelected(survey);
+      redirectToSurveyPage(survey);
     }
     setLoading(false);
+  };
+
+  const redirectToSurveyPage = (survey: Survey) => {
+    if (router) {
+      router.push(`/surveys/${survey.id}`);
+    }
   };
 
   return (
