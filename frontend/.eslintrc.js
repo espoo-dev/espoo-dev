@@ -6,9 +6,8 @@ module.exports = {
   },
   extends: [
     'eslint:recommended',
+    'plugin:cypress/recommended',
     'plugin:jest/recommended',
-    'plugin:@typescript-eslint/eslint-recommended',
-    'plugin:@typescript-eslint/recommended',
     'airbnb',
   ],
   parser: '@typescript-eslint/parser',
@@ -19,7 +18,7 @@ module.exports = {
     ecmaVersion: 12,
     sourceType: 'module',
   },
-  plugins: ['react', '@typescript-eslint', 'react-hooks', 'jest'],
+  plugins: ['react', 'react-hooks', 'jest'],
   rules: {
     'comma-dangle': 'off',
     'object-curly-newline': 'off',
@@ -43,24 +42,16 @@ module.exports = {
       'error',
       'ignorePackages',
       {
+        js: 'never',
+        jsx: 'never',
         ts: 'never',
         tsx: 'never',
       },
     ],
     'no-shadow': 'off',
-    '@typescript-eslint/no-shadow': ['error'],
     'react-hooks/rules-of-hooks': 'error',
     'react-hooks/exhaustive-deps': 'off',
     'no-unused-vars': 'off',
-    '@typescript-eslint/no-unused-vars': 'warn',
-    '@typescript-eslint/explicit-module-boundary-types': 'off',
-    '@typescript-eslint/no-explicit-any': [
-      'warn',
-      {
-        fixToUnknown: true,
-        ignoreRestArgs: true,
-      },
-    ],
     semi: 'warn',
     'quote-props': 'off',
     camelcase: 'off',
@@ -86,4 +77,34 @@ module.exports = {
     },
     jest: { version: '27.0.1' },
   },
+  overrides: [
+    // typescript
+    {
+      extends: [
+        'plugin:@typescript-eslint/eslint-recommended',
+        'plugin:@typescript-eslint/recommended',
+      ],
+      files: [
+        '*.ts', 
+        '*.tsx'
+      ],
+      excludedFiles: [
+        '*.test.js',
+        '*.js'
+      ],
+      plugins: ['@typescript-eslint'],
+      rules: {
+        '@typescript-eslint/no-shadow': ['error'],
+        '@typescript-eslint/no-unused-vars': 'warn',
+        '@typescript-eslint/explicit-module-boundary-types': 'off',
+        '@typescript-eslint/no-explicit-any': [
+          'warn',
+          {
+            fixToUnknown: true,
+            ignoreRestArgs: true,
+          },
+        ],
+      }
+    }
+  ]
 };

@@ -1,13 +1,19 @@
-class RegisterPage{
+export default class RegisterPage {
+  constructor(data) {
+    this.data = data;
+  }
 
-  register(register){
-    cy.visit('/register')
-    cy.get('[data-testid="email-register"]').type(register.email);
-    cy.get('[data-testid="password-register"]').type(register.password);
-    cy.get('[data-testid="rolesRegister"]',{ timeout: 20000 }).contains(register.roles).click();
+  register() {
+    cy.visit('/register');
+    cy.get('[data-testid="email-register"]').type(this.data.email);
+    cy.get('[data-testid="password-register"]').type(this.data.password);
+    cy.get('[data-testid="rolesRegister"]', { timeout: 20000 })
+      .contains(this.data.roles)
+      .click();
     cy.get('[data-testid="register-btn"]').click();
-    cy.get('div[class="Toastify__toast-body"]').should("have.text",register.alert_msg); 
+    cy.get('div[class="Toastify__toast-body"]').should(
+      'have.text',
+      this.data.alert_msg
+    );
   }
 }
-
-export default new RegisterPage() 

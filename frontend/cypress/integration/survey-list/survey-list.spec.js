@@ -16,7 +16,9 @@ context('survey list', () => {
     cy.wait(1000);
     cy.intercept('GET', '**/api/v1/surveys*').as('getSurvey');
     cy.get('[data-testid="refresh-survey-lit"]').click();
-    cy.wait('@getSurvey').its('response.statusCode').should('match', /^(200|304)/);
+    cy.wait('@getSurvey')
+      .its('response.statusCode')
+      .should('match', /^(200|304)/);
   });
 
   it('Must log out when click on log out button', () => {
