@@ -89,6 +89,7 @@ const Surveys = () => {
                   <Tooltip label="Refresh" placement="top">
                     <Button
                       rounded="lg"
+                      data-testid="refresh-survey-lit"
                       p={0}
                       bg="teal.400"
                       colorScheme="teal"
