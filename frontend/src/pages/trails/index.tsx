@@ -10,12 +10,9 @@ import {
   Text,
   Tooltip,
 } from '@chakra-ui/react';
-import { SurveysList } from '@components/main/SurveysList';
 import RoadmapSurvey from '@components/roadmap-survey/roadmap-survey';
 import { Sidemenu } from '@components/sidemenu';
 import { SurveyHandler } from '@components/survey-handler';
-import TrailList from '@components/trail-list/trails-list';
-import { colorPallettes } from '@styles/globals';
 import { httpClient } from 'api';
 import { errorHandler } from 'api/error-handler';
 import { Survey } from 'api/models/survey';
@@ -23,7 +20,8 @@ import { withAuth } from 'hoc/withAuth';
 import Head from 'next/head';
 import { useEffect, useState } from 'react';
 import { HiArrowLeft, HiRefresh } from 'react-icons/hi';
-import { Container, Content, Layout } from 'styles/main.styles';
+import { Container, Content, DarkBG, Layout } from 'styles/main.styles';
+import { colors } from '@styles/colors';
 
 const Trails = () => {
   const trailService = new TrailService(httpClient);
@@ -63,28 +61,27 @@ const Trails = () => {
       <Layout>
         <Sidemenu />
         <Content>
-          <Heading as="h1" fontWeight="normal" fontSize="26px">
-            {surveySelected ? surveySelected.name : 'Trails'}
+          <Heading
+            as="h1"
+            fontWeight="normal"
+            fontSize="26px"
+            color={colors.primaryTxt}
+          >
+            { surveySelected ? surveySelected.name : 'Trails' }
           </Heading>
 
-          <Box
-            background="#f5f7fb"
-            height="100%"
-            borderRadius="3xl"
-            mt="30"
-            p="16px"
-          >
-            {loading ? (
-              <Spinner color={colorPallettes.primary} />
+          <DarkBG>
+            { loading ? (
+              <Spinner color={colors.primaryTxt} />
             ) : (
               !surveySelected && (
                 <Flex padding="10px" alignItems="center">
                   <Text
-                    color={colorPallettes.primary}
+                    color={colors.primaryTxt}
                     textAlign="center"
                     mb="10px"
                   >
-                    {trails.length ? 'Discover a trail!' : 'No trails =/'}
+                    { trails.length ? 'Discover a trail!' : 'No trails =/' }
                   </Text>
                   <Spacer />
                   <Tooltip label="Refresh" placement="top">
@@ -101,9 +98,9 @@ const Trails = () => {
                   </Tooltip>
                 </Flex>
               )
-            )}
+            ) }
 
-            {surveySelected ? (
+            { surveySelected ? (
               <Box>
                 <Tooltip label="Back to list" placement="top">
                   <Button
@@ -121,9 +118,11 @@ const Trails = () => {
               </Box>
             ) : (
               !loading &&
-              trails.length && <RoadmapSurvey groups={trails[0].groups} />
-            )}
-          </Box>
+              trails.length && (
+                <RoadmapSurvey groups={trails[0]?.groups || []} />
+              )
+            ) }
+          </DarkBG>
         </Content>
       </Layout>
     </Container>
