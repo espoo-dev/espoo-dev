@@ -1,5 +1,6 @@
 import { Group } from '@api/models/group';
-import { Flex } from '@chakra-ui/react';
+import { Flex, Text } from '@chakra-ui/react';
+import { colors } from '@styles/colors';
 import {
   IconItem,
   RoadmapContainer,
@@ -36,7 +37,7 @@ const RoadmapSurvey = (props: RoadmapSurveyProps) => {
             </Flex>
           ))
         ) : (
-          <div>No surveys to show =/</div>
+          <Text color={colors.primaryTxt}>No surveys to show =/</Text>
         )}
       </RoadmapRow>
     </RoadmapContainer>

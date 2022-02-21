@@ -6,18 +6,23 @@ import * as transitions from 'styles/transitions';
 const { breakpoints } = theme;
 
 export const MenuLinkOption = styled.a`
-  padding: 15px 2em;
+  padding: 10px;
   display: flex;
   gap: 1em;
   color: ${colors.primaryTxt};
   cursor: pointer;
   text-decoration: none;
   border-radius: 12px;
+  font-size: 16px;
   transition: ${transitions.defaultTransition};
 
   &:hover {
-    background: #606060;
+    background: rgba(255, 255, 255, 0.1);
     transition: ${transitions.defaultTransition};
+  }
+
+  &:not(:last-child) {
+    margin-bottom: 10px;
   }
 
   @media (max-width: ${breakpoints.md}) and (max-width: ${breakpoints.md}) {
@@ -41,15 +46,14 @@ export const SideMenuContainer = styled.aside`
   flex-direction: column;
   height: 100vh;
   width: 250px;
-  padding: 2em;
-  border-right: 1px solid;
-  border-radius: 0 30px 30px 0;
+  padding: 20px;
+  border-right: 1px solid #323232;
 
   @media (max-width: ${breakpoints.md}) {
-    border-radius: 0;
+    border: none;
     height: 80px;
     width: 100%;
-    padding: 1em 2em;
+    padding: 10px 20px;
     flex-direction: row;
     justify-content: space-between;
     align-items: center;
@@ -70,6 +74,7 @@ export const MenuList = styled.div`
   flex-direction: column;
   justify-content: space-between;
   height: 100%;
+  width: 100%;
 
   @media (max-width: ${breakpoints.sm}) {
     flex-direction: row;

@@ -146,7 +146,7 @@ export const SurveyHandler = (props: SurveyPageProps) => {
   return (
     <Box>
       {question ? (
-        <Box m={6}>
+        <Box my={4}>
           <Flex alignItems="center" justifyContent="space-between">
             <Heading color="white" fontSize={16}>
               {`Question ${questionIndex + 1}`}

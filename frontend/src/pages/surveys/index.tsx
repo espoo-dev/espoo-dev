@@ -22,6 +22,7 @@ import { HiArrowLeft, HiRefresh } from 'react-icons/hi';
 import {
   Container,
   Content,
+  DarkBG,
   Layout,
   SurveyListWrapper,
 } from 'styles/main.styles';
@@ -67,25 +68,25 @@ const Surveys = () => {
           <Heading
             as="h1"
             fontWeight="bold"
-            fontSize="26px"
+            fontSize="20px"
             color={colors.primaryTxt}
+            ml={{
+              base: 0,
+              md: 0,
+              sm: '20px',
+              xs: '20px',
+            }}
           >
             {surveySelected ? surveySelected.name : 'Surveys'}
           </Heading>
 
-          <Box
-            background="#323232"
-            height="100%"
-            borderRadius="3xl"
-            mt="30"
-            p="1em 2em"
-          >
+          <DarkBG>
             {loading ? (
               <Spinner color={colors.primaryTxt} />
             ) : (
               !surveySelected && (
                 <Flex
-                  padding="10px"
+                  py="10px"
                   alignItems="center"
                   justifyContent="space-between"
                   mb="1em"
@@ -142,7 +143,7 @@ const Surveys = () => {
                 </SurveyListWrapper>
               )
             )}
-          </Box>
+          </DarkBG>
         </Content>
       </Layout>
     </Container>

@@ -1,7 +1,7 @@
-import { theme } from '@chakra-ui/react';
 import styled from 'styled-components';
+import customTheme from './theme';
 
-const { breakpoints } = theme;
+const { breakpoints } = customTheme;
 
 export const Container = styled.div`
   background: #171717;
@@ -9,25 +9,23 @@ export const Container = styled.div`
 `;
 
 export const Layout = styled.div`
-  display: flex;
-  background: #181818;
+  display: grid;
   height: 100%;
+  width: 100%;
+  background: #181818;
+  grid-template-columns: 250px 1fr;
 
   @media (max-width: ${breakpoints.md}) {
-    flex-direction: column;
+    grid-template-columns: auto;
+    grid-template-rows: 80px 1fr;
   }
 `;
 
 export const Content = styled.main`
   display: flex;
-  padding: 2em;
+  flex: 1;
   flex-direction: column;
-  width: 100%;
-  height: 100%;
-
-  @media (max-width: ${breakpoints.md}) {
-    padding: 1em 2em;
-  }
+  padding: 20px;
 `;
 
 export const SurveyListWrapper = styled.div`
@@ -36,4 +34,12 @@ export const SurveyListWrapper = styled.div`
   width: 100%;
   overflow: hidden;
   display: block;
+`;
+
+export const DarkBG = styled.div`
+  height: 100%;
+  background: #323232;
+  margin-top: 20px;
+  padding: 20px;
+  border-radius: 20px;
 `;

@@ -1,11 +1,10 @@
-import { Button, Flex, Heading, Tooltip } from '@chakra-ui/react';
+import { Button, Flex, Heading, Image, Text, Tooltip } from '@chakra-ui/react';
 import { colors } from '@styles/colors';
 import { AuthContext } from 'context/auth';
 import Link from 'next/link';
 import React, { useContext } from 'react';
 import { IconType } from 'react-icons';
-import { HiClipboardCheck, HiHome } from 'react-icons/hi';
-import { RiLogoutCircleLine } from 'react-icons/ri';
+import { HiClipboardCheck, HiHome, HiLogout } from 'react-icons/hi';
 import {
   ItemMenu,
   MenuLinkOption,
@@ -46,9 +45,22 @@ export const Sidemenu = () => {
         }}
         flex={1}
       >
-        <Heading as="h1" fontSize="26" m="0" color={colors.primaryTxt}>
-          Espoolingo
-        </Heading>
+        <Flex alignItems="center">
+          <Image src="/assets/logo.png" alt="main_logo" h="40px" w="40px" />
+          <Heading
+            display={{
+              md: 'block',
+              sm: 'none',
+              xs: 'none',
+            }}
+            as="h1"
+            fontSize="20"
+            ml="4"
+            color={colors.primaryTxt}
+          >
+            Espoolingo
+          </Heading>
+        </Flex>
 
         <MenuList>
           <ItemMenu>
@@ -70,16 +82,36 @@ export const Sidemenu = () => {
 
       <Tooltip label="Logout">
         <Button
-          p={0}
-          m={0}
           rounded="lg"
+          p={{
+            base: 0,
+            md: '5px 10px',
+            sm: 0,
+          }}
           bg="teal.400"
           colorScheme="teal"
-          w="30px"
+          w={{
+            base: 'full',
+            md: 'full',
+            sm: '30px',
+            xs: '30px',
+          }}
           onClick={logout}
-          data-testid="logout-button"
+          data-testid="logout_button"
         >
-          <RiLogoutCircleLine color="white" />
+          <HiLogout color="white" />
+          <Text
+            w="full"
+            as="span"
+            display={{
+              base: 'block',
+              md: 'block',
+              sm: 'none',
+              xs: 'none',
+            }}
+          >
+            Log out
+          </Text>
         </Button>
       </Tooltip>
     </SideMenuContainer>

@@ -23,6 +23,7 @@ export const BoxResult = styled.div<{ correct?: boolean }>`
   padding: 0px 12px;
   background: ${(props) => (props.correct ? '#04a904' : '#c34141')};
   font-size: 18px;
+  color: #fff;
 
   ${(props) =>
     (props.correct &&
