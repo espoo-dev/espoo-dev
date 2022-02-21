@@ -18,8 +18,8 @@ import { MultipleChoice, SingleChoice } from '@components/questions';
 import SumaryResult from '@components/sumary-result/sumary-result';
 import { usePrevious } from '@hooks/usePrevious';
 import { useUpdateEffect } from '@hooks/useUpdateEffect';
+import { colors } from '@styles/colors';
 import { useCallback, useEffect, useMemo, useState } from 'react';
-import { colorPallettes } from 'styles/globals';
 
 interface SurveyPageProps {
   survey: Survey;
@@ -146,37 +146,50 @@ export const SurveyHandler = (props: SurveyPageProps) => {
   return (
     <Box>
       {question ? (
-        <Box m={6}>
+        <Box my={4}>
           <Flex alignItems="center" justifyContent="space-between">
-            <h2>{`Question ${questionIndex + 1}`}</h2>
+            <Heading color="white" fontSize={16}>
+              {`Question ${questionIndex + 1}`}
+            </Heading>
 
             <CircularProgress
               value={getCompletePercent()[0]}
-              color={colorPallettes.bgSuccess}
+              color={colors.primaryTxt}
               capIsRound
               ml="4"
               data-testid="progress_bar"
             >
-              <CircularProgressLabel data-testid="progress_text">
+              <CircularProgressLabel
+                data-testid="progress_text"
+                color={colors.primaryTxt}
+              >
                 {questionIndex + 1} / {totalQuestions}
               </CircularProgressLabel>
             </CircularProgress>
           </Flex>
 
           <Box m={6} textAlign="center">
-            <Heading
-              fontSize="30px"
-              color={colorPallettes.primary}
-              fontWeight={400}
-            >
+            <Heading fontSize="30px" color={colors.primaryTxt} fontWeight={400}>
               {question && question.name}
             </Heading>
 
-            <Box mt={3} color={colorPallettes.secondary}>
+            <Box mt={3} color="white">
               <span>SELECT UP TO 1 OPTION</span>
             </Box>
 
-            <Box mt={10}>{renderOptionByType()}</Box>
+            <Box
+              mt={10}
+              overflow="hidden"
+              overflowY="auto"
+              maxH={{
+                md: 'unset',
+                sm: '350px',
+                xs: '350px',
+              }}
+              p="3"
+            >
+              {renderOptionByType()}
+            </Box>
           </Box>
 
           <Flex alignItems="center" justifyContent="center">
@@ -199,7 +212,7 @@ export const SurveyHandler = (props: SurveyPageProps) => {
           ) : (
             <Box textAlign="center">
               {isLoadingResult ? (
-                <Box color={colorPallettes.primary}>
+                <Box color={colors.primaryTxt}>
                   <Spinner mr={4} />
                   <span>Calculating result...</span>
                 </Box>

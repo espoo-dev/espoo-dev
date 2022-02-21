@@ -7,12 +7,17 @@ describe('Sidemenu', () => {
     expect(screen.getByText('Espoolingo')).toBeInTheDocument();
   });
 
-  it('should show Surveys menu item', () => {
+  it('should have "Home" menu link', () => {
     render(<Sidemenu />);
-    expect(screen.getByText('Surveys')).toBeInTheDocument();
+    expect(screen.getByText('Home')).toBeInTheDocument();
   });
 
-  it('should show a logout button', () => {
+  it('should have "Trails" menu link', () => {
+    render(<Sidemenu />);
+    expect(screen.getByText('Trails')).toBeInTheDocument();
+  });
+
+  it('should have a logout button', () => {
     render(<Sidemenu />);
     expect(screen.getByTestId('logout-button')).toBeInTheDocument();
   });
