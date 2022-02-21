@@ -12,6 +12,7 @@ import { AUTH_COOKIE } from 'consts';
 import { parseCookies } from 'nookies';
 import { HiArrowLeft } from 'react-icons/hi';
 import { SurveyHandler } from '@components/survey-handler';
+import { errorHandler } from '@api/error-handler';
 
 const surveyService = new SurveyService(httpClient);
 
@@ -23,9 +24,14 @@ const SurveyPage = () => {
 
   const loadSurvey = async () => {
     setLoading(true);
-    const response = await surveyService.get(Number(id));
-    setSurvey(response.data);
-    setLoading(false);
+    try {
+      const response = await surveyService.get(Number(id));
+      setSurvey(response.data);
+    } catch (error) {
+      errorHandler(error);
+    } finally {
+      setLoading(false);
+    }
   };
 
   useEffect(() => {
