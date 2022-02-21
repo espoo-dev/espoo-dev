@@ -177,7 +177,19 @@ export const SurveyHandler = (props: SurveyPageProps) => {
               <span>SELECT UP TO 1 OPTION</span>
             </Box>
 
-            <Box mt={10}>{renderOptionByType()}</Box>
+            <Box
+              mt={10}
+              overflow="hidden"
+              overflowY="auto"
+              maxH={{
+                md: 'unset',
+                sm: '350px',
+                xs: '350px',
+              }}
+              p="3"
+            >
+              {renderOptionByType()}
+            </Box>
           </Box>
 
           <Flex alignItems="center" justifyContent="center">
