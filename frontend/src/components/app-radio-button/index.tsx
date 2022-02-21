@@ -50,7 +50,7 @@ export const AppRadioButton = ({
     <FormControl isRequired={isRequired} id={name}>
       <FormLabel htmlFor={name}>{label}</FormLabel>
       <RadioGroup name={name} onChange={setRadioValue} value={radioValue}>
-        <Stack direction="row">
+        <Stack data-testid="rolesRegister" direction="row">
           {options.map((option, index) => (
             <Radio
               key={option[keyAttrs]}

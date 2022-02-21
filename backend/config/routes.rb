@@ -13,6 +13,8 @@ Rails.application.routes.draw do
     resources :question_types
     resources :questions
     resources :options
+    resources :groups
+    resources :group_dependencies
 
     root to: "users#index"
   end
