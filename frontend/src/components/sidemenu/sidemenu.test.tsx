@@ -17,8 +17,12 @@ describe('Sidemenu', () => {
     expect(screen.getByText('Trails')).toBeInTheDocument();
   });
 
-  it('should have a logout button', () => {
+  it('should have a logout button', async () => {
     render(<Sidemenu />);
-    expect(screen.getByTestId('logout-button')).toBeInTheDocument();
+
+    screen.debug();
+    const logoutBtn = await screen.findByTestId('logout_button');
+
+    expect(logoutBtn).toBeInTheDocument();
   });
 });
