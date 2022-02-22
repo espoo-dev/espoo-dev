@@ -2,7 +2,7 @@ import { httpClient } from '@api/client';
 import { errorHandler } from '@api/error-handler';
 import { AnswerCreate } from '@api/models/answer';
 import { AnswerSurveyReceive } from '@api/models/answer_survey';
-import { Question, Survey } from '@api/models/survey';
+import { Question, QuestionTypeName, Survey } from '@api/models/survey';
 import { AnswerService } from '@api/services/answers';
 import { AnswerSurveyService } from '@api/services/answer_survey';
 import { Box } from '@chakra-ui/layout';
@@ -25,7 +25,10 @@ interface SurveyPageProps {
   survey: Survey;
 }
 
-const questionTypes = {
+const questionTypes: Record<
+  QuestionTypeName,
+  typeof SingleChoice | typeof MultipleChoice
+> = {
   'Single Choice': SingleChoice,
   'Multiple Choice': MultipleChoice,
 };
@@ -173,7 +176,11 @@ export const SurveyHandler = (props: SurveyPageProps) => {
             </Heading>
 
             <Box mt={3} color={colorPallettes.secondary}>
-              <span>SELECT UP TO 1 OPTION</span>
+              <span>
+                {question.question_type.name === 'Multiple Choice'
+                  ? 'SELECT ONE OR MORE OPTIONS'
+                  : 'SELECT UP TO 1 OPTION'}
+              </span>
             </Box>
 
             <Box mt={10}>{renderOptionByType()}</Box>
