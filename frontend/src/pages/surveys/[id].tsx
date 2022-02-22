@@ -12,7 +12,7 @@ import { AUTH_COOKIE } from 'consts';
 import { parseCookies } from 'nookies';
 import { HiArrowLeft } from 'react-icons/hi';
 import { SurveyHandler } from '@components/survey-handler';
-import { errorHandler } from '@api/error-handler';
+import { toast } from 'react-toastify';
 
 const surveyService = new SurveyService(httpClient);
 
@@ -28,13 +28,26 @@ const SurveyPage = () => {
       const response = await surveyService.get(Number(id));
       setSurvey(response.data);
     } catch (error) {
-      errorHandler(error);
+      redirectToList();
     } finally {
       setLoading(false);
     }
   };
 
+  const redirectToList = () => {
+    toast('Survey invalid', {
+      position: 'top-right',
+      type: 'warning',
+      pauseOnHover: false,
+    });
+    router.replace('/surveys');
+  };
+
   useEffect(() => {
+    if (Number.isNaN(Number(id))) {
+      redirectToList();
+      return;
+    }
     loadSurvey();
   }, []);
 
@@ -47,7 +60,7 @@ const SurveyPage = () => {
         <Sidemenu />
         <Content>
           <Heading as="h1" fontWeight="normal" fontSize="26px">
-            {survey ? survey.name : <Spinner color="white" />}
+            {loading ? <Spinner color="white" /> : survey && survey.name}
           </Heading>
 
           <Box
