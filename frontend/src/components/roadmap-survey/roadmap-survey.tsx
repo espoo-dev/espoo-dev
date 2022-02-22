@@ -17,19 +17,20 @@ const RoadmapSurvey = (props: RoadmapSurveyProps) => {
   return (
     <RoadmapContainer>
       <RoadmapRow>
-        {groups.map((group) => (
-          <Flex key={group.id} data-testid={`group-${group.id}`}>
-            {group.surveys.map((survey) => (
-              <SurveyItemMap status={group.status} key={survey.name}>
-                <IconItem
-                  data-testid={`icon-${survey.name}`}
-                  status={group.status}
-                />
-                <span>{survey.name}</span>
-              </SurveyItemMap>
-            ))}
-          </Flex>
-        ))}
+        {groups &&
+          groups.map((group) => (
+            <Flex key={group.id} data-testid={`group-${group.id}`}>
+              {group.surveys.map((survey) => (
+                <SurveyItemMap status={group.status} key={survey.name}>
+                  <IconItem
+                    data-testid={`icon-${survey.name}`}
+                    status={group.status}
+                  />
+                  <span>{survey.name}</span>
+                </SurveyItemMap>
+              ))}
+            </Flex>
+          ))}
       </RoadmapRow>
     </RoadmapContainer>
   );
