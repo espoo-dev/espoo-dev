@@ -1,6 +1,8 @@
+export type QuestionTypeName = 'Single Choice' | 'Multiple Choice';
 export interface QuestionType {
   id: number;
-  name: string;
+  // ? Maybe would be better to use singleChoice/multipleChoice instead
+  name: QuestionTypeName;
 }
 
 export interface AnswersSurvey {
