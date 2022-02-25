@@ -1,5 +1,9 @@
 import { Trail } from '@api/models/trail';
-import { TrailListContainer } from './trail-list.styles';
+import {
+  TrailListContainer,
+  TrailListItem,
+  TrailTitle,
+} from './trail-list.styles';
 
 interface TrailListProps {
   data: Trail[];
@@ -11,9 +15,14 @@ const TrailList = (props: TrailListProps) => {
   return (
     <TrailListContainer>
       {data.map((trail) => (
-        <div key={trail.id}>
-          <span>{trail.name}</span>
-        </div>
+        <TrailListItem key={trail.id}>
+          <TrailTitle>{trail.name}</TrailTitle>
+          <span>
+            {`${trail.surveys_quantity} ${
+              trail.surveys_quantity > 1 ? 'Surveys' : 'Survey'
+            }`}
+          </span>
+        </TrailListItem>
       ))}
     </TrailListContainer>
   );
