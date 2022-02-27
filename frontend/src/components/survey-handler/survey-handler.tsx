@@ -2,7 +2,7 @@ import { httpClient } from '@api/client';
 import { errorHandler } from '@api/error-handler';
 import { AnswerCreate } from '@api/models/answer';
 import { AnswerSurveyReceive } from '@api/models/answer_survey';
-import { Question, Survey } from '@api/models/survey';
+import { Question, QuestionTypeName, Survey } from '@api/models/survey';
 import { AnswerService } from '@api/services/answers';
 import { AnswerSurveyService } from '@api/services/answer_survey';
 import { Box } from '@chakra-ui/layout';
@@ -28,6 +28,17 @@ interface SurveyPageProps {
 const questionTypes = {
   'Single Choice': SingleChoice,
   'Multiple Choice': MultipleChoice,
+};
+
+const getSurveyTitle = (questionType: QuestionTypeName) => {
+  switch (questionType) {
+    case 'Multiple Choice':
+      return 'SELECT ONE OR MORE OPTIONS';
+    case 'Single Choice':
+      return 'SELECT UP TO 1 OPTION';
+    default:
+      return '';
+  }
 };
 
 export const SurveyHandler = (props: SurveyPageProps) => {
@@ -57,7 +68,7 @@ export const SurveyHandler = (props: SurveyPageProps) => {
     setQuestionIndex((prev) => prev + 1);
   };
 
-  const renderOptionByType = useCallback(() => {
+  const OptionByType = useCallback(() => {
     const { options, question_type } = question;
 
     const Component = questionTypes[question_type.name];
@@ -173,10 +184,12 @@ export const SurveyHandler = (props: SurveyPageProps) => {
             </Heading>
 
             <Box mt={3} color={colorPallettes.secondary}>
-              <span>SELECT UP TO 1 OPTION</span>
+              <span>{getSurveyTitle(question.question_type.name)}</span>
             </Box>
 
-            <Box mt={10}>{renderOptionByType()}</Box>
+            <Box mt={10}>
+              <OptionByType />
+            </Box>
           </Box>
 
           <Flex alignItems="center" justifyContent="center">
