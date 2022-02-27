@@ -25,12 +25,20 @@ interface SurveyPageProps {
   survey: Survey;
 }
 
-const questionTypes: Record<
-  QuestionTypeName,
-  typeof SingleChoice | typeof MultipleChoice
-> = {
+const questionTypes = {
   'Single Choice': SingleChoice,
   'Multiple Choice': MultipleChoice,
+};
+
+const getSurveyTitle = (questionType: QuestionTypeName) => {
+  switch (questionType) {
+    case 'Multiple Choice':
+      return 'SELECT ONE OR MORE OPTIONS';
+    case 'Single Choice':
+      return 'SELECT UP TO 1 OPTION';
+    default:
+      return '';
+  }
 };
 
 export const SurveyHandler = (props: SurveyPageProps) => {
@@ -60,7 +68,7 @@ export const SurveyHandler = (props: SurveyPageProps) => {
     setQuestionIndex((prev) => prev + 1);
   };
 
-  const renderOptionByType = useCallback(() => {
+  const OptionByType = useCallback(() => {
     const { options, question_type } = question;
 
     const Component = questionTypes[question_type.name];
@@ -176,14 +184,12 @@ export const SurveyHandler = (props: SurveyPageProps) => {
             </Heading>
 
             <Box mt={3} color={colorPallettes.secondary}>
-              <span>
-                {question.question_type.name === 'Multiple Choice'
-                  ? 'SELECT ONE OR MORE OPTIONS'
-                  : 'SELECT UP TO 1 OPTION'}
-              </span>
+              <span>{getSurveyTitle(question.question_type.name)}</span>
             </Box>
 
-            <Box mt={10}>{renderOptionByType()}</Box>
+            <Box mt={10}>
+              <OptionByType />
+            </Box>
           </Box>
 
           <Flex alignItems="center" justifyContent="center">
