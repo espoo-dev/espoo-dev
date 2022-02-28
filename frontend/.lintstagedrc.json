@@ -1,0 +1,11 @@
+{
+  "src/**/*.{html,css,scss,sass,json}": [
+    "npx pretty-quick --staged"
+  ],
+  "src/**/*.{js,jsx,ts,tsx,mdx}": [
+    "yarn lint --fix"
+  ],
+  "src/**/*.test.{js,jsx,ts,ts}": [
+    "yarn test -b --passWithNoTests --silent --findRelatedTests"
+  ]
+}

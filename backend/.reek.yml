@@ -1,5 +1,4 @@
 ---
-
 ### Generic smell configuration
 
 detectors:
@@ -18,6 +17,7 @@ detectors:
     exclude:
       - "Users::SessionsController#create"
       - "Seeds"
+    max_statements: 6
   TooManyMethods:
     exclude:
       - "Seeds"
@@ -81,4 +81,3 @@ exclude_paths:
   - bin/
   - vendor/
   - db/migrate
-  - spec/support/hash_helper.rb

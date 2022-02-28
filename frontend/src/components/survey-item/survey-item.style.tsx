@@ -1,9 +1,19 @@
 import styled from 'styled-components';
+import { defaultTransition } from 'styles/transitions';
 
 export const SurveyContainer = styled.div`
-  border-radius: 6px;
+  border-radius: 12px;
   cursor: pointer;
-  margin: 10px;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  transition: ${defaultTransition};
+  max-height: 200px;
+
+  &:hover {
+    transition: ${defaultTransition};
+    filter: brightness(1.1);
+  }
 `;
 
 export const ImageSurvey = styled.div<{ cover: string }>`
@@ -22,9 +32,14 @@ export const ImageSurvey = styled.div<{ cover: string }>`
 
 export const DetailsSurvey = styled.div`
   padding: 10px;
-  background-color: #fff;
+  background-color: #222;
   border-bottom-left-radius: 6px;
   border-bottom-right-radius: 6px;
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  color: #3cbfb9;
 `;
 
 export const TitleSurvey = styled.div`
@@ -41,9 +56,9 @@ export const QuestionsSurvey = styled.div`
   display: flex;
   align-items: center;
   font-size: 12px;
-  color: #747474;
   padding-top: 12px;
   justify-content: space-between;
+  color: #fff;
 `;
 
 export const NumberQuestions = styled.div`

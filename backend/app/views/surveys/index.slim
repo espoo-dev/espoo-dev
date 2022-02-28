@@ -9,8 +9,13 @@
             p.card-text
               = survey[:description]
             p.card-text
+              =  question_types(survey).join(", ")
+              =< t('surveys.index.type_of_questions')
+              | .
+            p.card-text
               =  t('surveys.index.question', count: survey[:answered_questions_quantity])
-              |  answered.
+              =< t('surveys.index.answered')
+              | .
             = form_with url: answers_surveys_path, method: :post do |form|
               = form.hidden_field :survey_id, value: survey[:id]
               = form.submit t('surveys.answers.submit'), class: 'btn btn-primary'

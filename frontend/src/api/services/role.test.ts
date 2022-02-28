@@ -3,16 +3,15 @@ import { AxiosInstance, AxiosResponse } from 'axios';
 import { RoleService } from './role';
 import { httpClient } from '../client';
 
-// Mocking httpClient
 jest.mock('../client', () => ({
   httpClient: {
-    get: jest.fn()
-  }
+    get: jest.fn(),
+  },
 }));
 
 // expected result to tests
 const mockResponse = {
-  mock: true
+  mock: true,
 };
 
 describe('RoleService', () => {
@@ -22,17 +21,11 @@ describe('RoleService', () => {
   describe('list method', () => {
     describe('when returns expected data', () => {
       beforeEach(async () => {
-        // mocking get implementation to return the expected value
-        (httpClient as jest.Mocked<AxiosInstance>)
-          .get
-          .mockImplementationOnce(
-            jest.fn((url: string) => {
-              return Promise.resolve({ data: mockResponse });
-            }
-          )
+        (httpClient as jest.Mocked<AxiosInstance>).get.mockImplementationOnce(
+          jest.fn((url: string) => Promise.resolve({ data: mockResponse }))
         );
 
-        instance = new RoleService(httpClient as any);
+        instance = new RoleService(httpClient as unknown);
 
         res = await instance.list();
       });
@@ -48,17 +41,11 @@ describe('RoleService', () => {
 
     describe('when returns an error', () => {
       beforeEach(async () => {
-        // mocking get implementation to return the expected value
-        (httpClient as jest.Mocked<AxiosInstance>)
-          .get
-          .mockImplementationOnce(
-            jest.fn((url: string) => {
-              return Promise.reject(new Error('test error'));
-            }
-          )
+        (httpClient as jest.Mocked<AxiosInstance>).get.mockImplementationOnce(
+          jest.fn((url: string) => Promise.reject(new Error('test error')))
         );
 
-        instance = new RoleService(httpClient as any);
+        instance = new RoleService(httpClient as unknown);
 
         res = await instance.list();
       });
@@ -72,4 +59,4 @@ describe('RoleService', () => {
       });
     });
   });
-})
+});

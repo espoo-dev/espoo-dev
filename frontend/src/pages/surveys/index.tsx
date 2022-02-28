@@ -1,31 +1,42 @@
-import Head from 'next/head';
-import { withAuth } from 'hoc/withAuth';
-import { Container, Content, Layout } from 'styles/main.styles';
-import { Sidemenu } from '@components/sidemenu';
 import {
   Box,
+  Button,
+  Flex,
   Heading,
   Spinner,
   Text,
-  Flex,
-  Button,
   Tooltip,
-  Spacer,
 } from '@chakra-ui/react';
+import { SurveysList } from '@components/main/SurveysList';
+import { Sidemenu } from '@components/sidemenu';
+import { SurveyHandler } from '@components/survey-handler';
+import { colors } from '@styles/colors';
+import {
+  Container,
+  Content,
+  DarkContainer,
+  Layout,
+  SurveyListWrapper,
+} from '@styles/main.styles';
 import { httpClient } from 'api';
 import { errorHandler } from 'api/error-handler';
-import { useEffect, useState } from 'react';
-import { SurveysList } from '@components/main/SurveysList';
-import { SurveyService } from 'api/services/survey';
 import { Survey } from 'api/models/survey';
-import { HiRefresh } from 'react-icons/hi';
-import SurveyPage from '../survey';
+import { SurveyService } from 'api/services/survey';
+import { withAuth } from 'hoc/withAuth';
+import Head from 'next/head';
+import { useEffect, useState } from 'react';
+import { HiArrowLeft, HiRefresh } from 'react-icons/hi';
 
 const Surveys = () => {
   const surveyService = new SurveyService(httpClient);
   const [surveys, setSurveys] = useState<Survey[]>([]);
   const [loading, setLoading] = useState(false);
   const [surveySelected, setSurveySelected] = useState<Survey>(null);
+
+  const backToList = () => {
+    listSurveys();
+    setSurveySelected(null);
+  };
 
   const listSurveys = async () => {
     setLoading(true);
@@ -54,32 +65,46 @@ const Surveys = () => {
       <Layout>
         <Sidemenu />
         <Content>
-          <Heading as="h1" fontWeight="normal" fontSize="26px">
+          <Heading
+            as="h1"
+            fontWeight="bold"
+            fontSize="20px"
+            color={colors.primaryTxt}
+            ml={{
+              base: 0,
+              md: 0,
+              sm: '20px',
+              xs: '20px',
+            }}
+          >
             {surveySelected ? surveySelected.name : 'Surveys'}
           </Heading>
 
-          <Box
-            background="#292929"
-            height="100%"
-            margin="8px 0px"
-            borderRadius="3xl"
-            mt="30"
-            p="16px"
-          >
+          <DarkContainer>
             {loading ? (
-              <Spinner color="white" />
+              <Spinner color={colors.primaryTxt} />
             ) : (
               !surveySelected && (
-                <Flex alignItems="center">
-                  <Text color="white" textAlign="center" mb="10px">
+                <Flex
+                  py="10px"
+                  alignItems="center"
+                  justifyContent="space-between"
+                  mb="1em"
+                >
+                  <Text
+                    color={colors.primaryTxt}
+                    textAlign="center"
+                    fontWeight="bold"
+                  >
                     {surveys.length
                       ? 'Discover a new survey!'
                       : 'No surveys =/'}
                   </Text>
-                  <Spacer />
+
                   <Tooltip label="Refresh" placement="top">
                     <Button
                       rounded="lg"
+                      data-testid="refresh-survey-lit"
                       p={0}
                       bg="teal.400"
                       colorScheme="teal"
@@ -94,42 +119,32 @@ const Surveys = () => {
             )}
 
             {surveySelected ? (
-              <SurveyPage survey={surveySelected} />
+              <Box>
+                <Tooltip label="Back to list" placement="top">
+                  <Button
+                    rounded="lg"
+                    p={0}
+                    bg="teal.400"
+                    colorScheme="teal"
+                    w="30px"
+                    onClick={backToList}
+                  >
+                    <HiArrowLeft color="white" />
+                  </Button>
+                </Tooltip>
+                <SurveyHandler survey={surveySelected} />
+              </Box>
             ) : (
-              <SurveysList
-                data={surveys}
-                setSurveySelected={setSurveySelected}
-              />
+              !loading && (
+                <SurveyListWrapper>
+                  <SurveysList
+                    data={surveys}
+                    setSurveySelected={setSurveySelected}
+                  />
+                </SurveyListWrapper>
+              )
             )}
-          </Box>
-
-          {/* Paggination buttons */}
-          {/* <Box
-            display="flex"
-            justifyContent="flex-end"
-            alignItems="center"
-          >
-            <Box
-              background="#292929"
-              alignItems="center"
-              padding="10px"
-              margin="2px"
-              color="#fff"
-              borderRadius="8px"
-            >
-              <HiArrowLeft />
-            </Box>
-            <Box
-              background="#292929"
-              alignItems="center"
-              padding="10px"
-              margin="2px"
-              color="#fff"
-              borderRadius="8px"
-            >
-              <HiArrowRight />
-            </Box>
-          </Box> */}
+          </DarkContainer>
         </Content>
       </Layout>
     </Container>

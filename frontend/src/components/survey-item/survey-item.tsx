@@ -1,7 +1,9 @@
-import { RiQuestionAnswerLine } from 'react-icons/ri';
-import { MouseEventHandler, useEffect, useState } from 'react';
+import { AnswerSurveyStatus, Survey } from '@api/models/survey';
 import { Progress } from '@chakra-ui/progress';
-import { Survey } from '@api/models/survey';
+import { Flex } from '@chakra-ui/react';
+import { Tag } from '@chakra-ui/tag';
+import { MouseEventHandler, useEffect, useState } from 'react';
+import { RiQuestionAnswerLine } from 'react-icons/ri';
 import {
   DescriptionSurvey,
   DetailsSurvey,
@@ -21,7 +23,14 @@ export interface SurveyItemProps {
   onClick?: MouseEventHandler<HTMLDivElement>;
   loading?: boolean;
   surveyData?: Survey;
+  status?: AnswerSurveyStatus;
 }
+
+const StatusTagColors = {
+  [AnswerSurveyStatus.NotStarted]: 'red',
+  [AnswerSurveyStatus.Started]: 'yellow',
+  [AnswerSurveyStatus.Completed]: 'green',
+};
 
 export const SurveyItem = (props: SurveyItemProps) => {
   const {
@@ -31,21 +40,17 @@ export const SurveyItem = (props: SurveyItemProps) => {
     cover,
     onClick,
     loading,
-    surveyData,
+    status,
   } = props;
   const [coverImage, setCoverImage] = useState<string>('');
 
+  const imgKit = 'https://ik.imagekit.io/u7kjueyghmd/';
+
   const randomImage = () => {
     const images = [
-      'https://images.pexels.com/photos/7103/writing-' +
-        'notes-idea-conference.jpg?cs=srgb&dl=' +
-        'pexels-startup-stock-photos-7103.jpg&fm=jpg',
-      'https://images.pexels.com/photos/1326947/' +
-        'pexels-photo-1326947.jpeg?auto=compress' +
-        's&cs=tinysrgb&dpr=2&h=650&w=940',
-      'https://images.pexels.com/photos/351961/' +
-        'pexels-photo-351961.jpeg?auto=compress' +
-        '&cs=tinysrgb&dpr=2&h=650&w=940',
+      `${imgKit}/question_card_template1_tDW_SAGUh.jpg`,
+      `${imgKit}/question_card_template3_otkvluVvys.jpeg`,
+      `${imgKit}/question_card_template2_ku8ufHjdpCYW.jpeg`,
     ];
     return images[Math.floor(Math.random() * images.length)];
   };
@@ -54,28 +59,45 @@ export const SurveyItem = (props: SurveyItemProps) => {
     setCoverImage(cover || randomImage());
   }, []);
 
+  const msgInSurvey = (surveyStatus: AnswerSurveyStatus) => {
+    const msgs = {
+      [AnswerSurveyStatus.NotStarted]: '',
+      [AnswerSurveyStatus.Started]: 'Click to resume',
+      [AnswerSurveyStatus.Completed]: 'Answer again!',
+    };
+
+    return msgs[surveyStatus];
+  };
+
   return (
     <SurveyContainer data-testid={title} onClick={onClick}>
       <ImageSurvey data-testid="random-image" cover={coverImage} />
       <DetailsSurvey>
-        <TitleSurvey>
-          <span>{title}</span>
-        </TitleSurvey>
+        <Flex alignItems="center" justifyContent="space-between">
+          <TitleSurvey>
+            <span>{title}</span>
+          </TitleSurvey>
+          {status ? (
+            <Tag
+              size="sm"
+              data-testid="status-current-tag"
+              colorScheme={StatusTagColors[status]}
+            >
+              {status}
+            </Tag>
+          ) : null}
+        </Flex>
+
         <DescriptionSurvey>
           <span>{description}</span>
         </DescriptionSurvey>
+
         <QuestionsSurvey>
-          <span>
-            {surveyData?.answers_surveys.length ? 'Click to resume' : ''}
-          </span>
+          <div>{msgInSurvey(status)}</div>
           <QuestionsSection>
             <RiQuestionAnswerLine size={20} />
             {numberQuestions > 0 ? (
-              <NumberQuestions>
-                {numberQuestions}
-                {' '}
-                Questions
-              </NumberQuestions>
+              <NumberQuestions>{numberQuestions} Questions</NumberQuestions>
             ) : (
               <NumberQuestions>No questions</NumberQuestions>
             )}

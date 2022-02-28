@@ -1,9 +1,8 @@
 class Survey < ApplicationRecord
-  attr_accessor :answers_surveys_by_user
-
   validate :validates_ready
   belongs_to :user
   belongs_to :survey_subject
+  belongs_to :group, optional: true
 
   has_many :questions, dependent: :nullify
   has_many :answers_surveys, dependent: :destroy
@@ -18,12 +17,12 @@ class Survey < ApplicationRecord
 
   scope :ready_surveys_eager, -> { ready_surveys.includes([:questions]) }
 
-  def last_answers_survey
-    answers_surveys.last
+  def last_answers_survey(user)
+    answers_surveys.where(user: user).last
   end
 
-  def last_answers_quantity
-    last_answers_survey&.answers&.count || 0
+  def last_answers_quantity(user)
+    last_answers_survey(user)&.answers&.count || 0
   end
 
   def validates_ready

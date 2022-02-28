@@ -34,3 +34,8 @@ yarn-error.log*
 .vercel
 
 *.log
+
+/.idea/
+
+cypress/videos
+cypress/screenshots

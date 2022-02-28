@@ -1,5 +1,7 @@
 class Seeds < Base
   def call
+    return if Rails.env.production?
+
     clean_database
     create_users
     create_question_types
@@ -7,20 +9,23 @@ class Seeds < Base
     create_questions_and_options
     create_answers
     set_survey_ready
+    create_trails
   end
-
-  private
 
   def clean_database
     User.destroy_all
-    Role.destroy_all
-    QuestionType.destroy_all
     Question.destroy_all
     Survey.destroy_all
     Option.destroy_all
     SurveySubject.destroy_all
     Answer.destroy_all
+    Group.destroy_all
+    Trail.destroy_all
+    Role.destroy_all
+    QuestionType.destroy_all
   end
+
+  private
 
   # Users and Roles
 
@@ -42,7 +47,6 @@ class Seeds < Base
   def create_question_types
     @question_type_single_choice = QuestionType.create!(name: 'Single Choice')
     @question_type_multiple_choice = QuestionType.create!(name: 'Multiple Choice')
-    @question_type_free_text = QuestionType.create!(name: 'Free Text')
   end
 
   def create_questions_and_options
@@ -55,6 +59,9 @@ class Seeds < Base
     create_question_one_to_be_survey_ready
     create_question_two_to_be_survey_ready
     create_question_three_to_be_survey_ready
+    create_question_one_choose_subject_ready_survey
+    create_question_two_choose_subject_ready_survey
+    create_question_three_choose_subject_ready_survey
   end
 
   def create_question_one_to_be_survey_ready
@@ -93,6 +100,57 @@ class Seeds < Base
     Option.create!(name: 'is', question: question, user: @user_admin, correct: false)
     Option.create!(name: 'am', question: question, user: @user_admin, correct: false)
     Option.create!(name: 'are', question: question, user: @user_admin, correct: true)
+    question.update!(ready_to_be_answered: true)
+  end
+
+  def create_question_one_choose_subject_ready_survey
+    question = Question.create!(
+      name: '___ is happy!',
+      user: @user_teacher,
+      survey: @choose_subject_ready_survey,
+      question_type: @question_type_multiple_choice
+    )
+    Option.create!(name: 'I', question: question, user: @user_admin, correct: false)
+    Option.create!(name: 'He', question: question, user: @user_admin, correct: true)
+    Option.create!(name: 'She', question: question, user: @user_admin, correct: true)
+    Option.create!(name: 'It', question: question, user: @user_admin, correct: true)
+    Option.create!(name: 'You', question: question, user: @user_admin, correct: false)
+    Option.create!(name: 'We', question: question, user: @user_admin, correct: false)
+    Option.create!(name: 'They', question: question, user: @user_admin, correct: false)
+    question.update!(ready_to_be_answered: true)
+  end
+
+  def create_question_two_choose_subject_ready_survey
+    question = Question.create!(
+      name: '___ am happy!',
+      user: @user_teacher,
+      survey: @choose_subject_ready_survey,
+      question_type: @question_type_multiple_choice
+    )
+    Option.create!(name: 'I', question: question, user: @user_admin, correct: true)
+    Option.create!(name: 'He', question: question, user: @user_admin, correct: false)
+    Option.create!(name: 'She', question: question, user: @user_admin, correct: false)
+    Option.create!(name: 'It', question: question, user: @user_admin, correct: false)
+    Option.create!(name: 'You', question: question, user: @user_admin, correct: false)
+    Option.create!(name: 'We', question: question, user: @user_admin, correct: false)
+    Option.create!(name: 'They', question: question, user: @user_admin, correct: false)
+    question.update!(ready_to_be_answered: true)
+  end
+
+  def create_question_three_choose_subject_ready_survey
+    question = Question.create!(
+      name: '___ are happy!',
+      user: @user_teacher,
+      survey: @choose_subject_ready_survey,
+      question_type: @question_type_multiple_choice
+    )
+    Option.create!(name: 'I', question: question, user: @user_admin, correct: false)
+    Option.create!(name: 'He', question: question, user: @user_admin, correct: false)
+    Option.create!(name: 'She', question: question, user: @user_admin, correct: false)
+    Option.create!(name: 'It', question: question, user: @user_admin, correct: false)
+    Option.create!(name: 'You', question: question, user: @user_admin, correct: true)
+    Option.create!(name: 'We', question: question, user: @user_admin, correct: true)
+    Option.create!(name: 'They', question: question, user: @user_admin, correct: true)
     question.update!(ready_to_be_answered: true)
   end
 
@@ -179,7 +237,7 @@ class Seeds < Base
       name: 'Translate red',
       user: @user_admin,
       survey: @colors_survey_ready,
-      question_type: @question_type_free_text
+      question_type: @question_type_single_choice
     )
   end
 
@@ -226,6 +284,7 @@ class Seeds < Base
     @colors_survey_ready = Survey.create!(name: 'Colors survey - for Children', description: 'Favorite colors', user: @user_admin, survey_subject_id: color_subject_id)
     @teacher_ready_survey = Survey.create!(name: 'Animals survey - Teacher', description: 'Nice animals', user: @user_teacher, survey_subject_id: animal_subject_id)
     @to_be_ready_survey = Survey.create!(name: 'To Be Verb', description: 'Select one option to fill the gap on the sentence', user: @user_teacher, survey_subject_id: english_subject_id)
+    @choose_subject_ready_survey = Survey.create!(name: 'Choose Subject', description: 'Select correct subjects for the sentence', user: @user_teacher, survey_subject_id: english_subject_id)
 
     Survey.create!(name: 'Dog survey - Teacher', user: @user_teacher, survey_subject_id: animal_subject_id)
     Survey.create!(name: 'Bunny survey - Teacher', user: @user_teacher, survey_subject_id: animal_subject_id)
@@ -235,6 +294,7 @@ class Seeds < Base
     @teacher_ready_survey.update!(ready: true)
     @colors_survey_ready.update!(ready: true)
     @to_be_ready_survey.update!(ready: true)
+    @choose_subject_ready_survey.update!(ready: true)
   end
 
   # Answer Surveys and Answers
@@ -251,5 +311,14 @@ class Seeds < Base
     Answer.create!(answers_survey: answers_survey_colors, question: question_one_color_survey, options: [correct_option_question_1_colors_survey])
     Answer.create!(answers_survey: answers_survey_teacher, question: question_one_teacher, options: [option_correct_question_1_survey_teacher])
     Answer.create!(answers_survey: answers_survey_teacher, question: question_two_teacher_ready, options: [@option_incorrect_question_2_survey_teacher])
+  end
+
+  def create_trails
+    first_group = Group.create!(name: 'Animals and colors', surveys: [@teacher_ready_survey, @colors_survey_ready], user: @user_teacher)
+    second_group = Group.create!(name: 'To be', surveys: [@to_be_ready_survey], user: @user_teacher)
+    third_group = Group.create!(name: 'Choose subject', surveys: [@choose_subject_ready_survey], user: @user_teacher)
+    third_group.add_required_group!(second_group)
+    second_group.add_required_group!(first_group)
+    Trail.create!(name: 'English', groups: [first_group, second_group, third_group], user: @user_teacher)
   end
 end
