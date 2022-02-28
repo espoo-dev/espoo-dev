@@ -22,10 +22,10 @@ import { HiArrowLeft, HiRefresh } from 'react-icons/hi';
 import {
   Container,
   Content,
-  DarkBG,
   Layout,
   SurveyListWrapper,
 } from 'styles/main.styles';
+import { DarkContainer } from './surveys.styles';
 
 const Surveys = () => {
   const surveyService = new SurveyService(httpClient);
@@ -80,7 +80,7 @@ const Surveys = () => {
             {surveySelected ? surveySelected.name : 'Surveys'}
           </Heading>
 
-          <DarkBG>
+          <DarkContainer>
             {loading ? (
               <Spinner color={colors.primaryTxt} />
             ) : (
@@ -144,7 +144,7 @@ const Surveys = () => {
                 </SurveyListWrapper>
               )
             )}
-          </DarkBG>
+          </DarkContainer>
         </Content>
       </Layout>
     </Container>

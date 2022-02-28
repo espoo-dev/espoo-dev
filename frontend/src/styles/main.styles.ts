@@ -35,11 +35,3 @@ export const SurveyListWrapper = styled.div`
   overflow: hidden;
   display: block;
 `;
-
-export const DarkBG = styled.div`
-  height: 100%;
-  background: #323232;
-  margin-top: 20px;
-  padding: 20px;
-  border-radius: 20px;
-`;
