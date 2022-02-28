@@ -1,7 +1,7 @@
+import { Sidemenu } from '@components/sidemenu';
+import { User } from 'api/models/user';
 import { render, screen } from 'test-utils';
 import { AuthContext } from './auth';
-import { User } from 'api/models/user';
-import { Sidemenu } from '@components/sidemenu';
 
 const checkToken = jest.fn();
 const token = 'token';
@@ -32,6 +32,6 @@ describe('AuthContext', () => {
       />
     );
     render(<Sidemenu />);
-    expect(screen.getByTestId('logout-button')).toBeInTheDocument();
+    expect(screen.getByTestId('logout_button')).toBeInTheDocument();
   });
 });

@@ -3,7 +3,6 @@ import {
   Button,
   Flex,
   Heading,
-  Spacer,
   Spinner,
   Text,
   Tooltip,
@@ -11,7 +10,14 @@ import {
 import { SurveysList } from '@components/main/SurveysList';
 import { Sidemenu } from '@components/sidemenu';
 import { SurveyHandler } from '@components/survey-handler';
-import { colorPallettes } from '@styles/globals';
+import { colors } from '@styles/colors';
+import {
+  Container,
+  Content,
+  DarkContainer,
+  Layout,
+  SurveyListWrapper,
+} from '@styles/main.styles';
 import { httpClient } from 'api';
 import { errorHandler } from 'api/error-handler';
 import { Survey } from 'api/models/survey';
@@ -20,7 +26,6 @@ import { withAuth } from 'hoc/withAuth';
 import Head from 'next/head';
 import { useEffect, useState } from 'react';
 import { HiArrowLeft, HiRefresh } from 'react-icons/hi';
-import { Container, Content, Layout } from 'styles/main.styles';
 
 const Surveys = () => {
   const surveyService = new SurveyService(httpClient);
@@ -60,32 +65,42 @@ const Surveys = () => {
       <Layout>
         <Sidemenu />
         <Content>
-          <Heading as="h1" fontWeight="normal" fontSize="26px">
+          <Heading
+            as="h1"
+            fontWeight="bold"
+            fontSize="20px"
+            color={colors.primaryTxt}
+            ml={{
+              base: 0,
+              md: 0,
+              sm: '20px',
+              xs: '20px',
+            }}
+          >
             {surveySelected ? surveySelected.name : 'Surveys'}
           </Heading>
 
-          <Box
-            background="#f5f7fb"
-            height="100%"
-            borderRadius="3xl"
-            mt="30"
-            p="16px"
-          >
+          <DarkContainer>
             {loading ? (
-              <Spinner color={colorPallettes.primary} />
+              <Spinner color={colors.primaryTxt} />
             ) : (
               !surveySelected && (
-                <Flex padding="10px" alignItems="center">
+                <Flex
+                  py="10px"
+                  alignItems="center"
+                  justifyContent="space-between"
+                  mb="1em"
+                >
                   <Text
-                    color={colorPallettes.primary}
+                    color={colors.primaryTxt}
                     textAlign="center"
-                    mb="10px"
+                    fontWeight="bold"
                   >
                     {surveys.length
                       ? 'Discover a new survey!'
                       : 'No surveys =/'}
                   </Text>
-                  <Spacer />
+
                   <Tooltip label="Refresh" placement="top">
                     <Button
                       rounded="lg"
@@ -121,41 +136,15 @@ const Surveys = () => {
               </Box>
             ) : (
               !loading && (
-                <SurveysList
-                  data={surveys}
-                  setSurveySelected={setSurveySelected}
-                />
+                <SurveyListWrapper>
+                  <SurveysList
+                    data={surveys}
+                    setSurveySelected={setSurveySelected}
+                  />
+                </SurveyListWrapper>
               )
             )}
-          </Box>
-
-          {/* Paggination buttons */}
-          {/* <Box
-            display="flex"
-            justifyContent="flex-end"
-            alignItems="center"
-          >
-            <Box
-              background="#292929"
-              alignItems="center"
-              padding="10px"
-              margin="2px"
-              color="#fff"
-              borderRadius="8px"
-            >
-              <HiArrowLeft />
-            </Box>
-            <Box
-              background="#292929"
-              alignItems="center"
-              padding="10px"
-              margin="2px"
-              color="#fff"
-              borderRadius="8px"
-            >
-              <HiArrowRight />
-            </Box>
-          </Box> */}
+          </DarkContainer>
         </Content>
       </Layout>
     </Container>
