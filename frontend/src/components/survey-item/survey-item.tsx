@@ -1,5 +1,6 @@
 import { AnswerSurveyStatus, Survey } from '@api/models/survey';
 import { Progress } from '@chakra-ui/progress';
+import { Flex } from '@chakra-ui/react';
 import { Tag } from '@chakra-ui/tag';
 import { MouseEventHandler, useEffect, useState } from 'react';
 import { RiQuestionAnswerLine } from 'react-icons/ri';
@@ -72,14 +73,10 @@ export const SurveyItem = (props: SurveyItemProps) => {
     <SurveyContainer data-testid={title} onClick={onClick}>
       <ImageSurvey data-testid="random-image" cover={coverImage} />
       <DetailsSurvey>
-        <TitleSurvey>
-          <span>{title}</span>
-        </TitleSurvey>
-        <DescriptionSurvey>
-          <span>{description}</span>
-        </DescriptionSurvey>
-        <QuestionsSurvey>
-          <span>{msgInSurvey(status)}</span>
+        <Flex alignItems="center" justifyContent="space-between">
+          <TitleSurvey>
+            <span>{title}</span>
+          </TitleSurvey>
           {status ? (
             <Tag
               size="sm"
@@ -89,6 +86,14 @@ export const SurveyItem = (props: SurveyItemProps) => {
               {status}
             </Tag>
           ) : null}
+        </Flex>
+
+        <DescriptionSurvey>
+          <span>{description}</span>
+        </DescriptionSurvey>
+
+        <QuestionsSurvey>
+          <div>{msgInSurvey(status)}</div>
           <QuestionsSection>
             <RiQuestionAnswerLine size={20} />
             {numberQuestions > 0 ? (

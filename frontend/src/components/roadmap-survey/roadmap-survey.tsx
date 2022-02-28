@@ -1,5 +1,6 @@
 import { Group } from '@api/models/group';
-import { Flex } from '@chakra-ui/react';
+import { Flex, Text } from '@chakra-ui/react';
+import { colors } from '@styles/colors';
 import {
   IconItem,
   RoadmapContainer,
@@ -14,10 +15,14 @@ interface RoadmapSurveyProps {
 const RoadmapSurvey = (props: RoadmapSurveyProps) => {
   const { groups } = props;
 
+  if (!groups) {
+    return null;
+  }
+
   return (
     <RoadmapContainer>
       <RoadmapRow>
-        {groups &&
+        {groups && groups.length ? (
           groups.map((group) => (
             <Flex key={group.id} data-testid={`group-${group.id}`}>
               {group.surveys.map((survey) => (
@@ -30,7 +35,10 @@ const RoadmapSurvey = (props: RoadmapSurveyProps) => {
                 </SurveyItemMap>
               ))}
             </Flex>
-          ))}
+          ))
+        ) : (
+          <Text color={colors.primaryTxt}>No surveys to show =/</Text>
+        )}
       </RoadmapRow>
     </RoadmapContainer>
   );
