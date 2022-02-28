@@ -68,7 +68,7 @@ class LoginActivity : AppCompatActivity() {
                     //TODO retrieve the  {error: "Invalid Email or password."} from response
                     Log.d("TAG_", "${response.raw()}")
                     Log.d("TAG_", "${response.message()}")
-                    Log.d("TAG_", "${response.body()}")
+                    //Log.d("TAG_", "${response.body()}")
                 }
 
                 override fun onFailure(call: Call<User>, t: Throwable) {
