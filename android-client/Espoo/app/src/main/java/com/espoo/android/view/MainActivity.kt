@@ -6,6 +6,7 @@ import android.os.Bundle
 import android.util.Log
 import android.view.View
 import com.espoo.android.R
+import com.espoo.android.adapter.SurveyClickListener
 import com.espoo.android.adapter.SurveysAdapter
 import com.espoo.android.api.ApiService
 import com.espoo.android.helper.SessionManager
@@ -25,7 +26,10 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
         sessionManager = SessionManager(applicationContext)
 
-        val adapter = SurveysAdapter()
+        val adapter = SurveysAdapter(SurveyClickListener { surveyId ->
+            Log.d("TAG_", "survey id: $surveyId")
+        })
+
         recyclerViewSurvey.adapter = adapter
 
         service = ApiService.create(sessionManager.readAPIToken())
@@ -36,7 +40,7 @@ class MainActivity : AppCompatActivity() {
                     Log.d("TAG_", "onResponse: ${response.body()}")
                     Log.d("TAG_", "onResponse: ${response.raw()}")
                     response.body()?.let {
-                        adapter.data = it
+                        adapter.submitList(it)
                     }
                 }
 
@@ -46,7 +50,6 @@ class MainActivity : AppCompatActivity() {
                 }
 
             })
-
     }
 
     fun logout(view: View) {
