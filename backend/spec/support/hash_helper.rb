@@ -119,4 +119,8 @@ module HashHelper
       current_answers_survey: answers_survey_attributes
     }.merge(survey_helper)
   end
+
+  def present_survey(survey)
+    SurveyPresenter.new(survey, survey.answers_surveys&.last&.user).payload.with_indifferent_access
+  end
 end
