@@ -1,12 +1,7 @@
-import { colorPallettes } from '@styles/globals';
 import styled, { css } from 'styled-components';
 
 export const ResultContainer = styled.div`
   text-align: center;
-
-  div h1 {
-    color: ${colorPallettes.primary};
-  }
 `;
 
 export const Result = styled.div`
@@ -28,6 +23,7 @@ export const BoxResult = styled.div<{ correct?: boolean }>`
   padding: 0px 12px;
   background: ${(props) => (props.correct ? '#04a904' : '#c34141')};
   font-size: 18px;
+  color: #fff;
 
   ${(props) =>
     (props.correct &&

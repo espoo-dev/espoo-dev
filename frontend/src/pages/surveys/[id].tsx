@@ -1,18 +1,20 @@
-import { Container, Content, Layout } from 'styles/main.styles';
-import { Box, Button, Heading, Spinner, Tooltip } from '@chakra-ui/react';
-import Head from 'next/head';
-import { Sidemenu } from '@components/sidemenu';
-import { useRouter } from 'next/router';
-import { SurveyService } from '@api/services/survey';
 import { httpClient } from '@api/client';
-import { useEffect, useState } from 'react';
-import { Survey } from 'api/models/survey';
-import { GetServerSideProps } from 'next';
-import { AUTH_COOKIE } from 'consts';
-import { parseCookies } from 'nookies';
-import { HiArrowLeft } from 'react-icons/hi';
+import { SurveyService } from '@api/services/survey';
+import { Box, Button, Heading, Spinner, Tooltip } from '@chakra-ui/react';
+import { Sidemenu } from '@components/sidemenu';
 import { SurveyHandler } from '@components/survey-handler';
+import { colors } from '@styles/colors';
+import { Survey } from 'api/models/survey';
+import { AUTH_COOKIE } from 'consts';
+import { GetServerSideProps } from 'next';
+import Head from 'next/head';
+import { useRouter } from 'next/router';
+import { parseCookies } from 'nookies';
+import { useEffect, useState } from 'react';
+import { HiArrowLeft } from 'react-icons/hi';
 import { toast } from 'react-toastify';
+import { Container, Content, Layout } from 'styles/main.styles';
+import { DarkContainer } from './surveys.styles';
 
 const surveyService = new SurveyService(httpClient);
 
@@ -59,17 +61,16 @@ const SurveyPage = () => {
       <Layout>
         <Sidemenu />
         <Content>
-          <Heading as="h1" fontWeight="normal" fontSize="26px">
+          <Heading
+            color={colors.primaryTxt}
+            as="h1"
+            fontWeight="normal"
+            fontSize="26px"
+          >
             {loading ? <Spinner color="white" /> : survey && survey.name}
           </Heading>
 
-          <Box
-            background="#f5f7fb"
-            height="100%"
-            borderRadius="3xl"
-            mt="30"
-            p="16px"
-          >
+          <DarkContainer>
             {survey && !loading && (
               <Box>
                 <Tooltip label="Back to list" placement="top">
@@ -87,7 +88,7 @@ const SurveyPage = () => {
                 <SurveyHandler survey={survey} />
               </Box>
             )}
-          </Box>
+          </DarkContainer>
         </Content>
       </Layout>
     </Container>
