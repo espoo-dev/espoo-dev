@@ -1,11 +1,11 @@
 import { AnswerSurveyReceive } from '@api/models/answer_survey';
 import { Box, Grid, Heading, Tooltip } from '@chakra-ui/react';
-import AsnweredQuestion from '@components/answered-question/answered-question';
 import { colors } from '@styles/colors';
 import { useEffect, useState } from 'react';
+import { AsnweredQuestion } from '../answered-question';
 import { BoxResult, ResultContainer } from './sumary-result.styles';
 
-const SumaryResult = (props: AnswerSurveyReceive) => {
+export const SummaryResult = (props: AnswerSurveyReceive) => {
   const { questions } = props;
 
   const [result, setResult] = useState({
@@ -90,5 +90,3 @@ const SumaryResult = (props: AnswerSurveyReceive) => {
     </ResultContainer>
   );
 };
-
-export default SumaryResult;

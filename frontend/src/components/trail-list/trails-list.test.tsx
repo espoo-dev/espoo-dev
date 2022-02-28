@@ -1,6 +1,6 @@
 import { Trail } from '@api/models/trail';
 import { render, screen } from 'test-utils';
-import TrailList from './trails-list';
+import { TrailList } from './trails-list';
 
 let trails = [];
 

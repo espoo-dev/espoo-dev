@@ -15,7 +15,7 @@ import {
 } from '@chakra-ui/react';
 import { AppButton } from '@components/app-button';
 import { MultipleChoice, SingleChoice } from '@components/questions';
-import SumaryResult from '@components/sumary-result/sumary-result';
+import { SummaryResult } from '@components/sumary-result/sumary-result';
 import { usePrevious } from '@hooks/usePrevious';
 import { useUpdateEffect } from '@hooks/useUpdateEffect';
 import { colors } from '@styles/colors';
@@ -208,7 +208,7 @@ export const SurveyHandler = (props: SurveyPageProps) => {
           {survey &&
           survey.current_answers_survey.questions.length &&
           answerSurvey ? (
-            <SumaryResult {...answerSurvey} />
+            <SummaryResult {...answerSurvey} />
           ) : (
             <Box textAlign="center">
               {isLoadingResult ? (
