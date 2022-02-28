@@ -6,17 +6,19 @@ import android.os.Bundle
 import android.util.Log
 import android.view.View
 import android.widget.Toast
+import androidx.databinding.DataBindingUtil
 import com.espoo.android.R
 import com.espoo.android.api.ApiService
+import com.espoo.android.databinding.ActivityLoginBinding
 import com.espoo.android.helper.SessionManager
 import com.espoo.android.helper.SessionManager.PreferencesConstants.API_TOKEN
 import com.espoo.android.helper.SessionManager.PreferencesConstants.IS_LOGIN
 import com.espoo.android.helper.SessionManager.PreferencesConstants.USER_ID
 import com.espoo.android.helper.SessionManager.PreferencesConstants.EMAIL
+import com.espoo.android.helper.Validator
 import com.espoo.android.model.AuthData
 import com.espoo.android.model.User
 import com.espoo.android.model.UserLogin
-import kotlinx.android.synthetic.main.activity_login.*
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -24,11 +26,14 @@ import retrofit2.Response
 class LoginActivity : AppCompatActivity() {
 
     private lateinit var service: ApiService
-    private lateinit var sessionManager : SessionManager
+    lateinit var sessionManager : SessionManager
+    private lateinit var binding: ActivityLoginBinding
+    private lateinit var validator: Validator
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_login)
+        binding = DataBindingUtil.setContentView(this, R.layout.activity_login)
+        validator = Validator()
 
         sessionManager = SessionManager(applicationContext)
         if (sessionManager.isLogin()) {
@@ -39,11 +44,31 @@ class LoginActivity : AppCompatActivity() {
     }
 
     fun login(view: View) {
-        service.login(AuthData(UserLogin(editTextUsername.text.toString(), editTextPassword.text.toString())))
-            .enqueue(object :Callback<User> {
+        val userName = binding.editTextUsername.text.toString()
+        val password = binding.editTextPassword.text.toString()
+
+        if (!validator.validateInputNotEmpty(userName)) {
+            Toast.makeText(this,
+                "${getString(R.string.login_username)} ${getString(R.string.field_does_not_filled)}",
+                Toast.LENGTH_LONG).show()
+        } else if (!validator.validateInputNotEmpty(password)) {
+            Toast.makeText(this,
+                "${getString(R.string.login_password)} ${getString(R.string.field_does_not_filled)}",
+                Toast.LENGTH_LONG).show()
+        } else {
+            service.login(AuthData(UserLogin(userName, password))).enqueue(object :Callback<User> {
                 override fun onResponse(call: Call<User>, response: Response<User>) {
-                    storeLoginData(response)
-                    openMainActivity()
+                    response.body()?.let {
+                        storeLoginData(it)
+                        openMainActivity()
+                    }
+                    response.headers()["Authorization"]?.let {
+                        sessionManager.storeData(API_TOKEN, it)
+                    }
+                    //TODO retrieve the  {error: "Invalid Email or password."} from response
+                    Log.d("TAG_", "${response.raw()}")
+                    Log.d("TAG_", "${response.message()}")
+                    //Log.d("TAG_", "${response.body()}")
                 }
 
                 override fun onFailure(call: Call<User>, t: Throwable) {
@@ -51,6 +76,7 @@ class LoginActivity : AppCompatActivity() {
                     t.printStackTrace()
                 }
             })
+        }
     }
 
     private fun openMainActivity() {
@@ -58,20 +84,14 @@ class LoginActivity : AppCompatActivity() {
         finish()
     }
 
-    private fun storeLoginData(response: Response<User>) {
-        val user = response.body()
-        user?.let {
-            sessionManager.storeData(USER_ID, it.id)
-            sessionManager.storeData(EMAIL, it.email)
-            Toast.makeText(
-                applicationContext,
-                "${getString(R.string.welcome)} ${it.email}",
-                Toast.LENGTH_LONG
-            ).show()
-        }
-        response.headers()["Authorization"]?.let {
-            sessionManager.storeData(API_TOKEN, it)
-        }
+    fun storeLoginData(user: User) {
+        sessionManager.storeData(USER_ID, user.id)
+        sessionManager.storeData(EMAIL, user.email)
+        Toast.makeText(
+            applicationContext,
+            "${getString(R.string.welcome)} ${user.email}",
+            Toast.LENGTH_LONG
+        ).show()
         sessionManager.storeData(IS_LOGIN, true)
     }
 }
