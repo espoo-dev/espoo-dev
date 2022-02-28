@@ -1,5 +1,5 @@
 import { render, screen } from 'test-utils';
-import AsnweredQuestion from './answered-question';
+import { AsnweredQuestion } from './answered-question';
 
 interface AnswerdOption {
   id: number;

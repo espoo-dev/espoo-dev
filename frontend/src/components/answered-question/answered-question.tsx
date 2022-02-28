@@ -20,7 +20,7 @@ export interface ResultAnswerProps {
   answered_options: AnswerdOption[];
 }
 
-const AsnweredQuestion = (props: ResultAnswerProps) => {
+export const AsnweredQuestion = (props: ResultAnswerProps) => {
   const { id, correct, answered_options } = props;
   const { name } = props;
   const answered = answered_options[0].name;
@@ -43,5 +43,3 @@ const AsnweredQuestion = (props: ResultAnswerProps) => {
     </CardReponse>
   );
 };
-
-export default AsnweredQuestion;
