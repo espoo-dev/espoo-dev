@@ -11,6 +11,13 @@ import { SurveysList } from '@components/main/SurveysList';
 import { Sidemenu } from '@components/sidemenu';
 import { SurveyHandler } from '@components/survey-handler';
 import { colors } from '@styles/colors';
+import {
+  Container,
+  Content,
+  DarkContainer,
+  Layout,
+  SurveyListWrapper,
+} from '@styles/main.styles';
 import { httpClient } from 'api';
 import { errorHandler } from 'api/error-handler';
 import { Survey } from 'api/models/survey';
@@ -19,13 +26,6 @@ import { withAuth } from 'hoc/withAuth';
 import Head from 'next/head';
 import { useEffect, useState } from 'react';
 import { HiArrowLeft, HiRefresh } from 'react-icons/hi';
-import {
-  Container,
-  Content,
-  DarkBG,
-  Layout,
-  SurveyListWrapper,
-} from 'styles/main.styles';
 
 const Surveys = () => {
   const surveyService = new SurveyService(httpClient);
@@ -80,7 +80,7 @@ const Surveys = () => {
             {surveySelected ? surveySelected.name : 'Surveys'}
           </Heading>
 
-          <DarkBG>
+          <DarkContainer>
             {loading ? (
               <Spinner color={colors.primaryTxt} />
             ) : (
@@ -144,7 +144,7 @@ const Surveys = () => {
                 </SurveyListWrapper>
               )
             )}
-          </DarkBG>
+          </DarkContainer>
         </Content>
       </Layout>
     </Container>

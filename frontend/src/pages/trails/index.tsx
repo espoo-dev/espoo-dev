@@ -14,6 +14,7 @@ import { Sidemenu } from '@components/sidemenu';
 import { SurveyHandler } from '@components/survey-handler';
 import TrailList from '@components/trail-list/trails-list';
 import { colors } from '@styles/colors';
+import { Container, Content, DarkContainer, Layout } from '@styles/main.styles';
 import { httpClient } from 'api';
 import { errorHandler } from 'api/error-handler';
 import { Survey } from 'api/models/survey';
@@ -21,7 +22,6 @@ import { withAuth } from 'hoc/withAuth';
 import Head from 'next/head';
 import { useEffect, useState } from 'react';
 import { HiArrowLeft, HiRefresh } from 'react-icons/hi';
-import { Container, Content, DarkBG, Layout } from 'styles/main.styles';
 
 const Trails = () => {
   const trailService = new TrailService(httpClient);
@@ -67,21 +67,17 @@ const Trails = () => {
             fontSize="26px"
             color={colors.primaryTxt}
           >
-            { surveySelected ? surveySelected.name : 'Trails' }
+            {surveySelected ? surveySelected.name : 'Trails'}
           </Heading>
 
-          <DarkBG>
-            { loading ? (
+          <DarkContainer>
+            {loading ? (
               <Spinner color={colors.primaryTxt} />
             ) : (
               !surveySelected && (
                 <Flex padding="10px" alignItems="center">
-                  <Text
-                    color={colors.primaryTxt}
-                    textAlign="center"
-                    mb="10px"
-                  >
-                    { trails.length ? 'Discover a trail!' : 'No trails =/' }
+                  <Text color={colors.primaryTxt} textAlign="center" mb="10px">
+                    {trails.length ? 'Discover a trail!' : 'No trails =/'}
                   </Text>
                   <Spacer />
                   <Tooltip label="Refresh" placement="top">
@@ -98,9 +94,9 @@ const Trails = () => {
                   </Tooltip>
                 </Flex>
               )
-            ) }
+            )}
 
-            { surveySelected ? (
+            {surveySelected ? (
               <Box>
                 <Tooltip label="Back to list" placement="top">
                   <Button
@@ -119,7 +115,7 @@ const Trails = () => {
             ) : (
               !loading && trails.length && <TrailList data={trails} />
             )}
-          </DarkBG>
+          </DarkContainer>
         </Content>
       </Layout>
     </Container>

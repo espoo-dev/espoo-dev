@@ -36,7 +36,7 @@ export const SurveyListWrapper = styled.div`
   display: block;
 `;
 
-export const DarkBG = styled.div`
+export const DarkContainer = styled.div`
   height: 100%;
   background: #323232;
   margin-top: 20px;
