@@ -22,7 +22,7 @@ const RoadmapSurvey = (props: RoadmapSurveyProps) => {
   return (
     <RoadmapContainer>
       <RoadmapRow>
-        {groups.length ? (
+        {groups && groups.length ? (
           groups.map((group) => (
             <Flex key={group.id} data-testid={`group-${group.id}`}>
               {group.surveys.map((survey) => (

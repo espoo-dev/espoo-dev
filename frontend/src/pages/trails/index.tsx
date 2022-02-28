@@ -10,9 +10,10 @@ import {
   Text,
   Tooltip,
 } from '@chakra-ui/react';
-import RoadmapSurvey from '@components/roadmap-survey/roadmap-survey';
 import { Sidemenu } from '@components/sidemenu';
 import { SurveyHandler } from '@components/survey-handler';
+import TrailList from '@components/trail-list/trails-list';
+import { colors } from '@styles/colors';
 import { httpClient } from 'api';
 import { errorHandler } from 'api/error-handler';
 import { Survey } from 'api/models/survey';
@@ -21,7 +22,6 @@ import Head from 'next/head';
 import { useEffect, useState } from 'react';
 import { HiArrowLeft, HiRefresh } from 'react-icons/hi';
 import { Container, Content, DarkBG, Layout } from 'styles/main.styles';
-import { colors } from '@styles/colors';
 
 const Trails = () => {
   const trailService = new TrailService(httpClient);
@@ -117,11 +117,8 @@ const Trails = () => {
                 <SurveyHandler survey={surveySelected} />
               </Box>
             ) : (
-              !loading &&
-              trails.length && (
-                <RoadmapSurvey groups={trails[0]?.groups || []} />
-              )
-            ) }
+              !loading && trails.length && <TrailList data={trails} />
+            )}
           </DarkBG>
         </Content>
       </Layout>
