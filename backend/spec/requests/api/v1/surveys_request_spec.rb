@@ -84,5 +84,35 @@ RSpec.describe 'SurveysController', type: :request do
         it { expect(response_body.count).to eq(2) }
       end
     end
+
+    describe 'surveys to be sorted by AnswersSurvey status' do
+      let(:user_student) { create(:user_student) }
+
+      let(:answer_survey_one) { create(:answers_survey, user: user_student, survey: create(:ready_survey)) }
+      let!(:not_started_survey) { answer_survey_one.survey }
+
+      let!(:without_answer_survey_survey) { create(:ready_survey) }
+
+      let(:answers_survey_two) { create(:answers_survey_with_some_answers, user: user_student) }
+      let!(:started_survey) { answers_survey_two.survey }
+
+      let(:answers_survey_three) { create(:answers_survey_with_all_answers, user: user_student) }
+      let!(:completed_survey) { answers_survey_three.survey }
+
+      before do
+        get api_v1_surveys_path, headers: auth_headers(user: user_student)
+      end
+
+      it 'expect surveys to be ordered' do
+        sorted_surveys = [
+          present_survey(not_started_survey),
+          present_survey(without_answer_survey_survey),
+          present_survey(started_survey),
+          present_survey(completed_survey)
+        ]
+
+        expect(response_body).to match(sorted_surveys)
+      end
+    end
   end
 end
