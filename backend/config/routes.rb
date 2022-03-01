@@ -15,6 +15,7 @@ Rails.application.routes.draw do
     resources :options
     resources :groups
     resources :group_dependencies
+    resources :trails
 
     root to: "users#index"
   end
