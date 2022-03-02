@@ -2,11 +2,38 @@ fix #issuenumber
 
 # Add Appropriate Title
 
-# Check if you need to update some readme
+## Type of changes
 
-#### Only select the appropriate.
+Please delete options that are not relevant.
 
-- [ ] **Model testing.**
-- [ ] **Request testing and swagger doc update.**
-- [ ] **System testing.**
-- [ ] **No tests required.**
+- [ ] **Bug fix**
+- [ ] **New feature**
+- [ ] **Breaking change**
+
+---
+
+## Checklist:
+
+- [ ] My code is understandable
+- [ ] My code follows the styleguide of this project
+- [ ] My changes don't generate new warnings/errors
+- [ ] I have performed a self-review of my own code (build/lint/tests)
+
+  ### Backend
+
+  Please delete options that are not relevant.
+
+  - [ ] **Model testing.**
+  - [ ] **Request testing and swagger doc update.**
+  - [ ] **System testing.**
+  - [ ] **No tests required.**
+
+  ### Frontend
+
+  - Components:
+
+    - [ ] I have implemented/updated unit tests
+    - [ ] I have implemented/updated Storybook documentation
+
+  - Pages:
+    - [ ] I have implemented/updated E2E tests
