@@ -105,8 +105,8 @@ RSpec.describe 'SurveysController', type: :request do
 
       it 'expect surveys to be ordered' do
         sorted_surveys = [
-          present_survey(not_started_survey),
           present_survey(without_answer_survey_survey),
+          present_survey(not_started_survey),
           present_survey(started_survey),
           present_survey(completed_survey)
         ]
