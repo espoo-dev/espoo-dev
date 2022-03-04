@@ -1,6 +1,7 @@
 import { Box } from '@chakra-ui/react';
 import { HiOutlineCheck } from 'react-icons/hi';
 import { MdClose } from 'react-icons/md';
+import { useEffect, useState } from 'react';
 import {
   AnswerFooter,
   CardReponse,
@@ -18,12 +19,29 @@ export interface ResultAnswerProps {
   correct: boolean;
   name: string;
   answered_options: AnswerdOption[];
+  options: {
+    id: number;
+    name: string;
+    correct?: boolean;
+  }[];
 }
 
 const AsnweredQuestion = (props: ResultAnswerProps) => {
-  const { id, correct, answered_options } = props;
+  const { id, correct, options } = props;
   const { name } = props;
-  const answered = answered_options[0].name;
+  const [correctAnswers, setCorrectAnswers] = useState<string[]>([]);
+
+  const getCorrectAnswersName = () => {
+    const correctsNames = options
+      .filter((option) => option.correct === true)
+      .map((option) => option.name);
+
+    setCorrectAnswers(correctsNames);
+  };
+
+  useEffect(() => {
+    getCorrectAnswersName();
+  }, []);
 
   return (
     <CardReponse key={id}>
@@ -37,7 +55,12 @@ const AsnweredQuestion = (props: ResultAnswerProps) => {
           ) : (
             <MdClose color="red" data-testid="incorrect-icon" />
           )}
-          <span style={{ paddingLeft: '8px' }}>{answered}</span>
+          {correctAnswers.length &&
+            correctAnswers.map((answer) => (
+              <span style={{ paddingLeft: '8px' }} key={answer}>
+                {answer}
+              </span>
+            ))}
         </Box>
       </AnswerFooter>
     </CardReponse>
