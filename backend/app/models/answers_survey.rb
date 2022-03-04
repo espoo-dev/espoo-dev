@@ -16,6 +16,12 @@ class AnswersSurvey < ApplicationRecord
   STARTED = 'Started'.freeze
   COMPLETED = 'Completed'.freeze
 
+  STATUS_ORDER = [
+    NOT_STARTED,
+    STARTED,
+    COMPLETED
+  ].freeze
+
   def status
     survey_questions_count = survey&.questions&.count || 0
     answers_count = answers.count
