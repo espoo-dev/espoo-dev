@@ -3,6 +3,23 @@ class SurveyPresenter < SimpleSurveyPresenter
     complete_payload
   end
 
+  def compare(survey_presenter)
+    local_index = AnswersSurvey::STATUS_ORDER.index(status) || -1
+    external_index = AnswersSurvey::STATUS_ORDER.index(survey_presenter.status) || -1
+
+    if local_index == external_index
+      0
+    elsif local_index > external_index
+      1
+    else
+      -1
+    end
+  end
+
+  def status
+    answers_surveys_payload.last&.dig(:status)
+  end
+
   private
 
   def complete_payload
