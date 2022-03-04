@@ -13,13 +13,14 @@ class Seeds < Base
   end
 
   def clean_database
+    GroupDependency.destroy_all
+    Group.destroy_all
     User.destroy_all
     Question.destroy_all
     Survey.destroy_all
     Option.destroy_all
     SurveySubject.destroy_all
     Answer.destroy_all
-    Group.destroy_all
     Trail.destroy_all
     Role.destroy_all
     QuestionType.destroy_all
