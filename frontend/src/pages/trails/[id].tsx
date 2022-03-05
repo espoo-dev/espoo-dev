@@ -15,6 +15,7 @@ import { Trail } from '@api/models/trail';
 import RoadmapSurvey from '@components/roadmap-survey/roadmap-survey';
 import { colorPallettes } from '@styles/globals';
 import { colors } from '@styles/colors';
+import { AppButton } from '@components/app-button';
 
 const trailService = new TrailService(httpClient);
 
@@ -73,19 +74,11 @@ const TrailPage = () => {
           <DarkContainer>
             {trail && !loading && (
               <Box>
-                <Tooltip label="Back to list" placement="top">
-                  <Button
-                    rounded="lg"
-                    p={0}
-                    bg="teal.400"
-                    colorScheme="teal"
-                    w="30px"
-                    onClick={() => router.push('/trails')}
-                  >
-                    <HiArrowLeft color="white" />
-                  </Button>
-                </Tooltip>
-
+                <AppButton
+                  tooltip="Back to list"
+                  icon={<HiArrowLeft />}
+                  onClick={() => router.push('/trails')}
+                />
                 {trail.groups && (
                   <Box
                     mt={3}
