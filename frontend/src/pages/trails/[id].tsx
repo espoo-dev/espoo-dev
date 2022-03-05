@@ -14,6 +14,7 @@ import { TrailService } from '@api/services/trail';
 import { Trail } from '@api/models/trail';
 import RoadmapSurvey from '@components/roadmap-survey/roadmap-survey';
 import { colorPallettes } from '@styles/globals';
+import { colors } from '@styles/colors';
 
 const trailService = new TrailService(httpClient);
 
@@ -60,7 +61,12 @@ const TrailPage = () => {
       <Layout>
         <Sidemenu />
         <Content>
-          <Heading as="h1" fontWeight="normal" fontSize="26px">
+          <Heading
+            as="h1"
+            fontWeight="normal"
+            fontSize="26px"
+            color={colors.primaryTxt}
+          >
             {loading ? <Spinner color="white" /> : trail && trail.name}
           </Heading>
 
