@@ -1,5 +1,5 @@
 import { Group } from '@api/models/group';
-import { render, screen } from 'test-utils';
+import { render, screen, fireEvent } from 'test-utils';
 import mockManyGroups from 'utils/mocks/groups';
 import RoadmapSurvey from './roadmap-survey';
 
@@ -42,4 +42,11 @@ describe('RoadmapSurvey', () => {
       'background: gray'
     );
   });
+
+  // it('should open page when click in survey', () => {
+  //   render(<RoadmapSurvey groups={groups} />);
+  //   const surveyIndroduction = groups[0].surveys[0];
+  //   fireEvent.click(screen.getByTestId(`icon-${surveyIndroduction.name}`));
+  //   expect(surveyIndroduction.name).toBeInTheDocument();
+  // });
 });
