@@ -1,3 +1,4 @@
+import { colors } from '@styles/colors';
 import styled from 'styled-components';
 
 export const TrailListContainer = styled.div`
@@ -12,13 +13,13 @@ export const TrailListContainer = styled.div`
 `;
 
 export const TrailListItem = styled.div`
-  background-color: #fff;
+  background-color: #222;
   display: flex;
   flex-direction: column;
-  border: 1px solid #e1e1e1;
   padding: 8px;
   border-radius: 6px;
   cursor: pointer;
+  color: ${colors.primaryTxt};
 `;
 
 export const TrailTitle = styled.span`
