@@ -1,4 +1,4 @@
-import { Container, Content, Layout } from 'styles/main.styles';
+import { Container, Content, DarkContainer, Layout } from 'styles/main.styles';
 import { Box, Button, Heading, Spinner, Tooltip } from '@chakra-ui/react';
 import Head from 'next/head';
 import { Sidemenu } from '@components/sidemenu';
@@ -14,6 +14,7 @@ import { TrailService } from '@api/services/trail';
 import { Trail } from '@api/models/trail';
 import RoadmapSurvey from '@components/roadmap-survey/roadmap-survey';
 import { colorPallettes } from '@styles/globals';
+import { colors } from '@styles/colors';
 
 const trailService = new TrailService(httpClient);
 
@@ -64,13 +65,7 @@ const TrailPage = () => {
             {loading ? <Spinner color="white" /> : trail && trail.name}
           </Heading>
 
-          <Box
-            background="#f5f7fb"
-            height="100%"
-            borderRadius="3xl"
-            mt="30"
-            p="16px"
-          >
+          <DarkContainer>
             {trail && !loading && (
               <Box>
                 <Tooltip label="Back to list" placement="top">
@@ -92,13 +87,15 @@ const TrailPage = () => {
                     textAlign="center"
                     color={colorPallettes.secondary}
                   >
-                    <span>SELECT A SURVEY TO ANSWER</span>
+                    <span style={{ color: '#3cbfb9' }}>
+                      SELECT A SURVEY TO ANSWER
+                    </span>
                     <RoadmapSurvey groups={trail.groups} />
                   </Box>
                 )}
               </Box>
             )}
-          </Box>
+          </DarkContainer>
         </Content>
       </Layout>
     </Container>
