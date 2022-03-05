@@ -39,7 +39,6 @@ interface ApiService {
                 apiToken?.let {
                     request.header("Authorization", it)
                 }
-
                 chain.proceed(request.build())
             }
 
