@@ -1,6 +1,7 @@
 import { httpClient } from '@api/client';
 import { SurveyService } from '@api/services/survey';
 import { Box, Button, Heading, Spinner, Tooltip } from '@chakra-ui/react';
+import { AppButton } from '@components/app-button';
 import { Sidemenu } from '@components/sidemenu';
 import { SurveyHandler } from '@components/survey-handler';
 import { colors } from '@styles/colors';
@@ -72,18 +73,11 @@ const SurveyPage = () => {
           <DarkContainer>
             {survey && !loading && (
               <Box>
-                <Tooltip label="Back to list" placement="top">
-                  <Button
-                    rounded="lg"
-                    p={0}
-                    bg="teal.400"
-                    colorScheme="teal"
-                    w="30px"
-                    onClick={() => router.push('/surveys')}
-                  >
-                    <HiArrowLeft color="white" />
-                  </Button>
-                </Tooltip>
+                <AppButton
+                  tooltip="Back to list"
+                  icon={<HiArrowLeft />}
+                  onClick={() => router.push('/surveys')}
+                />
                 <SurveyHandler survey={survey} />
               </Box>
             )}
