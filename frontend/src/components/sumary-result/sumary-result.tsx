@@ -54,27 +54,6 @@ const SumaryResult = (props: AnswerSurveyReceive) => {
             </div>
           </BoxResult>
         </Tooltip>
-        {/* <h2 style={{ fontWeight: 'bold' }}>
-          <Box
-            display="flex"
-            justifyContent="center"
-            alignItems="center"
-            mt={8}
-          >
-            <MdClose color="red" />
-            <span>{`${result.incorrect} incorrect`}</span>
-          </Box>
-          <Box
-            display="flex"
-            justifyContent="center"
-            alignItems="center"
-            mt={2}
-            fontSize={18}
-          >
-            <HiOutlineCheck color="green" />
-            <span>{`${result.correct} correct`}</span>
-          </Box>
-        </h2> */}
       </Box>
       <Grid
         templateColumns="repeat(auto-fit, minmax(300px, 2fr))"
