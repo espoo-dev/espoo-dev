@@ -14,7 +14,6 @@ import { TrailService } from '@api/services/trail';
 import { Trail } from '@api/models/trail';
 import RoadmapSurvey from '@components/roadmap-survey/roadmap-survey';
 import { colorPallettes } from '@styles/globals';
-import { colors } from '@styles/colors';
 
 const trailService = new TrailService(httpClient);
 
@@ -24,7 +23,7 @@ const TrailPage = () => {
   const [trail, setTrail] = useState<Trail>();
   const [loading, setLoading] = useState(false);
 
-  const loadSurvey = async () => {
+  const loadTrail = async () => {
     setLoading(true);
     try {
       const response = await trailService.get(Number(id));
@@ -50,7 +49,7 @@ const TrailPage = () => {
       redirectToList();
       return;
     }
-    loadSurvey();
+    loadTrail();
   }, []);
 
   return (

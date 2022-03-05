@@ -42,11 +42,4 @@ describe('RoadmapSurvey', () => {
       'background: gray'
     );
   });
-
-  // it('should open page when click in survey', () => {
-  //   render(<RoadmapSurvey groups={groups} />);
-  //   const surveyIndroduction = groups[0].surveys[0];
-  //   fireEvent.click(screen.getByTestId(`icon-${surveyIndroduction.name}`));
-  //   expect(surveyIndroduction.name).toBeInTheDocument();
-  // });
 });
