@@ -9,6 +9,7 @@ const mockManyGroups: Group[] = [
       {
         name: 'Introduction',
         icon: 'url',
+        id: 1,
       },
     ],
     position: 1,
@@ -22,10 +23,12 @@ const mockManyGroups: Group[] = [
       {
         name: 'Regards',
         icon: 'url',
+        id: 2,
       },
       {
         name: 'Travel',
         icon: 'url',
+        id: 3,
       },
     ],
     position: 2,
@@ -39,10 +42,12 @@ const mockManyGroups: Group[] = [
       {
         name: 'Store',
         icon: 'url',
+        id: 4,
       },
       {
         name: 'My day',
         icon: 'url',
+        id: 5,
       },
     ],
     position: 3,

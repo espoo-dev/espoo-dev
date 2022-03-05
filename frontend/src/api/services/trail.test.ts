@@ -10,15 +10,21 @@ jest.mock('../client', () => ({
   },
 }));
 
+// expected result to tests
+const mockResponse = {
+  mock: true,
+};
+
 describe('TrailService', () => {
   let instance: TrailService;
   let res: AxiosResponse<Trail[]>;
+  let resById: AxiosResponse<Trail>;
 
   describe('list method', () => {
     describe('when returns expected data', () => {
       beforeEach(async () => {
         (httpClient as jest.Mocked<AxiosInstance>).get.mockImplementationOnce(
-          jest.fn((url: string) => Promise.resolve({ data: mockManyGroups }))
+          jest.fn(() => Promise.resolve({ data: mockManyGroups }))
         );
 
         instance = new TrailService(httpClient);
@@ -38,7 +44,7 @@ describe('TrailService', () => {
     describe('when returns an error', () => {
       beforeEach(async () => {
         (httpClient as jest.Mocked<AxiosInstance>).get.mockImplementationOnce(
-          jest.fn((url: string) => Promise.reject(new Error('test error')))
+          jest.fn(() => Promise.reject(new Error('test error')))
         );
 
         instance = new TrailService(httpClient);
@@ -52,6 +58,48 @@ describe('TrailService', () => {
 
       it('should return the expected data', () => {
         expect(res).toEqual(undefined);
+      });
+    });
+  });
+
+  describe('get by id method', () => {
+    describe('when returns expected data', () => {
+      beforeEach(async () => {
+        (httpClient as jest.Mocked<AxiosInstance>).get.mockImplementationOnce(
+          jest.fn(() => Promise.resolve({ data: mockResponse }))
+        );
+
+        instance = new TrailService(httpClient);
+
+        resById = await instance.get(1);
+      });
+
+      it('should call the get method', () => {
+        expect(httpClient.get).toHaveBeenCalled();
+      });
+
+      it('should return the expected data', () => {
+        expect(resById.data).toEqual(mockResponse);
+      });
+    });
+
+    describe('when returns an error', () => {
+      beforeEach(async () => {
+        (httpClient as jest.Mocked<AxiosInstance>).get.mockImplementationOnce(
+          jest.fn(() => Promise.reject(new Error('test error')))
+        );
+
+        instance = new TrailService(httpClient);
+
+        resById = await instance.get(1);
+      });
+
+      it('should call the get method', () => {
+        expect(httpClient.get).toHaveBeenCalled();
+      });
+
+      it('should return the expected data', () => {
+        expect(resById).toEqual(undefined);
       });
     });
   });

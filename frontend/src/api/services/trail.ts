@@ -22,4 +22,23 @@ export class TrailService {
 
     return undefined;
   }
+
+  public async get(id: number): Promise<AxiosResponse<Trail | undefined>> {
+    try {
+      const response = await this.httpClient.get<Trail>(
+        `/api/v1/trails/${id}`,
+        {
+          params: {},
+        }
+      );
+
+      if (response) {
+        return response;
+      }
+    } catch (error) {
+      errorHandler(error);
+    }
+
+    return undefined;
+  }
 }
