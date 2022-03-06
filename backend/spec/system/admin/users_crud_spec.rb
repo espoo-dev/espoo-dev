@@ -29,7 +29,7 @@ RSpec.describe 'Users CRUD', type: :system do
     end
 
     describe '#index' do
-      context 'when user is a admin' do
+      context 'when user is an admin' do
         before do
           sign_in user_admin
           visit admin_users_path
@@ -64,10 +64,19 @@ RSpec.describe 'Users CRUD', type: :system do
           expect(page.text).not_to include(user_admin.email)
         end
       end
+
+      context 'when user is a student' do
+        before do
+          sign_in user_student
+          visit admin_users_path
+        end
+
+        it { expect(page).to have_text('You have no permission :(') }
+      end
     end
 
     describe '#edit' do
-      context 'when user is a admin' do
+      context 'when user is an admin' do
         before do
           sign_in user_admin
           visit edit_admin_user_path(user_admin)
@@ -91,7 +100,7 @@ RSpec.describe 'Users CRUD', type: :system do
     end
 
     describe '#update' do
-      context 'when user is a admin' do
+      context 'when user is an admin' do
         before do
           sign_in user_admin
           visit edit_admin_user_path(user_teacher)
