@@ -10,6 +10,9 @@ Rails.application.routes.draw do
     resources :roles
     resources :survey_subjects
     resources :surveys
+    resources :answers_surveys
+    resources :answers
+    resources :answers_options
     resources :question_types
     resources :questions
     resources :options
