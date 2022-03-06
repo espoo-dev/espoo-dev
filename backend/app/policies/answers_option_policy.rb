@@ -1,4 +1,4 @@
-class AnswerPolicy < GenericPolicy
+class AnswersOptionPolicy < GenericPolicy
   def index?
     user.admin? || user.role.role_type == Role::TEACHER
   end
