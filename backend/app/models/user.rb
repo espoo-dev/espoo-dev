@@ -18,4 +18,20 @@ class User < ApplicationRecord
 
   delegate :admin?, to: :role
   delegate :student?, to: :role
+
+  scope :answers, -> {}
+
+  # def method_name
+
+  #   answers_ids = []
+
+  #   surveys.each do |survey|
+  #     survey.answers_surveys.each do |answer_survey|
+  #       answer_survey.answers.each do |answer|
+  #         answers_ids << answer
+  #       end
+  #     end
+  #   end
+  #   answers_ids
+  # end
 end
