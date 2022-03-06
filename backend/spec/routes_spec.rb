@@ -6,6 +6,6 @@ RSpec.describe 'Routes', type: :routing do
   end
 
   it 'has expected routes amount' do
-    expect(Rails.application.routes.routes.size).to eq(116)
+    expect(Rails.application.routes.routes.size).to eq(140)
   end
 end
