@@ -23,7 +23,6 @@ class GroupDependencyDashboard < Administrate::BaseDashboard
   COLLECTION_ATTRIBUTES = %i[
     group
     groups
-    id
     created_at
   ].freeze
 
