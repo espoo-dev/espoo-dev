@@ -1,4 +1,6 @@
 class Answer < ApplicationRecord
+  after_save :notify_slack, if: :answers_survey_completed?
+
   belongs_to :question
   belongs_to :answers_survey
 
@@ -23,5 +25,25 @@ class Answer < ApplicationRecord
   def maximum_one_option
     # i18n-tasks-use t('activerecord.errors.models.answer.attributes.question_id.only_one_option')
     errors.add(:question_id, :only_one_option) if single_choice? && options.length > 1
+  end
+
+  def answers_survey_completed?
+    answers_survey.completed?
+  end
+
+  def notify_slack
+    SlackNotifierService.call(message_slack)
+    puts "I'm here"
+  end
+
+  def message_slack
+    survey = answers_survey.survey
+    count_completed_surveys = survey.answers_surveys.select { |a| a.completed? }.count
+    teacher_email = answers_survey.survey.user.email
+
+    
+    "Survey \"#{survey.name}\" from teacher \"#{teacher_email}\" has "\
+    "been answered now.\nThis survey has #{count_completed_surveys} "\
+    "answers in the total."
   end
 end
