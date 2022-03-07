@@ -20,6 +20,10 @@ class Role < ApplicationRecord
     role_type == ADMIN
   end
 
+  def teacher?
+    role_type == TEACHER
+  end
+
   def student?
     role_type == STUDENT
   end
