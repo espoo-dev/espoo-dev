@@ -1,8 +1,8 @@
 class Base
   def initialize; end
 
-  def self.call
-    new.call
+  def self.call(*args, &block)
+    new(*args, &block).call
   end
 
   def call
