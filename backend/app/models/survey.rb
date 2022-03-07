@@ -30,4 +30,8 @@ class Survey < ApplicationRecord
     # i18n-tasks-use t('activerecord.errors.models.survey.attributes.ready.cant_update_ready')
     errors.add(:ready, :cant_update_ready) if ready && questions.any? && !ready_questions
   end
+
+  def answers_ids_of_answers_surveys
+    answers_surveys.map(&:answers_ids).flatten
+  end
 end
