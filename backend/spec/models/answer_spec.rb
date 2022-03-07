@@ -54,4 +54,28 @@ RSpec.describe Answer, type: :model do
       expect(answer).to be_valid
     end
   end
+
+  describe "#notify_slack" do
+    context "when answers_survey not completed" do
+      let(:not_completed_answers_survey) { create(:answers_survey_with_some_answers) }
+    end
+    
+    context "when answers_survey completed" do
+      # let(:completed_answers_survey) { create(:answers_survey_with_all_answers) }
+      
+      it "should call the method" do
+        service = class_spy("SlackNotifierService")
+
+        answers = create(:answers_survey_with_all_answers)
+
+        # binding.pry
+
+        expect(service).to have_received(:call).once
+
+        # slack_notifier = SlackNotifierService.new
+        # slack_notifier.run
+        # expect(slack_notifier).not_to have_received(:execute)
+      end
+    end
+  end
 end
