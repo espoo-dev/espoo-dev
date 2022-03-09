@@ -37,6 +37,10 @@ class AnswersSurvey < ApplicationRecord
     status == COMPLETED
   end
 
+  def answers_ids
+    answers.map(&:id)
+  end
+
   private
 
   def unique_not_completed_by_survey
