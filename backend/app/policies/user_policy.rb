@@ -1,4 +1,8 @@
 class UserPolicy < GenericPolicy
+  def index?
+    user.admin? || user.role.role_type == Role::TEACHER
+  end
+
   def new?
     user.admin?
   end
