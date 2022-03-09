@@ -1,14 +1,16 @@
 import React, { ButtonHTMLAttributes, ReactElement } from 'react';
 import { IconType } from 'react-icons/lib';
 import { ButtonProps } from '@styles/utils';
+import { Tooltip } from '@chakra-ui/react';
 import { LoadingIcon, StyledAppButton } from './app-button.styles';
 
 type CustomButton = ButtonHTMLAttributes<HTMLButtonElement> & ButtonProps;
 
 export interface AppButtonProps extends CustomButton {
   loading?: boolean;
-  text: string;
+  text?: string;
   icon?: ReactElement<IconType>;
+  tooltip?: string;
 }
 
 const defaultProps = {
@@ -17,13 +19,15 @@ const defaultProps = {
 };
 
 export const AppButton = (props: AppButtonProps) => {
-  const { disabled, loading, icon, text, ...rest } = props;
+  const { disabled, loading, icon, text, tooltip, ...rest } = props;
   return (
-    <StyledAppButton {...rest} disabled={loading || disabled}>
-      {loading && <LoadingIcon data-testid="loading_icon" size={16} />}
-      <span className="text">{text}</span>
-      {icon}
-    </StyledAppButton>
+    <Tooltip label={tooltip} placement="top">
+      <StyledAppButton {...rest} disabled={loading || disabled}>
+        {loading && <LoadingIcon data-testid="loading_icon" size={16} />}
+        {text ? <span className="text">{text}</span> : null}
+        {icon}
+      </StyledAppButton>
+    </Tooltip>
   );
 };
 
