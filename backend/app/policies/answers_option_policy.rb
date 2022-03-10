@@ -1,4 +1,4 @@
-class AnswerPolicy < GenericPolicy
+class AnswersOptionPolicy < GenericPolicy
   def index?
     user.admin? || user.teacher?
   end

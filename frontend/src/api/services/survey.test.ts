@@ -1,5 +1,4 @@
 import { Survey } from '@api/models/survey';
-import { UserFilters } from '@api/models/user';
 import { AxiosInstance, AxiosResponse } from 'axios';
 import { httpClient } from '../client';
 import { SurveyService } from './survey';
@@ -15,10 +14,6 @@ const mockResponse = {
   mock: true,
 };
 
-const mockUserFilter: UserFilters = {
-  role_id: 1,
-};
-
 describe('SurveyService', () => {
   let instance: SurveyService;
   let res: AxiosResponse<Survey[]>;
@@ -28,10 +23,10 @@ describe('SurveyService', () => {
     describe('when returns expected data', () => {
       beforeEach(async () => {
         (httpClient as jest.Mocked<AxiosInstance>).get.mockImplementationOnce(
-          jest.fn((url: string) => Promise.resolve({ data: mockResponse }))
+          jest.fn(() => Promise.resolve({ data: mockResponse }))
         );
 
-        instance = new SurveyService(httpClient as unknown);
+        instance = new SurveyService(httpClient);
 
         res = await instance.list();
       });
@@ -48,10 +43,10 @@ describe('SurveyService', () => {
     describe('when returns an error', () => {
       beforeEach(async () => {
         (httpClient as jest.Mocked<AxiosInstance>).get.mockImplementationOnce(
-          jest.fn((url: string) => Promise.reject(new Error('test error')))
+          jest.fn(() => Promise.reject(new Error('test error')))
         );
 
-        instance = new SurveyService(httpClient as unknown);
+        instance = new SurveyService(httpClient);
 
         res = await instance.list();
       });
@@ -70,10 +65,10 @@ describe('SurveyService', () => {
     describe('when returns expected data', () => {
       beforeEach(async () => {
         (httpClient as jest.Mocked<AxiosInstance>).get.mockImplementationOnce(
-          jest.fn((url: string) => Promise.resolve({ data: mockResponse }))
+          jest.fn(() => Promise.resolve({ data: mockResponse }))
         );
 
-        instance = new SurveyService(httpClient as unknown);
+        instance = new SurveyService(httpClient);
 
         resById = await instance.get(1);
       });
@@ -90,10 +85,10 @@ describe('SurveyService', () => {
     describe('when returns an error', () => {
       beforeEach(async () => {
         (httpClient as jest.Mocked<AxiosInstance>).get.mockImplementationOnce(
-          jest.fn((url: string) => Promise.reject(new Error('test error')))
+          jest.fn(() => Promise.reject(new Error('test error')))
         );
 
-        instance = new SurveyService(httpClient as unknown);
+        instance = new SurveyService(httpClient);
 
         resById = await instance.get(1);
       });
