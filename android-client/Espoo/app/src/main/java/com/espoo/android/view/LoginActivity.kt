@@ -66,7 +66,7 @@ class LoginActivity : AppCompatActivity() {
                         response.headers()["Authorization"]?.let {
                             sessionManager.storeData(API_TOKEN, it)
                         }
-                    } else{
+                    } else {
                         response.errorBody()?.let {
                             val jsonResponse = JSONObject(it.string())
                             Toast.makeText(applicationContext, jsonResponse.getString("error"), Toast.LENGTH_LONG)
