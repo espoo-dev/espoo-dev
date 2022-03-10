@@ -71,7 +71,6 @@ class LoginActivity : AppCompatActivity() {
                             val jsonResponse = JSONObject(it.string())
                             Toast.makeText(applicationContext, jsonResponse.getString("error"), Toast.LENGTH_LONG)
                                 .show()
-                            Log.d("TAG_", jsonResponse.getString("error"))
                         }
                     }
                 }
