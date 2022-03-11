@@ -19,6 +19,7 @@ import com.espoo.android.helper.Validator
 import com.espoo.android.model.AuthData
 import com.espoo.android.model.User
 import com.espoo.android.model.UserLogin
+import org.json.JSONObject
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -46,7 +47,6 @@ class LoginActivity : AppCompatActivity() {
     fun login(view: View) {
         val userName = binding.editTextUsername.text.toString()
         val password = binding.editTextPassword.text.toString()
-
         if (!validator.validateInputNotEmpty(userName)) {
             Toast.makeText(this,
                 "${getString(R.string.login_username)} ${getString(R.string.field_does_not_filled)}",
@@ -58,19 +58,16 @@ class LoginActivity : AppCompatActivity() {
         } else {
             service.login(AuthData(UserLogin(userName, password))).enqueue(object :Callback<User> {
                 override fun onResponse(call: Call<User>, response: Response<User>) {
-                    response.body()?.let {
-                        storeLoginData(it)
-                        openMainActivity()
+                    if (response.isSuccessful) {
+                        response.body()?.let {
+                            storeLoginData(it)
+                            openMainActivity()
+                        }
+                        response.headers()["Authorization"]?.let {
+                            sessionManager.storeData(API_TOKEN, it)
+                        }
                     }
-                    response.headers()["Authorization"]?.let {
-                        sessionManager.storeData(API_TOKEN, it)
-                    }
-                    //TODO retrieve the  {error: "Invalid Email or password."} from response
-                    Log.d("TAG_", "${response.raw()}")
-                    Log.d("TAG_", "${response.message()}")
-                    //Log.d("TAG_", "${response.body()}")
                 }
-
                 override fun onFailure(call: Call<User>, t: Throwable) {
                     Log.e("TAG_", "onFailure: An error happened!")
                     t.printStackTrace()
