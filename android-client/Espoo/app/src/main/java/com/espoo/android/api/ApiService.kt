@@ -1,9 +1,13 @@
 package com.espoo.android.api
 
+import android.content.Context
+import android.util.Log
+import android.util.MalformedJsonException
 import com.espoo.android.model.AuthData
 import com.espoo.android.model.Survey
 import com.espoo.android.model.User
 import okhttp3.OkHttpClient
+import org.json.JSONObject
 import retrofit2.Call
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
@@ -39,7 +43,19 @@ interface ApiService {
                 apiToken?.let {
                     request.header("Authorization", it)
                 }
-                chain.proceed(request.build())
+                val response = chain.proceed(request.build())
+
+                if (!response.isSuccessful) {
+                    try {
+                        val jsonResponse = JSONObject(response.peekBody(2048).string())
+                        /* TODO Implement a way to communicate between components and classes in Android (LocalBroadcastManager for example)
+                           To send the error message to the view and show it to the user */
+                        Log.d("TAG_", jsonResponse.getString("error"))
+                    } catch (e: MalformedJsonException) {
+                        Log.e("ERROR", e.stackTraceToString())
+                    }
+                }
+                response
             }
 
             val okHttpClient = httpClient.build()
