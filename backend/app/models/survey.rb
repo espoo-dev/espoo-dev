@@ -1,6 +1,6 @@
 class Survey < ApplicationRecord
   validate :validates_ready
-  validates :icon_url, format: { with: /\A#{URI::DEFAULT_PARSER.make_regexp(%w[http https])}\z/ }, allow_blank: true
+  validates :icon_url, format: { with: /\A#{URI::DEFAULT_PARSER.make_regexp(%w[http https])}\z/ }, allow_blank: true, allow_nil: true
   belongs_to :user
   belongs_to :survey_subject
   belongs_to :group, optional: true
