@@ -1,5 +1,6 @@
 class Survey < ApplicationRecord
   validate :validates_ready
+  validates :icon_url, format: { with: /\A#{URI::regexp(['http', 'https'])}\z/ }, :allow_nil => true, :allow_blank => true
   belongs_to :user
   belongs_to :survey_subject
   belongs_to :group, optional: true
