@@ -4,6 +4,7 @@ class Question < ApplicationRecord
   validate :validates_ready
   validate :validates_ready_survey
   validate :survey_must_have_same_user
+  validates :image_url, format: { with: /\A#{URI::DEFAULT_PARSER.make_regexp(%w[http https])}\z/ }, allow_blank: true
 
   belongs_to :user
   belongs_to :question_type
