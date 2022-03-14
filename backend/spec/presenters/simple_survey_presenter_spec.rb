@@ -23,6 +23,7 @@ RSpec.describe SimpleSurveyPresenter do
         answered_questions_quantity: 1,
         icon_url: survey.icon_url
       }
+      
       expect(presenter.payload).to eq expected_payload
     end
   end
