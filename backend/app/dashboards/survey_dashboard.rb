@@ -11,6 +11,7 @@ class SurveyDashboard < ApplicationDashboard
     questions: HasManyByUser,
     name: Field::String,
     ready: Field::Boolean,
+    icon_url: Field::String,
     description: Field::String,
     created_at: Field::DateTime,
     updated_at: Field::DateTime
@@ -27,6 +28,7 @@ class SurveyDashboard < ApplicationDashboard
     questions
     name
     ready
+    icon_url
   ].freeze
 
   # SHOW_PAGE_ATTRIBUTES
@@ -38,6 +40,7 @@ class SurveyDashboard < ApplicationDashboard
     name
     description
     ready
+    icon_url
     created_at
     updated_at
   ].freeze
@@ -52,6 +55,7 @@ class SurveyDashboard < ApplicationDashboard
     name
     description
     ready
+    icon_url
   ].freeze
 
   # COLLECTION_FILTERS
