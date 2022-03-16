@@ -51,6 +51,20 @@ RSpec.describe 'Survey CRUD', type: :system do
         end
 
         it { expect(page).to have_text(survey.name) }
+
+        it 'can see icon_url field' do
+          visit admin_survey_path(survey)
+
+          expect(page).to have_text(survey.icon_url)
+        end
+      end
+
+      describe 'show' do
+        it 'can see icon_url field' do
+          visit admin_survey_path(survey)
+
+          expect(page).to have_text(survey.icon_url)
+        end
       end
 
       describe 'delete' do
@@ -74,8 +88,8 @@ RSpec.describe 'Survey CRUD', type: :system do
     end
 
     describe 'when user is not admin' do
-      let!(:survey1) { create(:survey_with_1_question, user: user_teacher) }
-      let!(:survey2) { create(:survey_with_1_question) }
+      let!(:survey1) { create(:survey_with_1_question, user: user_teacher, icon_url: 'http://www.example.com') }
+      let!(:survey2) { create(:survey_with_1_question, icon_url: 'https://www.example.com') }
 
       before do
         sign_in user_teacher
@@ -116,6 +130,14 @@ RSpec.describe 'Survey CRUD', type: :system do
 
         it 'does not see surveys that not belongs to him' do
           expect(page).not_to have_text(survey2.name)
+        end
+
+        it 'see icon_url field that belongs to him' do
+          expect(page).to have_text(survey1.icon_url)
+        end
+
+        it 'does not icon_url field that not belongs to him' do
+          expect(page).not_to have_text(survey2.icon_url)
         end
       end
 
