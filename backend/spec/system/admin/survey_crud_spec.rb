@@ -136,7 +136,7 @@ RSpec.describe 'Survey CRUD', type: :system do
           expect(page).to have_text(survey1.icon_url)
         end
 
-        it 'does not icon_url field that not belongs to him' do
+        it 'does not see icon_url field that not belongs to him' do
           expect(page).not_to have_text(survey2.icon_url)
         end
       end
