@@ -1,4 +1,4 @@
-import { AnswerSurveyStatus, Survey } from '@api/models/survey';
+import { AnswerSurveyStatus, Question, Survey } from '@api/models/survey';
 
 const questions = [
   {
@@ -37,7 +37,7 @@ const questions = [
       name: 'Single Choice',
     },
   },
-];
+] as Question[];
 
 const mockSurvey: Survey = {
   id: 1,
