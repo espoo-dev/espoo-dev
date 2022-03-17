@@ -167,7 +167,13 @@ RSpec.describe 'Survey CRUD', type: :system do
 
           expect(page).to have_text(survey1.name)
         end
+        
+        it "can't see surveys that not belongs to him" do
+          visit admin_survey_path(survey2)
 
+          expect(page).to have_text("The page you were looking for doesn't exist.")
+        end
+        
         it 'can see his own image_url' do
           visit admin_survey_path(survey1)
 
