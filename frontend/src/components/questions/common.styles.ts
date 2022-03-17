@@ -14,7 +14,7 @@ export const BaseOption = styled.div<BaseOptionProps>`
   transition: ${transitions.defaultTransition};
 
   background-color: ${(props) =>
-    props.selected ? colorPallettes.bgSuccess : '#e4e8ee'};
+    props.selected ? colorPallettes.bgSuccess : '#fff'};
 
   border: ${(props) =>
     props.selected

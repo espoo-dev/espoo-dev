@@ -12,7 +12,9 @@ import {
 } from '@chakra-ui/react';
 import { Sidemenu } from '@components/sidemenu';
 import { SurveyHandler } from '@components/survey-handler';
-import { colorPallettes } from '@styles/globals';
+import TrailList from '@components/trail-list/trails-list';
+import { colors } from '@styles/colors';
+import { Container, Content, DarkContainer, Layout } from '@styles/main.styles';
 import { httpClient } from 'api';
 import { errorHandler } from 'api/error-handler';
 import { Survey } from 'api/models/survey';
@@ -20,8 +22,6 @@ import { withAuth } from 'hoc/withAuth';
 import Head from 'next/head';
 import { useEffect, useState } from 'react';
 import { HiArrowLeft, HiRefresh } from 'react-icons/hi';
-import { Container, Content, Layout } from 'styles/main.styles';
-import TrailList from '@components/trail-list/trails-list';
 
 const Trails = () => {
   const trailService = new TrailService(httpClient);
@@ -61,27 +61,22 @@ const Trails = () => {
       <Layout>
         <Sidemenu />
         <Content>
-          <Heading as="h1" fontWeight="normal" fontSize="26px">
+          <Heading
+            as="h1"
+            fontWeight="normal"
+            fontSize="26px"
+            color={colors.primaryTxt}
+          >
             {surveySelected ? surveySelected.name : 'Trails'}
           </Heading>
 
-          <Box
-            background="#f5f7fb"
-            height="100%"
-            borderRadius="3xl"
-            mt="30"
-            p="16px"
-          >
+          <DarkContainer>
             {loading ? (
-              <Spinner color={colorPallettes.primary} />
+              <Spinner color={colors.primaryTxt} />
             ) : (
               !surveySelected && (
                 <Flex padding="10px" alignItems="center">
-                  <Text
-                    color={colorPallettes.primary}
-                    textAlign="center"
-                    mb="10px"
-                  >
+                  <Text color={colors.primaryTxt} textAlign="center" mb="10px">
                     {trails.length ? 'Discover a trail!' : 'No trails =/'}
                   </Text>
                   <Spacer />
@@ -120,7 +115,7 @@ const Trails = () => {
             ) : (
               !loading && trails.length && <TrailList data={trails} />
             )}
-          </Box>
+          </DarkContainer>
         </Content>
       </Layout>
     </Container>

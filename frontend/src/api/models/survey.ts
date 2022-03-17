@@ -17,6 +17,7 @@ export interface AnswersSurvey {
 export interface OptionQuestion {
   id: number;
   name: string;
+  correct?: boolean;
 }
 
 export interface Question {

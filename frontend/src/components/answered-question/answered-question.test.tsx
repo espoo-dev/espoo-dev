@@ -1,18 +1,5 @@
 import { render, screen } from 'test-utils';
-import AsnweredQuestion from './answered-question';
-
-interface AnswerdOption {
-  id: number;
-  name: string;
-  correct: boolean;
-}
-
-interface ResultAnswerProps {
-  id: number;
-  correct: boolean;
-  name: string;
-  answered_options: AnswerdOption[];
-}
+import AsnweredQuestion, { ResultAnswerProps } from './answered-question';
 
 const answeredQuestionDefault: ResultAnswerProps = {
   id: 1,
@@ -23,6 +10,27 @@ const answeredQuestionDefault: ResultAnswerProps = {
       id: 1,
       name: 'Yep',
       correct: true,
+    },
+  ],
+  options: [
+    {
+      id: 1,
+      name: 'Yep',
+      correct: true,
+    },
+    {
+      id: 2,
+      name: 'Maybe',
+      correct: true,
+    },
+    {
+      id: 3,
+      name: 'No',
+      correct: false,
+    },
+    {
+      id: 3,
+      name: 'I believe',
     },
   ],
 };
@@ -40,7 +48,6 @@ describe('ResultAnswer', () => {
 
   it('should show correct icon when answered is correct', () => {
     render(<AsnweredQuestion {...answeredQuestionDefault} />);
-    screen.debug();
     expect(screen.queryAllByTestId('correct-icon')).toHaveLength(1);
   });
 
@@ -56,5 +63,12 @@ describe('ResultAnswer', () => {
     expect(
       screen.queryAllByText(answeredQuestionDefault.answered_options[0].name)
     ).toHaveLength(1);
+  });
+
+  it('should show all correct options when is multiple', () => {
+    render(<AsnweredQuestion {...answeredQuestionDefault} />);
+    ['Yep', 'Maybe'].forEach((answer) => {
+      expect(screen.queryAllByText(answer)).toHaveLength(1);
+    });
   });
 });

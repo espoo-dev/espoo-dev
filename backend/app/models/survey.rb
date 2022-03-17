@@ -1,5 +1,6 @@
 class Survey < ApplicationRecord
   validate :validates_ready
+  validates :icon_url, format: { with: /\A#{URI::DEFAULT_PARSER.make_regexp(%w[http https])}\z/ }, allow_blank: true
   belongs_to :user
   belongs_to :survey_subject
   belongs_to :group, optional: true
@@ -29,5 +30,9 @@ class Survey < ApplicationRecord
     ready_questions = questions.all?(&:ready_to_be_answered)
     # i18n-tasks-use t('activerecord.errors.models.survey.attributes.ready.cant_update_ready')
     errors.add(:ready, :cant_update_ready) if ready && questions.any? && !ready_questions
+  end
+
+  def answers_ids_of_answers_surveys
+    answers_surveys.map(&:answers_ids).flatten
   end
 end

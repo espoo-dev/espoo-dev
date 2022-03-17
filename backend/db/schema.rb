@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_02_05_120657) do
+ActiveRecord::Schema.define(version: 2022_03_11_184711) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -119,6 +119,7 @@ ActiveRecord::Schema.define(version: 2022_02_05_120657) do
     t.boolean "ready", default: false
     t.bigint "survey_subject_id", null: false
     t.integer "group_id"
+    t.string "icon_url"
     t.index ["group_id"], name: "index_surveys_on_group_id"
     t.index ["survey_subject_id"], name: "index_surveys_on_survey_subject_id"
     t.index ["user_id"], name: "index_surveys_on_user_id"
