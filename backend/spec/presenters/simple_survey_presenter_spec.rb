@@ -21,7 +21,8 @@ RSpec.describe SimpleSurveyPresenter do
         description: survey.description,
         total_questions_quantity: 2,
         answered_questions_quantity: 1,
-        icon_url: survey.icon_url
+        icon_url: survey.icon_url,
+        image_url: survey.image_url
       }
       expect(presenter.payload).to eq expected_payload
     end
