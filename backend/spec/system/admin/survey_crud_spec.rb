@@ -174,15 +174,10 @@ RSpec.describe 'Survey CRUD', type: :system do
           expect(page).to have_text("The page you were looking for doesn't exist.")
         end
 
-        it 'can see his own image_url' do
+        it 'can see his own image_url and not from others' do
           visit admin_survey_path(survey1)
 
           expect(page).to have_text(survey1.image_url)
-        end
-
-        it "can't see image_url that not belongs to him" do
-          visit admin_survey_path(survey1)
-
           expect(page).not_to have_text(survey2.icon_url)
         end
       end
