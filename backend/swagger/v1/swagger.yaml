@@ -151,7 +151,7 @@ components:
         image_url:
           type: string
     Survey:
-      type: object  
+      type: object
       properties:
         id:
           type: number
