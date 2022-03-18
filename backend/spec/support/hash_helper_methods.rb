@@ -33,7 +33,8 @@ module HashHelperMethods
       'id' => survey_question.id,
       'name' => survey_question.name,
       'question_type' => question_type(question_type).transform_keys(&:to_sym),
-      'options' => options_sym(options)
+      'options' => options_sym(options),
+      'image_url' => survey_question.image_url
     }.transform_keys(&:to_sym)
   end
 
@@ -42,7 +43,8 @@ module HashHelperMethods
       'id' => survey_question.id,
       'name' => survey_question.name,
       'question_type' => question_type(question_type),
-      'options' => options_hash(options)
+      'options' => options_hash(options),
+      'image_url' => survey_question.image_url
     }
   end
 

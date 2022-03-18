@@ -25,6 +25,7 @@ RSpec.describe 'AnswersSurveysController', type: :request do
         question_attributes = {
           'id' => survey_question.id,
           'name' => survey_question.name,
+          'image_url' => survey_question.image_url,
           'question_type' => {
             'id' => question_type.id,
             'name' => question_type.name
