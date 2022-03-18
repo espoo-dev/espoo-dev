@@ -100,4 +100,48 @@ RSpec.describe Question, type: :model do
       expect(question_mod.errors.full_messages).to match(['User must be the same in question and survey'])
     end
   end
+
+  describe 'validate image_url' do
+    let!(:question) { create(:question) }
+
+    it 'is valid when image_url is an empty string' do
+      question.image_url = ''
+      expect(question.valid?).to eq true
+    end
+
+    it 'is valid when image_url is an url http' do
+      question.image_url = 'http://www.example.com'
+      expect(question.valid?).to eq true
+    end
+
+    it 'is valid when image_url is an url https' do
+      question.image_url = 'https://www.example.com'
+      expect(question.valid?).to eq true
+    end
+
+    it 'is valid when image_url has prefix' do
+      question.image_url = 'https://www.example.com/user'
+      expect(question.valid?).to eq true
+    end
+
+    it 'is invalid when image_url does not have a protocol' do
+      question.image_url = 'www.example.com'
+      expect(question.valid?).to eq false
+    end
+
+    it 'is invalid when image_url has an error' do
+      question.image_url = 'www.example. com'
+      expect(question.valid?).to eq false
+    end
+
+    it 'is invalid when image_url has a www error' do
+      question.image_url = 'ww.example.com'
+      expect(question.valid?).to eq false
+    end
+
+    it 'is invalid when image_url do not have a second-level domain' do
+      question.image_url = 'www.example'
+      expect(question.valid?).to eq false
+    end
+  end
 end
