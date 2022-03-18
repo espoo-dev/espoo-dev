@@ -60,7 +60,7 @@ RSpec.describe 'Question CRUD', type: :system do
         end
       end
 
-      context 'when show' do
+      context 'show' do
         before do
           visit admin_question_path(question_admin)
         end
