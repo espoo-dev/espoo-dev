@@ -20,7 +20,9 @@ class SimpleSurveyPresenter < BasePresenter
       name: survey.name,
       description: survey.description,
       total_questions_quantity: survey.questions.size,
-      answered_questions_quantity: survey.last_answers_quantity(user)
+      answered_questions_quantity: survey.last_answers_quantity(user),
+      icon_url: survey.icon_url
+
     }
   end
 end

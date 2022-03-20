@@ -186,6 +186,8 @@ components:
           type: number
         answered_question_quantity:
           type: number
+        icon_url:
+          type: string
     User:
       type: object
       properties:

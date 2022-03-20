@@ -67,7 +67,8 @@ module HashHelperMethods
       description: survey.description,
       survey_subject_id: survey.survey_subject.id,
       answered_questions_quantity: 1,
-      total_questions_quantity: 2
+      total_questions_quantity: 2,
+      icon_url: survey.icon_url
     }
   end
 end
