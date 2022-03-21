@@ -115,8 +115,7 @@ RSpec.describe 'UsersController', type: :request do
               'description' => survey.description,
               'total_questions_quantity' => survey.questions.size,
               'answered_questions_quantity' => survey.last_answers_quantity(user_with_surveys),
-              'icon_url' => survey.icon_url,
-              'image_url' => survey.image_url
+              'icon_url' => survey.icon_url
             }
           ]
         }
