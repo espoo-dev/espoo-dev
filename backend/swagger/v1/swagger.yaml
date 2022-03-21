@@ -190,6 +190,8 @@ components:
           type: number
         icon_url:
           type: string
+        image_url:
+          type: string
     User:
       type: object
       properties:
