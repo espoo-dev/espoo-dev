@@ -100,4 +100,48 @@ RSpec.describe Survey, type: :model do
       expect(survey.valid?).to eq false
     end
   end
+
+  describe 'validate image_url' do
+    let!(:survey) { create(:survey) }
+
+    it 'is valid when image_url is an empty string' do
+      survey.image_url = ''
+      expect(survey.valid?).to be true
+    end
+
+    it 'is valid when image_url is url http' do
+      survey.image_url = 'http://www.example.com'
+      expect(survey.valid?).to be true
+    end
+
+    it 'is valid when image_url is url https' do
+      survey.image_url = 'https://www.example.com'
+      expect(survey.valid?).to be true
+    end
+
+    it 'is valid when image_url has prefix' do
+      survey.image_url = 'https://www.example.com/user/'
+      expect(survey.valid?).to be true
+    end
+
+    it 'is invalid when image_url does not have a protocol' do
+      survey.image_url = 'www.example.com'
+      expect(survey.valid?).to be false
+    end
+
+    it 'is invalid when image_url has an error' do
+      survey.image_url = 'www.example. com'
+      expect(survey.valid?).to be false
+    end
+
+    it 'is invalid when image_url has a www error' do
+      survey.image_url = 'ww.example.com'
+      expect(survey.valid?).to be false
+    end
+
+    it 'is invalid when image_url do not have a second-level domain' do
+      survey.image_url = 'www.example'
+      expect(survey.valid?).to be false
+    end
+  end
 end
