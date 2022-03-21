@@ -148,6 +148,8 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/Option'
+        image_url:
+          type: string
     Survey:
       type: object
       properties:
