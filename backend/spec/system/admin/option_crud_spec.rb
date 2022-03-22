@@ -28,6 +28,7 @@ RSpec.describe 'Option CRUD', type: :system do
         end
 
         it { expect(page).to have_content 'Option was successfully created.' }
+        it { expect(page).to have_current_path(new_admin_option_path, ignore_query: true) }
       end
 
       context 'when data is not valid' do
