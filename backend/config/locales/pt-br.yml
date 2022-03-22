@@ -56,7 +56,7 @@ pt-br:
   administrate:
     option:
       created:
-        success: Option was successfully created.
+        success: A opção foi criada com sucesso.
   app_name: Rails espoo pt-br
   devise:
     sessions:

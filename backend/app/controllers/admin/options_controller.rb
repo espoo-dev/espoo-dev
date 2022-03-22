@@ -5,8 +5,10 @@ module Admin
       authorize_resource(resource)
 
       if resource.save
-        flash[:notice] = t('administrate.option.created.success')
-        redirect_to admin_options_path
+        redirect_to(
+          [:new, namespace, resource.class.name.downcase.to_sym],
+          notice: t('administrate.option.created.success')
+        )
       else
         render :new, locals: {
           page: Administrate::Page::Form.new(dashboard, resource)
