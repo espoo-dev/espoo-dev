@@ -44,37 +44,37 @@ class LoginActivity : AppCompatActivity() {
         service = ApiService.create("")
     }
 
-    fun login(view: View) {
-        val userName = binding.editTextUsername.text.toString()
-        val password = binding.editTextPassword.text.toString()
-        if (!validator.validateInputNotEmpty(userName)) {
-            Toast.makeText(this,
-                "${getString(R.string.login_username)} ${getString(R.string.field_does_not_filled)}",
-                Toast.LENGTH_LONG).show()
-        } else if (!validator.validateInputNotEmpty(password)) {
-            Toast.makeText(this,
-                "${getString(R.string.login_password)} ${getString(R.string.field_does_not_filled)}",
-                Toast.LENGTH_LONG).show()
-        } else {
-            service.login(AuthData(UserLogin(userName, password))).enqueue(object :Callback<User> {
-                override fun onResponse(call: Call<User>, response: Response<User>) {
-                    if (response.isSuccessful) {
-                        response.body()?.let {
-                            storeLoginData(it)
-                            openMainActivity()
-                        }
-                        response.headers()["Authorization"]?.let {
-                            sessionManager.storeData(API_TOKEN, it)
-                        }
-                    }
-                }
-                override fun onFailure(call: Call<User>, t: Throwable) {
-                    Log.e("TAG_", "onFailure: An error happened!")
-                    t.printStackTrace()
-                }
-            })
-        }
-    }
+//    fun login(view: View) {
+//        val userName = binding.editTextUsername.text.toString()
+//        val password = binding.editTextPassword.text.toString()
+//        if (!validator.validateInputNotEmpty(userName)) {
+//            Toast.makeText(this,
+//                "${getString(R.string.login_username)} ${getString(R.string.field_does_not_filled)}",
+//                Toast.LENGTH_LONG).show()
+//        } else if (!validator.validateInputNotEmpty(password)) {
+//            Toast.makeText(this,
+//                "${getString(R.string.login_password)} ${getString(R.string.field_does_not_filled)}",
+//                Toast.LENGTH_LONG).show()
+//        } else {
+//            service.login(AuthData(UserLogin(userName, password))).enqueue(object :Callback<User> {
+//                override fun onResponse(call: Call<User>, response: Response<User>) {
+//                    if (response.isSuccessful) {
+//                        response.body()?.let {
+//                            storeLoginData(it)
+//                            openMainActivity()
+//                        }
+//                        response.headers()["Authorization"]?.let {
+//                            sessionManager.storeData(API_TOKEN, it)
+//                        }
+//                    }
+//                }
+//                override fun onFailure(call: Call<User>, t: Throwable) {
+//                    Log.e("TAG_", "onFailure: An error happened!")
+//                    t.printStackTrace()
+//                }
+//            })
+//        }
+//    }
 
     private fun openMainActivity() {
         startActivity(Intent(this, MainActivity::class.java))
