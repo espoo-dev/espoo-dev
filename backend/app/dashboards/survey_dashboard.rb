@@ -13,6 +13,7 @@ class SurveyDashboard < ApplicationDashboard
     ready: Field::Boolean,
     description: Field::String,
     icon_url: Field::String,
+    image_url: Field::String,
     created_at: Field::DateTime,
     updated_at: Field::DateTime
   }.freeze
@@ -29,6 +30,7 @@ class SurveyDashboard < ApplicationDashboard
     name
     ready
     icon_url
+    image_url
   ].freeze
 
   # SHOW_PAGE_ATTRIBUTES
@@ -41,6 +43,7 @@ class SurveyDashboard < ApplicationDashboard
     description
     ready
     icon_url
+    image_url
     created_at
     updated_at
   ].freeze
@@ -56,6 +59,7 @@ class SurveyDashboard < ApplicationDashboard
     description
     ready
     icon_url
+    image_url
   ].freeze
 
   # COLLECTION_FILTERS
