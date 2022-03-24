@@ -12,8 +12,7 @@ module HashHelperMethods
     options.map do |option|
       {
         'id' => option.id,
-        'name' => option.name,
-        'correct' => option.correct
+        'name' => option.name
       }.transform_keys(&:to_sym)
     end
   end
@@ -22,8 +21,7 @@ module HashHelperMethods
     options.map do |option|
       {
         'id' => option.id,
-        'name' => option.name,
-        'correct' => option.correct
+        'name' => option.name
       }
     end
   end
