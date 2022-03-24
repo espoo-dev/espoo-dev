@@ -10,7 +10,6 @@ class OptionPresenter < BasePresenter
     {
       id: @option.id,
       name: @option.name,
-      correct: @option.correct
     }
   end
 end
