@@ -2,9 +2,10 @@ class Api::V1::AnswersController < Api::V1::ApiController
   include AnswerConcern
 
   def create
-    answer = build_answer(answer_params, option_ids)
-    authorize answer
-    answer.save!
+    answer = create_answer
+
+    NotifySurveyCompletedUseCase.call(answer.answers_survey)
+
     render json: answer, status: :created
   end
 
@@ -16,5 +17,15 @@ class Api::V1::AnswersController < Api::V1::ApiController
 
   def option_ids
     params.permit(option_ids: [])[:option_ids]
+  end
+
+  def create_answer
+    answer = build_answer(answer_params, option_ids)
+
+    authorize answer
+
+    answer.save!
+
+    answer
   end
 end
