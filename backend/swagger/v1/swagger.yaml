@@ -126,8 +126,6 @@ components:
           type: number
         name:
           type: string
-        correct:
-          type: boolean
     QuestionType:
       type: object
       properties:

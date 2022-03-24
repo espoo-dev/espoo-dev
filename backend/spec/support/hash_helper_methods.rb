@@ -13,7 +13,6 @@ module HashHelperMethods
       {
         'id' => option.id,
         'name' => option.name,
-        'correct' => option.correct
       }.transform_keys(&:to_sym)
     end
   end
@@ -23,7 +22,6 @@ module HashHelperMethods
       {
         'id' => option.id,
         'name' => option.name,
-        'correct' => option.correct
       }
     end
   end
