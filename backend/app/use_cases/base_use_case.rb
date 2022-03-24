@@ -1,6 +1,4 @@
-class Base
-  def initialize; end
-
+class BaseUseCase
   def self.call(*args)
     new(*args).call
   end
