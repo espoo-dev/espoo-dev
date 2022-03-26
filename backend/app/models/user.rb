@@ -14,8 +14,6 @@ class User < ApplicationRecord
 
   belongs_to :role
 
-  validates :role, presence: true
-
   delegate :admin?, to: :role
   delegate :teacher?, to: :role
   delegate :student?, to: :role
