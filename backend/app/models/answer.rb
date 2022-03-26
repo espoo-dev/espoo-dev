@@ -6,7 +6,7 @@ class Answer < ApplicationRecord
   has_many :options, through: :answers_options
 
   validates :user_answer, presence: true, if: :free_text?
-  validates :question_id, presence: true, uniqueness: { scope: :answers_survey_id }
+  validates :question_id, uniqueness: { scope: :answers_survey_id }
   validate :minimum_one_option
   validate :maximum_one_option
 

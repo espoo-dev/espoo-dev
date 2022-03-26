@@ -37,7 +37,7 @@ RSpec.describe Option, type: :model do
     end
 
     describe 'when update option of ready question' do
-      it { expect(ready_question.ready_to_be_answered).to eq(true) }
+      it { expect(ready_question.ready_to_be_answered).to be(true) }
       it { expect(correct_option.update(correct: false)).to be_falsy }
     end
   end
