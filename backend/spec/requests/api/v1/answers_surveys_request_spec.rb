@@ -32,7 +32,8 @@ RSpec.describe 'AnswersSurveysController', type: :request do
           },
           'options' => [{
             'id' => option.id,
-            'name' => option.name
+            'name' => option.name,
+            'correct' => option.correct
           }]
         }
         expected_attributes = {

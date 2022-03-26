@@ -9,7 +9,8 @@ class OptionPresenter < BasePresenter
   def payload
     {
       id: @option.id,
-      name: @option.name
+      name: @option.name,
+      correct: @option.correct
     }
   end
 end
