@@ -9,11 +9,10 @@ RSpec.describe User, type: :model do
   it { expect(user).to be_valid }
 
   describe 'relationships' do
-
-    [:surveys, :questions, :options, :answers_surveys, :groups, :trails].each do |sym|
+    %i[surveys questions options answers_surveys groups trails].each do |sym|
       it { is_expected.to have_many(sym).dependent(:destroy) }
     end
- 
+
     it { is_expected.to belong_to(:role) }
   end
 end
