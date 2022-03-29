@@ -4,13 +4,15 @@ class NotifySurveyCompletedUseCase < BaseUseCase
   end
 
   def call
-    SlackNotifierService.call(message_slack) if @answers_survey.completed?
+    SlackNotifierService.call(message) if @answers_survey.completed?
   end
 
-  def message_slack
+  private
+
+  def message
     survey = @answers_survey.survey
 
-    count_completed_surveys = survey.answers_surveys.select { |a| a.completed? }.count
+    count_completed_surveys = survey.answers_surveys.completed.count.count
 
     teacher_email = survey.user.email
 

@@ -8,8 +8,6 @@ class SlackNotifierService < Base
   end
 
   def call
-    return unless Rails.env.production?
-    
     return unless @slack_client
 
     @slack_client.ping @message

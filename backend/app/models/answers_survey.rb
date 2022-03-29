@@ -12,6 +12,12 @@ class AnswersSurvey < ApplicationRecord
     return where(user: user, survey: survey)
   }
 
+  scope :completed, -> {
+    joins(:answers, survey: :questions)
+      .group(:id)
+      .having('COUNT(answers.id) = COUNT(questions.id)')
+  }
+
   NOT_STARTED = 'Not started'.freeze
   STARTED = 'Started'.freeze
   COMPLETED = 'Completed'.freeze
