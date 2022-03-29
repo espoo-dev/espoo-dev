@@ -11,13 +11,13 @@ RSpec.describe QuestionWithAnswersPresenter do
 
   describe '#correct' do
     it 'returns false when question answer contains incorrect options' do
-      expect(presenter.payload[:correct]).to eq false
+      expect(presenter.payload[:correct]).to be false
     end
 
     it 'returns true when question answer contains correct options' do
       question.options.second.update!(correct: true)
       question.options.first.update!(correct: false)
-      expect(presenter.payload[:correct]).to eq true
+      expect(presenter.payload[:correct]).to be true
     end
   end
 

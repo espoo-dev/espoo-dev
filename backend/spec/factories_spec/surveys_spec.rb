@@ -7,7 +7,6 @@ RSpec.describe 'Surveys' do
     end
 
     it { expect(Survey.count).to eq(1) }
-
     it { expect(Question.count).to eq(2) }
   end
 
@@ -16,11 +15,9 @@ RSpec.describe 'Surveys' do
       create(:survey_with_1_question)
     end
 
-    it { expect(Survey.count).to eq(1) }
-
-    it { expect(Question.count).to eq(1) }
-
-    it { expect(SurveySubject.count).to eq(1) }
+    [Survey, Question, SurveySubject].each do |model|
+      it { expect(model.count).to eq(1) }
+    end
   end
 
   describe 'survey_with_two_questions_two_answers' do
@@ -29,13 +26,9 @@ RSpec.describe 'Surveys' do
     end
 
     it { expect(Survey.count).to eq(1) }
-
     it { expect(Question.count).to eq(2) }
-
     it { expect(Answer.count).to eq(2) }
-
     it { expect(AnswersSurvey.count).to eq(1) }
-
     it { expect(User.count).to eq(1) }
 
     it 'has one answer for first question' do
@@ -57,13 +50,9 @@ RSpec.describe 'Surveys' do
     end
 
     it { expect(Survey.count).to eq(1) }
-
     it { expect(Question.count).to eq(2) }
-
     it { expect(Answer.count).to eq(1) }
-
     it { expect(AnswersSurvey.count).to eq(1) }
-
     it { expect(User.count).to eq(1) }
 
     it 'has one answer for first question' do

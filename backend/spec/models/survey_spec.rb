@@ -51,4 +51,97 @@ RSpec.describe Survey, type: :model do
       expect(survey).to be_valid
     end
   end
+
+  describe 'validate icon_url' do
+    let!(:survey) { create(:survey) }
+
+    it 'is valid when icon_url is empty' do
+      survey.icon_url = nil
+      expect(survey.valid?).to be true
+    end
+
+    it 'is valid when icon_url is an empty string' do
+      survey.icon_url = ''
+      expect(survey.valid?).to be true
+    end
+
+    it 'is valid when icon_url is url http' do
+      survey.icon_url = 'http://www.google.com'
+      expect(survey.valid?).to be true
+    end
+
+    it 'is valid when icon_url is url https' do
+      survey.icon_url = 'https://www.facebook.com'
+      expect(survey.valid?).to be true
+    end
+
+    it 'is valid when icon_url has prefix' do
+      survey.icon_url = 'https://www.facebook.com/user/'
+      expect(survey.valid?).to be true
+    end
+
+    it 'is invalid when icon_url does not have a protocol' do
+      survey.icon_url = 'www.facebook.com'
+      expect(survey.valid?).to be false
+    end
+
+    it 'is invalid when icon_url has error' do
+      survey.icon_url = 'www.facebook. com'
+      expect(survey.valid?).to be false
+    end
+
+    it 'is invalid when icon_url has a www error' do
+      survey.icon_url = 'ww.facebook.com'
+      expect(survey.valid?).to be false
+    end
+
+    it 'is invalid when icon_url do not have a second-level domain' do
+      survey.icon_url = 'www.facebook'
+      expect(survey.valid?).to be false
+    end
+  end
+
+  describe 'validate image_url' do
+    let!(:survey) { create(:survey) }
+
+    it 'is valid when image_url is an empty string' do
+      survey.image_url = ''
+      expect(survey.valid?).to be true
+    end
+
+    it 'is valid when image_url is url http' do
+      survey.image_url = 'http://www.example.com'
+      expect(survey.valid?).to be true
+    end
+
+    it 'is valid when image_url is url https' do
+      survey.image_url = 'https://www.example.com'
+      expect(survey.valid?).to be true
+    end
+
+    it 'is valid when image_url has prefix' do
+      survey.image_url = 'https://www.example.com/user/'
+      expect(survey.valid?).to be true
+    end
+
+    it 'is invalid when image_url does not have a protocol' do
+      survey.image_url = 'www.example.com'
+      expect(survey.valid?).to be false
+    end
+
+    it 'is invalid when image_url has an error' do
+      survey.image_url = 'www.example. com'
+      expect(survey.valid?).to be false
+    end
+
+    it 'is invalid when image_url has a www error' do
+      survey.image_url = 'ww.example.com'
+      expect(survey.valid?).to be false
+    end
+
+    it 'is invalid when image_url do not have a second-level domain' do
+      survey.image_url = 'www.example'
+      expect(survey.valid?).to be false
+    end
+  end
 end

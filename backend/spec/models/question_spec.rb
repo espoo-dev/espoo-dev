@@ -35,8 +35,8 @@ RSpec.describe Question, type: :model do
   end
 
   describe '#single_choice?' do
-    it { expect(question_single.single_choice?).to eq(true) }
-    it { expect(question_multiple.single_choice?).to eq(false) }
+    it { expect(question_single.single_choice?).to be(true) }
+    it { expect(question_multiple.single_choice?).to be(false) }
   end
 
   describe 'uniqueness by user' do
@@ -58,12 +58,12 @@ RSpec.describe Question, type: :model do
 
   describe '#validates_ready' do
     it 'has no correct options' do
-      expect(question.update(ready_to_be_answered: true)).to eq(false)
+      expect(question.update(ready_to_be_answered: true)).to be(false)
     end
 
     it 'has correct options' do
       create(:correct_option, question: question)
-      expect(question.update(ready_to_be_answered: true)).to eq(true)
+      expect(question.update(ready_to_be_answered: true)).to be(true)
     end
   end
 
@@ -98,6 +98,50 @@ RSpec.describe Question, type: :model do
 
       expect(question_mod).not_to be_valid
       expect(question_mod.errors.full_messages).to match(['User must be the same in question and survey'])
+    end
+  end
+
+  describe 'validate image_url' do
+    let!(:question) { create(:question) }
+
+    it 'is valid when image_url is an empty string' do
+      question.image_url = ''
+      expect(question.valid?).to be true
+    end
+
+    it 'is valid when image_url is an url http' do
+      question.image_url = 'http://www.example.com'
+      expect(question.valid?).to be true
+    end
+
+    it 'is valid when image_url is an url https' do
+      question.image_url = 'https://www.example.com'
+      expect(question.valid?).to be true
+    end
+
+    it 'is valid when image_url has prefix' do
+      question.image_url = 'https://www.example.com/user'
+      expect(question.valid?).to be true
+    end
+
+    it 'is invalid when image_url does not have a protocol' do
+      question.image_url = 'www.example.com'
+      expect(question.valid?).to be false
+    end
+
+    it 'is invalid when image_url has an error' do
+      question.image_url = 'www.example. com'
+      expect(question.valid?).to be false
+    end
+
+    it 'is invalid when image_url has a www error' do
+      question.image_url = 'ww.example.com'
+      expect(question.valid?).to be false
+    end
+
+    it 'is invalid when image_url do not have a second-level domain' do
+      question.image_url = 'www.example'
+      expect(question.valid?).to be false
     end
   end
 end
