@@ -17,9 +17,8 @@ RSpec.describe Option, type: :model do
   end
 
   describe 'relationships' do
-    %i[user question].each { |sym| it { is_expected.to belong_to(sym).required } }
-    it { is_expected.to have_many(:answers_options).dependent(:destroy) }
-    it { is_expected.to have_many(:answers) }
+    it { is_expected.to belong_to(:user).required }
+    it { is_expected.to belong_to(:question).required }
   end
 
   describe 'option validation' do

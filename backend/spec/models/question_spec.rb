@@ -24,8 +24,8 @@ RSpec.describe Question, type: :model do
     it { is_expected.to validate_presence_of(:name) }
   end
 
-  describe 'single choice' do
-    context 'when updating to single choice with multiple correct options' do
+  describe 'updating to single choice' do
+    context 'when has with multiple correct options' do
       before do
         create_list(:option, 3, correct: true, question_id: question_multiple.id)
         question_multiple.update(question_type_id: question_type_single.id)
