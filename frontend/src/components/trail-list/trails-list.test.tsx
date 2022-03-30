@@ -1,6 +1,16 @@
 import { Trail } from '@api/models/trail';
 import { render, screen, fireEvent } from 'test-utils';
+import { useRouter } from 'next/router';
 import TrailList from './trails-list';
+
+jest.mock('next/router', () => ({
+  useRouter: jest.fn()
+}));
+
+const mockRouter = {
+  push: jest.fn()
+};
+(useRouter as jest.Mock).mockReturnValue(mockRouter);
 
 let trails = [];
 
@@ -60,6 +70,6 @@ describe('TrailList', () => {
     render(<TrailList data={trails} />);
     const trailItem = screen.getByText(trails[0].name);
     fireEvent.click(trailItem);
-    expect(trailItem).toBeInTheDocument();
+    expect(mockRouter.push).toHaveBeenCalledWith(`/trails/${trails[0].id}`);
   });
 });
