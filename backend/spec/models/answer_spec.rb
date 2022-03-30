@@ -15,43 +15,55 @@ RSpec.describe Answer, type: :model do
   end
 
   describe 'free_text validations' do
-    it 'is not valid when has no user_answer' do
-      answer = build(:free_text_answer, options: [], user_answer: nil)
-      expect(answer).not_to be_valid
+    context 'when question has no user_answer' do
+      it 'is not valid' do
+        answer = build(:free_text_answer, options: [], user_answer: nil)
+        expect(answer).not_to be_valid
+      end
     end
 
-    it 'is valid when question has user_answer' do
-      answer = build(:free_text_answer, options: [], user_answer: 'something')
-      expect(answer).to be_valid
+    context 'when question has user_answer' do
+      it 'is valid' do
+        answer = build(:free_text_answer, options: [], user_answer: 'something')
+        expect(answer).to be_valid
+      end
     end
   end
 
   describe '#minimum_one_option' do
-    it 'is not valid when there are no options' do
-      answer = build(:answer)
-      answer.valid?
-      expect(answer.errors.full_messages).to include('Options Should have at least one option.')
+    context 'when there are no options' do
+      it 'is not valid' do
+        answer = build(:answer)
+        answer.valid?
+        expect(answer.errors.full_messages).to include('Options Should have at least one option.')
+      end
     end
 
-    it 'is valid when there are options' do
-      answer = create(:answer_with_option)
-      expect(answer).to be_valid
+    context 'when there are options' do
+      it 'is valid' do
+        answer = create(:answer_with_option)
+        expect(answer).to be_valid
+      end
     end
   end
 
   describe '#maximum_one_option' do
-    it 'onlies have one option when question is single choice' do
-      option1 = build(:option)
-      option2 = build(:option)
-      answer = build(:answer, options: [option1, option2])
-      answer.valid?
-      expect(answer.errors.full_messages).to include("Question Can't select more than one option when single choice.")
+    context 'when question is single choice' do
+      it 'onlies have one option' do
+        option1 = build(:option)
+        option2 = build(:option)
+        answer = build(:answer, options: [option1, option2])
+        answer.valid?
+        expect(answer.errors.full_messages).to include("Question Can't select more than one option when single choice.")
+      end
     end
 
-    it 'is valid when answer have only one option' do
-      option1 = build(:option)
-      answer = build(:answer_with_option, options: [option1])
-      expect(answer).to be_valid
+    context 'when answer have only one option' do
+      it 'is valid' do
+        option1 = build(:option)
+        answer = build(:answer_with_option, options: [option1])
+        expect(answer).to be_valid
+      end
     end
   end
 end
