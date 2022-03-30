@@ -2,6 +2,7 @@ import { Button, Flex, Heading, Image, Text, Tooltip } from '@chakra-ui/react';
 import { colors } from '@styles/colors';
 import { AuthContext } from 'context/auth';
 import Link from 'next/link';
+import { useRouter } from 'next/router';
 import React, { useContext } from 'react';
 import { IconType } from 'react-icons';
 import { HiClipboardCheck, HiHome, HiLogout } from 'react-icons/hi';
@@ -21,6 +22,7 @@ interface MenuLink {
 export const Sidemenu = () => {
   const context = useContext(AuthContext);
   const { logout } = context;
+  const router = useRouter();
 
   const menuLinks: MenuLink[] = [
     {
@@ -35,6 +37,10 @@ export const Sidemenu = () => {
     },
   ];
 
+  const redirectToHome = () => {
+    router.replace('/surveys');
+  };
+
   return (
     <SideMenuContainer>
       <Flex
@@ -45,7 +51,7 @@ export const Sidemenu = () => {
         }}
         flex={1}
       >
-        <Flex alignItems="center">
+        <Flex alignItems="center" cursor="pointer" onClick={() => redirectToHome()} data-testid="logo-img">
           <Image src="/assets/logo.png" alt="main_logo" h="40px" w="40px" />
           <Heading
             display={{
