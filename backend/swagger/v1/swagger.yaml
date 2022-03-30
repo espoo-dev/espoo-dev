@@ -148,6 +148,8 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/Option'
+        image_url:
+          type: string
     Survey:
       type: object
       properties:
@@ -187,6 +189,8 @@ components:
         answered_question_quantity:
           type: number
         icon_url:
+          type: string
+        image_url:
           type: string
     User:
       type: object

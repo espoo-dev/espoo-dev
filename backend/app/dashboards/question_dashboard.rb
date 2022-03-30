@@ -14,6 +14,7 @@ class QuestionDashboard < ApplicationDashboard
     options: HasManyByUser,
     name: Field::String,
     ready_to_be_answered: Field::Boolean,
+    image_url: Field::String,
     created_at: Field::DateTime,
     updated_at: Field::DateTime
   }.freeze
@@ -28,6 +29,7 @@ class QuestionDashboard < ApplicationDashboard
     question_type
     survey
     ready_to_be_answered
+    image_url
   ].freeze
 
   # SHOW_PAGE_ATTRIBUTES
@@ -39,6 +41,7 @@ class QuestionDashboard < ApplicationDashboard
     name
     options
     ready_to_be_answered
+    image_url
   ].freeze
 
   # FORM_ATTRIBUTES
@@ -51,6 +54,7 @@ class QuestionDashboard < ApplicationDashboard
     name
     options
     ready_to_be_answered
+    image_url
   ].freeze
 
   # COLLECTION_FILTERS
