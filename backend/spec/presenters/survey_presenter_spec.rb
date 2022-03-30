@@ -34,24 +34,24 @@ RSpec.describe SurveyPresenter do
     let!(:not_started_survey) { create(:answers_survey, user: user).survey }
     let!(:not_started_survey_presenter) { described_class.new(not_started_survey, user) }
 
-    it 'has no answers survey for without_answers_survey' do
-      expect(without_answers_survey.answers_surveys).to be_empty
+    context 'when has no answers survey for without_answers_survey' do
+      it { expect(without_answers_survey.answers_surveys).to be_empty }
     end
 
-    it 'has status not_started for not_started_survey' do
-      expect(not_started_survey.answers_surveys.last.status).to eq(AnswersSurvey::NOT_STARTED)
+    context 'when has status not_started for not_started_survey' do
+      it { expect(not_started_survey.answers_surveys.last.status).to eq(AnswersSurvey::NOT_STARTED) }
     end
 
-    it 'has status completed for completed_survey' do
-      expect(completed_survey.answers_surveys.last.status).to eq(AnswersSurvey::COMPLETED)
+    context 'when has status completed for completed_survey' do
+      it { expect(completed_survey.answers_surveys.last.status).to eq(AnswersSurvey::COMPLETED) }
     end
 
-    it 'has status started for started_survey' do
-      expect(started_survey.answers_surveys.last.status).to eq(AnswersSurvey::STARTED)
+    context 'when has status started for started_survey' do
+      it { expect(started_survey.answers_surveys.last.status).to eq(AnswersSurvey::STARTED) }
     end
 
     context 'when without_answers_survey_presenter' do
-      it 'returns that without_answers_survey_presenter is lesser than all others surveys presenter' do
+      it 'returns that is lesser than all others surveys presenter' do
         survey_presenters_array = [
           not_started_survey_presenter,
           started_survey_presenter,
@@ -67,13 +67,13 @@ RSpec.describe SurveyPresenter do
     end
 
     context 'when not_started_survey_presenter' do
-      it 'returns that not_started_survey_presenter is greater than without_answers_survey_presenter' do
+      it 'returns that is greater than without_answers_survey_presenter' do
         result = not_started_survey_presenter.compare(without_answers_survey_presenter)
 
         expect(result).to eq(1)
       end
 
-      it 'returns that not_started_survey_presenter is lesser than started_survey_presenter and completed_survey_presenter' do
+      it 'returns that is lesser than started_survey_presenter and completed_survey_presenter' do
         survey_presenters_array = [
           started_survey_presenter,
           completed_survey_presenter
@@ -88,7 +88,7 @@ RSpec.describe SurveyPresenter do
     end
 
     context 'when started_survey_presenter' do
-      it 'returns that started_survey_presenter is greater than without_answers_survey_presenter and not_started_survey_presenter' do
+      it 'returns that is greater than without_answers_survey_presenter and not_started_survey_presenter' do
         survey_presenters_array = [
           without_answers_survey_presenter,
           not_started_survey_presenter
@@ -109,7 +109,7 @@ RSpec.describe SurveyPresenter do
     end
 
     context 'when completed_survey_presenter' do
-      it 'returns that completed_survey_presenter is greater than without_answers_survey_presenter, not_started_survey_presenter and started_survey_presenter' do
+      it 'returns that is greater than without_answers_survey_presenter, not_started_survey_presenter and started_survey_presenter' do
         survey_presenters_array = [
           without_answers_survey_presenter,
           not_started_survey_presenter,

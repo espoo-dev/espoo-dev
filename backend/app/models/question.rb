@@ -1,4 +1,5 @@
 class Question < ApplicationRecord
+  validates :image_url, format: { with: /\A#{URI::DEFAULT_PARSER.make_regexp(%w[http https])}\z/ }, allow_blank: true
   validates :name, presence: true, uniqueness: { scope: :user_id }
   validate :validates_options
   validate :validates_ready

@@ -13,7 +13,8 @@ class QuestionPresenter < BasePresenter
       id: question.id,
       name: question.name,
       question_type: question_type,
-      options: options
+      options: options,
+      image_url: question.image_url
     }
   end
 

@@ -12,7 +12,7 @@ RSpec.describe QuestionType, type: :model do
   end
 
   describe '#destroy' do
-    describe 'When there are questions for question type' do
+    context 'when there are questions for question type' do
       let!(:question_type) { create(:question).question_type }
 
       it 'does not destroy' do
@@ -26,7 +26,7 @@ RSpec.describe QuestionType, type: :model do
       end
     end
 
-    describe 'When there are no questions for question type' do
+    context 'when there are no questions for question type' do
       let!(:question_type) { create(:question_type) }
 
       it { expect(question_type.destroy).to be_truthy }
@@ -38,11 +38,13 @@ RSpec.describe QuestionType, type: :model do
     end
   end
 
-  describe 'factory only creates one instance of each question type' do
-    # rubocop:disable RSpec/IdenticalEqualityAssertion
-    it { expect(create(:question_type_single)).to eq(create(:question_type_single)) }
+  describe 'factory' do
+    context 'when only creates one instance of each question type' do
+      # rubocop:disable RSpec/IdenticalEqualityAssertion
+      it { expect(create(:question_type_single)).to eq(create(:question_type_single)) }
 
-    it { expect(create(:question_type_multiple)).to eq(create(:question_type_multiple)) }
-    # rubocop:enable RSpec/IdenticalEqualityAssertion
+      it { expect(create(:question_type_multiple)).to eq(create(:question_type_multiple)) }
+      # rubocop:enable RSpec/IdenticalEqualityAssertion
+    end
   end
 end

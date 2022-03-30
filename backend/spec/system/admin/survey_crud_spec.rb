@@ -4,7 +4,7 @@ RSpec.describe 'Survey CRUD', type: :system do
   describe 'CRUD' do
     let!(:user_admin) { create(:user) }
     let!(:user_teacher) { create(:user_teacher) }
-    let!(:survey) { create(:survey_with_1_question, icon_url: 'http://www.example.com') }
+    let!(:survey) { create(:survey_with_1_question, icon_url: 'http://www.example.com', image_url: 'https://www.example.com') }
     let!(:question_admin) { create(:question, user: user_admin) }
     let!(:question_teacher) { create(:question, user: user_teacher) }
     let!(:survey_subject) { create(:survey_subject) }
@@ -57,6 +57,12 @@ RSpec.describe 'Survey CRUD', type: :system do
 
           expect(page).to have_text(survey.icon_url)
         end
+
+        it 'can see image_url field' do
+          visit admin_survey_path(survey)
+
+          expect(page).to have_text(survey.image_url)
+        end
       end
 
       describe 'show' do
@@ -64,6 +70,12 @@ RSpec.describe 'Survey CRUD', type: :system do
           visit admin_survey_path(survey)
 
           expect(page).to have_text(survey.icon_url)
+        end
+
+        it 'can see image_url field' do
+          visit admin_survey_path(survey)
+
+          expect(page).to have_text(survey.image_url)
         end
       end
 
@@ -88,8 +100,8 @@ RSpec.describe 'Survey CRUD', type: :system do
     end
 
     describe 'when user is not admin' do
-      let!(:survey1) { create(:survey_with_1_question, user: user_teacher, icon_url: 'http://www.example.com') }
-      let!(:survey2) { create(:survey_with_1_question, icon_url: 'https://www.example.com') }
+      let!(:survey1) { create(:survey_with_1_question, user: user_teacher, icon_url: 'http://www.example.com', image_url: 'http://www.example.com') }
+      let!(:survey2) { create(:survey_with_1_question, icon_url: 'https://www.example.com', image_url: 'https://www.example.com') }
 
       before do
         sign_in user_teacher
@@ -139,6 +151,14 @@ RSpec.describe 'Survey CRUD', type: :system do
         it 'does not see icon_url field that not belongs to him' do
           expect(page).not_to have_text(survey2.icon_url)
         end
+
+        it 'sees image_url field that belongs to him' do
+          expect(page).to have_text(survey1.image_url)
+        end
+
+        it 'does not see image_url field that not belongs to him' do
+          expect(page).not_to have_text(survey2.image_url)
+        end
       end
 
       describe 'show' do
@@ -152,6 +172,13 @@ RSpec.describe 'Survey CRUD', type: :system do
           visit admin_survey_path(survey2)
 
           expect(page).to have_text("The page you were looking for doesn't exist.")
+        end
+
+        it 'can see his own image_url and not from others' do
+          visit admin_survey_path(survey1)
+
+          expect(page).to have_text(survey1.image_url)
+          expect(page).not_to have_text(survey2.icon_url)
         end
       end
 
