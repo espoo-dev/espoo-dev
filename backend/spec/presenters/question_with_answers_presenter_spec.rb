@@ -10,23 +10,27 @@ RSpec.describe QuestionWithAnswersPresenter do
   let!(:question) { survey.questions.first }
 
   describe '#correct' do
-    it 'returns false when question answer contains incorrect options' do
-      expect(presenter.payload[:correct]).to be false
+    context 'when question answer contains incorrect options' do
+      it 'returns false' do
+        expect(presenter.payload[:correct]).to be false
+      end
     end
 
-    it 'returns true when question answer contains correct options' do
-      question.options.second.update!(correct: true)
-      question.options.first.update!(correct: false)
-      expect(presenter.payload[:correct]).to be true
+    context 'when question answer contains correct options' do
+      it 'returns true' do
+        question.options.second.update!(correct: true)
+        question.options.first.update!(correct: false)
+        expect(presenter.payload[:correct]).to be true
+      end
     end
   end
 
   describe '#answered_options' do
-    describe 'when it has multiple answered options' do
+    context 'when it has multiple answered options' do
       let(:answers_survey) { create(:answers_survey_with_multiple_options_answers) }
 
-      it 'renders all answered options' do
-        expect(presenter.payload[:answered_options].count).to eq 2
+      context 'when renders all answered options' do
+        it { expect(presenter.payload[:answered_options].count).to eq 2 }
       end
     end
   end

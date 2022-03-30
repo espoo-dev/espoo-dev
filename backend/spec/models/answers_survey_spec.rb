@@ -8,7 +8,7 @@ RSpec.describe AnswersSurvey, type: :model do
   end
 
   describe '#status' do
-    describe 'when has no answers' do
+    context 'when has no answers' do
       let(:answer_survey) { create(:answers_survey, answers: []) }
 
       it 'has status NOT_STARTED' do
@@ -16,7 +16,7 @@ RSpec.describe AnswersSurvey, type: :model do
       end
     end
 
-    describe 'when has some answers' do
+    context 'when has some answers' do
       let(:answer_survey) { create(:answers_survey_with_some_answers) }
 
       it 'has status STARTED' do
@@ -24,7 +24,7 @@ RSpec.describe AnswersSurvey, type: :model do
       end
     end
 
-    describe 'when has all answers' do
+    context 'when has all answers' do
       let(:answer_survey) { create(:answers_survey_with_all_answers) }
 
       it 'has status COMPLETED' do
@@ -37,7 +37,7 @@ RSpec.describe AnswersSurvey, type: :model do
     let(:user) { create(:user) }
     let(:survey) { create(:survey_with_1_question) }
 
-    describe 'when answers_survey is unique "not completed" by survey' do
+    context 'when answers_survey is unique "not completed" by survey' do
       let(:answers_survey) { create(:answers_survey) }
 
       it 'is valid' do
@@ -45,7 +45,7 @@ RSpec.describe AnswersSurvey, type: :model do
       end
     end
 
-    describe 'when answers_survey is not unique "not completed" by survey' do
+    context 'when answers_survey is not unique "not completed" by survey' do
       let(:answers_survey1) { create(:answers_survey, user: user, survey: survey) }
       let(:answers_survey2) { build(:answers_survey, user: user, survey: survey) }
 

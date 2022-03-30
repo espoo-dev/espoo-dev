@@ -19,8 +19,6 @@ RSpec.describe Option, type: :model do
   describe 'relationships' do
     it { is_expected.to belong_to(:user).required }
     it { is_expected.to belong_to(:question).required }
-    it { is_expected.to have_many(:answers_options).dependent(:destroy) }
-    it { is_expected.to have_many(:answers) }
   end
 
   describe 'option validation' do
@@ -29,14 +27,14 @@ RSpec.describe Option, type: :model do
       ready_question.update(ready_to_be_answered: true)
     end
 
-    describe 'when many options are set to correct' do
+    context 'when many options are set to correct' do
       it { expect(test_option.errors.full_messages).to match(['Single choice questions should have no more than one correct option.']) }
       it { expect(test_option).not_to be_valid }
       it { expect(option.update(name: 'new name')).to be_truthy }
       it { expect(option.errors).to be_empty }
     end
 
-    describe 'when update option of ready question' do
+    context 'when update option of ready question' do
       it { expect(ready_question.ready_to_be_answered).to be(true) }
       it { expect(correct_option.update(correct: false)).to be_falsy }
     end
@@ -72,12 +70,14 @@ RSpec.describe Option, type: :model do
     let!(:option) { create(:correct_option, question: question) }
     let(:option2) { build(:correct_option, question: question) }
 
-    it 'is valid when there is only one correct option for single_choice question' do
-      expect(option).to be_valid
-    end
+    context 'when there is correct option for single_choice question' do
+      context 'with only one corret option is valid' do
+        it { expect(option).to be_valid }
+      end
 
-    it 'is not valid when there are many correct option for single_choice question' do
-      expect(option2).not_to be_valid
+      context 'with many correct options is not valid' do
+        it { expect(option2).not_to be_valid }
+      end
     end
   end
 
@@ -85,16 +85,16 @@ RSpec.describe Option, type: :model do
     let!(:question) { create(:multiple_choice_ready_question) }
     let!(:option) { question.options.first }
 
-    describe 'when question is ready' do
-      describe 'and there is only one correct option' do
-        it 'can have correct true' do
+    context 'when question is ready' do
+      context 'when there is only one correct option' do
+        it 'is valid' do
           create(:option, question: question, correct: false)
 
           expect(option).to be_valid
         end
       end
 
-      describe 'and there are no correct options' do
+      context 'when there are no correct options' do
         it 'can not have correct false' do
           option.correct = false
 
