@@ -20,7 +20,7 @@ RSpec.describe Role, type: :model do
   end
 
   describe '#destroy' do
-    describe 'When there are users for role' do
+    context 'when there are users for role' do
       let!(:role) { create(:user).role }
 
       it 'does not destroy' do
@@ -31,7 +31,7 @@ RSpec.describe Role, type: :model do
       it { expect(described_class.count).to eq(1) }
     end
 
-    describe 'When there are no users for role' do
+    context 'when there are no users for role' do
       let!(:role) { create(:role) }
 
       it { expect(role.destroy).to be_truthy }
@@ -43,16 +43,18 @@ RSpec.describe Role, type: :model do
     end
   end
 
-  describe 'factory only creates one instance of each role' do
-    # rubocop:disable RSpec/IdenticalEqualityAssertion
-    it { expect(create(:role)).to eq(create(:role)) }
+  describe 'factory' do
+    context 'when only creates one instance of each role' do
+      # rubocop:disable RSpec/IdenticalEqualityAssertion
+      it { expect(create(:role)).to eq(create(:role)) }
 
-    it { expect(create(:role_admin)).to eq(create(:role_admin)) }
+      it { expect(create(:role_admin)).to eq(create(:role_admin)) }
 
-    it { expect(create(:role_teacher)).to eq(create(:role_teacher)) }
+      it { expect(create(:role_teacher)).to eq(create(:role_teacher)) }
 
-    it { expect(create(:role_moderator)).to eq(create(:role_moderator)) }
-    # rubocop:enable RSpec/IdenticalEqualityAssertion
+      it { expect(create(:role_moderator)).to eq(create(:role_moderator)) }
+      # rubocop:enable RSpec/IdenticalEqualityAssertion
+    end
   end
 
   describe '.by_role' do
@@ -65,16 +67,16 @@ RSpec.describe Role, type: :model do
     let!(:user_teacher) { create(:user_teacher) }
     let(:user_admin) { create(:user) }
 
-    it 'shows all roles when admin' do
-      expect(described_class.by_user(user_admin)).to match(all_roles)
+    context 'when shows all roles when admin' do
+      it { expect(described_class.by_user(user_admin)).to match(all_roles) }
     end
 
-    it 'shows all not admin roles when user is not admin' do
-      expect(described_class.by_user(user_teacher)).to match(not_admin_roles)
+    context 'when shows all not admin roles when user is not admin' do
+      it { expect(described_class.by_user(user_teacher)).to match(not_admin_roles) }
     end
 
-    it 'shows all not admin roles when has no user' do
-      expect(described_class.by_user(nil)).to match(not_admin_roles)
+    context 'when shows all not admin roles when has no user' do
+      it { expect(described_class.by_user(nil)).to match(not_admin_roles) }
     end
   end
 end
