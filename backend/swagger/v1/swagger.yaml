@@ -175,6 +175,10 @@ components:
             $ref: '#/components/schemas/Question'
         survey_subject_id:
           type: number
+        icon_url:
+          type: string
+        image_url:
+          type: string
     SimpleSurvey:
       type: object
       properties:
@@ -188,10 +192,6 @@ components:
           type: number
         answered_question_quantity:
           type: number
-        icon_url:
-          type: string
-        image_url:
-          type: string
     User:
       type: object
       properties:
