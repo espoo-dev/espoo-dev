@@ -4,66 +4,66 @@ require 'rails_helper'
 
 RSpec.describe Seeds do
   describe '#call' do
-    describe 'when non production environment' do
+    context 'when non production environment' do
       before { described_class.call }
 
-      it 'creates 3 users' do
-        expect(User.count).to eq(3)
+      context 'when creates 3 users' do
+        it { expect(User.count).to eq(3) }
       end
 
-      it 'creates 3 roles' do
-        expect(Role.count).to eq(3)
+      context 'when creates 3 roles' do
+        it { expect(Role.count).to eq(3) }
       end
 
-      it 'creates 2 question types' do
-        expect(QuestionType.count).to eq(2)
+      context 'when creates 2 question types' do
+        it { expect(QuestionType.count).to eq(2) }
       end
 
-      it 'creates 3 survey subjects' do
-        expect(SurveySubject.count).to eq(3)
+      context 'when creates 3 survey subjects' do
+        it { expect(SurveySubject.count).to eq(3) }
       end
 
-      it 'creates 12 questions' do
-        expect(Question.count).to eq(12)
+      context 'when creates 12 questions' do
+        it { expect(Question.count).to eq(12) }
       end
 
-      it 'creates 7 surveys' do
-        expect(Survey.count).to eq(7)
+      context 'when creates 7 surveys' do
+        it { expect(Survey.count).to eq(7) }
       end
 
-      it 'creates 4 ready surveys' do
-        expect(Survey.ready_surveys.count).to eq(4)
+      context 'when creates 4 ready surveys' do
+        it { expect(Survey.ready_surveys.count).to eq(4) }
       end
 
-      it 'creates 41 options' do
-        expect(Option.count).to eq(41)
+      context 'when creates 41 options' do
+        it { expect(Option.count).to eq(41) }
       end
 
-      it 'creates 3 groups' do
-        expect(Group.count).to eq(3)
+      context 'when creates 3 groups' do
+        it { expect(Group.count).to eq(3) }
       end
 
-      it 'Groups have position 0,1,2' do
-        expect(Group.all.map(&:position).sort).to eq([0, 1, 2])
+      context 'when groups have position 0,1,2' do
+        it { expect(Group.all.map(&:position).sort).to eq([0, 1, 2]) }
       end
 
-      it 'creates 1 trail' do
-        expect(Trail.count).to eq(1)
+      context 'when creates 1 trail' do
+        it { expect(Trail.count).to eq(1) }
       end
 
-      it 'creates 1 trail with 3 groups' do
-        expect(Trail.first.groups.count).to eq(3)
+      context 'when creates 1 trail with 3 groups' do
+        it { expect(Trail.first.groups.count).to eq(3) }
       end
     end
 
-    describe 'when production environment' do
+    context 'when production environment' do
       before do
         allow(Rails.env).to receive(:production?).and_return(true)
         described_class.call
       end
 
-      it 'do not create entities' do
-        expect(User.count).to be_zero
+      context 'when do not create entities' do
+        it { expect(User.count).to be_zero }
       end
     end
   end

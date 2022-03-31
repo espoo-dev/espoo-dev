@@ -12,7 +12,7 @@ RSpec.describe 'Option CRUD', type: :system do
       sign_in user
     end
 
-    describe 'create' do
+    describe '#create' do
       context 'when data is valid' do
         before do
           visit new_admin_option_path
@@ -72,7 +72,7 @@ RSpec.describe 'Option CRUD', type: :system do
       end
     end
 
-    describe 'update' do
+    describe '#update' do
       before do
         visit edit_admin_option_path(option)
         find('label', text: 'Correct').click
@@ -82,7 +82,7 @@ RSpec.describe 'Option CRUD', type: :system do
       it { expect(page).to have_content('true') }
     end
 
-    describe 'list' do
+    describe '#list' do
       before do
         visit admin_options_path
       end
@@ -90,7 +90,7 @@ RSpec.describe 'Option CRUD', type: :system do
       it { expect(page).to have_text(option.name) }
     end
 
-    describe 'delete' do
+    describe '#delete' do
       before do
         visit admin_options_path
 
