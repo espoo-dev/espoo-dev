@@ -12,7 +12,7 @@ RSpec.describe 'Answer CRUD', type: :system do
     let!(:answer_teacher_survey) { create(:answer_with_option, answers_survey: answer_survey_teacher_survey) }
     let!(:answer_admin_survey) { create(:answer_with_option, answers_survey: answer_survey_admin_survey) }
 
-    describe 'index' do
+    describe '#index' do
       context 'when admin' do
         before do
           sign_in user_admin
@@ -37,7 +37,7 @@ RSpec.describe 'Answer CRUD', type: :system do
       end
     end
 
-    describe 'show' do
+    describe '#show' do
       context 'when admin' do
         before do
           sign_in user_admin
