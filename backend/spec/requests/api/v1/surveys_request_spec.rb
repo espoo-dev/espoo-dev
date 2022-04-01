@@ -18,7 +18,7 @@ RSpec.describe 'SurveysController', type: :request do
   end
 
   describe '#index' do
-    describe 'when user is admin' do
+    context 'when user is admin' do
       context 'when it has an answers survey' do
         let!(:user_student) { create(:user_student) }
         let!(:answers_survey) { create(:answers_survey_with_some_answers, user: user_student) }
@@ -71,7 +71,7 @@ RSpec.describe 'SurveysController', type: :request do
       end
     end
 
-    describe 'when user is student' do
+    describe 'user is student' do
       context 'when many surveys from users with different roles exist' do
         before do
           create(:ready_survey, user: create(:user_admin))
