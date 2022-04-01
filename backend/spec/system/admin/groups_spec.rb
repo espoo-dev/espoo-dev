@@ -9,7 +9,7 @@ RSpec.describe 'Group CRUD', type: :system do
     let!(:group_dependency_group_admin) { GroupDependency.first }
     let!(:group_dependency_group_teacher) { GroupDependency.last }
 
-    describe 'index' do
+    describe '#index' do
       context 'when admin' do
         before do
           sign_in user_admin
@@ -34,7 +34,7 @@ RSpec.describe 'Group CRUD', type: :system do
       end
     end
 
-    describe 'show' do
+    describe '#show' do
       context 'when admin' do
         before do
           sign_in user_admin
