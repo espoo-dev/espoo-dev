@@ -9,7 +9,7 @@ RSpec.describe 'Trail CRUD', type: :system do
       sign_in user
     end
 
-    describe 'index' do
+    describe '#index' do
       before do
         visit admin_trails_path
       end
@@ -18,7 +18,7 @@ RSpec.describe 'Trail CRUD', type: :system do
       it { expect(page).to have_content trail.name.to_s }
     end
 
-    describe 'show' do
+    describe '#show' do
       before do
         visit admin_trail_path(trail)
       end

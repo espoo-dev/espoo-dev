@@ -9,7 +9,7 @@ RSpec.describe 'Survey CRUD', type: :system do
     let!(:question_teacher) { create(:question, user: user_teacher) }
     let!(:survey_subject) { create(:survey_subject) }
 
-    describe 'when user is admin' do
+    describe 'user is admin' do
       before do
         sign_in user_admin
       end

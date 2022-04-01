@@ -14,7 +14,7 @@ RSpec.describe 'RolesController', type: :request do
     let(:user_admin) { create(:user) }
     let(:user_student) { create(:user_student) }
 
-    describe 'when admin, list all roles' do
+    context 'when admin, list all roles' do
       before do
         get api_v1_roles_path, headers: auth_headers(user: user_admin)
       end
@@ -24,7 +24,7 @@ RSpec.describe 'RolesController', type: :request do
       it { expect(response_body).to match(all_roles) }
     end
 
-    describe 'when user is not logged, list all not admin roles' do
+    context 'when user is not logged, list all not admin roles' do
       before do
         get api_v1_roles_path
       end
@@ -38,7 +38,7 @@ RSpec.describe 'RolesController', type: :request do
       end
     end
 
-    describe 'when user is not admin, list all not admin roles' do
+    context 'when user is not admin, list all not admin roles' do
       before do
         get api_v1_roles_path, headers: auth_headers(user: user_student)
       end
