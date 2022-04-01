@@ -42,4 +42,9 @@ describe('RoadmapSurvey', () => {
       'background: gray'
     );
   });
+
+  it('should not render groups when not passed and show message', () => {
+    render(<RoadmapSurvey groups={[]} />);
+    expect(screen.getByText('No surveys to show =/')).toBeInTheDocument();
+  });
 });
