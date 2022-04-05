@@ -3,6 +3,7 @@ plugins {
     id 'kotlin-android'
     id "org.jlleitschuh.gradle.ktlint"
     id 'kotlin-android-extensions'
+    id("androidx.navigation.safeargs")
 }
 apply from: '../jacoco.gradle'
 apply from: '../sonarqube.gradle'

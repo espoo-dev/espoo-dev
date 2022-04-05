@@ -10,6 +10,7 @@ import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.navigation.Navigation
 import androidx.navigation.findNavController
+import androidx.navigation.fragment.findNavController
 import com.espoo.android.R
 import com.espoo.android.api.ApiService
 import com.espoo.android.databinding.FragmentLoginBinding
@@ -41,9 +42,9 @@ class LoginFragment : Fragment() {
         service = ApiService.create("")
         sessionManager = context?.let { SessionManager(it) }!!
         // TODO Implement conditional start fragment using the Navigation component
-//        if (sessionManager.isLogin()) {
-//            Open Surveys Fragment
-//        }
+        if (sessionManager.isLogin()) {
+            findNavController().navigate(LoginFragmentDirections.actionLoginFragmentToSurveysFragment())
+        }
         binding.loginButton.setOnClickListener { view ->
 
             val userName = binding.editTextUsername.text.toString()
@@ -62,7 +63,7 @@ class LoginFragment : Fragment() {
                         if (response.isSuccessful) {
                             response.body()?.let {
                                 storeLoginData(it)
-                                view.findNavController().navigate(R.id.action_loginFragment_to_surveysFragment)
+                                view.findNavController().navigate(LoginFragmentDirections.actionLoginFragmentToSurveysFragment())
                             }
                             response.headers()["Authorization"]?.let {
                                 sessionManager.storeData(API_TOKEN, it)
