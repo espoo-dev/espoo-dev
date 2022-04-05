@@ -11,10 +11,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.Espoo">
-        <activity
-            android:name="com.espoo.android.view.MainActivity"
-            android:exported="false" />
-        <activity android:name="com.espoo.android.view.LoginActivity">
+        <activity android:name="com.espoo.android.view.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
