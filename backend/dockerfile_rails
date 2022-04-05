@@ -3,7 +3,8 @@ FROM ruby:3.0.2-alpine
 # dependencies
 RUN apk add --no-cache \
   git build-base postgresql-dev \
-  nodejs npm tzdata less
+  nodejs npm tzdata less graphviz \
+  font-noto fontconfig fc-cache -f
 
 # install recent yarn
 RUN npm install -g yarn
