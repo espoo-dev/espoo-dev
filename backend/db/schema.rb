@@ -10,16 +10,15 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[6.1].define(version: 2022_03_22_145615) do
-
+ActiveRecord::Schema[7.0].define(version: 2022_03_21_133302) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
   create_table "answers", force: :cascade do |t|
     t.bigint "question_id", null: false
     t.bigint "answers_survey_id", null: false
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
     t.string "user_answer"
     t.index ["answers_survey_id"], name: "index_answers_on_answers_survey_id"
     t.index ["question_id", "answers_survey_id"], name: "index_answers_on_question_id_and_answers_survey_id", unique: true
@@ -29,8 +28,8 @@ ActiveRecord::Schema[6.1].define(version: 2022_03_22_145615) do
   create_table "answers_options", force: :cascade do |t|
     t.bigint "answer_id", null: false
     t.bigint "option_id", null: false
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
     t.index ["answer_id"], name: "index_answers_options_on_answer_id"
     t.index ["option_id"], name: "index_answers_options_on_option_id"
   end
@@ -38,16 +37,16 @@ ActiveRecord::Schema[6.1].define(version: 2022_03_22_145615) do
   create_table "answers_surveys", force: :cascade do |t|
     t.bigint "survey_id", null: false
     t.bigint "user_id", null: false
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
     t.index ["survey_id"], name: "index_answers_surveys_on_survey_id"
     t.index ["user_id"], name: "index_answers_surveys_on_user_id"
   end
 
   create_table "group_dependencies", force: :cascade do |t|
     t.bigint "group_id", null: false
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
     t.index ["group_id"], name: "index_group_dependencies_on_group_id"
   end
 
@@ -55,8 +54,8 @@ ActiveRecord::Schema[6.1].define(version: 2022_03_22_145615) do
     t.string "name", null: false
     t.string "description"
     t.bigint "user_id", null: false
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
     t.integer "group_dependency_id"
     t.integer "trail_id"
     t.index ["name", "user_id"], name: "index_groups_on_name_and_user_id", unique: true
@@ -66,8 +65,8 @@ ActiveRecord::Schema[6.1].define(version: 2022_03_22_145615) do
   create_table "options", force: :cascade do |t|
     t.string "name"
     t.bigint "question_id", null: false
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
     t.bigint "user_id", null: false
     t.boolean "correct", default: false
     t.index ["name", "question_id"], name: "index_options_on_name_and_question_id", unique: true
@@ -77,15 +76,15 @@ ActiveRecord::Schema[6.1].define(version: 2022_03_22_145615) do
 
   create_table "question_types", force: :cascade do |t|
     t.string "name", null: false
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
     t.index ["name"], name: "index_question_types_on_name", unique: true
   end
 
   create_table "questions", force: :cascade do |t|
     t.string "name"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
     t.integer "question_type_id", null: false
     t.integer "survey_id"
     t.integer "user_id", null: false
@@ -99,24 +98,24 @@ ActiveRecord::Schema[6.1].define(version: 2022_03_22_145615) do
 
   create_table "roles", force: :cascade do |t|
     t.string "role_type"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
     t.index ["role_type"], name: "index_roles_on_role_type", unique: true
   end
 
   create_table "survey_subjects", force: :cascade do |t|
     t.string "name"
     t.string "description"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "surveys", force: :cascade do |t|
     t.string "name"
     t.string "description"
     t.bigint "user_id", null: false
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
     t.boolean "ready", default: false
     t.bigint "survey_subject_id", null: false
     t.integer "group_id"
@@ -131,8 +130,8 @@ ActiveRecord::Schema[6.1].define(version: 2022_03_22_145615) do
     t.string "name", null: false
     t.string "description"
     t.bigint "user_id", null: false
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
     t.index ["name", "user_id"], name: "index_trails_on_name_and_user_id", unique: true
     t.index ["user_id"], name: "index_trails_on_user_id"
   end
@@ -142,10 +141,10 @@ ActiveRecord::Schema[6.1].define(version: 2022_03_22_145615) do
     t.string "encrypted_password", default: "", null: false
     t.string "phone"
     t.string "reset_password_token"
-    t.datetime "reset_password_sent_at"
-    t.datetime "remember_created_at"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
+    t.datetime "reset_password_sent_at", precision: nil
+    t.datetime "remember_created_at", precision: nil
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
     t.bigint "role_id", null: false
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
