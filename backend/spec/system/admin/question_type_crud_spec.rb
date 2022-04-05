@@ -6,7 +6,7 @@ RSpec.describe 'question_type CRUD', type: :system do
     let!(:question_type_single) { create(:question_type_single) }
     let!(:admin_user) { create(:user) }
 
-    describe 'when user is admin' do
+    context 'when user is admin' do
       before do
         sign_in admin_user
         visit admin_question_types_path
@@ -14,7 +14,7 @@ RSpec.describe 'question_type CRUD', type: :system do
 
       it { expect(page).to have_text(question_type.name) }
 
-      describe 'when delete' do
+      context 'when delete' do
         it 'deletes question_type' do
           first(:link, 'Destroy').click
           page.accept_alert
@@ -29,7 +29,7 @@ RSpec.describe 'question_type CRUD', type: :system do
         end
       end
 
-      describe 'when create' do
+      context 'when create' do
         before do
           click_on 'New question type'
           fill_in 'Name', with: 'test type'
@@ -39,7 +39,7 @@ RSpec.describe 'question_type CRUD', type: :system do
         it { expect(page).to have_text('Question type was successfully created.') }
       end
 
-      describe 'when edit' do
+      context 'when edit' do
         before do
           question_type = create(:question_type)
           visit edit_admin_question_type_path(question_type)
