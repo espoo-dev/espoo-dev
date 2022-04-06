@@ -7,11 +7,11 @@ RSpec.describe 'Role CRUD', type: :system do
       visit admin_roles_path
     end
 
-    describe 'when list' do
+    context 'when list' do
       it { expect(page).to have_content 'Role' }
     end
 
-    describe 'when destroy' do
+    context 'when destroy' do
       before do
         click_on 'Destroy'
         page.accept_alert
@@ -20,7 +20,7 @@ RSpec.describe 'Role CRUD', type: :system do
       it { expect(page).to have_content "Can't destroy role with 1 users" }
     end
 
-    describe 'when create' do
+    context 'when create' do
       before do
         click_on 'New role'
         fill_in 'Role type', with: 'test role'
@@ -30,7 +30,7 @@ RSpec.describe 'Role CRUD', type: :system do
       it { expect(page).to have_text('Role was successfully created.') }
     end
 
-    describe 'when edit' do
+    context 'when edit' do
       before do
         role = create(:role_admin)
         visit edit_admin_role_path(role)

@@ -60,7 +60,7 @@ RSpec.describe 'Question CRUD', type: :system do
         end
       end
 
-      describe 'show' do
+      describe '#show' do
         before do
           visit admin_question_path(question_admin)
         end
@@ -70,7 +70,7 @@ RSpec.describe 'Question CRUD', type: :system do
         end
       end
 
-      describe 'index' do
+      describe '#index' do
         before do
           visit admin_questions_path
         end
@@ -92,7 +92,7 @@ RSpec.describe 'Question CRUD', type: :system do
         end
       end
 
-      describe 'delete' do
+      describe '#delete' do
         before do
           visit admin_questions_path
 
@@ -113,7 +113,7 @@ RSpec.describe 'Question CRUD', type: :system do
         sign_in user_teacher
       end
 
-      describe 'when show' do
+      context 'when show' do
         before do
           visit admin_question_path(question)
         end
@@ -131,7 +131,7 @@ RSpec.describe 'Question CRUD', type: :system do
         end
       end
 
-      describe 'when create' do
+      context 'when create' do
         before do
           visit new_admin_question_path
 
@@ -166,7 +166,7 @@ RSpec.describe 'Question CRUD', type: :system do
         end
       end
 
-      describe 'when index' do
+      context 'when index' do
         before do
           visit admin_questions_path
         end

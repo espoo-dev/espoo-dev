@@ -8,11 +8,11 @@ RSpec.describe 'SurveySubject CRUD', type: :system do
       visit admin_survey_subjects_path
     end
 
-    describe 'when list' do
+    context 'when list' do
       it { expect(page).to have_content 'Survey Subjects' }
     end
 
-    describe 'when destroy' do
+    context 'when destroy' do
       before do
         click_on 'Destroy'
         page.accept_alert
@@ -21,7 +21,7 @@ RSpec.describe 'SurveySubject CRUD', type: :system do
       it { expect(page).to have_content "Can't destroy survey subject with 1 surveys." }
     end
 
-    describe 'when create' do
+    context 'when create' do
       before do
         click_on 'New survey subject'
         fill_in 'Name', with: 'test subject'
@@ -32,7 +32,7 @@ RSpec.describe 'SurveySubject CRUD', type: :system do
       it { expect(page).to have_text('Survey subject was successfully created.') }
     end
 
-    describe 'when edit' do
+    context 'when edit' do
       before do
         subject = create(:survey_subject)
         visit edit_admin_survey_subject_path(subject)
