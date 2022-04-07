@@ -15,6 +15,7 @@
 #
 #  fk_rails_...  (user_id => users.id)
 #
+#:reek:MissingSafeMethod { exclude: [ add_required_group! ] }
 class Group < ApplicationRecord
   belongs_to :user
   belongs_to :trail, optional: true
