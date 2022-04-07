@@ -95,6 +95,9 @@ GEM
       momentjs-rails (~> 2.8)
       sassc-rails (~> 2.1)
       selectize-rails (~> 0.6)
+    annotate (3.2.0)
+      activerecord (>= 3.2, < 8.0)
+      rake (>= 10.4, < 14.0)
     ast (2.4.2)
     autoprefixer-rails (10.4.2.0)
       execjs (~> 2)
@@ -500,6 +503,7 @@ PLATFORMS
 DEPENDENCIES
   active_model_serializers
   administrate
+  annotate
   bootsnap (>= 1.4.4)
   bootstrap (~> 5.0.0.beta1)
   brakeman

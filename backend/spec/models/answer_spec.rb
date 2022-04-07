@@ -1,3 +1,14 @@
+# == Schema Information
+#
+# Table name: answers
+#
+#  id                :bigint           not null, primary key
+#  question_id       :bigint           not null
+#  answers_survey_id :bigint           not null
+#  created_at        :datetime         not null
+#  updated_at        :datetime         not null
+#  user_answer       :string
+#
 require 'rails_helper'
 
 RSpec.describe Answer, type: :model do

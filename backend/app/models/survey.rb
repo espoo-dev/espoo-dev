@@ -1,3 +1,19 @@
+# == Schema Information
+#
+# Table name: surveys
+#
+#  id                :bigint           not null, primary key
+#  name              :string
+#  description       :string
+#  user_id           :bigint           not null
+#  created_at        :datetime         not null
+#  updated_at        :datetime         not null
+#  ready             :boolean          default(FALSE)
+#  survey_subject_id :bigint           not null
+#  group_id          :integer
+#  icon_url          :string
+#  image_url         :string
+#
 class Survey < ApplicationRecord
   validate :validates_ready
   validates :icon_url, :image_url, format: { with: /\A#{URI::DEFAULT_PARSER.make_regexp(%w[http https])}\z/ }, allow_blank: true
