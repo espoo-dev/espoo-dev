@@ -1,3 +1,12 @@
+# == Schema Information
+#
+# Table name: question_types
+#
+#  id         :bigint           not null, primary key
+#  name       :string           not null
+#  created_at :datetime         not null
+#  updated_at :datetime         not null
+#
 FactoryBot.define do
   factory :question_type do
     initialize_with { QuestionType.find_or_create_by(name: QuestionType::SINGLE_CHOICE) }

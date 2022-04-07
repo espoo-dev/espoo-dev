@@ -1,3 +1,13 @@
+# == Schema Information
+#
+# Table name: answers_surveys
+#
+#  id         :bigint           not null, primary key
+#  survey_id  :bigint           not null
+#  user_id    :bigint           not null
+#  created_at :datetime         not null
+#  updated_at :datetime         not null
+#
 class AnswersSurvey < ApplicationRecord
   belongs_to :user
   belongs_to :survey

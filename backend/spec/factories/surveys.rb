@@ -1,3 +1,19 @@
+# == Schema Information
+#
+# Table name: surveys
+#
+#  id                :bigint           not null, primary key
+#  name              :string
+#  description       :string
+#  user_id           :bigint           not null
+#  created_at        :datetime         not null
+#  updated_at        :datetime         not null
+#  ready             :boolean          default(FALSE)
+#  survey_subject_id :bigint           not null
+#  group_id          :integer
+#  icon_url          :string
+#  image_url         :string
+#
 FactoryBot.define do
   factory :survey do
     name { Faker::Name.unique.name }
