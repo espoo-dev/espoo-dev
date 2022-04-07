@@ -1,17 +1,3 @@
-# == Schema Information
-#
-# Table name: questions
-#
-#  id                   :bigint           not null, primary key
-#  name                 :string
-#  created_at           :datetime         not null
-#  updated_at           :datetime         not null
-#  question_type_id     :integer          not null
-#  survey_id            :integer
-#  user_id              :integer          not null
-#  ready_to_be_answered :boolean          default(FALSE)
-#  image_url            :string
-#
 require 'rails_helper'
 
 RSpec.describe Question, type: :model do

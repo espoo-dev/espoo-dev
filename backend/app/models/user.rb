@@ -6,12 +6,16 @@
 #  email                  :string           default(""), not null
 #  encrypted_password     :string           default(""), not null
 #  phone                  :string
-#  reset_password_token   :string
-#  reset_password_sent_at :datetime
 #  remember_created_at    :datetime
+#  reset_password_sent_at :datetime
+#  reset_password_token   :string
 #  created_at             :datetime         not null
 #  updated_at             :datetime         not null
 #  role_id                :bigint           not null
+#
+# Foreign Keys
+#
+#  fk_rails_...  (role_id => roles.id)
 #
 class User < ApplicationRecord
   # Include default devise modules. Others available are:

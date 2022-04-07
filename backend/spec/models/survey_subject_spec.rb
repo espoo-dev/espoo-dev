@@ -1,13 +1,3 @@
-# == Schema Information
-#
-# Table name: survey_subjects
-#
-#  id          :bigint           not null, primary key
-#  name        :string
-#  description :string
-#  created_at  :datetime         not null
-#  updated_at  :datetime         not null
-#
 require 'rails_helper'
 
 RSpec.describe SurveySubject, type: :model do

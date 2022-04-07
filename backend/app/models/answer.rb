@@ -3,11 +3,11 @@
 # Table name: answers
 #
 #  id                :bigint           not null, primary key
-#  question_id       :bigint           not null
-#  answers_survey_id :bigint           not null
+#  user_answer       :string
 #  created_at        :datetime         not null
 #  updated_at        :datetime         not null
-#  user_answer       :string
+#  answers_survey_id :bigint           not null
+#  question_id       :bigint           not null
 #
 class Answer < ApplicationRecord
   belongs_to :question

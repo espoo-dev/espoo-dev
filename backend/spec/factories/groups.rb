@@ -1,16 +1,3 @@
-# == Schema Information
-#
-# Table name: groups
-#
-#  id                  :bigint           not null, primary key
-#  name                :string           not null
-#  description         :string
-#  user_id             :bigint           not null
-#  created_at          :datetime         not null
-#  updated_at          :datetime         not null
-#  group_dependency_id :integer
-#  trail_id            :integer
-#
 FactoryBot.define do
   factory :group do
     sequence(:name) { |n| "Group #{n}" }

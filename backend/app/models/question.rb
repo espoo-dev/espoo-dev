@@ -3,14 +3,14 @@
 # Table name: questions
 #
 #  id                   :bigint           not null, primary key
+#  image_url            :string
 #  name                 :string
+#  ready_to_be_answered :boolean          default(FALSE)
 #  created_at           :datetime         not null
 #  updated_at           :datetime         not null
 #  question_type_id     :integer          not null
 #  survey_id            :integer
 #  user_id              :integer          not null
-#  ready_to_be_answered :boolean          default(FALSE)
-#  image_url            :string
 #
 class Question < ApplicationRecord
   validates :image_url, format: { with: /\A#{URI::DEFAULT_PARSER.make_regexp(%w[http https])}\z/ }, allow_blank: true

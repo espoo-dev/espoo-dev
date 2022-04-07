@@ -1,12 +1,3 @@
-# == Schema Information
-#
-# Table name: roles
-#
-#  id         :bigint           not null, primary key
-#  role_type  :string
-#  created_at :datetime         not null
-#  updated_at :datetime         not null
-#
 require 'rails_helper'
 
 RSpec.describe Role, type: :model do
