@@ -1,3 +1,20 @@
+# == Schema Information
+#
+# Table name: options
+#
+#  id          :bigint           not null, primary key
+#  correct     :boolean          default(FALSE)
+#  name        :string
+#  created_at  :datetime         not null
+#  updated_at  :datetime         not null
+#  question_id :bigint           not null
+#  user_id     :bigint           not null
+#
+# Foreign Keys
+#
+#  fk_rails_...  (question_id => questions.id)
+#  fk_rails_...  (user_id => users.id)
+#
 class Option < ApplicationRecord
   belongs_to :user
   belongs_to :question
