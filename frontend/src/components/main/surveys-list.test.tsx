@@ -3,6 +3,7 @@ import { AnswerSurveyStatus, Survey } from 'api/models/survey';
 import { AnswerSurveyCreate } from 'api/models/answer_survey';
 import { fireEvent, render, screen, waitFor } from 'test-utils';
 import { AxiosInstance } from 'axios';
+import { useRouter } from 'next/router';
 import { SurveysList } from './SurveysList';
 import { httpClient } from '../../api/client';
 
@@ -11,6 +12,15 @@ jest.mock('../../api/client', () => ({
     post: jest.fn(),
   },
 }));
+
+jest.mock('next/router', () => ({
+  useRouter: jest.fn()
+}));
+
+const mockRouter = {
+  push: jest.fn()
+};
+(useRouter as jest.Mock).mockReturnValue(mockRouter);
 
 const mockResponse = {
   mock: true,
@@ -156,6 +166,9 @@ describe('Surveys list', () => {
         expect(httpClient.post).toHaveBeenCalledWith(urlApiCreateAnswerSurvey, {
           survey_id: 2,
         })
+      );
+      expect(mockRouter.push).toHaveBeenCalledWith(
+        `/surveys/${surveyDefault.id}`
       );
     });
 
