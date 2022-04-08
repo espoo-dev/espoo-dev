@@ -2,9 +2,10 @@
   "name": "espoo",
   "private": true,
   "dependencies": {
+    "@hotwired/turbo": "^7.1.0",
+    "@hotwired/turbo-rails": "^7.1.1",
     "@rails/ujs": "^6.0.0",
-    "@rails/webpacker": "5.2.1",
-    "turbolinks": "^5.2.0"
+    "@rails/webpacker": "5.2.1"
   },
   "version": "0.1.0",
   "devDependencies": {
