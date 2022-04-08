@@ -1,3 +1,12 @@
+# == Schema Information
+#
+# Table name: question_types
+#
+#  id         :bigint           not null, primary key
+#  name       :string           not null
+#  created_at :datetime         not null
+#  updated_at :datetime         not null
+#
 class QuestionType < ApplicationRecord
   validates :name, presence: true
   validates :name, uniqueness: { case_sensitive: false }
