@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/loginFragment"
-        android:name="com.espoo.android.view.LoginFragment"
+        android:name="com.espoo.android.view.login.LoginFragment"
         android:label="fragment_login"
         tools:layout="@layout/fragment_login" >
         <action
@@ -18,7 +18,7 @@
     </fragment>
     <fragment
         android:id="@+id/surveysFragment"
-        android:name="com.espoo.android.view.SurveysFragment"
+        android:name="com.espoo.android.view.surveys.SurveysFragment"
         android:label="fragment_surveys"
         tools:layout="@layout/fragment_surveys" />
 </navigation>
