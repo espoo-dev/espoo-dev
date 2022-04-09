@@ -12,7 +12,7 @@ RSpec.describe 'AnswersController', type: :request do
       let!(:option_b) { create(:option, user: user_teacher) }
 
       before do
-        allow(SlackNotifierService).to receive(:call)
+        allow(SlackService).to receive(:call)
 
         answer_params = {
           question_id: question.id,
@@ -96,7 +96,7 @@ RSpec.describe 'AnswersController', type: :request do
           message =  "Survey \"#{answers_survey.survey.name}\" from teacher \"#{user_teacher.email}\""\
                      " has been answered now.\nThis survey has 1 answers in the total.\n"
 
-          expect(SlackNotifierService).to have_received(:call).with(message)
+          expect(SlackService).to have_received(:call).with(message)
         end
       end
     end

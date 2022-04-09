@@ -1,8 +1,8 @@
-class SlackNotifierService < Base
+class SlackService < Base
   def initialize(message)
     return if ENV['SLACK_TOKEN'].blank?
       
-    @slack_client = Slack::Notifier.new ENV['SLACK_TOKEN']
+    @slack_client = Slack::Notifier.new(ENV['SLACK_TOKEN'])
 
     @message = message
   end

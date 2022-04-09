@@ -1,4 +1,4 @@
-class Answer::AnswersCreator < ::Base
+class Answer::AnswerCreator < ::Base
   attr_reader :answer_params, :option_ids, :user
 
   def initialize(answer_params:, option_ids:, user:)
@@ -38,7 +38,7 @@ class Answer::AnswersCreator < ::Base
   end
 
   def notify
-    SlackNotifierService.call(message) if answers_survey.completed?
+    SlackService.call(message) if answers_survey.completed?
   end
 
   def answers_survey

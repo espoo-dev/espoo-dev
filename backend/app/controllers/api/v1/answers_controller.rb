@@ -1,6 +1,6 @@
 class Api::V1::AnswersController < Api::V1::ApiController
   def create
-    answer = Answer::AnswersCreator.call(**creator_args)
+    answer = Answer::AnswerCreator.call(**creator_args)
 
     render json: answer, status: :created
   end
