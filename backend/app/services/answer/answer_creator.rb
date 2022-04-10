@@ -25,7 +25,7 @@ class Answer::AnswerCreator < ::Base
     @answer = Answer.new(@answer_params)
 
     unless @answer.free_text? || !@option_ids
-      @answer.options = Option.find(@option_ids)
+      @answer.options = Option.includes(%i[user question]).find(@option_ids)
     end
   end
 
@@ -51,7 +51,7 @@ class Answer::AnswerCreator < ::Base
 
   def translate_arguments
     {
-      count_answers_surveys_answered: survey.answers_surveys.completed.count.count,
+      count_answers_surveys_answered: survey.answers_surveys.completed.count,
       survey_name: survey.name,
       teacher_email: survey.user.email,
     }

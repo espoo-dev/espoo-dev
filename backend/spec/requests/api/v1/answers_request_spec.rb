@@ -104,6 +104,13 @@ RSpec.describe 'AnswersController', type: :request do
       end
 
       context 'when answers_survey is completed' do
+        let(:total_completed_answers_surveys) { 1 }
+
+        let(:message) {
+          "Survey \"#{answers_survey.survey.name}\" from teacher \"#{user_teacher.email}\" "\
+          "has been answered now.\nThis survey has #{total_completed_answers_surveys} answers in the total.\n"
+        }
+
         before do
           answer_params = {
             question_id: another_question.id,
@@ -114,16 +121,9 @@ RSpec.describe 'AnswersController', type: :request do
           post api_v1_answers_path, params: answer_params, headers: auth_headers(user: user_student)
         end
 
-        it 'has answers_survey completed' do
-          expect(answers_survey.completed?).to eq(true)
-        end
+        it { expect(answers_survey.completed?).to eq(true) }
 
-        it 'calls SlackNotifierService for the current answers_survey)' do
-          message =  "Survey \"#{answers_survey.survey.name}\" from teacher \"#{user_teacher.email}\""\
-                     " has been answered now.\nThis survey has 1 answers in the total.\n"
-
-          expect(SlackService).to have_received(:call).with(message).once
-        end
+        it { expect(SlackService).to have_received(:call).with(message).once }
       end
     end
 

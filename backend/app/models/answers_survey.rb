@@ -13,9 +13,11 @@ class AnswersSurvey < ApplicationRecord
   }
 
   scope :completed, -> {
-    joins(:answers, survey: :questions)
-      .group(:id)
-      .having('COUNT(answers.id) = COUNT(questions.id)')
+    joins("INNER JOIN (SELECT answers_survey_id, COUNT(id) AS count_answers FROM answers "\
+      "GROUP BY answers_survey_id) subquery_answers ON answers_surveys.id = subquery_answers.answers_survey_id")
+      .joins("INNER JOIN ( SELECT survey_id, COUNT(id) AS count_questions FROM questions "\
+        "GROUP BY survey_id) subquery_questions ON answers_surveys.survey_id = subquery_questions.survey_id")
+      .where('count_answers = count_questions')
   }
 
   NOT_STARTED = 'Not started'.freeze
