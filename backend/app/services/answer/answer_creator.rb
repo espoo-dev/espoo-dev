@@ -46,10 +46,10 @@ class Answer::AnswerCreator < ::Base
   end
 
   def message
-    I18n.t('surveys.answered', **translate_args)
+    I18n.t('surveys.answered', **translate_arguments)
   end
 
-  def translate_args
+  def translate_arguments
     {
       count_answers_surveys_answered: survey.answers_surveys.completed.count.count,
       survey_name: survey.name,
