@@ -10,7 +10,7 @@ class Answer::AnswerCreator < ::Base
   def call
     build_answer
 
-    authorize
+    authorize!
 
     save!
 
@@ -25,12 +25,12 @@ class Answer::AnswerCreator < ::Base
     @answer = Answer.new(@answer_params)
 
     unless @answer.free_text? || !@option_ids
-      @answer.options = Option.includes(%i[user question]).find(@option_ids)
+      @answer.options = Option.find(@option_ids)
     end
   end
 
-  def authorize
-    AnswerPolicy.new(@user, @answer).create?
+  def authorize!
+    raise Pundit::NotAuthorizedError unless AnswerPolicy.new(@user, @answer).create?
   end
 
   def save!
