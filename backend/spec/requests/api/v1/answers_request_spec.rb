@@ -27,7 +27,7 @@ RSpec.describe 'AnswersController', type: :request do
 
         post api_v1_answers_path, params: answer_params, headers: auth_headers(user: user_student)
       end
-      
+
       it { expect(response).to have_http_status :created }
 
       it { expect(Answer.count).to eq(1) }
