@@ -53,63 +53,51 @@ RSpec.describe Answer::AnswerCreator do
       let(:option_ids) { [option_a.id, option_b.id] }
       let(:user) { user_teacher }
 
+      subject(:creator_call) {
+        described_class.call(
+          answer_params: answer_params,
+          option_ids: option_ids,
+          user: user
+        )
+      }
+
       context 'when the user is nil' do
+        let(:user) { nil }
+
         it 'raise Pundit::NotAuthorizedError' do
-          expect {
-            Answer::AnswerCreator.call(
-              answer_params: answer_params,
-              option_ids: option_ids,
-              user: nil
-            )
-          }.to raise_error Pundit::NotAuthorizedError
+          expect { creator_call }.to raise_error Pundit::NotAuthorizedError
         end
       end
 
       context 'when the option_ids is nil' do
+        let(:option_ids) { nil }
+
         it 'raise ActiveRecord::RecordInvalid' do
-          expect {
-            Answer::AnswerCreator.call(
-              answer_params: answer_params,
-              option_ids: nil,
-              user: user_teacher
-            )
-          }.to raise_error ActiveRecord::RecordInvalid
+          expect { creator_call }.to raise_error ActiveRecord::RecordInvalid
         end
       end
 
       context 'when the answer_params is nil' do
+        let(:answer_params) { nil }
+
         it 'raise ActiveRecord::RecordInvalid' do
-          expect {
-            Answer::AnswerCreator.call(
-              answer_params: nil,
-              option_ids: option_ids,
-              user: user_teacher
-            )
-          }.to raise_error ActiveRecord::RecordInvalid
+          expect { creator_call }.to raise_error ActiveRecord::RecordInvalid
         end
       end
 
       context 'when the question_id is nil' do
+        let(:question_id) { nil }
+
         it 'raise ActiveRecord::RecordInvalid' do
-          expect {
-            Answer::AnswerCreator.call(
-              answer_params: { question_id: nil, answers_survey_id: answers_survey_id } ,
-              option_ids: option_ids,
-              user: user_teacher
-            )
-          }.to raise_error ActiveRecord::RecordInvalid
+          expect { creator_call }.to raise_error ActiveRecord::RecordInvalid
         end
       end
 
       context 'when the answers_survey_id is nil' do
+        let(:answers_survey_id) { nil }
+
         it 'raise ActiveRecord::RecordInvalid' do
-          expect {
-            Answer::AnswerCreator.call(
-              answer_params: { question_id: question_id, answers_survey_id: nil } ,
-              option_ids: option_ids,
-              user: user_teacher
-            )
-          }.to raise_error ActiveRecord::RecordInvalid
+          expect { creator_call }.to raise_error ActiveRecord::RecordInvalid
         end
       end
     end
