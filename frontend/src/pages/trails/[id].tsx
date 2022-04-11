@@ -1,5 +1,5 @@
 import { Container, Content, DarkContainer, Layout } from 'styles/main.styles';
-import { Box, Button, Heading, Spinner, Tooltip } from '@chakra-ui/react';
+import { Box, Heading, Spinner } from '@chakra-ui/react';
 import Head from 'next/head';
 import { Sidemenu } from '@components/sidemenu';
 import { useRouter } from 'next/router';
