@@ -1,6 +1,6 @@
 import { httpClient } from '@api/client';
 import { SurveyService } from '@api/services/survey';
-import { Box, Button, Heading, Spinner, Tooltip } from '@chakra-ui/react';
+import { Box, Heading, Spinner } from '@chakra-ui/react';
 import { AppButton } from '@components/app-button';
 import { Sidemenu } from '@components/sidemenu';
 import { SurveyHandler } from '@components/survey-handler';
