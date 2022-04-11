@@ -20,11 +20,14 @@ export const SurveyItemMap = styled.div<{ status: StatusGroup }>`
   }
 `;
 
-export const IconItem = styled.div<{ status: StatusGroup }>`
+export const IconItem = styled.div<{ status: StatusGroup, icon_url: string }>`
   height: 80px;
   width: 80px;
   border-radius: 50%;
-  background: ${(props) => getAvailableColor(props.status)};
+  background-image: url(${(props) => props.icon_url || '/assets/survey.png'});
+  background-size: cover;
+  background-position: center;
+  border: ${(props) => `4px solid ${getAvailableColor(props.status)}`};
 `;
 
 export const RoadmapContainer = styled.div`
