@@ -1,5 +1,11 @@
 # README
 
+# Admin
+
+You can access the backend as admin at this following URL:
+
+- `https://espoo.herokuapp.com/users/sign_in`
+
 # 🐳 Run (with docker)
 
 - `docker-compose up espoo_server`
@@ -45,6 +51,10 @@ Replace the version in the next command with yours:
 - `sudo mv chromedriver /usr/bin/chromedriver`
 - `sudo chown root:root /usr/bin/chromedriver`
 - `sudo chmod +x /usr/bin/chromedriver`
+
+# Entity-Relationship Diagrams
+
+- `https://github.com/espoo-dev/espoo-dev/blob/main/backend/erd.png`
 
 # Reference projects
 
