@@ -27,8 +27,8 @@ export interface ResultAnswerProps {
 }
 
 const AsnweredQuestion = (props: ResultAnswerProps) => {
-  const { id, correct, options } = props;
-  const { name } = props;
+  const { correct, id, name, options } = props;
+
   const [correctAnswers, setCorrectAnswers] = useState<string[]>([]);
 
   const getCorrectAnswersName = () => {
@@ -66,5 +66,3 @@ const AsnweredQuestion = (props: ResultAnswerProps) => {
     </CardReponse>
   );
 };
-
-export default AsnweredQuestion;

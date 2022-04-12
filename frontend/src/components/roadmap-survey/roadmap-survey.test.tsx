@@ -1,7 +1,7 @@
 import { Group } from '@api/models/group';
 import { render, screen, fireEvent } from 'test-utils';
 import mockManyGroups from 'utils/mocks/groups';
-import RoadmapSurvey from './roadmap-survey';
+import { RoadmapSurvey } from './roadmap-survey';
 
 let groups: Group[] = [];
 
