@@ -6,7 +6,7 @@ ruby '3.0.2'
 gem 'dry-configurable', '0.9.0'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails', branch: 'main'
-gem 'rails', '~> 6.1.2', '>= 6.1.2.1'
+gem 'rails', '~> 7.0', '>= 7.0.1'
 # Use postgresql as the database for Active Record
 gem 'pg', '~> 1.1'
 # Use Puma as the app server
@@ -15,8 +15,8 @@ gem 'puma', '~> 5.0'
 gem 'sass-rails', '>= 6'
 # Transpile app-like JavaScript. Read more: https://github.com/rails/webpacker
 gem 'webpacker', '~> 5.0'
-# Turbolinks makes navigating your web application faster. Read more: https://github.com/turbolinks/turbolinks
-gem 'turbolinks', '~> 5'
+# Turbo gives you the speed of a single-page web application without having to write any JavaScript. Read more: https://github.com/hotwired/turbo-rails
+gem 'turbo-rails'
 # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
 gem 'jbuilder', '~> 2.7'
 # Use Active Model has_secure_password
@@ -50,10 +50,14 @@ group :development do
   # Display performance information such as SQL time and flame graphs for each request in your browser.
   # Can be configured to work on production as well see: https://github.com/MiniProfiler/rack-mini-profiler/blob/master/README.md
   gem 'rack-mini-profiler', '~> 2.0'
+  gem 'rails-erd'
   gem 'solargraph'
 
   # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
   gem 'spring'
+
+  #Add a comment summarizing the current schema. Read more : https://github.com/ctran/annotate_models
+  gem 'annotate'
 end
 
 gem 'administrate'

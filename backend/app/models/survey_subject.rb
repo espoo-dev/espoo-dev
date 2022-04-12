@@ -1,3 +1,13 @@
+# == Schema Information
+#
+# Table name: survey_subjects
+#
+#  id          :bigint           not null, primary key
+#  description :string
+#  name        :string
+#  created_at  :datetime         not null
+#  updated_at  :datetime         not null
+#
 class SurveySubject < ApplicationRecord
   has_many :surveys, dependent: :destroy
 

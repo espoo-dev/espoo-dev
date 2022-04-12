@@ -20,7 +20,9 @@ RSpec.describe SimpleSurveyPresenter do
         name: survey.name,
         description: survey.description,
         total_questions_quantity: 2,
-        answered_questions_quantity: 1
+        answered_questions_quantity: 1,
+        icon_url: survey.icon_url,
+        image_url: survey.image_url
       }
       expect(presenter.payload).to eq expected_payload
     end
@@ -40,8 +42,8 @@ RSpec.describe SimpleSurveyPresenter do
       create(:answer, answers_survey: answers_survey, question: second_question, options: [second_option])
     end
 
-    it 'has quantity 1 for user' do
-      expect(presenter.payload[:answered_questions_quantity]).to eq(1)
+    context 'when has quantity 1 for user' do
+      it { expect(presenter.payload[:answered_questions_quantity]).to eq(1) }
     end
 
     it 'has quantity 2 for user2' do

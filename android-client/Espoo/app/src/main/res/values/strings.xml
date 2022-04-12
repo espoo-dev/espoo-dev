@@ -13,4 +13,11 @@
     <string name="logout">Logout</string>
 
     <string name="survey_call_to_action">Tap to resume</string>
+    <string name="espoo_logo">Espoo logo</string>
+
+    <!-- validations-->
+    <string name="field_does_not_filled">field doesn’t filled</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+
 </resources>

@@ -1,6 +1,7 @@
 import React from 'react';
 import { render, fireEvent, screen } from 'test-utils';
 import { FaTrash } from 'react-icons/fa';
+import { HiArrowLeft } from 'react-icons/hi';
 import { AppButton } from './app-button';
 
 describe('App Button', () => {
@@ -36,11 +37,23 @@ describe('App Button', () => {
 
   it('should display an icon on the button', () => {
     const icon = <FaTrash data-testid="icon" />;
-
-    const { getByTestId } = render(
-      <AppButton icon={icon} text="delete" />
-    );
+    const { getByTestId } = render(<AppButton icon={icon} text="delete" />);
 
     expect(getByTestId('icon')).toBeInTheDocument();
+  });
+
+  it('should show tooltip message', async () => {
+    const tooltip = 'Back to list';
+    const rendered = render(
+      <AppButton
+        id="btn-back"
+        data-testid="btn-back"
+        tooltip={tooltip}
+        icon={<HiArrowLeft />}
+      />
+    );
+    fireEvent.mouseOver(rendered.getByTestId('btn-back'));
+
+    expect(await rendered.findByText(tooltip)).toBeInTheDocument();
   });
 });

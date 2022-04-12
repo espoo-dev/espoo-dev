@@ -1,3 +1,4 @@
+import { colors } from '@styles/colors';
 import styled from 'styled-components';
 import { defaultTransition } from 'styles/transitions';
 
@@ -39,7 +40,7 @@ export const DetailsSurvey = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: space-around;
-  color: #3cbfb9;
+  color: ${colors.primaryTxt};
 `;
 
 export const TitleSurvey = styled.div`

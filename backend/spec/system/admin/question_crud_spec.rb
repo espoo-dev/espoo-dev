@@ -8,8 +8,8 @@ RSpec.describe 'Question CRUD', type: :system do
     let!(:survey_teacher) { create(:survey_with_1_question, user: user_teacher) }
     let!(:option_admin) { create(:option, user: user_admin) }
     let!(:option_teacher) { create(:option, user: user_teacher) }
-    let!(:question_admin) { create(:question, user: user_admin, survey: survey_admin) }
-    let!(:question_teacher) { create(:question, user: user_teacher, survey: survey_teacher) }
+    let!(:question_admin) { create(:question, user: user_admin, survey: survey_admin, image_url: 'https://www.examples.com') }
+    let!(:question_teacher) { create(:question, user: user_teacher, survey: survey_teacher, image_url: 'http://www.examples.com') }
     let!(:question_type) { create(:question_type) }
 
     describe 'user admin' do
@@ -60,7 +60,17 @@ RSpec.describe 'Question CRUD', type: :system do
         end
       end
 
-      describe 'index' do
+      describe '#show' do
+        before do
+          visit admin_question_path(question_admin)
+        end
+
+        it 'shows the image_url that belongs to question_admin' do
+          expect(page).to have_text(question_admin.image_url)
+        end
+      end
+
+      describe '#index' do
         before do
           visit admin_questions_path
         end
@@ -76,9 +86,13 @@ RSpec.describe 'Question CRUD', type: :system do
         it 'list all questions with surveys names' do
           expect(page).to have_text(survey_admin.name && survey_teacher.name)
         end
+
+        it 'list all image_url from each question' do
+          expect(page).to have_text(question_admin.image_url && question_teacher.image_url)
+        end
       end
 
-      describe 'delete' do
+      describe '#delete' do
         before do
           visit admin_questions_path
 
@@ -92,14 +106,14 @@ RSpec.describe 'Question CRUD', type: :system do
     end
 
     describe 'user teacher' do
-      let!(:question) { create(:question, user: user_teacher) }
+      let!(:question) { create(:question, user: user_teacher, image_url: 'https://www.example.com') }
       let!(:option) { create(:option, question: question) }
 
       before do
         sign_in user_teacher
       end
 
-      describe 'when show' do
+      context 'when show' do
         before do
           visit admin_question_path(question)
         end
@@ -107,9 +121,17 @@ RSpec.describe 'Question CRUD', type: :system do
         it 'shows the options that belongs to question' do
           expect(page).to have_text(option.name)
         end
+
+        it 'shows the image_url that belongs to question' do
+          expect(page).to have_text(question.image_url)
+        end
+
+        it 'not show the image_url that belongs to admin' do
+          expect(page).not_to have_text(question_admin.image_url)
+        end
       end
 
-      describe 'when create' do
+      context 'when create' do
         before do
           visit new_admin_question_path
 
@@ -144,7 +166,7 @@ RSpec.describe 'Question CRUD', type: :system do
         end
       end
 
-      describe 'when index' do
+      context 'when index' do
         before do
           visit admin_questions_path
         end
@@ -155,6 +177,10 @@ RSpec.describe 'Question CRUD', type: :system do
 
         it 'when logged in as teacher list only questions of teacher' do
           expect(page).not_to have_text([question_admin.name, question_teacher.name])
+        end
+
+        it 'when logged in as teacher list only teachers image_url from questions' do
+          expect(page).to have_text(question.image_url && question_teacher.image_url)
         end
       end
 
