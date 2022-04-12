@@ -1,7 +1,7 @@
 import { Box } from '@chakra-ui/react';
+import { useEffect, useState } from 'react';
 import { HiOutlineCheck } from 'react-icons/hi';
 import { MdClose } from 'react-icons/md';
-import { useEffect, useState } from 'react';
 import {
   AnswerFooter,
   CardReponse,
@@ -26,9 +26,9 @@ export interface ResultAnswerProps {
   }[];
 }
 
-const AsnweredQuestion = (props: ResultAnswerProps) => {
-  const { id, correct, options } = props;
-  const { name } = props;
+export const AsnweredQuestion = (props: ResultAnswerProps) => {
+  const { correct, id, name, options } = props;
+
   const [correctAnswers, setCorrectAnswers] = useState<string[]>([]);
 
   const getCorrectAnswersName = () => {
@@ -66,5 +66,3 @@ const AsnweredQuestion = (props: ResultAnswerProps) => {
     </CardReponse>
   );
 };
-
-export default AsnweredQuestion;

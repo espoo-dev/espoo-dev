@@ -1,21 +1,21 @@
-import { Container, Content, DarkContainer, Layout } from 'styles/main.styles';
-import { Box, Button, Heading, Spinner, Tooltip } from '@chakra-ui/react';
-import Head from 'next/head';
-import { Sidemenu } from '@components/sidemenu';
-import { useRouter } from 'next/router';
 import { httpClient } from '@api/client';
-import { useEffect, useState } from 'react';
-import { GetServerSideProps } from 'next';
+import { Trail } from '@api/models/trail';
+import { TrailService } from '@api/services/trail';
+import { Box, Heading, Spinner } from '@chakra-ui/react';
+import { AppButton } from '@components/app-button';
+import { RoadmapSurvey } from '@components/roadmap-survey/roadmap-survey';
+import { Sidemenu } from '@components/sidemenu';
+import { colors } from '@styles/colors';
+import { colorPallettes } from '@styles/globals';
 import { AUTH_COOKIE } from 'consts';
+import { GetServerSideProps } from 'next';
+import Head from 'next/head';
+import { useRouter } from 'next/router';
 import { parseCookies } from 'nookies';
+import { useEffect, useState } from 'react';
 import { HiArrowLeft } from 'react-icons/hi';
 import { toast } from 'react-toastify';
-import { TrailService } from '@api/services/trail';
-import { Trail } from '@api/models/trail';
-import RoadmapSurvey from '@components/roadmap-survey/roadmap-survey';
-import { colorPallettes } from '@styles/globals';
-import { colors } from '@styles/colors';
-import { AppButton } from '@components/app-button';
+import { Container, Content, DarkContainer, Layout } from 'styles/main.styles';
 
 const trailService = new TrailService(httpClient);
 
