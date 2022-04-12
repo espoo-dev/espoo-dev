@@ -1,5 +1,5 @@
 import { Group } from '@api/models/group';
-import { render, screen } from 'test-utils';
+import { render, screen, fireEvent } from 'test-utils';
 import mockManyGroups from 'utils/mocks/groups';
 import RoadmapSurvey from './roadmap-survey';
 
@@ -41,5 +41,10 @@ describe('RoadmapSurvey', () => {
     expect(screen.getByTestId(`icon-${groups[2].surveys[0].name}`)).toHaveStyle(
       'background: gray'
     );
+  });
+
+  it('should not render groups when not passed and show message', () => {
+    render(<RoadmapSurvey groups={[]} />);
+    expect(screen.getByText('No surveys to show =/')).toBeInTheDocument();
   });
 });

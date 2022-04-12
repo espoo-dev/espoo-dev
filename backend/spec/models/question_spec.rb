@@ -24,19 +24,21 @@ RSpec.describe Question, type: :model do
     it { is_expected.to validate_presence_of(:name) }
   end
 
-  describe 'when updating to single choice with multiple correct options.' do
-    before do
-      create_list(:option, 3, correct: true, question_id: question_multiple.id)
-      question_multiple.update(question_type_id: question_type_single.id)
-    end
+  describe 'updating to single choice' do
+    context 'when has with multiple correct options' do
+      before do
+        create_list(:option, 3, correct: true, question_id: question_multiple.id)
+        question_multiple.update(question_type_id: question_type_single.id)
+      end
 
-    it { expect(question_multiple).not_to be_valid }
-    it { expect(question_multiple.errors.full_messages).to match(["Question type Can't change to single choice when having more than one correct option."]) }
+      it { expect(question_multiple).not_to be_valid }
+      it { expect(question_multiple.errors.full_messages).to match(["Question type Can't change to single choice when having more than one correct option."]) }
+    end
   end
 
   describe '#single_choice?' do
-    it { expect(question_single.single_choice?).to eq(true) }
-    it { expect(question_multiple.single_choice?).to eq(false) }
+    it { expect(question_single.single_choice?).to be(true) }
+    it { expect(question_multiple.single_choice?).to be(false) }
   end
 
   describe 'uniqueness by user' do
@@ -57,47 +59,75 @@ RSpec.describe Question, type: :model do
   end
 
   describe '#validates_ready' do
-    it 'has no correct options' do
-      expect(question.update(ready_to_be_answered: true)).to eq(false)
+    context 'when has no correct options' do
+      it { expect(question.update(ready_to_be_answered: true)).to be(false) }
     end
 
     it 'has correct options' do
       create(:correct_option, question: question)
-      expect(question.update(ready_to_be_answered: true)).to eq(true)
+      expect(question.update(ready_to_be_answered: true)).to be(true)
     end
   end
 
   describe '#validates_ready_survey' do
     let!(:survey) { create(:ready_survey) }
 
-    it 'is not valid when update ready to be answered when survey is ready' do
-      question = survey.questions.first
-      question.ready_to_be_answered = false
-      expect(question).not_to be_valid
-    end
+    context 'when survey is ready' do
+      context 'when update ready to be answered' do
+        it 'is not valid' do
+          question = survey.questions.first
+          question.ready_to_be_answered = false
+          expect(question).not_to be_valid
+        end
+      end
 
-    it 'does not update ready to be answered when survey is ready' do
-      question = survey.questions.first
-      question.ready_to_be_answered = false
-      question.valid?
-      expect(question.errors.full_messages).to match(['Ready to be answered Has to be "ready to be answered" when survey is ready.'])
+      context 'when does not update ready to be answered' do
+        it 'matches' do
+          question = survey.questions.first
+          question.ready_to_be_answered = false
+          question.valid?
+          expect(question.errors.full_messages).to match(['Ready to be answered Has to be "ready to be answered" when survey is ready.'])
+        end
+      end
     end
   end
 
   describe 'validate survey same user' do
-    it 'is valid when question and survey have the same user' do
-      survey_teacher = create(:survey_with_1_question, user: user_teacher)
-      question = create(:question, user: user_teacher, survey: survey_teacher)
+    context 'when question and survey have the same user' do
+      it 'is valid' do
+        survey_teacher = create(:survey_with_1_question, user: user_teacher)
+        question = create(:question, user: user_teacher, survey: survey_teacher)
 
-      expect(question).to be_valid
+        expect(question).to be_valid
+      end
     end
 
-    it 'is not valid when question and survey have different user' do
-      survey_teacher = create(:survey_with_1_question, user: user_teacher)
-      question_mod = build(:question, user: user_moderator, survey: survey_teacher)
+    context 'when question and survey have different user' do
+      it 'is not valid' do
+        survey_teacher = create(:survey_with_1_question, user: user_teacher)
+        question_mod = build(:question, user: user_moderator, survey: survey_teacher)
 
-      expect(question_mod).not_to be_valid
-      expect(question_mod.errors.full_messages).to match(['User must be the same in question and survey'])
+        expect(question_mod).not_to be_valid
+        expect(question_mod.errors.full_messages).to match(['User must be the same in question and survey'])
+      end
+    end
+  end
+
+  describe 'validate image_url' do
+    let!(:question) { create(:question) }
+
+    it 'returns true' do
+      ['', 'http://www.example.com', 'https://www.example.com', 'https://www.example.com/user'].each do |cases|
+        question.image_url = cases
+        expect(question.valid?).to be true
+      end
+    end
+
+    it 'returns false' do
+      ['www.example.com', 'www.example. com', 'ww.example.com', 'www.example'].each do |cases|
+        question.image_url = cases
+        expect(question.valid?).to be false
+      end
     end
   end
 end

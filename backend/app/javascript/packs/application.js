@@ -3,11 +3,10 @@
 // a relevant structure within app/javascript and only use these pack files to reference
 // that code so it'll be compiled.
 
-import Rails from "@rails/ujs"
-import Turbolinks from "turbolinks"
+import "@hotwired/turbo-rails";
+import Rails from "@rails/ujs";
 
-Rails.start()
-Turbolinks.start()
+Rails.start();
 
 //= require jquery3
 //= require popper

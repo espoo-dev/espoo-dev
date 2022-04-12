@@ -12,6 +12,7 @@ export interface Group {
   surveys: {
     name: string;
     icon: string;
+    id: number;
   }[];
   position: number;
   status: StatusGroup;

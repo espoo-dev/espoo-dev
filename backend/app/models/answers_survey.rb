@@ -1,3 +1,13 @@
+# == Schema Information
+#
+# Table name: answers_surveys
+#
+#  id         :bigint           not null, primary key
+#  created_at :datetime         not null
+#  updated_at :datetime         not null
+#  survey_id  :bigint           not null
+#  user_id    :bigint           not null
+#
 class AnswersSurvey < ApplicationRecord
   belongs_to :user
   belongs_to :survey
@@ -24,6 +34,12 @@ class AnswersSurvey < ApplicationRecord
   STARTED = 'Started'.freeze
   COMPLETED = 'Completed'.freeze
 
+  STATUS_ORDER = [
+    NOT_STARTED,
+    STARTED,
+    COMPLETED
+  ].freeze
+
   def status
     survey_questions_count = survey&.questions&.count || 0
     answers_count = answers.count
@@ -43,6 +59,10 @@ class AnswersSurvey < ApplicationRecord
 
   def completed?
     status == COMPLETED
+  end
+
+  def answers_ids
+    answers.map(&:id)
   end
 
   private

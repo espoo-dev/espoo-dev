@@ -4,7 +4,7 @@ RSpec.describe 'User sign in', type: :system do
   let(:user) { create(:user) }
   let(:user_student) { create(:user_student) }
 
-  describe 'When data is valid' do
+  describe 'valid data' do
     before do
       visit new_user_session_path
       fill_in 'Email', with: user.email
@@ -36,7 +36,7 @@ RSpec.describe 'User sign in', type: :system do
     it { expect(page).to have_current_path(surveys_path) }
   end
 
-  describe 'When data is not valid' do
+  describe 'not valid data' do
     before do
       visit new_user_session_path
       fill_in 'Email', with: user.email

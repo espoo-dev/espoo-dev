@@ -1,2 +1,2 @@
-class GroupPolicy < ApplicationPolicy
+class GroupPolicy < GenericPolicy
 end
