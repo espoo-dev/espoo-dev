@@ -10,7 +10,7 @@ interface TrailListProps {
   data: Trail[];
 }
 
-const TrailList = (props: TrailListProps) => {
+export const TrailList = (props: TrailListProps) => {
   const { data } = props;
   const router = useRouter();
 
@@ -35,5 +35,3 @@ const TrailList = (props: TrailListProps) => {
     </TrailListContainer>
   );
 };
-
-export default TrailList;

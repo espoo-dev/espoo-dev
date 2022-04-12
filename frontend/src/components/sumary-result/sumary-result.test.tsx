@@ -1,7 +1,7 @@
 import { AnswerSurveyReceive } from '@api/models/answer_survey';
-import { render, screen } from 'test-utils';
-import SumaryResult from './sumary-result';
 import { AnswerSurveyStatus } from '@api/models/survey';
+import { render, screen } from 'test-utils';
+import { SummaryResult } from './sumary-result';
 
 const answerSurvey: AnswerSurveyReceive = {
   id: 224,
@@ -65,12 +65,12 @@ const answerSurvey: AnswerSurveyReceive = {
 
 describe('SumaryResult', () => {
   it('should render component with title', () => {
-    render(<SumaryResult {...answerSurvey} />);
+    render(<SummaryResult {...answerSurvey} />);
     expect(screen.getByText('Finish!')).toBeInTheDocument();
   });
 
   it('should show the result of survey', () => {
-    render(<SumaryResult {...answerSurvey} />);
+    render(<SummaryResult {...answerSurvey} />);
     const correct = screen.getByTestId('correct');
     expect(correct).toHaveTextContent('1');
 
@@ -79,7 +79,7 @@ describe('SumaryResult', () => {
   });
 
   it('should show correct and incorrect questions', () => {
-    render(<SumaryResult {...answerSurvey} />);
+    render(<SummaryResult {...answerSurvey} />);
     answerSurvey.questions.forEach((question) => {
       expect(screen.getByText(question.name)).toBeInTheDocument();
     });

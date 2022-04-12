@@ -1,5 +1,5 @@
 import { AnswerSurveyStatus } from '@api/models/survey';
-import { screen, render } from 'test-utils';
+import { render } from 'test-utils';
 import { SurveyItem, SurveyItemProps } from './survey-item';
 
 const mockSurveyDefault: SurveyItemProps = {
@@ -10,6 +10,7 @@ const mockSurveyDefault: SurveyItemProps = {
 
 describe('SurveyItem', () => {
   let startedSurvey: SurveyItemProps;
+
   beforeEach(() => {
     startedSurvey = {
       title: 'Wild Animals',
@@ -21,7 +22,9 @@ describe('SurveyItem', () => {
           id: 1,
           status: AnswerSurveyStatus.NotStarted,
           user_id: 439,
+          questions: [],
         },
+        total_questions_quantity: 0,
         description: 'Animals that live in the wild',
         name: 'Wild Animals',
         questions: [],
@@ -31,11 +34,13 @@ describe('SurveyItem', () => {
             id: 1,
             status: AnswerSurveyStatus.NotStarted,
             user_id: 394,
+            questions: [],
           },
         ],
       },
     };
   });
+
   it('should render component on screen', () => {
     const rendered = render(<SurveyItem {...mockSurveyDefault} />);
     expect(rendered).toBeTruthy();
@@ -88,6 +93,7 @@ describe('SurveyItem', () => {
       );
       expect(rendered.getByText(AnswerSurveyStatus.Completed)).toBeTruthy();
     });
+
     it('should show started tag when survey is started', () => {
       const rendered = render(
         <SurveyItem
@@ -99,6 +105,7 @@ describe('SurveyItem', () => {
       );
       expect(rendered.getByText(AnswerSurveyStatus.Started)).toBeTruthy();
     });
+
     it('should show not started tag when survey is not started', () => {
       const rendered = render(
         <SurveyItem
@@ -110,6 +117,7 @@ describe('SurveyItem', () => {
       );
       expect(rendered.getByText(AnswerSurveyStatus.NotStarted)).toBeTruthy();
     });
+
     it('should not show tag when does not has an answers survey', () => {
       const rendered = render(
         <SurveyItem
