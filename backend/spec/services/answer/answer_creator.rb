@@ -29,17 +29,17 @@ RSpec.describe Answer::AnswerCreator do
 
       it { expect { creator_call }.to change { Answer.count }.from(0).to(1) }
 
-      it { expect(creator_call.answers_survey_id).to be answers_survey_id }
+      it { expect(creator_call.answers_survey_id).to eq(answers_survey_id) }
 
-      it { expect(creator_call.question_id).to eq question_id }
+      it { expect(creator_call.question_id).to eq(question_id) }
 
-      it { expect(creator_call.option_ids).to match_array option_ids }
+      it { expect(creator_call.option_ids).to match_array(option_ids) }
     end
 
     context 'when the params are not correct' do
-      shared_examples 'raise error' do |nil_param_name, error|
-        context "when #{nil_param_name} is nil" do
-          it { expect { creator_call }.to raise_error error }
+      shared_examples 'raise error' do |param_name, error_class|
+        context "when #{param_name} is nil" do
+          it { expect { creator_call }.to raise_error(error_class) }
         end
       end
 

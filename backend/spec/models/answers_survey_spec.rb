@@ -15,14 +15,14 @@ RSpec.describe AnswersSurvey, type: :model do
     end
 
     context 'when there are not answers_survey completed' do
-      it { expect(AnswersSurvey.completed ).to be_empty }
+      it { is_expected.to be_empty }
     end
 
     context 'when there are answers_survey completed' do
       let(:answers_survey_completed) { create(:answers_survey_with_all_answers) }
       let(:another_answers_survey_completed) { create(:answers_survey_with_all_answers) }
 
-      it { is_expected.to contain_exactly(answers_survey_completed, another_answers_survey_completed)}
+      it { is_expected.to contain_exactly(answers_survey_completed, another_answers_survey_completed) }
     end
   end
 
