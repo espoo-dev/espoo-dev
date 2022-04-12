@@ -32,6 +32,7 @@ const RoadmapSurvey = (props: RoadmapSurveyProps) => {
                   <IconItem
                     data-testid={`icon-${survey.name}`}
                     status={group.status}
+                    icon_url={survey.icon_url}
                   />
                   <span>{survey.name}</span>
                 </SurveyItemMap>
