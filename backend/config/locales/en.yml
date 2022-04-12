@@ -78,3 +78,7 @@ en:
         multiple_choice: Multiple choice
         single_choice: Single choice
       type_of_questions: type of questions
+    answered: |
+      Survey "%{survey_name}" from teacher "%{teacher_email}" has been answered now.
+      This survey has %{count_answers_surveys_answered} answers in the total.
+
