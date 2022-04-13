@@ -66,6 +66,9 @@ pt-br:
       multiple_choice: Questão de múltipla escolha
       single_choice: Questão de escolha única
   surveys:
+    answered: |
+      Questionario "%{survey_name}" do professor "%{teacher_email}" foi respondida agora.
+      Este questionário tem %{count_answers_surveys_answered} respostas no total.
     answers:
       submit: Responder
     index:
