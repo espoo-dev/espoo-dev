@@ -1,6 +1,11 @@
 import { StatusGroup } from '@api/models/group';
 import styled from 'styled-components';
 
+interface IconItemProps {
+  status: StatusGroup;
+  icon_url: string;
+}
+
 const getAvailableColor = (status: StatusGroup): string => {
   const color = (status === StatusGroup.Blocked && 'gray') || 'green';
   return color;
@@ -20,11 +25,11 @@ export const SurveyItemMap = styled.div<{ status: StatusGroup }>`
   }
 `;
 
-export const IconItem = styled.div<{ status: StatusGroup, icon_url: string }>`
+export const IconItem = styled.div<IconItemProps>`
   height: 80px;
   width: 80px;
   border-radius: 50%;
-  background-image: url(${(props) => props.icon_url || '/assets/survey.png'});
+  background-image: url(${(props) => props.icon_url || '/assets/default_survey_icon.png'});
   background-size: cover;
   background-position: center;
   border: ${(props) => `4px solid ${getAvailableColor(props.status)}`};

@@ -48,17 +48,17 @@ describe('RoadmapSurvey', () => {
     expect(screen.getByText('No surveys to show =/')).toBeInTheDocument();
   });
 
-  it('should render survey icon background', () => {
+  it('should render "icon from icon_url" when the survey has "icon_url"', () => {
     render(<RoadmapSurvey groups={groups} />);
     expect(screen.getByTestId(`icon-${groups[0].surveys[0].name}`)).toHaveStyle(
       `background-image: url(${groups[0].surveys[0].icon_url})`
     );
   });
 
-  it('should render survey default icon background when dont have icon', () => {
+  it('should render "default survey icon" when the survey has no "icon_url"', () => {
     render(<RoadmapSurvey groups={groups} />);
     expect(screen.getByTestId(`icon-${groups[1].surveys[0].name}`)).toHaveStyle(
-      'background-image: url(\'/assets/survey.png\')'
+      'background-image: url(\'/assets/default_survey_icon.png\')'
     );
   });
 });
