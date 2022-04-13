@@ -23,11 +23,11 @@ class Answer::AnswerCreator < ::Base
   private
 
   def build_answer
-    @answer = Answer.new(@answer_params)
+    answer = Answer.new(@answer_params)
 
-    @answer.options = Option.includes(%i[user question]).find(@option_ids) unless @answer.free_text? || !@option_ids
+    answer.options = Option.includes(%i[user question]).find(@option_ids) unless answer.free_text? || !@option_ids
 
-    @answer
+    answer
   end
 
   def authorize
