@@ -7,6 +7,25 @@ RSpec.describe AnswersSurvey, type: :model do
     it { is_expected.to have_many(:answers).dependent(:destroy) }
   end
 
+  describe '.completed' do
+    subject { described_class.completed }
+
+    before do
+      create(:answers_survey_with_some_answers)
+    end
+
+    context 'when there are not answers_survey completed' do
+      it { is_expected.to be_empty }
+    end
+
+    context 'when there are answers_survey completed' do
+      let(:answers_survey_completed) { create(:answers_survey_with_all_answers) }
+      let(:another_answers_survey_completed) { create(:answers_survey_with_all_answers) }
+
+      it { is_expected.to contain_exactly(answers_survey_completed, another_answers_survey_completed) }
+    end
+  end
+
   describe '#status' do
     context 'when has no answers' do
       let(:answer_survey) { create(:answers_survey, answers: []) }
