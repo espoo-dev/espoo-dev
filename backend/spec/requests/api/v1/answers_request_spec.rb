@@ -37,7 +37,7 @@ RSpec.describe 'AnswersController', type: :request do
       it 'has question and answers_survey with same survey' do
         expect(answers_survey.survey).to eq(question.survey)
       end
-      
+
       it 'matches answer attributes' do
         expected_attributes = {
           'id' => anything,
@@ -93,23 +93,22 @@ RSpec.describe 'AnswersController', type: :request do
       end
 
       context 'when answers_survey is not completed' do
-
         it 'has answers_survey not completed' do
-          expect(answers_survey.completed?).to eq(false)
+          expect(answers_survey.completed?).to be(false)
         end
 
         it 'not calls SlackNotifierService for the current answers_survey)' do
-          expect(SlackService).to_not have_received(:call)
+          expect(SlackService).not_to have_received(:call)
         end
       end
 
       context 'when answers_survey is completed' do
         let(:total_completed_answers_surveys) { 1 }
 
-        let(:message) {
+        let(:message) do
           "Survey \"#{answers_survey.survey.name}\" from teacher \"#{user_teacher.email}\" "\
-          "has been answered now.\nThis survey has #{total_completed_answers_surveys} answers in the total.\n"
-        }
+            "has been answered now.\nThis survey has #{total_completed_answers_surveys} answers in the total.\n"
+        end
 
         before do
           answer_params = {
@@ -121,7 +120,7 @@ RSpec.describe 'AnswersController', type: :request do
           post api_v1_answers_path, params: answer_params, headers: auth_headers(user: user_student)
         end
 
-        it { expect(answers_survey.completed?).to eq(true) }
+        it { expect(answers_survey.completed?).to be(true) }
 
         it { expect(SlackService).to have_received(:call).with(message).once }
       end
@@ -146,7 +145,7 @@ RSpec.describe 'AnswersController', type: :request do
         post api_v1_answers_path, params: answer_params, headers: auth_headers(user: user_student)
       end
 
-      it { expect(SlackService).to_not have_received(:call) }
+      it { expect(SlackService).not_to have_received(:call) }
 
       context 'when question is single choice and answer has more than one option' do
         it { expect(response).to have_http_status :unprocessable_entity }

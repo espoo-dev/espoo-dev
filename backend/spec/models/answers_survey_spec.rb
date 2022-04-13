@@ -8,7 +8,7 @@ RSpec.describe AnswersSurvey, type: :model do
   end
 
   describe '.completed' do
-    subject { AnswersSurvey.completed }
+    subject { described_class.completed }
 
     before do
       create(:answers_survey_with_some_answers)

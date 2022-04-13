@@ -24,9 +24,7 @@ class Answer::AnswerCreator < ::Base
   def build_answer
     @answer = Answer.new(@answer_params)
 
-    unless @answer.free_text? || !@option_ids
-      @answer.options = Option.includes(%i[user question]).find(@option_ids)
-    end
+    @answer.options = Option.includes(%i[user question]).find(@option_ids) unless @answer.free_text? || !@option_ids
   end
 
   def authorize!
@@ -53,7 +51,7 @@ class Answer::AnswerCreator < ::Base
     {
       count_answers_surveys_answered: survey.answers_surveys.completed.count,
       survey_name: survey.name,
-      teacher_email: survey.user.email,
+      teacher_email: survey.user.email
     }
   end
 

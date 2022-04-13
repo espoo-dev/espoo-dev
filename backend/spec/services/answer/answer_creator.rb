@@ -2,6 +2,14 @@ require 'rails_helper'
 
 RSpec.describe Answer::AnswerCreator do
   describe '#call' do
+    subject(:creator_call) do
+      described_class.call(
+        answer_params: answer_params,
+        option_ids: option_ids,
+        user: user
+      )
+    end
+
     let!(:user_teacher) { create(:user_teacher) }
     let!(:user_student) { create(:user_student) }
     let!(:survey) { create(:survey, user: user_teacher) }
@@ -16,18 +24,10 @@ RSpec.describe Answer::AnswerCreator do
     let(:option_ids) { [option_a.id, option_b.id] }
     let(:user) { user_student }
 
-    subject(:creator_call) {
-      described_class.call(
-        answer_params: answer_params,
-        option_ids: option_ids,
-        user: user
-      )
-    }
-
     context 'when the params are correct' do
       it { is_expected.to be_a Answer }
 
-      it { expect { creator_call }.to change { Answer.count }.from(0).to(1) }
+      it { expect { creator_call }.to change(Answer, :count).from(0).to(1) }
 
       it { expect(creator_call.answers_survey_id).to eq(answers_survey_id) }
 
