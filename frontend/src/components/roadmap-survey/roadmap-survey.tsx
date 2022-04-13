@@ -12,7 +12,7 @@ interface RoadmapSurveyProps {
   groups: Group[];
 }
 
-const RoadmapSurvey = (props: RoadmapSurveyProps) => {
+export const RoadmapSurvey = (props: RoadmapSurveyProps) => {
   const { groups } = props;
 
   if (!groups) {
@@ -44,5 +44,3 @@ const RoadmapSurvey = (props: RoadmapSurveyProps) => {
     </RoadmapContainer>
   );
 };
-
-export default RoadmapSurvey;

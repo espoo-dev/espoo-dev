@@ -12,7 +12,7 @@ import {
 } from '@chakra-ui/react';
 import { Sidemenu } from '@components/sidemenu';
 import { SurveyHandler } from '@components/survey-handler';
-import TrailList from '@components/trail-list/trails-list';
+import { TrailList } from '@components/trail-list/trails-list';
 import { colors } from '@styles/colors';
 import { Container, Content, DarkContainer, Layout } from '@styles/main.styles';
 import { httpClient } from 'api';
