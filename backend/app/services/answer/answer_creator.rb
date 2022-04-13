@@ -2,6 +2,8 @@ class Answer::AnswerCreator < ::Base
   attr_reader :answer_params, :option_ids, :answer, :user
 
   def initialize(answer_params:, option_ids:, user:)
+    super()
+
     @answer_params = answer_params
     @option_ids = option_ids
     @user = user
