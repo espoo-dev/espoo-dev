@@ -1,11 +1,23 @@
 class SlackService < Base
   def initialize(message)
-    @slack_client = Slack::Notifier.new(ENV['SLACK_TOKEN'])
-
     @message = message
   end
 
   def call
-    @slack_client.ping @message
+    send_message if slack_token.present?
+  end
+
+  private
+
+  def send_message
+    slack_client.ping @message
+  end
+
+  def slack_client
+    Slack::Notifier.new(slack_token)
+  end
+
+  def slack_token
+    ENV['SLACK_TOKEN']
   end
 end
