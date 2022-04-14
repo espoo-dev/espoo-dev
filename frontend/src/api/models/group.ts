@@ -13,6 +13,7 @@ export interface Group {
     name: string;
     icon: string;
     id: number;
+    icon_url?: string;
   }[];
   position: number;
   status: StatusGroup;
