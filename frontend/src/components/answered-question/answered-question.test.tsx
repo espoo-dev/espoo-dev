@@ -1,5 +1,5 @@
 import { render, screen } from 'test-utils';
-import AsnweredQuestion, { ResultAnswerProps } from './answered-question';
+import { AsnweredQuestion, ResultAnswerProps } from './answered-question';
 
 const answeredQuestionDefault: ResultAnswerProps = {
   id: 1,

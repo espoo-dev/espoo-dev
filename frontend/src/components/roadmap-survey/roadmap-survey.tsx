@@ -1,8 +1,6 @@
-import { httpClient } from '@api/client';
 import { Group } from '@api/models/group';
 import { Flex, Text } from '@chakra-ui/react';
 import { colors } from '@styles/colors';
-import { SurveyService } from '@api/services/survey';
 import {
   IconItem,
   RoadmapContainer,
@@ -14,7 +12,7 @@ interface RoadmapSurveyProps {
   groups: Group[];
 }
 
-const RoadmapSurvey = (props: RoadmapSurveyProps) => {
+export const RoadmapSurvey = (props: RoadmapSurveyProps) => {
   const { groups } = props;
 
   if (!groups) {
@@ -32,6 +30,7 @@ const RoadmapSurvey = (props: RoadmapSurveyProps) => {
                   <IconItem
                     data-testid={`icon-${survey.name}`}
                     status={group.status}
+                    icon_url={survey.icon_url}
                   />
                   <span>{survey.name}</span>
                 </SurveyItemMap>
@@ -45,5 +44,3 @@ const RoadmapSurvey = (props: RoadmapSurveyProps) => {
     </RoadmapContainer>
   );
 };
-
-export default RoadmapSurvey;
