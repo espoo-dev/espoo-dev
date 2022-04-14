@@ -113,21 +113,9 @@ RSpec.describe Question, type: :model do
     end
   end
 
-  describe 'validate image_url' do
-    let!(:question) { create(:question) }
+  describe 'image_url validation' do
+    let(:object_instance) { create(:question) }
 
-    it 'returns true' do
-      ['', 'http://www.example.com', 'https://www.example.com', 'https://www.example.com/user'].each do |cases|
-        question.image_url = cases
-        expect(question.valid?).to be true
-      end
-    end
-
-    it 'returns false' do
-      ['www.example.com', 'www.example. com', 'ww.example.com', 'www.example'].each do |cases|
-        question.image_url = cases
-        expect(question.valid?).to be false
-      end
-    end
+    it_behaves_like 'url validation', :image_url
   end
 end
