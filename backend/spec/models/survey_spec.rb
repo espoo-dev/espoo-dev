@@ -53,13 +53,13 @@ RSpec.describe Survey, type: :model do
   end
 
   describe 'validate icon_url' do
-    let(:tested_class) { create(:survey) }
+    let(:object_instance) { create(:survey) }
 
     it_behaves_like 'url validation', :icon_url
   end
 
   describe 'image_url validation' do
-    let(:tested_class) { create(:survey) }
+    let(:object_instance) { create(:survey) }
 
     it_behaves_like 'url validation', :image_url
   end
