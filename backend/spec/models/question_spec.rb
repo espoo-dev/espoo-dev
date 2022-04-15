@@ -116,6 +116,6 @@ RSpec.describe Question, type: :model do
   describe 'image_url validation' do
     let(:tested_class) { create(:question) }
 
-    it_behaves_like 'image_url validation'
+    it_behaves_like 'url validation', :image_url
   end
 end
