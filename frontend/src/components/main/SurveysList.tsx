@@ -77,6 +77,7 @@ export const SurveysList = (props: SurveyListProps) => {
             loading={loading && selectedSurvey === item.id}
             surveyData={item}
             status={item.current_answers_survey?.status}
+            cover={item.image_url}
           />
         ))}
       </SurveyGrid>

@@ -1,5 +1,6 @@
 import { AnswerSurveyStatus } from '@api/models/survey';
 import { render } from 'test-utils';
+import { images } from './random-images';
 import { SurveyItem, SurveyItemProps } from './survey-item';
 
 const mockSurveyDefault: SurveyItemProps = {
@@ -59,15 +60,19 @@ describe('SurveyItem', () => {
     ).toBeTruthy();
   });
 
-  it('should have random image in cover', () => {
+  it('should have a given image in cover', () => {
+    const rendered = render(<SurveyItem {...mockSurveyDefault} cover={'test.png'} />);
+    expect(rendered.getByTestId('cover-image')).toHaveStyle(
+      `background-image: url('test.png')`
+    )
+  });
+
+  it('should have a random image in cover', () => {
     const rendered = render(
-      <SurveyItem
-        title="Survey name"
-        description="Available your instincts now"
-        numberQuestions={10}
-      />
+      <SurveyItem {...mockSurveyDefault} cover={''} />
     );
-    expect(rendered.getByTestId('random-image')).toBeTruthy();
+    const coverImageUrl = getComputedStyle(rendered.getByTestId('cover-image')).backgroundImage;
+    expect(images.includes(coverImageUrl.replace(/^url\(['"]?/, '').replace(/['"]?\)$/, ''))).toBeTruthy();
   });
 
   it('should show no question when no have questions', () => {
