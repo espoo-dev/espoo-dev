@@ -2,13 +2,21 @@ require 'rails_helper'
 
 RSpec.describe 'AnswersController', type: :request do
   describe '#create' do
+    before do
+      allow(SlackService).to receive(:call)
+    end
+
     context 'when data is valid' do
       let!(:user_teacher) { create(:user_teacher) }
       let!(:user_student) { create(:user_student) }
-      let!(:answers_survey) { create(:answers_survey, user: user_student) }
-      let!(:question) { create(:multiple_choice_question, user: user_teacher) }
-      let!(:option_a) { create(:option, user: user_teacher) }
-      let!(:option_b) { create(:option, user: user_teacher) }
+      let!(:survey) { create(:survey, user: user_teacher) }
+      let!(:question) { create(:multiple_choice_question, user: user_teacher, survey: survey) }
+      let!(:another_question) { create(:multiple_choice_question, user: user_teacher, survey: survey) }
+      let!(:answers_survey) { create(:answers_survey, user: user_student, survey: survey) }
+      let!(:option_a) { create(:option, user: user_teacher, question: question) }
+      let!(:option_b) { create(:option, user: user_teacher, question: question) }
+      let!(:option_c) { create(:option, user: user_teacher, question: another_question) }
+      let!(:option_d) { create(:option, user: user_teacher, question: another_question) }
 
       before do
         answer_params = {
@@ -25,6 +33,10 @@ RSpec.describe 'AnswersController', type: :request do
       it { expect(Answer.count).to eq(1) }
 
       it { expect(Answer.first.options.count).to eq(2) }
+
+      it 'has question and answers_survey with same survey' do
+        expect(answers_survey.survey).to eq(question.survey)
+      end
 
       it 'matches answer attributes' do
         expected_attributes = {
@@ -79,6 +91,39 @@ RSpec.describe 'AnswersController', type: :request do
           expect(response_body).to match(expected_attributes)
         end
       end
+
+      context 'when answers_survey is not completed' do
+        it 'has answers_survey not completed' do
+          expect(answers_survey.completed?).to be(false)
+        end
+
+        it 'not calls SlackNotifierService for the current answers_survey)' do
+          expect(SlackService).not_to have_received(:call)
+        end
+      end
+
+      context 'when answers_survey is completed' do
+        let(:total_completed_answers_surveys) { 1 }
+
+        let(:message) do
+          "Survey \"#{answers_survey.survey.name}\" from teacher \"#{user_teacher.email}\" "\
+            "has been answered now.\nThis survey has #{total_completed_answers_surveys} answers in the total.\n"
+        end
+
+        before do
+          answer_params = {
+            question_id: another_question.id,
+            option_ids: [option_c.id, option_d.id],
+            answers_survey_id: answers_survey.id
+          }
+
+          post api_v1_answers_path, params: answer_params, headers: auth_headers(user: user_student)
+        end
+
+        it { expect(answers_survey.completed?).to be(true) }
+
+        it { expect(SlackService).to have_received(:call).with(message).once }
+      end
     end
 
     context 'when data is not valid' do
@@ -99,6 +144,8 @@ RSpec.describe 'AnswersController', type: :request do
 
         post api_v1_answers_path, params: answer_params, headers: auth_headers(user: user_student)
       end
+
+      it { expect(SlackService).not_to have_received(:call) }
 
       context 'when question is single choice and answer has more than one option' do
         it { expect(response).to have_http_status :unprocessable_entity }
