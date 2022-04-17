@@ -1,32 +1,25 @@
 require 'rails_helper'
 
 RSpec.describe SlackService do
-  describe '#call' do
-    subject(:slack_notifier_instance) { instance_double(Slack::Notifier) }
-
-    around do |example|
-      slack_token_before = ENV['SLACK_TOKEN']
-
-      ENV['SLACK_TOKEN'] = slack_token_value
-
-      example.run
-
-      ENV['SLACK_TOKEN'] = slack_token_before
-    end
+  describe '.call' do
+    let(:service) { described_class.new(message) }
+    let(:slack_notifier_instance) { instance_double(Slack::Notifier) }
 
     before do
-      allow(Slack::Notifier).to(receive(:new).and_return(slack_notifier_instance))
+      allow(slack_notifier_instance).to receive(:ping)
 
-      allow(slack_notifier_instance).to(receive(:ping))
+      allow(Slack::Notifier).to receive(:new).and_return(slack_notifier_instance)
 
-      described_class.call(message)
+      allow(service).to receive(:slack_token).and_return(slack_token_value)
+
+      service.call
     end
 
     context 'when SLACK_TOKEN is settled' do
       let(:slack_token_value) { 'some_beautiful_token' }
 
       shared_examples 'send the message received as argument Slack::Notifier' do
-        it { is_expected.to have_received(:ping).with(message).once }
+        it { expect(slack_notifier_instance).to have_received(:ping).with(message).once }
       end
 
       it_behaves_like 'send the message received as argument Slack::Notifier' do
@@ -43,7 +36,7 @@ RSpec.describe SlackService do
 
       let(:message) { 'This beautiful message it will not be sent by Slack' }
 
-      it { is_expected.not_to have_received(:ping) }
+      it { expect(slack_notifier_instance).not_to have_received(:ping) }
     end
   end
 end
