@@ -3,6 +3,7 @@ require 'rails_helper'
 RSpec.describe SlackService do
   describe '.call' do
     let(:service) { described_class.new(message) }
+
     let(:slack_notifier_instance) { instance_double(Slack::Notifier) }
 
     before do
