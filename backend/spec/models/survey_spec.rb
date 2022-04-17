@@ -53,38 +53,14 @@ RSpec.describe Survey, type: :model do
   end
 
   describe 'validate icon_url' do
-    let!(:survey) { create(:survey) }
+    let(:object_instance) { create(:survey) }
 
-    it 'returns true' do
-      ['', 'http://www.example.com', 'https://www.example.com', 'https://www.example.com/user'].each do |cases|
-        survey.icon_url = cases
-        expect(survey.valid?).to be true
-      end
-    end
-
-    it 'returns false' do
-      ['www.example.com', 'www.example. com', 'ww.example.com', 'www.example'].each do |cases|
-        survey.icon_url = cases
-        expect(survey.valid?).to be false
-      end
-    end
+    it_behaves_like 'url validation', :icon_url
   end
 
-  describe 'validate image_url' do
-    let!(:survey) { create(:survey) }
+  describe 'image_url validation' do
+    let(:object_instance) { create(:survey) }
 
-    it 'returns true' do
-      ['', 'http://www.example.com', 'https://www.example.com', 'https://www.example.com/user'].each do |cases|
-        survey.image_url = cases
-        expect(survey.valid?).to be true
-      end
-    end
-
-    it 'returns false' do
-      ['www.example.com', 'www.example. com', 'ww.example.com', 'www.example'].each do |cases|
-        survey.image_url = cases
-        expect(survey.valid?).to be false
-      end
-    end
+    it_behaves_like 'url validation', :image_url
   end
 end
