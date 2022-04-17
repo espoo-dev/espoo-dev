@@ -1,14 +1,14 @@
 import { Trail } from '@api/models/trail';
-import { render, screen, fireEvent } from 'test-utils';
 import { useRouter } from 'next/router';
-import TrailList from './trails-list';
+import { fireEvent, render, screen } from 'test-utils';
+import { TrailList } from './trails-list';
 
 jest.mock('next/router', () => ({
-  useRouter: jest.fn()
+  useRouter: jest.fn(),
 }));
 
 const mockRouter = {
-  push: jest.fn()
+  push: jest.fn(),
 };
 (useRouter as jest.Mock).mockReturnValue(mockRouter);
 

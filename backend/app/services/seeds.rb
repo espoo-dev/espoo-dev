@@ -70,7 +70,8 @@ class Seeds < Base
       name: 'She _____ happy!',
       user: @user_teacher,
       survey: @to_be_ready_survey,
-      question_type: @question_type_single_choice
+      question_type: @question_type_single_choice,
+      image_url: 'https://thumbs.dreamstime.com/b/conceito-do-sucesso-da-vit%C3%B3ria-e-realiza%C3%A7%C3%A3o-vencedor-feliz-mulher-que-aperta-seus-punhos-grita-sim-com-o-excitamento-148714049.jpg'
     )
     Option.create!(name: 'is', question: question, user: @user_admin, correct: true)
     Option.create!(name: 'am', question: question, user: @user_admin, correct: false)
@@ -83,7 +84,8 @@ class Seeds < Base
       name: 'I _____ happy!',
       user: @user_teacher,
       survey: @to_be_ready_survey,
-      question_type: @question_type_single_choice
+      question_type: @question_type_single_choice,
+      image_url: 'https://i.insider.com/55d4ccbf2acae717448bf0ce?width=600&format=jpeg&auto=webp'
     )
     Option.create!(name: 'is', question: question, user: @user_admin, correct: false)
     Option.create!(name: 'am', question: question, user: @user_admin, correct: true)
@@ -96,7 +98,8 @@ class Seeds < Base
       name: 'You _____ happy!',
       user: @user_teacher,
       survey: @to_be_ready_survey,
-      question_type: @question_type_single_choice
+      question_type: @question_type_single_choice,
+      image_url: 'https://img.freepik.com/free-photo/hey-you-positive-bearded-black-man-points-index-finger-camera-smiles-happily-chooses-someone-wears-pastel-green-jumper_273609-39116.jpg?w=1380&t=st=1649792111~exp=1649792711~hmac=f8684e7623df57de348479287d3d3f78238757e300d940aa2a08239e281861f7'
     )
     Option.create!(name: 'is', question: question, user: @user_admin, correct: false)
     Option.create!(name: 'am', question: question, user: @user_admin, correct: false)
@@ -109,7 +112,8 @@ class Seeds < Base
       name: '___ is happy!',
       user: @user_teacher,
       survey: @choose_subject_ready_survey,
-      question_type: @question_type_multiple_choice
+      question_type: @question_type_multiple_choice,
+      image_url: 'https://livelifepharmacy.co.ke/wp-content/uploads/2020/03/shutterstock_1308922756.jpg'
     )
     Option.create!(name: 'I', question: question, user: @user_admin, correct: false)
     Option.create!(name: 'He', question: question, user: @user_admin, correct: true)
@@ -126,7 +130,8 @@ class Seeds < Base
       name: '___ am happy!',
       user: @user_teacher,
       survey: @choose_subject_ready_survey,
-      question_type: @question_type_multiple_choice
+      question_type: @question_type_multiple_choice,
+      image_url: 'https://www.allprodad.com/wp-content/uploads/2021/03/05-12-21-happy-people.jpg'
     )
     Option.create!(name: 'I', question: question, user: @user_admin, correct: true)
     Option.create!(name: 'He', question: question, user: @user_admin, correct: false)
@@ -143,7 +148,8 @@ class Seeds < Base
       name: '___ are happy!',
       user: @user_teacher,
       survey: @choose_subject_ready_survey,
-      question_type: @question_type_multiple_choice
+      question_type: @question_type_multiple_choice,
+      image_url: 'https://media.istockphoto.com/photos/positive-group-of-young-friends-having-fun-at-public-park-picture-id1270415694?k=20&m=1270415694&s=170667a&w=0&h=MVrYBuQ_bph7ZzPSI_BYbHUuHlGNX3bINiG_M6oSDqI='
     )
     Option.create!(name: 'I', question: question, user: @user_admin, correct: false)
     Option.create!(name: 'He', question: question, user: @user_admin, correct: false)
@@ -160,7 +166,8 @@ class Seeds < Base
       name: 'What is your favorit color?',
       user: @user_admin,
       survey: @survey_admin,
-      question_type: @question_type_single_choice
+      question_type: @question_type_single_choice,
+      image_url: 'https://www.blog.agendaai.com.br/wp-content/uploads/2019/02/d%C3%BAvida.jpg'
     )
   end
 
@@ -174,7 +181,8 @@ class Seeds < Base
       name: 'What is the RGB for color white?',
       user: @user_admin,
       survey: @survey_admin,
-      question_type: @question_type_single_choice
+      question_type: @question_type_single_choice,
+      image_url: 'https://www.indezine.com/products/powerpoint/learn/color/images/rgb01.png'
     )
   end
 
@@ -188,7 +196,8 @@ class Seeds < Base
       name: 'What is your favorite animal?',
       user: @user_teacher,
       survey: @teacher_ready_survey,
-      question_type: @question_type_single_choice
+      question_type: @question_type_single_choice,
+      image_url: 'https://cdn.vox-cdn.com/thumbor/Mrc9ru3MgeBz1h8I5z3SDKvg-0M=/0x289:3504x2041/fit-in/1200x600/cdn.vox-cdn.com/uploads/chorus_asset/file/23266609/GettyImages_131967915.jpg'
     )
   end
 
@@ -203,7 +212,8 @@ class Seeds < Base
       name: 'What is the bigger animal?',
       user: @user_teacher,
       survey: @teacher_ready_survey,
-      question_type: @question_type_single_choice
+      question_type: @question_type_single_choice,
+      image_url: 'https://www.dsm.com/anh/challenges/ensuring-sustainability-and-animal-welfare/improving-lifetime-performance-of-animals/_jcr_content/root/responsivegrid/container/content/container_copy_1395958162/content/image.coreimg.82.1024.jpeg/1639394575163.jpeg'
     )
   end
 
@@ -281,10 +291,14 @@ class Seeds < Base
     color_subject_id = @color_subject.id
     english_subject_id = @english_subject.id
 
-    @survey_admin = Survey.create!(name: 'Colors survey - Admin', user: @user_admin, survey_subject_id: color_subject_id)
-    @colors_survey_ready = Survey.create!(name: 'Colors survey - for Children', description: 'Favorite colors', user: @user_admin, survey_subject_id: color_subject_id)
-    @teacher_ready_survey = Survey.create!(name: 'Animals survey - Teacher', description: 'Nice animals', user: @user_teacher, survey_subject_id: animal_subject_id)
-    @to_be_ready_survey = Survey.create!(name: 'To Be Verb', description: 'Select one option to fill the gap on the sentence', user: @user_teacher, survey_subject_id: english_subject_id)
+    @survey_admin = Survey.create!(name: 'Colors survey - Admin', user: @user_admin, survey_subject_id: color_subject_id,
+                                   image_url: 'https://www.comciencia.br/wp-content/uploads/2020/03/abstract-background-colors.jpg', icon_url: 'https://www.inovecolors.com.br/wp-content/uploads/2021/08/icone-beneficios-v2_cores_01-400x400.png')
+    @colors_survey_ready = Survey.create!(name: 'Colors survey - for Children', description: 'Favorite colors', user: @user_admin, survey_subject_id: color_subject_id,
+                                          image_url: 'https://www.nic.lat/wp-content/uploads/2019/01/el-significado-del-color.jpg', icon_url: 'https://www.inovecolors.com.br/wp-content/uploads/2021/08/icone-beneficios-v2_cores_01-400x400.png')
+    @teacher_ready_survey = Survey.create!(name: 'Animals survey - Teacher', description: 'Nice animals', user: @user_teacher, survey_subject_id: animal_subject_id,
+                                           image_url: 'https://www.a-z-animals.com/media/2021/08/Pack-of-Dogs-1024x535.jpg', icon_url: 'https://www.a-z-animals.com/media/2021/08/Pack-of-Dogs-1024x535.jpg')
+    @to_be_ready_survey = Survey.create!(name: 'To Be Verb', description: 'Select one option to fill the gap on the sentence', user: @user_teacher, survey_subject_id: english_subject_id,
+                                         image_url: 'https://www.abc.net.au/cm/rimage/11085034-16x9-large.jpg?v=2', icon_url: 'https://www.pinclipart.com/picdir/big/575-5751048_subject-english-icon-png-clipart.png')
     @choose_subject_ready_survey = Survey.create!(name: 'Choose Subject', description: 'Select correct subjects for the sentence', user: @user_teacher, survey_subject_id: english_subject_id)
 
     Survey.create!(name: 'Dog survey - Teacher', user: @user_teacher, survey_subject_id: animal_subject_id)

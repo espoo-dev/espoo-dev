@@ -5,7 +5,7 @@
   "src/**/*.{js,jsx,ts,tsx,mdx}": [
     "yarn lint --fix"
   ],
-  "src/**/*.test.{js,jsx,ts,ts}": [
+  "src/**/*.test.{js,jsx,ts,tsx}": [
     "yarn test -b --passWithNoTests --silent --findRelatedTests"
   ]
 }
