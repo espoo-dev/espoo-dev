@@ -1,5 +1,5 @@
 class Answer::AnswerCreator < ::Base
-  attr_reader :answer_params, :option_ids, :answer, :user
+  attr_reader :answer_params, :option_ids, :user, :answer, :answers_survey, :survey
 
   def initialize(answer_params:, option_ids:, user:)
     super()
@@ -8,6 +8,8 @@ class Answer::AnswerCreator < ::Base
     @option_ids = option_ids
     @user = user
     @answer = build_answer
+    @answers_survey = @answer.answers_survey
+    @survey = answers_survey&.survey
   end
 
   def call
@@ -52,13 +54,5 @@ class Answer::AnswerCreator < ::Base
       survey_name: survey.name,
       teacher_email: survey.user.email
     }
-  end
-
-  def answers_survey
-    @answers_survey ||= @answer.answers_survey
-  end
-
-  def survey
-    @survey ||= answers_survey.survey
   end
 end
