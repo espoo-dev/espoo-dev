@@ -7,7 +7,6 @@
   <a href="https://codeclimate.com/github/espoo-dev/espoo-dev/test_coverage"><img src="https://api.codeclimate.com/v1/badges/9979316a0c088a5cf937/test_coverage" /></a>
 </p>
 
-
 <p align="center">
   <h3>Backend CI (Ruby.ci)</h3>
 
