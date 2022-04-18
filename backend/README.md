@@ -12,7 +12,7 @@ You can access the backend as admin at this following URL:
 
 - `docker-compose exec espoo_server validate_all.sh`
 
-- navigate to http://localhost:3000
+- visit http://localhost:3000
 
 - username: `admin@gmail.com` password: `123456`
 
