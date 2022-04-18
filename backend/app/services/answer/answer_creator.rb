@@ -1,13 +1,11 @@
 class Answer::AnswerCreator < ::Base
-  attr_reader :answer_params, :option_ids, :user, :answer, :answers_survey, :survey
+  attr_reader :user, :answer, :answers_survey, :survey
 
   def initialize(answer_params:, option_ids:, user:)
     super()
 
-    @answer_params = answer_params
-    @option_ids = option_ids
     @user = user
-    @answer = build_answer
+    @answer = build_answer(answer_params, option_ids)
     @answers_survey = @answer.answers_survey
     @survey = answers_survey&.survey
   end
@@ -24,10 +22,10 @@ class Answer::AnswerCreator < ::Base
 
   private
 
-  def build_answer
-    answer = Answer.new(@answer_params)
+  def build_answer(answer_params, option_ids)
+    answer = Answer.new(answer_params)
 
-    answer.options = Option.includes(%i[user question]).find(@option_ids) unless answer.free_text? || !@option_ids
+    answer.options = Option.includes(%i[user question]).find(option_ids) unless answer.free_text? || !option_ids
 
     answer
   end
