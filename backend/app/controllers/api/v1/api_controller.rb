@@ -1,5 +1,5 @@
 class Api::V1::ApiController < ActionController::API
-  include Pundit
+  include Pundit::Authorization
 
   before_action :authenticate_user!, except: :seed_database
 
