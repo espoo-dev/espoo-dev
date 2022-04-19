@@ -3,6 +3,10 @@ import { render } from 'test-utils';
 import { images } from './random-images';
 import { SurveyItem, SurveyItemProps } from './survey-item';
 
+const extractImagePath = (fullUrl: string) => {
+  return fullUrl.replace(/^url\(['"]?/, '').replace(/['"]?\)$/, '');
+}
+
 const mockSurveyDefault: SurveyItemProps = {
   title: 'Wild Animals',
   description: 'Animals that live in the wild',
@@ -72,7 +76,7 @@ describe('SurveyItem', () => {
       <SurveyItem {...mockSurveyDefault} cover={''} />
     );
     const coverImageUrl = getComputedStyle(rendered.getByTestId('cover-image')).backgroundImage;
-    expect(images.includes(coverImageUrl.replace(/^url\(['"]?/, '').replace(/['"]?\)$/, ''))).toBeTruthy();
+    expect(images.includes(extractImagePath(coverImageUrl))).toBeTruthy();
   });
 
   it('should show no question when no have questions', () => {
