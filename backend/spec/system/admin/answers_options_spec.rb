@@ -2,15 +2,21 @@ require 'rails_helper'
 
 RSpec.describe 'AnswersOption CRUD', type: :system do
   describe 'CRUD' do
-    let(:user_admin) { create(:user_admin) }
-    let(:user_teacher) { create(:user_teacher) }
-    let(:teacher_survey) { create(:ready_survey, user: user_teacher) }
-    let(:admin_survey) { create(:ready_survey, user: user_admin) }
-    let(:student) { create(:user_student) }
-    let(:answer_survey_teacher_survey) { create(:answers_survey, survey_id: teacher_survey.id, user_id: student.id) }
-    let(:answer_survey_admin_survey) { create(:answers_survey, survey_id: admin_survey.id, user_id: student.id) }
-    let!(:answers_option_teacher_survey) { create(:answer_with_option, answers_survey: answer_survey_teacher_survey).answers_options }
-    let!(:answers_option_admin_survey) { create(:answer_with_option, answers_survey: answer_survey_admin_survey).answers_options }
+    let!(:user_admin) { create(:user_admin) }
+    let!(:user_teacher) { create(:user_teacher) }
+    let!(:user_student) { create(:user_student) }
+
+    let!(:teacher_survey) { create(:ready_survey, user: user_teacher) }
+    let!(:admin_survey) { create(:ready_survey, user: user_admin) }
+
+    let!(:answer_survey_teacher_survey) { create(:answers_survey, survey: teacher_survey, user: user_student) }
+    let!(:answer_survey_admin_survey) { create(:answers_survey, survey: admin_survey, user: user_student) }
+
+    let!(:teacher_question) { teacher_survey.questions.first }
+    let!(:admin_question) { admin_survey.questions.first }
+
+    let!(:answers_option_teacher_survey) { create(:answer_with_option, question: teacher_question, answers_survey: answer_survey_teacher_survey).answers_options }
+    let!(:answers_option_admin_survey) { create(:answer_with_option, question: admin_question, answers_survey: answer_survey_admin_survey).answers_options }
 
     describe '#index' do
       context 'when admin' do
@@ -32,9 +38,20 @@ RSpec.describe 'AnswersOption CRUD', type: :system do
           visit admin_answers_options_path
         end
 
-        it { expect(page).to have_content answers_option_teacher_survey.last.option.name }
+        it 'sees all answers_options names that belongs to teacher' do
+          AnswersOption.by_user(user_teacher).each do |answers_option|
+            expect(page).to have_content answers_option.option.name
+          end
+        end
 
-        it { expect(page).not_to have_content answers_option_admin_survey.last.option.name }
+        it 'does not see answers_options names that belongs to other users' do
+          users = User.where.not(id: user_teacher)
+          answers_options = users.map { |user| AnswersOption.by_user(user) }.flatten
+
+          answers_options.each do |answers_option|
+            expect(page).not_to have_content answers_option.option.name
+          end
+        end
       end
     end
 
@@ -42,10 +59,17 @@ RSpec.describe 'AnswersOption CRUD', type: :system do
       context 'when admin' do
         before do
           sign_in user_admin
-          visit admin_answers_option_path(answers_option_teacher_survey.last)
         end
 
-        it { expect(page).to have_content("Show AnswersOption ##{answers_option_teacher_survey.last.id}") }
+        it 'sees his own answers option' do
+          visit admin_answers_option_path(answers_option_admin_survey.last)
+          expect(page).to have_content("Show AnswersOption ##{answers_option_admin_survey.last.id}")
+        end
+
+        it 'sees teacher answers option' do
+          visit admin_answers_option_path(answers_option_teacher_survey.last)
+          expect(page).to have_content("Show AnswersOption ##{answers_option_teacher_survey.last.id}")
+        end
       end
 
       context 'when teacher' do

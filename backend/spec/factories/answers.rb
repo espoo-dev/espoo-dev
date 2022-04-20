@@ -12,7 +12,7 @@ FactoryBot.define do
     question { create(:single_choice_question) }
 
     before(:create) do |answer|
-      answer.options.push(create(:option, question: answer.question, user: answer.answers_survey.user))
+      answer.options.push(create(:option, question: answer.question, user: answer.answers_survey.survey.user))
       answer.save!
       answer.reload
     end
@@ -22,8 +22,8 @@ FactoryBot.define do
     question { create(:multiple_choice_question) }
 
     before(:create) do |answer|
-      answer.options.push(create(:option, question: answer.question, user: answer.answers_survey.user))
-      answer.options.push(create(:option, question: answer.question, user: answer.answers_survey.user))
+      answer.options.push(create(:option, question: answer.question, user: answer.answers_survey.survey.user))
+      answer.options.push(create(:option, question: answer.question, user: answer.answers_survey.survey.user))
       answer.save!
       answer.reload
     end

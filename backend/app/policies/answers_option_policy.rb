@@ -5,9 +5,9 @@ class AnswersOptionPolicy < GenericPolicy
 
   class Scope < Scope
     def search_params
-      answers_ids = user.surveys.map(&:answers_ids_of_answers_surveys).flatten
+      answers_options_ids = AnswersOption.by_user(user).pluck(:id)
 
-      { id: answers_ids }
+      { id: answers_options_ids }
     end
   end
 end
