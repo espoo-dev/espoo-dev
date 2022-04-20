@@ -16,4 +16,9 @@
 class AnswersOption < ApplicationRecord
   belongs_to :answer
   belongs_to :option
+  has_one :user, through: :option
+
+  scope :by_user, lambda { |user|
+    joins(:option).where(option: { user_id: user.id })
+  }
 end
