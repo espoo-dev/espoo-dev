@@ -20,6 +20,6 @@ class SlackService < Base
   end
 
   def slack_token
-    ENV['SLACK_TOKEN']
+    ENV.fetch('SLACK_TOKEN', nil)
   end
 end

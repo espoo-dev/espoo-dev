@@ -1,6 +1,6 @@
 GIT
   remote: https://github.com/faker-ruby/faker.git
-  revision: 91950218dd39119e420ca431fc9fae09b53986c7
+  revision: b1f567bd8456dd720aa9c4bad32d4562f4a38a27
   branch: master
   specs:
     faker (2.20.0)
@@ -111,7 +111,7 @@ GEM
       autoprefixer-rails (>= 9.1.0)
       popper_js (>= 2.9.2, < 3)
       sassc-rails (>= 2.0.0)
-    brakeman (5.2.1)
+    brakeman (5.2.2)
     builder (3.2.4)
     bullet (7.0.1)
       activesupport (>= 3.0.0)
@@ -194,7 +194,6 @@ GEM
       rails-i18n
       rainbow (>= 2.2.2, < 4.0)
       terminal-table (>= 1.5.1)
-    io-wait (0.2.1)
     jaro_winkler (1.5.4)
     jbuilder (2.11.5)
       actionview (>= 5.0.0)
@@ -227,7 +226,7 @@ GEM
     listen (3.7.1)
       rb-fsevent (~> 0.10, >= 0.10.3)
       rb-inotify (~> 0.9, >= 0.9.10)
-    loofah (2.15.0)
+    loofah (2.16.0)
       crass (~> 1.0.2)
       nokogiri (>= 1.5.9)
     mail (2.7.1)
@@ -239,7 +238,7 @@ GEM
     minitest (5.15.0)
     momentjs-rails (2.29.1.1)
       railties (>= 3.1)
-    msgpack (1.4.5)
+    msgpack (1.5.1)
     net-imap (0.2.3)
       digest
       net-protocol
@@ -248,23 +247,22 @@ GEM
       digest
       net-protocol
       timeout
-    net-protocol (0.1.2)
-      io-wait
+    net-protocol (0.1.3)
       timeout
     net-smtp (0.3.1)
       digest
       net-protocol
       timeout
     nio4r (2.5.8)
-    nokogiri (1.13.3-x86_64-darwin)
+    nokogiri (1.13.4-x86_64-darwin)
       racc (~> 1.4)
-    nokogiri (1.13.3-x86_64-linux)
+    nokogiri (1.13.4-x86_64-linux)
       racc (~> 1.4)
     orm_adapter (0.5.0)
-    parallel (1.22.0)
-    parser (3.1.1.0)
+    parallel (1.22.1)
+    parser (3.1.2.0)
       ast (~> 2.4.1)
-    pg (1.3.4)
+    pg (1.3.5)
     popper_js (2.9.3)
     pry (0.14.1)
       coderay (~> 1.1)
@@ -273,8 +271,8 @@ GEM
       pry (>= 0.9.10, < 0.15)
     pry-rails (0.3.9)
       pry (>= 0.10.4)
-    public_suffix (4.0.6)
-    puma (5.6.2)
+    public_suffix (4.0.7)
+    puma (5.6.4)
       nio4r (~> 2.0)
     pundit (2.2.0)
       activesupport (>= 3.0.0)
@@ -327,11 +325,11 @@ GEM
     rb-fsevent (0.11.1)
     rb-inotify (0.10.1)
       ffi (~> 1.0)
-    reek (6.1.0)
+    reek (6.1.1)
       kwalify (~> 0.7.0)
       parser (~> 3.1.0)
       rainbow (>= 2.0, < 4.0)
-    regexp_parser (2.2.1)
+    regexp_parser (2.3.0)
     request_store (1.5.1)
       rack (>= 1.4)
     responders (3.0.1)
@@ -345,7 +343,7 @@ GEM
     rspec-expectations (3.11.0)
       diff-lcs (>= 1.2.0, < 2.0)
       rspec-support (~> 3.11.0)
-    rspec-mocks (3.11.0)
+    rspec-mocks (3.11.1)
       diff-lcs (>= 1.2.0, < 2.0)
       rspec-support (~> 3.11.0)
     rspec-rails (4.0.2)
@@ -370,16 +368,16 @@ GEM
     rswag-ui (2.5.1)
       actionpack (>= 3.1, < 7.1)
       railties (>= 3.1, < 7.1)
-    rubocop (1.26.1)
+    rubocop (1.28.1)
       parallel (~> 1.10)
       parser (>= 3.1.0.0)
       rainbow (>= 2.2.2, < 4.0)
       regexp_parser (>= 1.8, < 3.0)
       rexml
-      rubocop-ast (>= 1.16.0, < 2.0)
+      rubocop-ast (>= 1.17.0, < 2.0)
       ruby-progressbar (~> 1.7)
       unicode-display_width (>= 1.4.0, < 3.0)
-    rubocop-ast (1.16.0)
+    rubocop-ast (1.17.0)
       parser (>= 3.1.1.0)
     rubocop-performance (1.13.3)
       rubocop (>= 1.7.0, < 2.0)
@@ -388,7 +386,7 @@ GEM
       activesupport (>= 4.2.0)
       rack (>= 1.1)
       rubocop (>= 1.7.0, < 2.0)
-    rubocop-rspec (2.9.0)
+    rubocop-rspec (2.10.0)
       rubocop (~> 1.19)
     ruby-graphviz (1.2.5)
       rexml
@@ -468,7 +466,7 @@ GEM
     tzinfo (2.0.4)
       concurrent-ruby (~> 1.0)
     unicode-display_width (2.1.0)
-    uniform_notifier (1.15.0)
+    uniform_notifier (1.16.0)
     warden (1.2.9)
       rack (>= 2.0.9)
     warden-jwt_auth (0.5.0)
@@ -558,4 +556,4 @@ RUBY VERSION
    ruby 3.0.2p107
 
 BUNDLED WITH
-   2.3.7
+   2.3.10
