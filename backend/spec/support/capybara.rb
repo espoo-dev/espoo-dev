@@ -6,7 +6,7 @@ Capybara.register_driver :chrome_headless do |app|
   if ENV['HUB_URL']
     Capybara::Selenium::Driver.new(app,
                                    browser: :remote,
-                                   url: ENV['HUB_URL'],
+                                   url: ENV.fetch('HUB_URL', nil),
                                    capabilities: [chrome_capabilities])
   else
     Capybara::Selenium::Driver.new(app,
