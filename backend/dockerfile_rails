@@ -15,10 +15,11 @@ RUN gem install bundler
 # config home environment
 WORKDIR /app
 
-COPY Gemfile Gemfile.lock /app/
+COPY Gemfile* /app/
 
 RUN gem install bundler
 RUN bundle config set --local path 'vendor/bundle'
-RUN bundle install --binstubs
+RUN bundle install
+RUN bundle binstubs --all
 
 ENV PATH="$PATH:/app/bin"
