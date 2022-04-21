@@ -5,13 +5,13 @@
 
 version: 2
 updates:
-  - package-ecosystem: "bundler" 
+  - package-ecosystem: "bundler"
     directory: "/backend"
     schedule:
       interval: "daily"
     reviewers:
       - "edimossilva"
-- package-ecosystem: "docker" 
+  - package-ecosystem: "docker"
     directory: "/backend"
     schedule:
       interval: "daily"
