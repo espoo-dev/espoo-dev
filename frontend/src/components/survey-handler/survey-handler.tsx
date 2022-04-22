@@ -199,7 +199,7 @@ export const SurveyHandler = (props: SurveyPageProps) => {
               }}
               p="3"
             >
-               <OptionByType />
+              <OptionByType />
             </Box>
           </Box>
 
