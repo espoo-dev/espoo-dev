@@ -83,13 +83,13 @@ gem 'rack-cors'
 gem 'sentry-rails'
 gem 'sentry-ruby'
 gem 'rswag'
-gem 'rspec-rails', '~> 4.0.2'
+gem 'rspec-rails', '~> 5.1.1'
 
 gem 'pundit'
 
 gem 'slim'
 
-gem 'sprockets', '3.7.2'
+gem 'sprockets', '4.0.3'
 
 gem 'reek'
 
