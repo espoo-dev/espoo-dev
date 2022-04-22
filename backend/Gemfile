@@ -49,7 +49,7 @@ group :development do
   gem 'web-console', '>= 4.1.0'
   # Display performance information such as SQL time and flame graphs for each request in your browser.
   # Can be configured to work on production as well see: https://github.com/MiniProfiler/rack-mini-profiler/blob/master/README.md
-  gem 'rack-mini-profiler', '~> 2.0'
+  gem 'rack-mini-profiler', '~> 3.0'
   gem 'rails-erd'
   gem 'solargraph'
 
@@ -83,13 +83,13 @@ gem 'rack-cors'
 gem 'sentry-rails'
 gem 'sentry-ruby'
 gem 'rswag'
-gem 'rspec-rails', '~> 4.0.2'
+gem 'rspec-rails', '~> 5.1.1'
 
 gem 'pundit'
 
 gem 'slim'
 
-gem 'sprockets', '3.7.2'
+gem 'sprockets', '4.0.3'
 
 gem 'reek'
 
