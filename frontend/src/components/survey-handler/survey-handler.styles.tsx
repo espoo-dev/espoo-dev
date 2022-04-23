@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-export const ImageQuestion = styled.div<{ src: string }>`
+export const QuestionImage = styled.div<{ src: string }>`
   margin-top: 0.75rem;
   border-radius: 6px;
   width: 300px;

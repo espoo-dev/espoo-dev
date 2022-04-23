@@ -21,7 +21,7 @@ import { usePrevious } from '@hooks/usePrevious';
 import { useUpdateEffect } from '@hooks/useUpdateEffect';
 import { colors } from '@styles/colors';
 import { useCallback, useEffect, useMemo, useState } from 'react';
-import { ImageQuestion } from './survey-handler.styles';
+import { QuestionImage } from './survey-handler.styles';
 
 interface SurveyPageProps {
   survey: Survey;
@@ -177,7 +177,7 @@ export const SurveyHandler = (props: SurveyPageProps) => {
 
             {question.image_url && (
               <Center>
-                <ImageQuestion
+                <QuestionImage
                   data-testid="question_image"
                   src={question.image_url}
                 />
