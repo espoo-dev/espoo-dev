@@ -49,6 +49,22 @@ describe('SurveyHandler', () => {
       expect(screen.getByText('Question 1')).toBeInTheDocument();
     });
 
+    it('should not render an image when question does not have an image url', () => {
+      const mockSurvey = JSON.parse(JSON.stringify(surveyDefault)) as Survey;
+      mockSurvey.current_answers_survey.questions[0].image_url = '';
+      render(<SurveyHandler survey={mockSurvey} />);
+      expect(screen.queryByTestId("question_image")).not.toBeInTheDocument();
+    })
+
+    it('should render an image when question has an image url', () => {
+      const mockSurvey = JSON.parse(JSON.stringify(surveyDefault)) as Survey;
+      mockSurvey.current_answers_survey.questions[0].image_url = 'image_test.jpg';
+      render(<SurveyHandler survey={mockSurvey} />);
+      const image = screen.getByTestId("question_image");
+      expect(image).toBeInTheDocument();
+      expect(image).toHaveStyle(`background-image: url('image_test.jpg')`);
+    })
+
     it('should not render next button when does not has a question', () => {
       const mockSurvey = JSON.parse(JSON.stringify(surveyDefault)) as Survey;
       mockSurvey.current_answers_survey.questions = [];
