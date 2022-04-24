@@ -24,6 +24,7 @@ export interface Question {
   name: string;
   question_type: QuestionType;
   options?: OptionQuestion[];
+  image_url?: string;
 }
 
 export interface Survey {

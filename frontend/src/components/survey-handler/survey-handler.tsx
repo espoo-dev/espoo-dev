@@ -7,6 +7,7 @@ import { AnswerService } from '@api/services/answers';
 import { AnswerSurveyService } from '@api/services/answer_survey';
 import { Box } from '@chakra-ui/layout';
 import {
+  Center,
   CircularProgress,
   CircularProgressLabel,
   Flex,
@@ -20,6 +21,7 @@ import { usePrevious } from '@hooks/usePrevious';
 import { useUpdateEffect } from '@hooks/useUpdateEffect';
 import { colors } from '@styles/colors';
 import { useCallback, useEffect, useMemo, useState } from 'react';
+import { QuestionImage } from './survey-handler.styles';
 
 interface SurveyPageProps {
   survey: Survey;
@@ -172,6 +174,15 @@ export const SurveyHandler = (props: SurveyPageProps) => {
             <Heading fontSize="30px" color={colors.primaryTxt} fontWeight={400}>
               {question && question.name}
             </Heading>
+
+            {question.image_url && (
+              <Center>
+                <QuestionImage
+                  data-testid="question_image"
+                  src={question.image_url}
+                />
+              </Center>
+            )}
 
             <Box mt={3} color="white">
               <span>SELECT UP TO 1 OPTION</span>
