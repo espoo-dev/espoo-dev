@@ -11,7 +11,7 @@ export const QuestionImage = styled.div<QuestionImageProps>`
   width: 60vw;
   max-height: 300px;
   height: 50vh;
-  background-image: url(${(props) => props.src});
+  background-image: url(${(props) => props.src}), url('/assets/logo.png');
   background-size: cover;
   background-position: center;
 `;
