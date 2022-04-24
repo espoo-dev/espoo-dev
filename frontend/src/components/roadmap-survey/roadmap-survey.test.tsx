@@ -51,14 +51,14 @@ describe('RoadmapSurvey', () => {
   it('should render "icon from icon_url" when the survey has "icon_url"', () => {
     render(<RoadmapSurvey groups={groups} />);
     expect(screen.getByTestId(`icon-${groups[0].surveys[0].name}`)).toHaveStyle(
-      `background-image: url(${groups[0].surveys[0].icon_url})`
+      `background-image: url(${groups[0].surveys[0].icon_url}), url(\'/assets/default_survey_icon.png\')`
     );
   });
 
   it('should render "default survey icon" when the survey has no "icon_url"', () => {
     render(<RoadmapSurvey groups={groups} />);
     expect(screen.getByTestId(`icon-${groups[1].surveys[0].name}`)).toHaveStyle(
-      'background-image: url(\'/assets/default_survey_icon.png\')'
+      'background-image: url(\'\'), url(\'/assets/default_survey_icon.png\')'
     );
   });
 });
