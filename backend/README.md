@@ -52,6 +52,10 @@ Replace the version in the next command with yours:
 - `sudo chown root:root /usr/bin/chromedriver`
 - `sudo chmod +x /usr/bin/chromedriver`
 
+# Check Gem's versions
+
+Use `bundle outdated` command to check gems that need update
+
 # Entity-Relationship Diagrams
 
 - `https://github.com/espoo-dev/espoo-dev/blob/main/backend/erd.png`
