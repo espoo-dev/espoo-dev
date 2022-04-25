@@ -81,7 +81,7 @@ gem 'rack-cors'
 gem 'sentry-rails'
 gem 'sentry-ruby'
 gem 'rswag'
-gem 'rspec-rails', '~> 5.1.1'
+gem 'rspec-rails', '~> 5.1.2'
 
 gem 'pundit'
 
