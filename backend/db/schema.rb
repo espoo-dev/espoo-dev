@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_03_21_133302) do
+ActiveRecord::Schema[7.0].define(version: 2022_04_24_161250) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -58,7 +58,9 @@ ActiveRecord::Schema[7.0].define(version: 2022_03_21_133302) do
     t.datetime "updated_at", null: false
     t.integer "group_dependency_id"
     t.integer "trail_id"
+    t.index ["group_dependency_id"], name: "index_groups_on_group_dependency_id"
     t.index ["name", "user_id"], name: "index_groups_on_name_and_user_id", unique: true
+    t.index ["trail_id"], name: "index_groups_on_trail_id"
     t.index ["user_id"], name: "index_groups_on_user_id"
   end
 
