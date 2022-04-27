@@ -11,6 +11,11 @@ const answeredQuestionDefault: ResultAnswerProps = {
       name: 'Yep',
       correct: true,
     },
+    {
+      id: 2,
+      name: 'Maybe',
+      correct: true,
+    }
   ],
   options: [
     {
@@ -70,5 +75,31 @@ describe('ResultAnswer', () => {
     ['Yep', 'Maybe'].forEach((answer) => {
       expect(screen.queryAllByText(answer)).toHaveLength(1);
     });
+  });
+
+  it('should show an extra label with correct options when user answered incorrect options', () => {
+    const incorrectQuestion = { ...answeredQuestionDefault };
+    incorrectQuestion.correct = false;
+    incorrectQuestion.answered_options = [{
+      id: 3,
+      name: 'No',
+      correct: false,
+    }];
+    render(<AsnweredQuestion {...incorrectQuestion} />);
+    expect(screen.getByText('Correct:')).toBeInTheDocument();
+    ['Yep', 'Maybe'].forEach((answer) => {
+      expect(screen.queryAllByText(answer)).toHaveLength(1);
+    });
+  });
+
+  it('should not show an extra label with correct options when user answered correct options', () => {
+    const incorrectQuestion = { ...answeredQuestionDefault };
+    incorrectQuestion.answered_options = [{
+      id: 1,
+      name: 'Yep',
+      correct: true,
+    }];
+    render(<AsnweredQuestion {...incorrectQuestion} />);
+    expect(screen.queryByText('Correct:')).toBeNull();
   });
 });
