@@ -92,7 +92,7 @@ describe('ResultAnswer', () => {
     });
   });
 
-  it('should not show session correct answerd when answerd right', () => {
+  it('should not show an extra label with correct options when user answered correct options', () => {
     const incorrectQuestion = { ...answeredQuestionDefault };
     incorrectQuestion.answered_options = [{
       id: 1,
