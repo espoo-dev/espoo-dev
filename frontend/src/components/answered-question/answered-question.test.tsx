@@ -77,7 +77,7 @@ describe('ResultAnswer', () => {
     });
   });
 
-  it('should show correct answerd when answerd wrong', () => {
+  it('should show an extra label with correct options when user answered incorrect options', () => {
     const incorrectQuestion = { ...answeredQuestionDefault };
     incorrectQuestion.correct = false;
     incorrectQuestion.answered_options = [{
