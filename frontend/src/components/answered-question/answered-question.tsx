@@ -3,7 +3,7 @@ import { useEffect, useState } from 'react';
 import { HiOutlineCheck } from 'react-icons/hi';
 import { MdClose } from 'react-icons/md';
 import {
-  AnswerCorrect,
+  CorrectAnswer,
   AnswerFooter,
   CardReponse,
   QuestionTitle,
@@ -64,7 +64,7 @@ export const AsnweredQuestion = (props: ResultAnswerProps) => {
             ))}
         </Box>
         {!correct ? (
-          <AnswerCorrect>
+          <CorrectAnswer>
             <span>Correct: </span>
             {correctAnswers.length &&
             correctAnswers.map((answer) => (
@@ -72,7 +72,7 @@ export const AsnweredQuestion = (props: ResultAnswerProps) => {
                 {answer}
               </span>
             ))}
-          </AnswerCorrect>
+          </CorrectAnswer>
         ) : null }
       </AnswerFooter>
     </CardReponse>

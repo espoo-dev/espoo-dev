@@ -27,7 +27,7 @@ export const AnswerFooter = styled.div`
   border-bottom-left-radius: 8px;
 `;
 
-export const AnswerCorrect = styled.div`
+export const CorrectAnswer = styled.div`
   color: #399939;
   font-weight: bold;
   margin-top: 6px;
