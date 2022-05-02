@@ -30,7 +30,7 @@ const questionTypes = {
   'Multiple Choice': MultipleChoice,
 };
 
-const getSurveyTitle = (questionType: QuestionTypeName) => {
+export const getSurveyTitle = (questionType: QuestionTypeName) => {
   switch (questionType) {
     case 'Multiple Choice':
       return 'SELECT ONE OR MORE OPTIONS';
