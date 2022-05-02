@@ -1,9 +1,9 @@
 import { Question, Survey } from '@api/models/survey';
 import { AxiosResponse } from 'axios';
 import { act, fireEvent, render, screen, waitFor } from 'test-utils';
-import surveyMock from 'utils/mocks/survey';
+import surveyMock, { questions } from 'utils/mocks/survey';
 import * as service from '../../api/services/answers';
-import { SurveyHandler } from './survey-handler';
+import { getSurveyTitle, SurveyHandler } from './survey-handler';
 
 jest.mock('../../api/services/answers');
 
@@ -98,6 +98,38 @@ describe('SurveyHandler', () => {
 
       expect(nextBtn).toBeInTheDocument();
       expect(nextBtn).toBeEnabled();
+    });
+
+    it('should render the single choice label', () => {
+      const singleChoiceQuestion = questions[1];
+      const mockSurvey: Survey = {
+        ...surveyDefault,
+        questions: [singleChoiceQuestion],
+        current_answers_survey: {
+          ...surveyDefault.current_answers_survey,
+          questions: [singleChoiceQuestion],
+        },
+      };
+
+      const { getByText } = render(<SurveyHandler survey={mockSurvey} />);
+
+      expect(getByText(getSurveyTitle('Single Choice'))).toBeInTheDocument();
+    });
+
+    it('should render the multiple choice label', () => {
+      const singleChoiceQuestion = questions[2];
+      const mockSurvey: Survey = {
+        ...surveyDefault,
+        questions: [singleChoiceQuestion],
+        current_answers_survey: {
+          ...surveyDefault.current_answers_survey,
+          questions: [singleChoiceQuestion],
+        },
+      };
+
+      const { getByText } = render(<SurveyHandler survey={mockSurvey} />);
+
+      expect(getByText(getSurveyTitle('Multiple Choice'))).toBeInTheDocument();
     });
 
     it('should call answerService.create when clicking next button', async () => {
