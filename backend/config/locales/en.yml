@@ -66,6 +66,9 @@ en:
       multiple_choice: Multiple choice question
       single_choice: Single choice question
   surveys:
+    answered: |
+      Survey "%{survey_name}" from teacher "%{teacher_email}" has been answered now.
+      This survey has %{count_answers_surveys_answered} answers in the total.
     answers:
       submit: Answer
     index:

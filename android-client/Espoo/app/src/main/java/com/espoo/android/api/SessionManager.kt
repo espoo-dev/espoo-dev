@@ -1,10 +1,15 @@
-package com.espoo.android.helper
+package com.espoo.android.api
 
 import android.content.Context
 import android.content.Context.MODE_PRIVATE
 import android.content.SharedPreferences
+import dagger.hilt.android.qualifiers.ApplicationContext
+import javax.inject.Inject
+import javax.inject.Singleton
 
-class SessionManager(val context: Context) {
+@Singleton
+class SessionManager
+@Inject constructor(@ApplicationContext context: Context) {
     private var preferences: SharedPreferences
     private var editor: SharedPreferences.Editor
 
@@ -22,7 +27,7 @@ class SessionManager(val context: Context) {
     }
 
     internal fun storeData(key: String, value: Any) {
-        when(value) {
+        when (value) {
             is Int -> editor.putInt(key, value)
             is String -> editor.putString(key, value)
             is Boolean -> editor.putBoolean(key, value)
@@ -30,7 +35,7 @@ class SessionManager(val context: Context) {
         editor.apply()
     }
 
-    internal fun readUserId() : Int {
+    internal fun readUserId(): Int {
         return preferences.getInt(PreferencesConstants.USER_ID, 0)
     }
 
@@ -42,7 +47,7 @@ class SessionManager(val context: Context) {
         return preferences.getBoolean(PreferencesConstants.IS_LOGIN, false)
     }
 
-    internal fun readAPIToken() : String? {
+    internal fun readAPIToken(): String? {
         return preferences.getString(PreferencesConstants.API_TOKEN, "")
     }
 

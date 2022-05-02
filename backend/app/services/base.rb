@@ -1,8 +1,6 @@
 class Base
-  def initialize; end
-
-  def self.call
-    new.call
+  def self.call(*args, **kwargs)
+    new(*args, **kwargs).call
   end
 
   def call

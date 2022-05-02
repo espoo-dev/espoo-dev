@@ -1,3 +1,14 @@
+# == Schema Information
+#
+# Table name: answers
+#
+#  id                :bigint           not null, primary key
+#  user_answer       :string
+#  created_at        :datetime         not null
+#  updated_at        :datetime         not null
+#  answers_survey_id :bigint           not null
+#  question_id       :bigint           not null
+#
 class Answer < ApplicationRecord
   belongs_to :question
   belongs_to :answers_survey
@@ -6,7 +17,7 @@ class Answer < ApplicationRecord
   has_many :options, through: :answers_options
 
   validates :user_answer, presence: true, if: :free_text?
-  validates :question_id, presence: true, uniqueness: { scope: :answers_survey_id }
+  validates :question_id, uniqueness: { scope: :answers_survey_id }
   validate :minimum_one_option
   validate :maximum_one_option
 

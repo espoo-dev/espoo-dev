@@ -7,6 +7,7 @@ import { AnswerService } from '@api/services/answers';
 import { AnswerSurveyService } from '@api/services/answer_survey';
 import { Box } from '@chakra-ui/layout';
 import {
+  Center,
   CircularProgress,
   CircularProgressLabel,
   Flex,
@@ -15,11 +16,12 @@ import {
 } from '@chakra-ui/react';
 import { AppButton } from '@components/app-button';
 import { MultipleChoice, SingleChoice } from '@components/questions';
-import SumaryResult from '@components/sumary-result/sumary-result';
+import { SummaryResult } from '@components/sumary-result/sumary-result';
 import { usePrevious } from '@hooks/usePrevious';
 import { useUpdateEffect } from '@hooks/useUpdateEffect';
 import { colors } from '@styles/colors';
 import { useCallback, useEffect, useMemo, useState } from 'react';
+import { QuestionImage } from './survey-handler.styles';
 
 interface SurveyPageProps {
   survey: Survey;
@@ -184,6 +186,15 @@ export const SurveyHandler = (props: SurveyPageProps) => {
               {question && question.name}
             </Heading>
 
+            {question.image_url && (
+              <Center>
+                <QuestionImage
+                  data-testid="question_image"
+                  src={question.image_url}
+                />
+              </Center>
+            )}
+
             <Box mt={3} color="white">
               <span>{getSurveyTitle(question.question_type.name)}</span>
             </Box>
@@ -219,7 +230,7 @@ export const SurveyHandler = (props: SurveyPageProps) => {
           {survey &&
           survey.current_answers_survey.questions.length &&
           answerSurvey ? (
-            <SumaryResult {...answerSurvey} />
+            <SummaryResult {...answerSurvey} />
           ) : (
             <Box textAlign="center">
               {isLoadingResult ? (

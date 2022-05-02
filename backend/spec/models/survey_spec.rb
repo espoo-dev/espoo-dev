@@ -53,51 +53,14 @@ RSpec.describe Survey, type: :model do
   end
 
   describe 'validate icon_url' do
-    let!(:survey) { create(:survey) }
+    let(:object_instance) { create(:survey) }
 
-    it 'is valid when icon_url is empty' do
-      survey.icon_url = nil
-      expect(survey.valid?).to eq true
-    end
+    it_behaves_like 'url validation', :icon_url
+  end
 
-    it 'is valid when icon_url is an empty string' do
-      survey.icon_url = ''
-      expect(survey.valid?).to eq true
-    end
+  describe 'image_url validation' do
+    let(:object_instance) { create(:survey) }
 
-    it 'is valid when icon_url is url http' do
-      survey.icon_url = 'http://www.google.com'
-      expect(survey.valid?).to eq true
-    end
-
-    it 'is valid when icon_url is url https' do
-      survey.icon_url = 'https://www.facebook.com'
-      expect(survey.valid?).to eq true
-    end
-
-    it 'is valid when icon_url has prefix' do
-      survey.icon_url = 'https://www.facebook.com/user/'
-      expect(survey.valid?).to eq true
-    end
-
-    it 'is invalid when icon_url does not have a protocol' do
-      survey.icon_url = 'www.facebook.com'
-      expect(survey.valid?).to eq false
-    end
-
-    it 'is invalid when icon_url has error' do
-      survey.icon_url = 'www.facebook. com'
-      expect(survey.valid?).to eq false
-    end
-
-    it 'is invalid when icon_url has a www error' do
-      survey.icon_url = 'ww.facebook.com'
-      expect(survey.valid?).to eq false
-    end
-
-    it 'is invalid when icon_url do not have a second-level domain' do
-      survey.icon_url = 'www.facebook'
-      expect(survey.valid?).to eq false
-    end
+    it_behaves_like 'url validation', :image_url
   end
 end

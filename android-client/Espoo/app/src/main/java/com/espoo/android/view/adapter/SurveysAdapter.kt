@@ -1,4 +1,4 @@
-package com.espoo.android.adapter
+package com.espoo.android.view.adapter
 
 import android.graphics.Matrix
 import android.view.LayoutInflater

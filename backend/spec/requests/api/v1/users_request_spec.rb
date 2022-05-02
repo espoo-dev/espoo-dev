@@ -80,7 +80,7 @@ RSpec.describe 'UsersController', type: :request do
   end
 
   describe '#list' do
-    describe 'when has no headers' do
+    context 'when has no headers' do
       before do
         create(:user)
         get api_v1_users_path
@@ -89,7 +89,7 @@ RSpec.describe 'UsersController', type: :request do
       it { expect(response).to have_http_status :found }
     end
 
-    describe 'when user has survey' do
+    context 'when user has survey' do
       let!(:user_with_surveys) { create(:user_with_surveys) }
       let!(:role) { user_with_surveys.role }
 
@@ -115,7 +115,8 @@ RSpec.describe 'UsersController', type: :request do
               'description' => survey.description,
               'total_questions_quantity' => survey.questions.size,
               'answered_questions_quantity' => survey.last_answers_quantity(user_with_surveys),
-              'icon_url' => survey.icon_url
+              'icon_url' => survey.icon_url,
+              'image_url' => survey.image_url
             }
           ]
         }
@@ -123,7 +124,7 @@ RSpec.describe 'UsersController', type: :request do
       end
     end
 
-    describe 'when has params role' do
+    context 'when has params role' do
       context 'when users exist' do
         let!(:user_teacher) { create(:user_teacher) }
         let!(:role) { user_teacher.role }

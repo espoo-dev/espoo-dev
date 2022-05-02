@@ -4,6 +4,7 @@ import { Flex } from '@chakra-ui/react';
 import { Tag } from '@chakra-ui/tag';
 import { MouseEventHandler, useEffect, useState } from 'react';
 import { RiQuestionAnswerLine } from 'react-icons/ri';
+import { images } from './random-images';
 import {
   DescriptionSurvey,
   DetailsSurvey,
@@ -44,16 +45,7 @@ export const SurveyItem = (props: SurveyItemProps) => {
   } = props;
   const [coverImage, setCoverImage] = useState<string>('');
 
-  const imgKit = 'https://ik.imagekit.io/u7kjueyghmd/';
-
-  const randomImage = () => {
-    const images = [
-      `${imgKit}/question_card_template1_tDW_SAGUh.jpg`,
-      `${imgKit}/question_card_template3_otkvluVvys.jpeg`,
-      `${imgKit}/question_card_template2_ku8ufHjdpCYW.jpeg`,
-    ];
-    return images[Math.floor(Math.random() * images.length)];
-  };
+  const randomImage = () => images[Math.floor(Math.random() * images.length)];
 
   useEffect(() => {
     setCoverImage(cover || randomImage());
@@ -71,7 +63,7 @@ export const SurveyItem = (props: SurveyItemProps) => {
 
   return (
     <SurveyContainer data-testid={title} onClick={onClick}>
-      <ImageSurvey data-testid="random-image" cover={coverImage} />
+      <ImageSurvey data-testid="cover-image" cover={coverImage} />
       <DetailsSurvey>
         <Flex alignItems="center" justifyContent="space-between">
           <TitleSurvey>

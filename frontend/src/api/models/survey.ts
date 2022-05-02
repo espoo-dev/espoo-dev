@@ -25,6 +25,7 @@ export interface Question {
   name: string;
   question_type: QuestionType;
   options?: OptionQuestion[];
+  image_url?: string;
 }
 
 export interface Survey {
@@ -36,6 +37,7 @@ export interface Survey {
   questions: Question[];
   survey_subject_id: number;
   total_questions_quantity: number;
+  image_url?: string;
 }
 
 export enum AnswerSurveyStatus {

@@ -23,8 +23,8 @@ describe JwtExampleController do
   describe '.sign_in' do
     let(:user) { create(:user) }
 
-    describe 'when data is valid' do
-      describe 'when has no token' do
+    context 'when data is valid' do
+      context 'when has no token' do
         let(:params) do
           { user: { 'email' => user.email, 'password' => user.password } }
         end
@@ -49,7 +49,7 @@ describe JwtExampleController do
         end
       end
 
-      describe 'when has token from another already user' do
+      context 'when has token from another already user' do
         let(:logged_user) { create(:user) }
 
         let(:params) do
