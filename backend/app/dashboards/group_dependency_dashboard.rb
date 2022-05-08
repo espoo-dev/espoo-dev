@@ -60,6 +60,6 @@ class GroupDependencyDashboard < Administrate::BaseDashboard
   # across all pages of the admin dashboard.
   #
   def display_resource(group_dependency)
-    "GroupDependency ##{group_dependency.id}, #{group_dependency.group.name}"
+    "GroupDependency ##{group_dependency.id}, #{group_dependency.group.snack_case_name_group}"
   end
 end

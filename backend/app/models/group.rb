@@ -72,6 +72,10 @@ class Group < ApplicationRecord
     end
   end
 
+  def snack_case_name_group
+    name
+  end
+
   private
 
   def recursive_position(group, sum)

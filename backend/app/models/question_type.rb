@@ -36,4 +36,8 @@ class QuestionType < ApplicationRecord
 
     throw :abort
   end
+
+  def snack_case_name_question_type
+    name.downcase.split.join('_')
+  end
 end
