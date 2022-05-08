@@ -50,7 +50,7 @@ class Answer::AnswerCreator < ::Base
     {
       count_answers_surveys_answered: survey.answers_surveys.completed.count,
       survey_name: survey.name,
-      teacher_email: survey.user.email
+      teacher_email: survey.user.snack_case_email
     }
   end
 end

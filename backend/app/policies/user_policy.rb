@@ -1,6 +1,6 @@
 class UserPolicy < GenericPolicy
   def index?
-    user.admin? || user.role.role_type == Role::TEACHER
+    user.admin? || user.role.snack_case_role_type == Role::TEACHER
   end
 
   def new?

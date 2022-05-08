@@ -47,4 +47,8 @@ class Role < ApplicationRecord
 
     throw :abort
   end
+
+  def snack_case_role_type
+    role_type
+  end
 end
