@@ -27,7 +27,7 @@ gem 'dotenv-rails'
 
 group :test do
   gem 'capybara'
-  gem 'i18n-tasks', '~> 0.9.34'
+  gem 'i18n-tasks', '~> 1.0.10'
   gem 'selenium-webdriver', '= 4.0.0.beta1'
   gem 'shoulda-matchers', '~> 4.0'
   gem 'simplecov', require: false
