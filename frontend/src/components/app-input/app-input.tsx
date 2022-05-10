@@ -1,8 +1,8 @@
-import React, { useEffect, useRef } from 'react';
 import { useField } from '@unform/core';
+import React, { InputHTMLAttributes, useEffect, useRef } from 'react';
 import { InputWrapper } from './app-input.styles';
 
-interface AppInputProps {
+export interface AppInputProps extends InputHTMLAttributes<HTMLInputElement> {
   label: string;
   placeholder: string;
   id: string;
