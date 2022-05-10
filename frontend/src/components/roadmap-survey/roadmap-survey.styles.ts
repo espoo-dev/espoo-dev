@@ -29,7 +29,8 @@ export const IconItem = styled.div<IconItemProps>`
   height: 80px;
   width: 80px;
   border-radius: 50%;
-  background-image: url(${(props) => props.icon_url || '/assets/default_survey_icon.png'});
+  background-image: url(${(props) => props.icon_url}),
+    url('/assets/default_survey_icon.png');
   background-size: cover;
   background-position: center;
   border: ${(props) => `4px solid ${getAvailableColor(props.status)}`};

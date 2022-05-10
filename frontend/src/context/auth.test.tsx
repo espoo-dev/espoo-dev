@@ -1,10 +1,7 @@
 import { Sidemenu } from '@components/sidemenu';
 import { User } from 'api/models/user';
 import { render, screen } from 'test-utils';
-import { AuthContext } from './auth';
-
-const checkToken = jest.fn();
-const token = 'token';
+import { AuthProvider } from './auth';
 
 const userMock: User = {
   id: 1,
@@ -16,22 +13,30 @@ const userMock: User = {
   },
 };
 
+const AllTheProviders = ({ children }) => (
+  <AuthProvider>
+    {children}
+  </AuthProvider>
+  );
+
+const customRender = (ui, options) => {
+  render(
+    ui,
+    {
+      wrapper: (props) => (
+        <AllTheProviders {...props} />
+      ),
+      ...options,
+    },
+  );
+};
+
 describe('AuthContext', () => {
-  it('should be defined', () => {
-    render(
-      <AuthContext.Provider
-        value={{
-          checkToken,
-          isAuthenticated: !!token,
-          user: userMock,
-          login: jest.fn(),
-          loading: false,
-          logout: jest.fn(),
-          register: jest.fn(),
-        }}
-      />
+  it('should be provider defined', () => {
+    customRender(
+      <span>test</span>,
+      userMock,
     );
-    render(<Sidemenu />);
-    expect(screen.getByTestId('logout_button')).toBeInTheDocument();
+    expect(screen.getByText('test')).toBeInTheDocument();
   });
 });

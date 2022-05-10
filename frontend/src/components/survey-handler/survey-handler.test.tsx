@@ -243,4 +243,24 @@ describe('SurveyHandler', () => {
       });
     });
   });
+
+  describe('Question image', () => {
+    const surveyDefault: Survey = JSON.parse(JSON.stringify(surveyMock));
+
+    it('should not render an image when question does not have an image url', () => {
+      const mockSurvey = JSON.parse(JSON.stringify(surveyDefault)) as Survey;
+      mockSurvey.current_answers_survey.questions[0].image_url = '';
+      render(<SurveyHandler survey={mockSurvey} />);
+      expect(screen.queryByTestId("question_image")).not.toBeInTheDocument();
+    })
+
+    it('should render an image when question has an image url', () => {
+      const mockSurvey = JSON.parse(JSON.stringify(surveyDefault)) as Survey;
+      mockSurvey.current_answers_survey.questions[0].image_url = 'image_test.png';
+      render(<SurveyHandler survey={mockSurvey} />);
+      const image = screen.getByTestId("question_image");
+      expect(image).toBeInTheDocument();
+      expect(image).toHaveAttribute('src', 'image_test.png');
+    })
+  })
 });

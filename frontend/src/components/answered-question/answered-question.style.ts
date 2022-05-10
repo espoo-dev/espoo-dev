@@ -26,3 +26,10 @@ export const AnswerFooter = styled.div`
   border-bottom-right-radius: 8px;
   border-bottom-left-radius: 8px;
 `;
+
+export const CorrectAnswer = styled.div`
+  color: #399939;
+  font-weight: bold;
+  margin-top: 6px;
+  text-align: left;
+`;
