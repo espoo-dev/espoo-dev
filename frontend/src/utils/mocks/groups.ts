@@ -1,4 +1,5 @@
 import { Group, StatusGroup } from '@api/models/group';
+import mockSurvey from './survey';
 
 const mockManyGroups: Group[] = [
   {
@@ -6,12 +7,7 @@ const mockManyGroups: Group[] = [
     name: 'Introduction',
     required_groups_ids: [],
     surveys: [
-      {
-        name: 'Introduction',
-        icon: 'url',
-        id: 1,
-        icon_url: 'http://placeholder.img/',
-      },
+      { ...mockSurvey, name: 'Introduction', id: 1 },
     ],
     position: 1,
     status: StatusGroup.Available,
@@ -21,17 +17,8 @@ const mockManyGroups: Group[] = [
     name: 'Basic1',
     required_groups_ids: [1],
     surveys: [
-      {
-        name: 'Regards',
-        icon: 'url',
-        id: 2,
-      },
-      {
-        name: 'Travel',
-        icon: 'url',
-        id: 3,
-        icon_url: 'http://placeholder.img/',
-      },
+      { ...mockSurvey, name: 'Regards', id: 2 },
+      { ...mockSurvey, name: 'Travel', id: 3 }
     ],
     position: 2,
     status: StatusGroup.Doing,
@@ -41,18 +28,8 @@ const mockManyGroups: Group[] = [
     name: 'Simple Present',
     required_groups_ids: [2],
     surveys: [
-      {
-        name: 'Store',
-        icon: 'url',
-        id: 4,
-        icon_url: 'http://placeholder.img/',
-      },
-      {
-        name: 'My day',
-        icon: 'url',
-        id: 5,
-        icon_url: 'http://placeholder.img/',
-      },
+      { ...mockSurvey, name: 'Store', id: 4 },
+      { ...mockSurvey, name: 'My day', id: 6 },
     ],
     position: 3,
     status: StatusGroup.Blocked,
