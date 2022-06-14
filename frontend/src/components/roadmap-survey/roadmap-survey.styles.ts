@@ -34,6 +34,7 @@ export const IconItem = styled.div<IconItemProps>`
   background-size: cover;
   background-position: center;
   border: ${(props) => `4px solid ${getAvailableColor(props.status)}`};
+  cursor: pointer;
 `;
 
 export const RoadmapContainer = styled.div`
