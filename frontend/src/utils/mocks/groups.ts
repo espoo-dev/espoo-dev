@@ -29,7 +29,7 @@ const mockManyGroups: Group[] = [
     required_groups_ids: [2],
     surveys: [
       { ...mockSurvey, name: 'Store', id: 4 },
-      { ...mockSurvey, name: 'My day', id: 5 },
+      { ...mockSurvey, name: 'My day', id: 6 },
     ],
     position: 3,
     status: StatusGroup.Blocked,
