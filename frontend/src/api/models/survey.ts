@@ -37,6 +37,7 @@ export interface Survey {
   survey_subject_id: number;
   total_questions_quantity: number;
   image_url?: string;
+  icon_url?: string;
 }
 
 export enum AnswerSurveyStatus {

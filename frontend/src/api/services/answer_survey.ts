@@ -29,6 +29,23 @@ export class AnswerSurveyService {
     return undefined;
   }
 
+  public async smartRegister(
+    answer_survey: AnswerSurveyCreate
+  ): Promise<AxiosResponse<AnswerSurvey | undefined>> {
+    try {
+      const response = await this.httpClient.post<AnswerSurvey>(
+        'api/v1/answers_surveys',
+        answer_survey
+      );
+
+      return response;
+    } catch (error) {
+      errorHandler(error);
+    }
+
+    return undefined;
+  }
+
   public async get(
     answer_survey: AnswerSurveyGet
   ): Promise<AxiosResponse<AnswerSurveyReceive | undefined>> {

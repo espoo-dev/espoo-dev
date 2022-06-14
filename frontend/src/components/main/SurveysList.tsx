@@ -23,7 +23,7 @@ export const SurveysList = (props: SurveyListProps) => {
   const initSurveySelect = async (survey: Survey) => {
     const surveyToInit = survey;
     try {
-      const response = await answerSurveyService.register({
+      const response = await answerSurveyService.smartRegister({
         survey_id: surveyToInit.id,
       });
       if (response && response.data) {

@@ -1,6 +1,7 @@
 import type { Config } from '@jest/types';
 
 const config: Config.InitialOptions = {
+  testEnvironment: 'jsdom',
   coverageReporters: ['json', 'html', 'lcov', 'text', 'clover'],
   testPathIgnorePatterns: [
     '<rootDir>/.next/',
