@@ -40,10 +40,12 @@ services:
     entrypoint: /app/scripts/entrypoint.sh
 
   chrome:
-    image: selenium/standalone-chrome:3.141.59-zirconium
+    image: seleniarm/standalone-chromium
     container_name: espoo_chrome
     volumes:
       - /dev/shm:/dev/shm
+    ports:
+      - "4444:4444"
 
   frontend:
     container_name: espoo_frontend
