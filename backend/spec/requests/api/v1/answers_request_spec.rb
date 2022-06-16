@@ -102,7 +102,7 @@ RSpec.describe 'AnswersController', type: :request do
         let(:total_completed_answers_surveys) { 1 }
 
         let(:message) do
-          "Survey \"#{answers_survey.survey.name}\" from teacher \"#{user_teacher.email}\" "\
+          "Survey \"#{answers_survey.survey.name}\" from teacher \"#{user_teacher.email}\" " \
             "has been answered now.\nThis survey has #{total_completed_answers_surveys} answers in the total.\n"
         end
 

@@ -10,14 +10,14 @@ describe JwtExampleController do
     user = create(:user)
     auth_headers = Devise::JWT::TestHelpers.auth_headers(headers, user)
     get '/jwt_example', headers: auth_headers
-    expect(response.status).to eq 200
+    expect(response).to have_http_status :ok
   end
 
   it 'returns 401 when token is not valid' do
     user = build(:user)
     auth_headers = Devise::JWT::TestHelpers.auth_headers(headers, user)
     get '/jwt_example', headers: auth_headers
-    expect(response.status).to eq 401
+    expect(response).to have_http_status :unauthorized
   end
 
   describe '.sign_in' do
@@ -33,7 +33,7 @@ describe JwtExampleController do
           post '/users/sign_in', params: params, headers: headers
         end
 
-        it { expect(response.status).to eq 200 }
+        it { expect(response).to have_http_status :ok }
 
         it { expect(response.header['Authorization']).to start_with('Bearer') }
 
