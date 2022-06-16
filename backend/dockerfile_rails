@@ -2,7 +2,7 @@ FROM ruby:3.1.2-alpine
 
 # dependencies
 RUN apk add --no-cache \
-  git build-base postgresql-dev \
+  libc6-compat git build-base postgresql-dev \
   nodejs npm tzdata less graphviz \
   font-noto fontconfig fc-cache -f
 
