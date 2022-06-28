@@ -92,3 +92,5 @@ gem 'sprockets', '4.0.3'
 gem 'reek'
 
 gem "slack-notifier"
+
+gem "rails_best_practices"

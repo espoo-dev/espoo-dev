@@ -36,4 +36,8 @@ class User < ApplicationRecord
   delegate :admin?, to: :role
   delegate :teacher?, to: :role
   delegate :student?, to: :role
+
+  def snack_case_email
+    email
+  end
 end
