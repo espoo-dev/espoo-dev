@@ -1,6 +1,10 @@
 require 'rails_helper'
 
 RSpec.describe User, type: :model do
+  before do
+    allow(SlackService).to receive(:call)
+  end
+
   let(:user) { create(:user) }
   let(:user_teacher) { create(:user_teacher) }
 
@@ -14,5 +18,20 @@ RSpec.describe User, type: :model do
     end
 
     it { is_expected.to belong_to(:role) }
+  end
+
+  context 'when student user is created' do
+    let(:user_student) { create(:user_student) }
+
+    it { expect(user_student).to be_valid }
+
+    let(:message) do
+      "New user with role #{user_student.role.role_type.humanize} created at #{user_student.created_at}. \n"\
+        "There are 0 admins, 0 teachers and 1 students\nTotal users: 1\n"
+    end
+
+    it 'send slack message' do
+      expect(SlackService).to have_received(:call).with(message)
+    end
   end
 end

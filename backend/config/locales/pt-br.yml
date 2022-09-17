@@ -81,3 +81,5 @@ pt-br:
         multiple_choice: Múltipla escolha
         single_choice: Escolha única
       type_of_questions: tipo de perguntas
+  users:
+    create: "Novo usuário com função %{role} criado em %{date}. \nExistem %{admin} administradores, %{teacher} professores e %{student} alunos\nTotal de usuários: %{total}\n"
