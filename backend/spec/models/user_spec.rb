@@ -1,6 +1,10 @@
 require 'rails_helper'
 
 RSpec.describe User, type: :model do
+  before do
+    allow(SlackService).to receive(:call)
+  end
+
   let(:user) { create(:user) }
   let(:user_teacher) { create(:user_teacher) }
 

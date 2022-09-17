@@ -2,9 +2,17 @@ require 'rails_helper'
 
 RSpec.describe 'UsersController', type: :request do
   describe '#create' do
+    before do
+      allow(SlackService).to receive(:call)
+    end
+
     context 'when data is valid' do
-      let(:user) { build(:user) }
+      let(:user) { build(:user, created_at: Time.zone.now) }
       let(:role_moderator) { create(:role_moderator) }
+      let(:message) do
+        "New user with role #{role_moderator.role_type.humanize} created at #{user.created_at}. \n"\
+          "There are 1 admins, 0 teachers and 0 students\nTotal users: 1\n"
+      end
 
       before do
         user_params = {
@@ -35,6 +43,10 @@ RSpec.describe 'UsersController', type: :request do
       it 'returns id as integer' do
         expect(response_body['id'].to_i).to be_a(Integer)
       end
+
+      it 'sends slack message' do
+        expect(SlackService).to have_received(:call).with(message)
+      end
     end
 
     context 'when data is not valid' do
@@ -56,6 +68,10 @@ RSpec.describe 'UsersController', type: :request do
         it { expect(User.count).to eq(0) }
 
         it { expect(response_body).to match({ 'error_message' => 'not allowed to create? this User' }) }
+
+        it 'not calls SlackNotifierService for admin user' do
+          expect(SlackService).not_to have_received(:call)
+        end
       end
 
       context 'when user email already exists' do
