@@ -81,3 +81,5 @@ en:
         multiple_choice: Multiple choice
         single_choice: Single choice
       type_of_questions: type of questions
+  users:
+    create: "New user with role %{role} created at %{date}. \nThere are %{admin} admins, %{teacher} teachers and %{student} students\nTotal users: %{total}\n"
