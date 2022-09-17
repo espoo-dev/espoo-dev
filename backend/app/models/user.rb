@@ -36,4 +36,27 @@ class User < ApplicationRecord
   delegate :admin?, to: :role
   delegate :teacher?, to: :role
   delegate :student?, to: :role
+
+  after_create :slack_notify
+
+  private
+
+  def slack_notify
+    SlackService.call(message)
+  end
+
+  def message
+    I18n.t('users.create', **translate_arguments)
+  end
+
+  def translate_arguments
+    {
+      role: role.role_type.humanize,
+      date: created_at,
+      admin: Role.find_by(role_type: Role::ADMIN)&.users_count || 0,
+      teacher: Role.find_by(role_type: Role::TEACHER)&.users_count || 0,
+      student: Role.find_by(role_type: Role::STUDENT)&.users_count || 0,
+      total: User.count
+    }
+  end
 end
