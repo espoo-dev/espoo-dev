@@ -14,6 +14,8 @@ class Role < ApplicationRecord
 
   before_destroy :check_users_before_destroy, prepend: true
 
+  delegate :count, to: :users, prefix: true
+
   scope :by_user, lambda { |user|
     return all if user&.admin?
 
