@@ -20,6 +20,8 @@ class Role < ApplicationRecord
     where.not(role_type: Role::ADMIN)
   }
 
+  scope :users_by_type, ->(type) { where(role_type: type) }
+
   ADMIN = 'admin'.freeze
   TEACHER = 'teacher'.freeze
   MODERATOR = 'moderator'.freeze
