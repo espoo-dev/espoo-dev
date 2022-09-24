@@ -32,7 +32,7 @@ class User::UserCreator < ::Base
   end
 
   def notify_on_slack
-    SlackService.call(message)
+    NotificationSlackJob.perform_later(message: message)
   end
 
   def message

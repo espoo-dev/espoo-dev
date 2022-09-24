@@ -39,7 +39,7 @@ class Answer::AnswerCreator < ::Base
   end
 
   def notify
-    SlackService.call(message) if answers_survey.completed?
+    NotificationSlackJob.perform_later(message: message) if answers_survey.completed?
   end
 
   def message
