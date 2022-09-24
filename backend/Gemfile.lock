@@ -131,6 +131,7 @@ GEM
     choice (0.2.0)
     coderay (1.1.3)
     concurrent-ruby (1.1.10)
+    connection_pool (2.3.0)
     crass (1.0.6)
     datetime_picker_rails (0.0.7)
       momentjs-rails (>= 2.8.1)
@@ -254,6 +255,8 @@ GEM
       net-protocol
       timeout
     nio4r (2.5.8)
+    nokogiri (1.13.4-arm64-darwin)
+      racc (~> 1.4)
     nokogiri (1.13.4-x86_64-linux)
       racc (~> 1.4)
     orm_adapter (0.5.0)
@@ -323,6 +326,10 @@ GEM
     rb-fsevent (0.11.1)
     rb-inotify (0.10.1)
       ffi (~> 1.0)
+    redis (5.0.5)
+      redis-client (>= 0.9.0)
+    redis-client (0.9.0)
+      connection_pool
     reek (6.1.1)
       kwalify (~> 0.7.0)
       parser (~> 3.1.0)
@@ -418,6 +425,10 @@ GEM
       concurrent-ruby
     shoulda-matchers (4.5.1)
       activesupport (>= 4.2.0)
+    sidekiq (6.5.5)
+      connection_pool (>= 2.2.2)
+      rack (~> 2.0)
+      redis (>= 4.5.0)
     simplecov (0.21.2)
       docile (~> 1.1)
       simplecov-html (~> 0.11)
@@ -494,6 +505,7 @@ GEM
     zeitwerk (2.5.4)
 
 PLATFORMS
+  arm64-darwin-21
   x86_64-linux-musl
 
 DEPENDENCIES
@@ -526,6 +538,7 @@ DEPENDENCIES
   rack-mini-profiler (~> 3.0)
   rails (~> 7.0, >= 7.0.1)
   rails-erd
+  redis
   reek
   rspec-rails (~> 5.1.1)
   rswag
@@ -537,6 +550,7 @@ DEPENDENCIES
   sentry-rails
   sentry-ruby
   shoulda-matchers (~> 4.0)
+  sidekiq
   simplecov
   slack-notifier
   slim
