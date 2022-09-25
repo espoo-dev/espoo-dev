@@ -20,6 +20,6 @@ class SlackService < Base
   end
 
   def slack_token
-    Rails.application.credentials.slack&.token
+    ENV.fetch('SLACK_TOKEN', nil)
   end
 end
