@@ -2,10 +2,6 @@ require 'rails_helper'
 
 RSpec.describe 'AnswersController', type: :request do
   describe '#create' do
-    before do
-      allow(SlackService).to receive(:call)
-    end
-
     context 'when data is valid' do
       let!(:user_teacher) { create(:user_teacher) }
       let!(:user_student) { create(:user_student) }
@@ -98,7 +94,7 @@ RSpec.describe 'AnswersController', type: :request do
         end
 
         it 'not calls SlackNotifierService for the current answers_survey)' do
-          expect(SlackService).not_to have_received(:call)
+          expect(NotificationSlackJob).not_to have_been_enqueued
         end
       end
 
@@ -122,7 +118,7 @@ RSpec.describe 'AnswersController', type: :request do
 
         it { expect(answers_survey.completed?).to be(true) }
 
-        it { expect(SlackService).to have_received(:call).with(message).once }
+        it { expect(NotificationSlackJob).to have_been_enqueued.with(message: message) }
       end
     end
 
@@ -145,7 +141,7 @@ RSpec.describe 'AnswersController', type: :request do
         post api_v1_answers_path, params: answer_params, headers: auth_headers(user: user_student)
       end
 
-      it { expect(SlackService).not_to have_received(:call) }
+      it { expect(NotificationSlackJob).not_to have_been_enqueued }
 
       context 'when question is single choice and answer has more than one option' do
         it { expect(response).to have_http_status :unprocessable_entity }
