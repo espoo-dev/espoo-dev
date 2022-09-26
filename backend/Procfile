@@ -1,2 +1,4 @@
 release: bundle exec rake db:migrate db:seed
 web: bundle exec rails server -p $PORT
+worker: bundle exec sidekiq -C config/sidekiq.yml
+

@@ -2,10 +2,6 @@ require 'rails_helper'
 
 RSpec.describe 'UsersController', type: :request do
   describe '#create' do
-    before do
-      allow(SlackService).to receive(:call)
-    end
-
     context 'when data is valid' do
       let(:user) { build(:user, created_at: Time.zone.now) }
       let(:role_moderator) { create(:role_moderator) }
@@ -45,7 +41,7 @@ RSpec.describe 'UsersController', type: :request do
       end
 
       it 'sends slack message' do
-        expect(SlackService).to have_received(:call).with(message)
+        expect(NotificationSlackJob).to have_been_enqueued.with(message: message)
       end
     end
 
@@ -70,7 +66,7 @@ RSpec.describe 'UsersController', type: :request do
         it { expect(response_body).to match({ 'error_message' => 'not allowed to create? this User' }) }
 
         it 'not calls SlackNotifierService for admin user' do
-          expect(SlackService).not_to have_received(:call)
+          expect(NotificationSlackJob).not_to have_been_enqueued
         end
       end
 
