@@ -255,6 +255,8 @@ GEM
       net-protocol
       timeout
     nio4r (2.5.8)
+    nokogiri (1.13.4-aarch64-linux)
+      racc (~> 1.4)
     nokogiri (1.13.4-arm64-darwin)
       racc (~> 1.4)
     nokogiri (1.13.4-x86_64-linux)
@@ -505,7 +507,9 @@ GEM
     zeitwerk (2.5.4)
 
 PLATFORMS
+  aarch64-linux-musl
   arm64-darwin-21
+  x86_64-linux
   x86_64-linux-musl
 
 DEPENDENCIES
