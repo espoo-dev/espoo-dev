@@ -6,7 +6,7 @@ RSpec.describe 'UsersController', type: :request do
       let(:user) { build(:user, created_at: Time.zone.now) }
       let(:role_moderator) { create(:role_moderator) }
       let(:message) do
-        "New user with role #{role_moderator.role_type.humanize} created at #{user.created_at}. \n"\
+        "New user with role #{role_moderator.role_type.humanize} created at #{user.created_at}. \n" \
           "There are 1 admins, 0 teachers and 0 students\nTotal users: 1\n"
       end
 
