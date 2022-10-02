@@ -1,6 +1,6 @@
 import { httpClient } from '@api/client';
-import { errorHandler } from '@api/error-handler';
-import { Group } from '@api/models/group';
+import { errorHandler, createErrorToast } from '@api/error-handler';
+import { Group, StatusGroup } from '@api/models/group';
 import { AnswerSurveyStatus, Survey } from '@api/models/survey';
 import { AnswerSurveyService } from '@api/services/answer_survey';
 import { Flex, Text } from '@chakra-ui/react';
@@ -52,7 +52,9 @@ export const RoadmapSurvey = (props: RoadmapSurveyProps) => {
   };
 
   const registerAnswerSurvey = async (survey_id: number, survey: Survey) => {
-    if (canCreateAnswerSurvey(survey)) {
+    if (survey.status === StatusGroup.Blocked) {
+      createErrorToast('Survey is blocked!');
+    } else if (canCreateAnswerSurvey(survey)) {
       initSurveySelect(survey);
     } else {
       redirectToSurveyPage(survey);

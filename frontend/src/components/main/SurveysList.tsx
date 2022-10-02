@@ -1,6 +1,7 @@
+import { StatusGroup } from '@api/models/group';
 import { SurveyItem } from '@components/survey-item/survey-item';
 import { httpClient } from 'api';
-import { errorHandler } from 'api/error-handler';
+import { createErrorToast, errorHandler } from 'api/error-handler';
 import { AnswerSurveyStatus, Survey } from 'api/models/survey';
 import { AnswerSurveyService } from 'api/services/answer_survey';
 import { useRouter } from 'next/router';
@@ -50,7 +51,9 @@ export const SurveysList = (props: SurveyListProps) => {
     setSelectedSurvey(survey_id);
     setLoading(true);
 
-    if (canCreateAnswerSurvey(survey)) {
+    if (survey.status === StatusGroup.Blocked) {
+      createErrorToast('Survey is blocked');
+    } else if (canCreateAnswerSurvey(survey)) {
       initSurveySelect(survey);
     } else {
       redirectToSurveyPage(survey);
