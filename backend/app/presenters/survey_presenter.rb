@@ -28,7 +28,8 @@ class SurveyPresenter < SimpleSurveyPresenter
         answers_surveys: answers_surveys_payload,
         current_answers_survey: answers_surveys_payload.last,
         questions: questions_payload,
-        survey_subject_id: survey.survey_subject.id
+        survey_subject_id: survey.survey_subject.id,
+        status: survey.group&.status(user)
       }
     )
   end

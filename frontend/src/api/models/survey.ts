@@ -28,6 +28,7 @@ export interface Question {
 }
 
 export interface Survey {
+  status: string;
   answers_surveys: AnswersSurvey[] | null;
   current_answers_survey: AnswersSurvey | null;
   id: number;
