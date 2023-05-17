@@ -1,6 +1,6 @@
-import { AnswerSurveyStatus, Survey } from '@api/models/survey';
+import { AnswerSurveyStatus, Question, Survey } from '@api/models/survey';
 
-const questions = [
+export const questions = [
   {
     id: 1,
     name: 'What is your favorite animal?',
@@ -37,7 +37,33 @@ const questions = [
       name: 'Single Choice',
     },
   },
-];
+  {
+    id: 3,
+    name: 'What animals have you had?',
+    options: [
+      {
+        id: 1372,
+        name: 'Cat',
+      },
+      {
+        id: 1372,
+        name: 'Dog',
+      },
+      {
+        id: 1373,
+        name: 'Bird',
+      },
+      {
+        id: 1373,
+        name: 'Horse',
+      },
+    ],
+    question_type: {
+      id: 2,
+      name: 'Multiple Choice',
+    },
+  },
+] as Question[];
 
 const mockSurvey: Survey = {
   id: 1,
